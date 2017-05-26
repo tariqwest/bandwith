@@ -2,11 +2,6 @@
   "knex": {
     "connection": {
       "database": "bandwith"
-    },
-    "debug": false,
-    "pool": {
-      "min": 2,
-      "max": 10
     }
   },
 

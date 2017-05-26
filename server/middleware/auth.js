@@ -3,19 +3,19 @@ const RedisStore = require('connect-redis')(session);
 const redisClient = require('redis').createClient();
 
 module.exports.verify = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
+  if (!req.isAuthenticated()) {
+    res.redirect('/login');
   }
-  res.redirect('/login');
+  return next();
 };
 
 module.exports.session = session({
   store: new RedisStore({
     client: redisClient,
     host: 'localhost',
-    port: 6379
+    port: 6379,
   }),
   secret: 'more laughter, more love, more life',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 });
