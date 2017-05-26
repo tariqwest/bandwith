@@ -2,9 +2,9 @@
   "knex": {
     "client": "postgresql",
     "connection": {
-      "database": "thesis",
-      "user": "Max",
-      "password": "",
+      "database": "bandwith",
+      "user": "postgres",
+      "password": "postgres",
       "host": "localhost",
       "port": 5432
     },
