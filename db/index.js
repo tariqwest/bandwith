@@ -3,47 +3,62 @@ const db = require('bookshelf')(knex);
 
 db.plugin('registry');
 
-knex.schema.createTable('users', table => {
-  table.increments('id').primary();
-  table.string('name');
-  table.string('location');
-  table.integer('searchRadius');
-  table.integer('age');
-  table.timestamps();
-});
-
-knex.schema.createTable('songs', table => {
-  table.increments('id').primary();
-  table.string('song_url');
-});
-
-knex.schema.createTable('videos', table => {
-  table.increments('id').primary();
-  table.string('video_url');
-});
-
-let User = db.Model.extend({
+const User = db.Model.extend({
   tableName: 'users',
-  song: () => {
-    return this.hasOne(Song);
-  },
-  video: () => {
-    return this.hasOne(Video);
-  }
+  song: () => this.hasOne(Song),
+  video: () => this.hasOne(Video),
+  photo: () => this.hasOne(Photo),
+  connections: () => this.hasMany(Connection),
+  chats: () => this.hasMany(Chat),
+  instruments: () => this.belongsToMany(Instrument),
+  genres: () => this.belongsToMany(Genre),
+  influences: () => this.belongsToMany(Influence),
+  preferred_instruments: () => this.belongsToMany(Instrument),
+  preferred_genres: () => this.belongsToMany(Genre),
 });
 
-let Song = db.Model.extend({
+const Song = db.Model.extend({
   tableName: 'songs',
-  user: () => {
-    return this.belongsTo(User);
-  }
+  user: () => this.belongsTo(User),
 });
 
-let Video = db.Model.extend({
+const Video = db.Model.extend({
   tableName: 'videos',
-  user: () => {
-    return this.belongsTo(User);
-  }
+  user: () => this.belongsTo(User),
+});
+
+const Photo = db.Model.extend({
+  tableName: 'photos',
+  user: () => this.belongsTo(User),
+});
+
+const Connection = db.Model.extend({
+  tableName: 'connections',
+  user_id_1: () => this.belongsTo(User),
+  user_id_2: () => this.belongsTo(User),
+});
+
+const Chat = db.Model.extend({
+  tableName: 'chats',
+  user_id_to: () => this.belongsTo(User),
+  user_id_from: () => this.belongsTo(User),
+});
+
+const Instrument = db.Model.extend({
+  tableName: 'instruments',
+  preference_user: () => this.belongsToMany(User),
+  choice_user: () => this.belongsToMany(User),
+});
+
+const Genre = db.Model.extend({
+  tableName: 'genres',
+  preference_user: () => this.belongsToMany(User),
+  choice_user: () => this.belongsToMany(User),
+});
+
+const Influence = db.Model.extend({
+  tableName: 'influences',
+  user: () => this.belongsToMany(User),
 });
 
 module.exports = db;
