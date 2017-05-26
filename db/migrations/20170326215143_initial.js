@@ -59,11 +59,11 @@ exports.up = (knex, Promise) => (
     }),
     knex.schema.createTable('genres', (table) => {
       table.increments('id').unsigned().primary();
-      table.string('genres_name', 20).notNullable();
+      table.string('genre_name', 20).notNullable();
     }),
     knex.schema.createTable('influences', (table) => {
       table.increments('id').unsigned().primary();
-      table.string('influences_name', 20).notNullable();
+      table.string('influence_name', 20).notNullable();
     }),
     knex.schema.createTable('usersInstruments', (table) => {
       table.integer('user_id').references('users.id').onDelete('CASCADE');
