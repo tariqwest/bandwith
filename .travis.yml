@@ -15,5 +15,6 @@ deploy:
   region: us-west-2
   app: bandwith
   env: bandwith-staging
+  bucket_name: elasticbeanstalk-us-west-2-153902526619
   on:
     repo: hr-celtics/bandwith
