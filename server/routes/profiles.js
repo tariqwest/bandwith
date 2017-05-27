@@ -1,8 +1,9 @@
-'use strict';
 const express = require('express');
-const router = express.Router();
 const ProfileController = require('../controllers').Profiles;
 
+const router = express.Router();
+
+// api/profiles
 router.route('/')
   .get(ProfileController.getAll)
   // .post(ProfileController.create)

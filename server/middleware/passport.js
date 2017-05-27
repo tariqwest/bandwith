@@ -3,28 +3,90 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
-const config = require('config').passport;
+const config = require('config')['passport'];
 const models = require('../../db/models');
 
 passport.serializeUser((profile, done) => {
   done(null, profile.id);
 });
 
-passport.deserializeUser((id, done) => (
-  models.Profile.where({ id }).fetch()
-    .then((profile) => {
+passport.deserializeUser((id, done) => {
+  return models.Profile.where({ id }).fetch()
+    .then(profile => {
       if (!profile) {
         throw profile;
       }
       done(null, profile.serialize());
     })
-    .error((error) => {
+    .error(error => {
       done(error, null);
     })
     .catch(() => {
       done(null, null, { message: 'No user found' });
+    });
+});
+
+const getOrCreateOAuthProfile = (type, oauthProfile, done) => (
+  models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
+    withRelated: ['profile'],
+  })
+    .then((oauthAccount) => {
+      if (oauthAccount) {
+        throw oauthAccount;
+      }
+
+      if (!oauthProfile.emails || !oauthProfile.emails.length) {
+        // FB users can register with a phone number, which is not exposed by Passport
+        // TODO figure out how to make airbnb happy here
+        throw null;  // eslint-disable-line
+      }
+      return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
     })
-));
+    .then((profile) => {
+      const profileInfo = {
+        first: oauthProfile.name.givenName,
+        last: oauthProfile.name.familyName,
+        display: oauthProfile.displayName || `${oauthProfile.name.givenName} ${oauthProfile.name.familyName}`,
+        email: oauthProfile.emails[0].value,
+      };
+
+      if (profile) {
+        // update profile with info from oauth
+        return profile.save(profileInfo, { method: 'update' });
+      }
+      // otherwise create new profile
+      return models.Profile.forge(profileInfo).save();
+    })
+    .tap(profile => (
+      models.Auth.forge({
+        type,
+        profile_id: profile.get('id'),
+        oauth_id: oauthProfile.id,
+      }).save()
+    ))
+    .error((err) => {
+      done(err, null);
+    })
+    .catch((oauthAccount) => {
+      if (!oauthAccount) {
+        throw oauthAccount;
+      }
+      return oauthAccount.related('profile');
+    })
+    .then((profile) => {
+      if (profile) {
+        done(null, profile.serialize());
+      }
+    })
+    .catch(() => {
+      // TODO: This is not working because redirect to login uses req.flash('loginMessage')
+      // and there is no access to req here
+      done(null, null, {
+        message: `Signing up requires an email address,
+          please be sure there is an email address associated with your Facebook account
+          and grant access when you register.` });
+    })
+);
 
 passport.use('local-signup', new LocalStrategy({
   usernameField: 'email',
@@ -110,93 +172,38 @@ passport.use('local-login', new LocalStrategy({
       })
   )));
 
-const getOrCreateOAuthProfile = (type, oauthProfile, done) => (
-  models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
-    withRelated: ['profile'],
-  })
-    .then((oauthAccount) => {
-      if (oauthAccount) {
-        throw oauthAccount;
-      }
 
-      if (!oauthProfile.emails || !oauthProfile.emails.length) {
-        // FB users can register with a phone number, which is not exposed by Passport
-        // TODO figure out how to make airbnb happy here
-        throw null;  // eslint-disable-line
-      }
-      return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
-    })
-    .then((profile) => {
-      const profileInfo = {
-        first: oauthProfile.name.givenName,
-        last: oauthProfile.name.familyName,
-        display: oauthProfile.displayName || `${oauthProfile.name.givenName} ${oauthProfile.name.familyName}`,
-        email: oauthProfile.emails[0].value,
-      };
-
-      if (profile) {
-        // update profile with info from oauth
-        return profile.save(profileInfo, { method: 'update' });
-      }
-      // otherwise create new profile
-      return models.Profile.forge(profileInfo).save();
-    })
-    .tap(profile => (
-      models.Auth.forge({
-        type,
-        profile_id: profile.get('id'),
-        oauth_id: oauthProfile.id,
-      }).save()
-    ))
-    .error((err) => {
-      done(err, null);
-    })
-    .catch((oauthAccount) => {
-      if (!oauthAccount) {
-        throw oauthAccount;
-      }
-      return oauthAccount.related('profile');
-    })
-    .then((profile) => {
-      if (profile) {
-        done(null, profile.serialize());
-      }
-    })
-    .catch(() => {
-      // TODO: This is not working because redirect to login uses req.flash('loginMessage')
-      // and there is no access to req here
-      done(null, null, {
-        message: `Signing up requires an email address,
-          please be sure there is an email address associated with your Facebook account
-          and grant access when you register.` });
-    })
-);
-
-passport.use('google', new GoogleStrategy({
+const googleOptions = {
   clientID: config.Google.clientID,
   clientSecret: config.Google.clientSecret,
   callbackURL: config.Google.callbackURL,
-},
-  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done)),
-);
+};
+const googleCallback = (accessToken, refreshToken, profile, done) =>
+  getOrCreateOAuthProfile('google', profile, done);
 
-passport.use('facebook', new FacebookStrategy({
+passport.use('google', new GoogleStrategy(googleOptions, googleCallback));
+
+const facebookOptions = {
   clientID: config.Facebook.clientID,
   clientSecret: config.Facebook.clientSecret,
   callbackURL: config.Facebook.callbackURL,
   profileFields: ['id', 'emails', 'name'],
-},
-  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('facebook', profile, done)),
-);
+};
+const facebookCallback = (accessToken, refreshToken, profile, done) =>
+  getOrCreateOAuthProfile('facebook', profile, done);
+
+passport.use('facebook', new FacebookStrategy(facebookOptions, facebookCallback));
 
 // REQUIRES PERMISSIONS FROM TWITTER TO OBTAIN USER EMAIL ADDRESSES
-passport.use('twitter', new TwitterStrategy({
+const twitterOptions = {
   consumerKey: config.Twitter.consumerKey,
   consumerSecret: config.Twitter.consumerSecret,
   callbackURL: config.Twitter.callbackURL,
   userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
-},
-  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('twitter', profile, done)),
-);
+};
+const twitterCallback = (accessToken, refreshToken, profile, done) =>
+  getOrCreateOAuthProfile('twitter', profile, done);
+
+passport.use('twitter', new TwitterStrategy(twitterOptions, twitterCallback));
 
 module.exports = passport;

@@ -1,32 +1,42 @@
-// const webpack = require('webpack');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './client/src/app',
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:1337',
+    'webpack/hot/only-dev-server',
+    './client/src/index.js',
+  ],
+
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+
   devServer: {
+    hot: true,
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 1337,
+    historyApiFallback: true,
     overlay: {
       warnings: true,
       errors: true,
     },
     proxy: {
       '/api': 'http://localhost:3000',
-      '/company': 'http://localhost:3000',
     },
   },
-  devtool: 'eval-source-map',
+
+  devtool: 'inline-source-map',
+
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules)/,
+        include: path.join(__dirname, 'client/src'),
         use: 'babel-loader',
       },
       {
@@ -36,9 +46,13 @@ module.exports = {
       },
     ],
   },
+
   plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '/client/src/index.html'),
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };

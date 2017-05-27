@@ -6,7 +6,7 @@ module.exports = {
         "import"
     ],
     rules: {
-      // "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
       // "no-console": [0, { "allow": ["warn", "error"]}],
       // "react/forbid-prop-types": [0],
       // "react/prop-types": [0],
