@@ -12,7 +12,7 @@ exports.rollbackMigrate = (done) => {
       done();
     })
     .catch((err) => {
-      console.log('error in migration:', err);
+      // console.log('error in migration:', err);
       done();
     });
 };
@@ -23,7 +23,7 @@ exports.rollback = (done) => {
       done();
     })
     .catch((err) => {
-      console.log('err in migration afterEach: ', err);
+      // console.log('err in migration afterEach: ', err);
       done();
     });
 };
