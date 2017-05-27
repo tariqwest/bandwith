@@ -39,8 +39,8 @@ exports.up = (knex, Promise) => (
       table.increments('id').unsigned().primary();
       table.integer('profile_id_1').references('profiles.id').onDelete('CASCADE');
       table.integer('profile_id_2').references('profiles.id').onDelete('CASCADE');
-      table.boolean('1_likes_2').nullable();
-      table.boolean('2_likes_1').nullable();
+      table.boolean('likes_1_2').nullable();
+      table.boolean('likes_2_1').nullable();
     }),
     knex.schema.createTable('chats', (table) => {
       table.increments('id').unsigned().primary();
