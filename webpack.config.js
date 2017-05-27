@@ -12,12 +12,12 @@ module.exports = {
 
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public/dist'),
   },
 
   devServer: {
-    hot: true,
-    contentBase: path.join(__dirname, 'dist'),
+
+    contentBase: path.join(__dirname, 'public'),
     compress: true,
     port: 1337,
     historyApiFallback: true,
