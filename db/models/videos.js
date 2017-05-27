@@ -2,7 +2,7 @@ const db = require('../');
 
 const Video = db.Model.extend({
   tableName: 'videos',
-  user: () => this.belongsTo('User'),
+  profile: () => this.belongsTo('Profile'),
 });
 
 module.exports = db.model('Video', Video);

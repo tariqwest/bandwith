@@ -2,8 +2,8 @@ const db = require('../');
 
 const Chat = db.Model.extend({
   tableName: 'chats',
-  user_id_to: () => this.belongsTo('User'),
-  user_id_from: () => this.belongsTo('User'),
+  profile_id_to: () => this.belongsTo('Profile'),
+  profile_id_from: () => this.belongsTo('Profile'),
 });
 
 module.exports = db.model('Chat', Chat);
