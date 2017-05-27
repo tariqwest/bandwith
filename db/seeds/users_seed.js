@@ -12,6 +12,9 @@ exports.seed = (knex, Promise) => (
         last: 'Admin',
         display: 'Administrator',
         email: 'admin@domain.com',
+        location: 'San Francisco',
+        age: 32,
+        searchRadius: 5,
       }).save();
     })
     .error((err) => {
