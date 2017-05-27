@@ -69,14 +69,14 @@ router.get('/auth/twitter/callback', middleware.passport.authenticate('twitter',
 }));
 
 router.get('/auth/status', (req, res) => {
-  let status;
-  if (req.user) {
-    status = true;
-  } else {
-    status = false;
-  }
-  res.send({ authenticated: status });
+  res.send({ loggedIn: req.isAuthenticated() });
 });
+
+router.route('/auth/logout')
+  .get((req, res) => {
+    req.logout();
+    res.send({ loggedOut: true });
+  });
 
 router.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/dist', 'index.html'));
