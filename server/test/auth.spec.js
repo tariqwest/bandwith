@@ -4,7 +4,7 @@ const dbUtils = require('../../db/lib/utils.js');
 const passport = require('../middleware/passport');
 const models = require('../../db/models');
 
-describe('Authentication', () => {
+xdescribe('Authentication', () => {
   let fakeFlash = function(key, message) {
     let object = {};
     object[key] = message;
@@ -20,7 +20,7 @@ describe('Authentication', () => {
     dbUtils.rollback(done);
   });
 
-  describe('Passport local-login strategy', () => {
+  xdescribe('Passport local-login strategy', () => {
     it('passport passes user if email and password match', done => {
       let request = httpMocks.createRequest({
         body: {
@@ -58,7 +58,7 @@ describe('Authentication', () => {
     });
   });
 
-  describe('Passport local-signup strategy', () => {
+  xdescribe('Passport local-signup strategy', () => {
     it('passport passes false if email already exists', done => {
       let request = httpMocks.createRequest({
         body: {
