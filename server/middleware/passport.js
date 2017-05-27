@@ -3,28 +3,28 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
-const config = require('config')['passport'];
+const config = require('config').passport;
 const models = require('../../db/models');
 
 passport.serializeUser((profile, done) => {
   done(null, profile.id);
 });
 
-passport.deserializeUser((id, done) => {
-  return models.Profile.where({ id }).fetch()
-    .then(profile => {
+passport.deserializeUser((id, done) => (
+  models.Profile.where({ id }).fetch()
+    .then((profile) => {
       if (!profile) {
         throw profile;
       }
       done(null, profile.serialize());
     })
-    .error(error => {
+    .error((error) => {
       done(error, null);
     })
     .catch(() => {
       done(null, null, { message: 'No user found' });
-    });
-});
+    })
+));
 
 const getOrCreateOAuthProfile = (type, oauthProfile, done) => (
   models.Auth.where({ type, oauth_id: oauthProfile.id }).fetch({
