@@ -55,15 +55,15 @@ exports.up = (knex, Promise) => (
     }),
     knex.schema.createTable('instruments', (table) => {
       table.increments('id').unsigned().primary();
-      table.string('instrument_name', 20).notNullable();
+      table.string('instrument_name', 20).notNullable().unique();
     }),
     knex.schema.createTable('genres', (table) => {
       table.increments('id').unsigned().primary();
-      table.string('genre_name', 20).notNullable();
+      table.string('genre_name', 20).notNullable().unique();
     }),
     knex.schema.createTable('influences', (table) => {
       table.increments('id').unsigned().primary();
-      table.string('influence_name', 20).notNullable();
+      table.string('influence_name', 20).notNullable().unique();
     }),
     knex.schema.createTable('usersInstruments', (table) => {
       table.integer('user_id').references('users.id').onDelete('CASCADE');
