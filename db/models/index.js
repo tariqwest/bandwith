@@ -1,6 +1,5 @@
 module.exports.Auth = require('./auths');
 module.exports.Profile = require('./profiles');
-module.exports.User = require('./users');
 module.exports.Song = require('./songs');
 module.exports.Video = require('./videos');
 module.exports.Photo = require('./photos');
