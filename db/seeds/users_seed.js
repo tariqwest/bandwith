@@ -11,25 +11,24 @@ exports.seed = function (knex, Promise) {
         first: 'System',
         last: 'Admin',
         display: 'Administrator',
-        email: 'admin@domain.com'
+        email: 'admin@domain.com',
       }).save();
     })
-    .error(err => {
-      console.error('ERROR: failed to create profile');
+    .error((err) => {
+      console.error('ERROR: failed to create profile: ', err);
       throw err;
     })
-    .then((profile) => {
-      return models.Auth.forge({
+    .then(profile => (
+      models.Auth.forge({
         type: 'local',
         password: 'admin123',
-        profile_id: profile.get('id')
-      }).save();
-    })
-    .error(err => {
-      console.error('ERROR: failed to create auth');
+        profile_id: profile.get('id'),
+      }).save()
+    ))
+    .error((err) => {
+      console.error('ERROR: failed to create auth: ', err);
     })
     .catch(() => {
       console.log('WARNING: defualt user already exists.');
     });
-
 };
