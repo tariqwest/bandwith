@@ -1,8 +1,8 @@
 const models = require('../models');
 
-exports.seed = function (knex, Promise) {
+exports.seed = (knex, Promise) => (
 
-  return models.Profile.where({ email: 'admin@domain.com' }).fetch()
+  models.Profile.where({ email: 'admin@domain.com' }).fetch()
     .then((profile) => {
       if (profile) {
         throw profile;
@@ -30,5 +30,5 @@ exports.seed = function (knex, Promise) {
     })
     .catch(() => {
       console.log('WARNING: defualt user already exists.');
-    });
-};
+    })
+);
