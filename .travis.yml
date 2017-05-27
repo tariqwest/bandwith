@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- iojs
+- '7'
+services:
+- postgresql
+- redis-server
+before_script:
+- psql -c 'create database bandwith;' -U postgres
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: AKIAJVTNJYJNBB3CD4JA
+  secret_access_key:
+    secure: CKZRo+kpY7izZHeCjUvxXeVEb+8fps585IRNVhRv8m+qwKdyFbkH4AO/vTUPES84f095zFhO0yB5+LIBY9/tFj5HMxCZXXVo5B8o1CdzJ9+1zOrBK00w7REOq4VFAg2W2gqB6yIiP0X5nGgMZb+s98eiV14T+xQg4OzVfTXRWSF+iJ+fbJV56HmapqWZm798+R5vNi2FKSp2mxFeLpXQ3x6HpsC01o4Q3OUr/2H+w1rWXGmpvy2j7NVnklWyhZ8kKYRZkivPdJqmf3kcr3fpTddnwppveH5dCQ1TWUyBl2htUrUB2SX3XGQoOUFK4yPK1yo0wFVQsb8pihDEfyXtGWq+gYhLbuR4M700Ao+LoJl7hrMjwo1b7wIB3ZHqUTCRUjK/rwkNB9abgLecT2/u96HX+JdsAmrAho5z71OSu1erNEducDqC9aRTIiDDCnj11SJDtQUft3a9VzHnfWr0Oe6t04qWs6Q0J22rDQx/dhHljX2jRxDNMrhzJ3pk3fQhTJRQa58pC4weyI0R65exPV6+GcG27CHCkrLEc+AM9MSLtElbkXrzvUd64kQ4zmP6nFvLLCvDqTCMZK9PggGjM0GQNZY7DcCZdK8E7e598VpIFo4W0D77ZEaoPNrd2WbnVqszsFzwHxWbfH5vi5sxx+ZUk/OhhW3u/roYnCSvyHE=
+  region: us-west-2
+  app: bandwith
+  env: bandwith-staging
+  bucket_name: elasticbeanstalk-us-west-2-153902526619
+  on:
+    repo: hr-celtics/bandwith
