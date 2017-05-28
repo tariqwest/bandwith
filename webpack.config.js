@@ -27,6 +27,7 @@ module.exports = {
     },
     proxy: {
       '/api': 'http://localhost:3000',
+      '/test': 'http://localhost:3000',
     },
   },
 
