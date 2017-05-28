@@ -3,14 +3,14 @@ const request = require('supertest');
 const app = require('../app.js');
 const dbUtils = require('../../db/lib/utils.js');
 
-beforeEach((done) => {
-  dbUtils.rollbackMigrate(done);
-});
+// beforeEach((done) => {
+//   dbUtils.rollbackMigrate(done);
+// });
 
-// Resets database back to original settings
-afterEach((done) => {
-  dbUtils.rollback(done);
-});
+// // Resets database back to original settings
+// afterEach((done) => {
+//   dbUtils.rollback(done);
+// });
 
 xtest('accepts GET requests to /api/profiles', (done) => {
   request(app)
