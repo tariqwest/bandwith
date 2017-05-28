@@ -1,13 +1,9 @@
 const express = require('express');
+const TestController = require('../controllers').Test;
 
 const router = express.Router();
 
 router.route('/')
-  .post((req, res) => {
-    debugger;
-    console.log('post request received from test: ', req.body);
-    // post the username into the database
-    res.status(201).send({ data: 'Posted!' });
-  });
+  .post(TestController.create);
 
 module.exports = router;

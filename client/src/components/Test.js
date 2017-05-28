@@ -12,7 +12,7 @@ class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      song: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.send = this.send.bind(this);
@@ -20,13 +20,13 @@ class Test extends React.Component {
 
   handleChange(event) {
     this.setState({
-      name: event.target.value,
+      song: event.target.value,
     });
   }
 
   send() {
     const body = {
-      username: this.state.name,
+      song: this.state.song,
     };
 
     const headers = {
@@ -40,7 +40,6 @@ class Test extends React.Component {
       headers,
     };
 
-    // debugger;
     fetch('/test', options)
       .then(res => res.json())
       .then(json => console.log(json))
@@ -52,7 +51,7 @@ class Test extends React.Component {
       <div>
         <input
           type="text"
-          placeholder="add username"
+          placeholder="add song"
           value={this.state.name}
           onChange={this.handleChange}
         />
