@@ -7,6 +7,7 @@ import {
 
 import Login from './Login';
 import Private from './Private';
+import Test from './Test';
 
 const App = () => (
   <Router>
@@ -15,8 +16,10 @@ const App = () => (
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/private">Protected Page</Link></li>
       </ul>
+      <Test />
       <Route path="/login" component={Login} />
       <Route path="/private" component={Private} />
+      <Route path="/test" component={Test} />
     </div>
   </Router>
 );
