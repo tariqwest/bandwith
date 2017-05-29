@@ -59,11 +59,7 @@ describe('Chat Model', () => {
       });
   });
 
-<<<<<<< HEAD
   it('Should be able to delete a record', (done) => {
-=======
-  it('should be able to delete a record', (done) => {
->>>>>>> Update chat model tests from Jest to Mocha
     Chat.where({ id: 1 }).destroy()
       .then(() => Chat.where({ id: 1 }).fetch())
       .then((result) => {
