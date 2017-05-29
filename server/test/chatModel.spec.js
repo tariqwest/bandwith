@@ -16,13 +16,13 @@ describe('Chat Model', () => {
     }).save()
       .then(() => {
         Profile.forge({
-          first: 'Hosico',
-          last: 'Cat',
-          display: 'hosicocat',
-          email: 'hosicocat@gmail.com',
-          phone: '9876543210',
-          location: 'Russia',
-          age: 10,
+          first: 'Alexander',
+          last: 'Hamilton',
+          display: 'a.ham',
+          email: 'a.ham@gmail.com',
+          phone: '212-509-6995',
+          location: 'New York, New York',
+          age: 260,
           searchRadius: 5,
         }).save();
       })
