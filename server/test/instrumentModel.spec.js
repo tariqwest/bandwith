@@ -15,7 +15,7 @@ describe('Instrument Model', () => {
       });
   });
 
-  it('should verify that all instrument names are unique', (done) => {
+  it('Should verify that all instrument names are unique', (done) => {
     Instrument.forge({ instrument_name: 'triangle' }).save()
       .then((result) => {
         done(new Error('was not supposed to succeed: ', result));
