@@ -3,7 +3,7 @@ const Chat = require('../../db/models/chats.js');
 const Profile = require('../../db/models/profiles.js');
 
 describe('Chat Model', () => {
-  it('should be able to retrieve test data', (done) => {
+  it('Should be able to retrieve test data', (done) => {
     Profile.forge({
       first: 'April',
       last: 'Ablon',
@@ -45,7 +45,7 @@ describe('Chat Model', () => {
       });
   });
 
-  it('should be able to delete a record', (done) => {
+  it('Should be able to delete a record', (done) => {
     Chat.where({ id: 1 }).destroy()
       .then(() => Chat.where({ id: 1 }).fetch())
       .then((result) => {
