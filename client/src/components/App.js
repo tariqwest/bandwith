@@ -1,4 +1,6 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -7,21 +9,23 @@ import {
 
 import Login from './Login';
 import Private from './Private';
-import Test from './Test';
+import PrivateRoute from './PrivateRoute';
+
+import store from '../store';
 
 const App = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/private">Protected Page</Link></li>
-      </ul>
-      <Test />
-      <Route path="/login" component={Login} />
-      <Route path="/private" component={Private} />
-      <Route path="/test" component={Test} />
-    </div>
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <div>
+        <ul>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/private">Protected Page</Link></li>
+        </ul>
+        <Route path="/login" component={Login} />
+        <PrivateRoute path="/private" component={Private} />
+      </div>
+    </Router>
+  </Provider>
 );
 
 export default App;
