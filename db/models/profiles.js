@@ -8,10 +8,14 @@ const Profile = db.Model.extend({
   photo: () => this.hasOne('Photo'),
   connections: () => this.hasMany('Connection'),
   chats: () => this.hasMany('Chat'),
-  instruments: () => this.belongsToMany('Instrument'),
+  instruments: function() {
+    return this.belongsToMany('Instrument', 'users_instruments');
+  },
   genres: () => this.belongsToMany('Genre'),
   influences: () => this.belongsToMany('Influence'),
-  preferred_instruments: () => this.belongsToMany('Instrument'),
+  preferred_instruments: function() {
+    return this.belongsToMany('Instrument', 'preferred_instruments');
+  },
   preferred_genres: () => this.belongsToMany('Genre'),
 });
 
