@@ -45,7 +45,7 @@ router.get('/auth/twitter/callback', middleware.passport.authenticate('twitter',
 }));
 
 router.get('/auth/status', (req, res) => {
-  res.send({ loggedIn: req.isAuthenticated() });
+  res.send({ loggedIn: req.isAuthenticated(), userId: req.user.id || null });
 });
 
 router.route('/auth/logout')
