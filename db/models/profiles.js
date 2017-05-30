@@ -11,12 +11,18 @@ const Profile = db.Model.extend({
   instruments: function() {
     return this.belongsToMany('Instrument', 'users_instruments');
   },
-  genres: () => this.belongsToMany('Genre'),
-  influences: () => this.belongsToMany('Influence'),
+  genres: function() {
+    return this.belongsToMany('Genre', 'users_genres');
+  },
+  influences: function() {
+    return this.belongsToMany('Influence', 'users_influences');
+  },
   preferred_instruments: function() {
     return this.belongsToMany('Instrument', 'preferred_instruments');
   },
-  preferred_genres: () => this.belongsToMany('Genre'),
+  preferred_genres: function() {
+    return this.belongsToMany('Genre', 'preferred_genres');
+  },
 });
 
 module.exports = db.model('Profile', Profile);

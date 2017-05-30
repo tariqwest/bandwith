@@ -2,8 +2,12 @@ const db = require('../');
 
 const Genre = db.Model.extend({
   tableName: 'genres',
-  preference_profile: () => this.belongsToMany('Profile'),
-  choice_profile: () => this.belongsToMany('Profile'),
+  preference: function() {
+    return this.belongsToMany('Profile', 'preferred_genres');
+  },
+  choice: function() {
+    return this.belongsToMany('Profile', 'users_genres');
+  },
 });
 
 module.exports = db.model('Genre', Genre);
