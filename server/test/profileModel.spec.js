@@ -40,21 +40,21 @@ describe('Profile Model', () => {
       age: 10,
       searchRadius: 5,
     }).save()
-    .then((result) => {
-      done(new Error('was not supposed to succeed: ', result));
-    })
-    .catch((err) => {
-      expect(err).to.be.an('error');
-      done();
-    });
+      .then((result) => {
+        done(new Error('was not supposed to succeed: ', result));
+      })
+      .catch((err) => {
+        expect(err).to.be.an('error');
+        done();
+      });
   });
 
   it('Should be able to update an already existing record', (done) => {
-    Profile.where({ id: 3 }).fetch()
+    Profile.where({ email: 'hosicocat@gmail.com' }).fetch()
       .then((result) => {
-        expect(result.get('id')).to.equal(3);
+        expect(result.get('phone')).to.equal('9876543210');
       })
-      .then(() => Profile.where({ id: 3 }).save({
+      .then(() => Profile.where({ email: 'hosicocat@gmail.com' }).save({
         first: 'Luna',
         display: 'lunacat',
         email: 'lunacat@gmail.com',
@@ -63,7 +63,7 @@ describe('Profile Model', () => {
         age: 4,
       },
       { method: 'update' }))
-      .then(() => Profile.where({ id: 3 }).fetch())
+      .then(() => Profile.where({ email: 'lunacat@gmail.com' }).fetch())
       .then((result) => {
         expect(result.get('first')).to.equal('Luna');
         expect(result.get('display')).to.equal('lunacat');
@@ -79,8 +79,8 @@ describe('Profile Model', () => {
   });
 
   it('Should be able to delete a record', (done) => {
-    Profile.where({ id: 3 }).destroy()
-      .then(() => Profile.where({ id: 3 }).fetch())
+    Profile.where({ email: 'lunacat@gmail.com' }).destroy()
+      .then(() => Profile.where({ email: 'lunacat@gmail.com' }).fetch())
       .then((result) => {
         expect(result).to.equal(null);
         done();
