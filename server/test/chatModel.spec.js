@@ -4,6 +4,8 @@ const Profile = require('../../db/models/profiles.js');
 
 describe('Chat Model', () => {
   it('Should be able to retrieve test data', (done) => {
+    const store = {};
+
     Profile.forge({
       first: 'April',
       last: 'Ablon',
@@ -27,16 +29,28 @@ describe('Chat Model', () => {
         }).save();
       })
       .then(() => (
+        Profile.where({ email: 'ablonapril@gmail.com' }).fetch()
+      ))
+      .then((profile) => {
+        store['April Ablon'] = profile.id;
+      })
+      .then(() => (
+        Profile.where({ email: 'a.ham@gmail.com' }).fetch()
+      ))
+      .then((profile) => {
+        store['Alexander Hamilton'] = profile.id;
+      })
+      .then(() => (
         Chat.forge({
-          profile_id_to: 1,
-          profile_id_from: 2,
+          profile_id_to: store['April Ablon'],
+          profile_id_from: store['Alexander Hamilton'],
           message: 'hey, what\'s up?',
         }).save()
       ))
       .then((results) => {
         expect(results.get('id')).to.equal(1);
-        expect(results.get('profile_id_to')).to.equal(1);
-        expect(results.get('profile_id_from')).to.equal(2);
+        expect(results.get('profile_id_to')).to.equal(store['April Ablon']);
+        expect(results.get('profile_id_from')).to.equal(store['Alexander Hamilton']);
         expect(results.get('message')).to.equal('hey, what\'s up?');
         done();
       })
