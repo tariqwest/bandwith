@@ -61,23 +61,23 @@ exports.up = (knex, Promise) => (
       table.increments('id').unsigned().primary();
       table.string('influence_name', 20).notNullable().unique();
     }),
-    knex.schema.createTable('usersInstruments', (table) => {
+    knex.schema.createTable('users_instruments', (table) => {
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.integer('instrument_id').references('instruments.id').onDelete('CASCADE');
     }),
-    knex.schema.createTable('usersGenres', (table) => {
+    knex.schema.createTable('users_genres', (table) => {
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.integer('genre_id').references('genres.id').onDelete('CASCADE');
     }),
-    knex.schema.createTable('usersInfluences', (table) => {
+    knex.schema.createTable('users_influences', (table) => {
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.integer('influence_id').references('influences.id').onDelete('CASCADE');
     }),
-    knex.schema.createTable('preferredInstruments', (table) => {
+    knex.schema.createTable('preferred_instruments', (table) => {
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.integer('instrument_id').references('instruments.id').onDelete('CASCADE');
     }),
-    knex.schema.createTable('preferredGenres', (table) => {
+    knex.schema.createTable('preferred_genres', (table) => {
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.integer('genre_id').references('genres.id').onDelete('CASCADE');
     }),
