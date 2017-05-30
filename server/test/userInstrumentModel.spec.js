@@ -4,29 +4,69 @@ const Instrument = require('../../db/models/instruments.js');
 
 describe('Users Instruments Join Table', () => {
   it('should be able to retrieve test data', (done) => {
-    Instrument.forge({ instrument_name: 'violin' }).save()
-      .then(() => {
-        Instrument.forge({ instrument_name: 'piano' }).save();
+    const instrument1 = new Instrument({ instrument_name: 'violin' });
+    const instrument2 = new Instrument({ instrument_name: 'piano' });
+
+    const expectedStore = {};
+
+    Promise.all([instrument1.save(), instrument2.save()])
+      .then(() => (
+        Profile.forge({
+          first: 'Luna',
+          last: 'Cat',
+          display: 'lunacat',
+          email: 'lunacat@gmail.com',
+          phone: '0412 345 678',
+          location: 'Brisbane, Australia',
+          age: 4,
+          searchRadius: 5,
+        }).save()
+      ))
+      .then((profile) => {
+        profile.instruments().attach([instrument1, instrument2]);
       })
       .then(() => (
-        // Profile.where({ id: 1 }).save({ instruments: })
-        Profile.where({ id: 1 }).fetch({ withRelated: ['instruments'] })
+        Instrument.where({ instrument_name: 'violin' }).fetch()
       ))
-      .then((result) => {
-        expect(result).to.exist;
-        console.log('join table result: ', result);
+      .then((instrument) => {
+        expectedStore.violin = instrument.get('id');
+      })
+      .then(() => (
+        Instrument.where({ instrument_name: 'piano' }).fetch()
+      ))
+      .then((instrument) => {
+        expectedStore.piano = instrument.get('id');
+      })
+      .then(() => (
+        Profile.where({ email: 'lunacat@gmail.com' }).fetch({ withRelated: ['instruments'] })
+      ))
+      .then((model) => {
+        const actualStore = {};
+        const results = model.related('instruments').models;
+
+        results.forEach((result) => {
+          actualStore[result.attributes.instrument_name] = result.attributes.id;
+        });
+
+        expect(actualStore).to.deep.equal(expectedStore);
+        done();
       })
       .catch((err) => {
         done(err);
       });
-    // update instrument to have user
-    // update user to have multiple instruments
-
-    // assert instrument relationship with user
-    // assert user relationship with instruments
   });
 
-  it('should be able to delete a record', () => {
-    // remove relationship
+  it('should be able to delete a record', (done) => {
+    Profile.where({ email: 'lunacat@gmail.com' }).fetch({ withRelated: ['instruments'] })
+      .then(profile => (
+        profile.instruments().detach()
+      ))
+      .then((model) => {
+        expect(model.length).to.equal(0);
+        done();
+      })
+      .catch((err) => {
+        done(err);
+      });
   });
 });
