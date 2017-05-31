@@ -17,10 +17,10 @@ app.use(middleware.passport.initialize());
 app.use(middleware.passport.session());
 app.use(middleware.flash());
 
-
 app.use('/api/profiles', routes.profiles);
 app.use('/api/preference', routes.preference);
 app.use('/api/connections', routes.connections);
+app.use('/api/chats', routes.chats);
 app.use('/api', routes.api);
 app.use('/auth', routes.auth);
 app.use('/test', routes.test);
