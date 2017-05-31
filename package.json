@@ -8,7 +8,8 @@
     "client": "webpack-dev-server --env.dev --open",
     "debug": "nodemon --inspect",
     "test": "NODE_ENV=test grunt test",
-    "test:jest": "jest"
+    "test:jest": "jest",
+    "heroku-postbuild": "knex migrate:latest && knex migrate:rollback && knex seed:run && npm run build:prod"
   },
   "author": "Hack Reactor",
   "license": "MIT",
