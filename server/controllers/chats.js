@@ -28,7 +28,7 @@ module.exports.getAllForUserMatch = (req, res) => {
         profile_id_from: req.query.userId,
       }
     })
-    .fetch()
+    .fetchAll()
     .then(chats => {
       res
         .status(200)
