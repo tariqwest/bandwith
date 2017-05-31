@@ -13,19 +13,5 @@
       "directory": "db/seeds"
     },
     "ssl": true
-  },
-
-  "passport": {
-    "Google": {
-
-    },
-
-    "Facebook": {
-
-    },
-
-    "Twitter": {
-
-    }
   }
 }

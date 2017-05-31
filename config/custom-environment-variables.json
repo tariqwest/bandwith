@@ -1,6 +1,7 @@
 {
   "env": {
-    "serverUrl": "SERVER_URL"
+    "serverUrl": "SERVER_URL",
+    "redisUrl":  "REDIS_URL"
   },
   "knex": {
     "connection": "DATABASE_URL"
