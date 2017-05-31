@@ -11,10 +11,35 @@ class Results extends React.Component {
       size: dummyData.length - 1,
       currentResult: dummyData[0],
       noMoreResults: false,
+      userId: 2,
     };
   }
 
+  updateConnections(choice) {
+    const body = {
+      userId: this.state.userId,
+      profileId: this.state.currentResult.id,
+      choice,
+    };
+
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers,
+    };
+
+    fetch('/api/connections', options)
+      .then(() => console.log('Successful POST request to /connections'))
+      .catch(err => console.log('Bad POST request to /connections', err));
+  }
+
   clickNo() {
+    this.updateConnections(false);
     const newIndex = this.state.index + 1;
     if (newIndex > this.state.size) {
       this.setState({
@@ -29,6 +54,7 @@ class Results extends React.Component {
   }
 
   clickYes() {
+    this.updateConnections(true);
     const newIndex = this.state.index + 1;
     if (newIndex > this.state.size) {
       this.setState({
