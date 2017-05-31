@@ -6,24 +6,32 @@ const router = express.Router();
 
 router.route('/login')
   .post(middleware.passport.authenticate('local-login', {
-    successRedirect: '/',
+    successReturnToOrRedirect: '/profile',
     failureRedirect: '/login',
     failureFlash: true,
   }));
 
 router.route('/signup')
   .post(middleware.passport.authenticate('local-signup', {
-    successRedirect: '/',
+    successReturnToOrRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true,
   }));
+
+router.use((req, res, next) => {
+  if (req.query && req.query.returnTo) {
+    req.session.returnTo = req.query.returnTo;
+  }
+  next();
+});
 
 router.get('/google', middleware.passport.authenticate('google', {
   scope: ['email', 'profile'],
 }));
 
+
 router.get('/google/callback', middleware.passport.authenticate('google', {
-  successRedirect: '/profile',
+  successReturnToOrRedirect: '/profile',
   failureRedirect: '/login',
 }));
 
@@ -32,7 +40,7 @@ router.get('/facebook', middleware.passport.authenticate('facebook', {
 }));
 
 router.get('/facebook/callback', middleware.passport.authenticate('facebook', {
-  successRedirect: '/profile',
+  successReturnToOrRedirect: '/profile',
   failureRedirect: '/login',
   failureFlash: true,
 }));
@@ -40,7 +48,7 @@ router.get('/facebook/callback', middleware.passport.authenticate('facebook', {
 router.get('/twitter', middleware.passport.authenticate('twitter'));
 
 router.get('/twitter/callback', middleware.passport.authenticate('twitter', {
-  successRedirect: '/profile',
+  successReturnToOrRedirect: '/profile',
   failureRedirect: '/login',
 }));
 
