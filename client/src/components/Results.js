@@ -8,31 +8,48 @@ class Results extends React.Component {
     this.state = {
       index: 0,
       results: dummyData,
+      size: dummyData.length - 1,
       currentResult: dummyData[0],
+      noMoreResults: false,
     };
   }
 
-  clickNo(event) {
-    console.log('CLICK NO: ', this);
+  clickNo() {
     const newIndex = this.state.index + 1;
-    this.setState({
-      index: newIndex,
-      currentResult: this.state.results[newIndex],
-    });
-    console.log('NO STATE: ', this.state);
+    if (newIndex > this.state.size) {
+      this.setState({
+        noMoreResults: true,
+      });
+    } else {
+      this.setState({
+        index: newIndex,
+        currentResult: this.state.results[newIndex],
+      });
+    }
   }
 
-  clickYes(event) {
-    console.log('CLICK YES: ', this);
+  clickYes() {
     const newIndex = this.state.index + 1;
-    this.setState({
-      index: newIndex,
-      currentResult: this.state.results[newIndex],
-    });
-    console.log('YES STATE: ', this.state);
+    if (newIndex > this.state.size) {
+      this.setState({
+        noMoreResults: true,
+      });
+    } else {
+      this.setState({
+        index: newIndex,
+        currentResult: this.state.results[newIndex],
+      });
+    }
   }
 
   render() {
+    if (this.state.noMoreResults) {
+      return (
+        <div>
+          <h1>No more musicians match your preferences</h1>
+        </div>
+      );
+    }
     return (
       <div>
         <h1>Find a Musician</h1>
