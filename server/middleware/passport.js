@@ -176,15 +176,15 @@ passport.use('local-login', new LocalStrategy({
 passport.use('google', new GoogleStrategy({
   clientID: config.Google.clientID || process.env.GOOGLE_CLIENTID,
   clientSecret: config.Google.clientSecret || process.env.GOOGLE_CLIENTSECRET,
-  callbackURL: config.Google.callbackURL || `${process.env.ENV_URL}/auth/google/callback`,
+  callbackURL: config.Google.callbackURL || `${process.env.SERVER_URL}/auth/google/callback`,
 },
   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done))
 );
 
 passport.use('facebook', new FacebookStrategy({
-  clientID: config.Facebook.clientID,
-  clientSecret: config.Facebook.clientSecret,
-  callbackURL: config.Facebook.callbackURL,
+  clientID: config.Facebook.clientID || process.env.FACEBOOK_CLIENTID,
+  clientSecret: config.Facebook.clientSecret || process.env.FACEBOOK_CLIENTSECRET,
+  callbackURL: config.Facebook.callbackURL || `${process.env.SERVER_URL}/auth/facebook/callback`,
   profileFields: ['id', 'emails', 'name']
 },
   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('facebook', profile, done))
@@ -192,9 +192,9 @@ passport.use('facebook', new FacebookStrategy({
 
 // REQUIRES PERMISSIONS FROM TWITTER TO OBTAIN USER EMAIL ADDRESSES
 const twitterOptions = {
-  consumerKey: config.Twitter.consumerKey,
-  consumerSecret: config.Twitter.consumerSecret,
-  callbackURL: config.Twitter.callbackURL,
+  consumerKey: config.Twitter.consumerKey || process.env.TWITTER_CONSUMERKEY,
+  consumerSecret: config.Twitter.consumerSecret || process.env.TWITTER_CONSUMERSECRET,
+  callbackURL: config.Twitter.callbackURL || `${process.env.SERVER_URL}/auth/twitter/callback`,
   userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
 };
 
