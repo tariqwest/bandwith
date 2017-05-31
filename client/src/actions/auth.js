@@ -36,3 +36,8 @@ export const checkLogin = () => (dispatch) => {
     .then(json => dispatch(receiveLogin(json)))
     .catch(err => dispatch(loginError(err.message)));
 };
+
+// TODO change this to check if already auth
+export const checkLoginIfNeccessary = () => {
+  // if not checkLogin
+};

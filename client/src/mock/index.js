@@ -1,7 +1,6 @@
 export const mockAuth = {
   isFetching: false,
   isAuthenticated: false,
-  user: 'calebcordry',
   errorMessage: '',
   receivedAt: Date.now(),
 };
