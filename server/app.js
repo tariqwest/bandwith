@@ -17,11 +17,13 @@ app.use(middleware.passport.initialize());
 app.use(middleware.passport.session());
 app.use(middleware.flash());
 
-app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/api/profiles', routes.profiles);
 app.use('/api', routes.api);
-app.use('/', routes.auth);
+app.use('/auth', routes.auth);
 app.use('/test', routes.test);
-
+app.use(express.static(path.join(__dirname, '../public')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../public', 'index.html'));
+});
 module.exports = app;
