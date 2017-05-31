@@ -12,7 +12,9 @@ if (process.env.NODE_ENV !== 'production') {
 const store = createStore(
   reducer,
   applyMiddleware(...middleware),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),  // eslint-disable-line
 );
+
+// TODO hook up redux dev tools with middleware
+// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 
 export default store;

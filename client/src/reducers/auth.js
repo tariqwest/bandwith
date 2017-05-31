@@ -12,7 +12,7 @@ const auth = (state = {
         ...state,
         isFetching: true,
         isAuthenticated: false,
-        user: action.creds,
+        user: action.credentials,
       };
     case LOGIN_SUCCESS:
       return {
