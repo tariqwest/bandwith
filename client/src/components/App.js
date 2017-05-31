@@ -1,18 +1,17 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import Test from './Test';
-import Matches from './Matches';
-import Results from './Results';
-import Login from './Login';
-import Private from './Private';
-import PrivateRoute from './PrivateRoute';
-
 import {
   BrowserRouter as Router,
   Route,
   Link,
 } from 'react-router-dom';
 
+import Test from './Test';
+import Matches from './Matches';
+import Results from './Results';
+import Login from './Login';
+import Private from './Private';
+import PrivateRoute from './PrivateRoute';
 import store from '../store';
 
 const App = () => (
