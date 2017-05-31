@@ -1,6 +1,6 @@
 module.exports = [
   {
-    id: 1,
+    id: 2,
     first: 'Alexander',
     last: 'Hamilton',
     display: 'A.HAM',
@@ -16,7 +16,7 @@ module.exports = [
     influences: ['Lin-Manuel Miranda'],
   },
   {
-    id: 2,
+    id: 10,
     first: 'Beyoncé',
     last: 'Knowles-Carter',
     display: 'Beyoncé',
@@ -32,7 +32,7 @@ module.exports = [
     influences: ['Stevie Wonder'],
   },
   {
-    id: 3,
+    id: 11,
     first: 'Antonio',
     last: 'Vivaldi',
     display: 'Vivaldi',
