@@ -8,14 +8,14 @@ router.route('/auth/login')
   .post(middleware.passport.authenticate('local-login', {
     successRedirect: '/',
     failureRedirect: '/login',
-    failureFlash: true
+    failureFlash: true,
   }));
 
 router.route('/auth/signup')
   .post(middleware.passport.authenticate('local-signup', {
     successRedirect: '/',
     failureRedirect: '/signup',
-    failureFlash: true
+    failureFlash: true,
   }));
 
 router.get('/auth/google', middleware.passport.authenticate('google', {
@@ -45,7 +45,9 @@ router.get('/auth/twitter/callback', middleware.passport.authenticate('twitter',
 }));
 
 router.get('/auth/status', (req, res) => {
-  res.send({ loggedIn: req.isAuthenticated(), userId: req.user.id || null });
+  const user = req.user;
+  const userId = user && user.id;
+  res.send({ loggedIn: req.isAuthenticated(), userId });
 });
 
 router.route('/auth/logout')

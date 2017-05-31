@@ -14,7 +14,7 @@ export const receiveLogin = user => ({
   type: LOGIN_SUCCESS,
   isFetching: false,
   isAuthenticated: user.loggedIn,
-  id_token: 'PLACE_ID_HERE',
+  userId: user.userId || null,
 });
 
 export const loginError = message => ({

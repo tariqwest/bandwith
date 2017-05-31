@@ -5,6 +5,8 @@ import {
 const auth = (state = {
   isFetching: false,
   isAuthenticated: false,
+  errorMessage: '',
+  userId: null,
 }, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
@@ -12,14 +14,14 @@ const auth = (state = {
         ...state,
         isFetching: true,
         isAuthenticated: false,
-        user: action.credentials,
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         isFetching: false,
-        isAuthenticated: true,
+        isAuthenticated: action.isAuthenticated,
         errorMessage: '',
+        userId: action.userId,
       };
     case LOGIN_FAILURE:
       return {
@@ -33,6 +35,7 @@ const auth = (state = {
         ...state,
         isFetching: true,
         isAuthenticated: false,
+        userId: null,
       };
     default:
       return state;
