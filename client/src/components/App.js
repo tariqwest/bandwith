@@ -14,6 +14,7 @@ import Login from './Login';
 import Logout from './Logout';
 import Private from './Private';
 import PrivateRoute from './PrivateRoute';
+import Signup from './Signup';
 import store from '../store';
 
 const App = () => (
@@ -31,10 +32,10 @@ const App = () => (
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
         <PrivateRoute path="/private" component={Private} />
-        <Route path="/test" component={Test} />
         <Route path="/connections" component={Matches} />
         <Route path="/results" component={Results} />
         <PrivateRoute path="/chats" component={Chats} />
+        <Route path="/signup" component={Signup} />
       </div>
     </Router>
   </Provider>
