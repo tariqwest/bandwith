@@ -5,11 +5,13 @@ exports.up = (knex, Promise) => (
       table.string('first', 100).nullable();
       table.string('last', 100).nullable();
       table.string('display', 100).nullable();
+      table.string('bio', 300).nullable();
       table.string('email', 100).nullable().unique();
       table.string('phone', 100).nullable();
       table.string('location', 30).nullable();
       table.integer('searchRadius').nullable();
       table.integer('age').nullable();
+      table.string('gender', 30).nullable();
       table.timestamps(true, true);
     }),
     knex.schema.createTableIfNotExists('auths', (table) => {
