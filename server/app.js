@@ -23,7 +23,7 @@ app.use('/api/connections', routes.connections);
 app.use('/api/chats', routes.chats);
 app.use('/api', routes.api);
 app.use('/auth', routes.auth);
-app.use('/signup', routes.signup);
+app.use('/api/signup', routes.signup);
 app.use(express.static(path.join(__dirname, '../public')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../public', 'index.html'));
