@@ -16,6 +16,6 @@ module.exports.session = session({
     url: config.env.redisUrl,
   }),
   secret: 'more laughter, more love, more life',
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
 });
