@@ -1,24 +1,22 @@
 {
+  "env": {
+    "serverUrl": "SERVER_URL"
+  },
   "knex": {
     "connection": "DATABASE_URL"
   },
   "passport": {
     "Google": {
       "clientID": "GOOGLE_CLIENTID",
-      "clientSecret": "GOOGLE_CLIENTSECRET",
-      "callbackURL": "SERVER_URL"
+      "clientSecret": "GOOGLE_CLIENTSECRET"
     },
-
     "Facebook": {
       "clientID": "FACEBOOK_CLIENTID",
-      "clientSecret": "FACEBOOK_CLIENTSECRET",
-      "callbackURL": "SERVER_URL"
+      "clientSecret": "FACEBOOK_CLIENTSECRET"
     },
-
     "Twitter": {
       "consumerKey": "TWITTER_CONSUMERKEY",
-      "consumerSecret": "TWITTER_CONSUMERSECRET",
-      "callbackURL": "SERVER_URL"
+      "consumerSecret": "TWITTER_CONSUMERSECRET"
     }
   }
 }

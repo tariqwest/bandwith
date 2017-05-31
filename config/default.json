@@ -1,7 +1,6 @@
 {
   "knex": {
     "client": "postgresql",
-    "connection": "",
     "pool": {
       "min": 1,
       "max": 2

@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
-const config = require('config').passport;
+const config = require('config');
 const models = require('../../db/models');
 
 passport.serializeUser((profile, done) => {
@@ -94,7 +94,6 @@ passport.use('local-signup', new LocalStrategy({
   passReqToCallback: true
 },
   (req, email, password, done) => {
-    console.log('Running local signup strategy', email, password);
     // check to see if there is a local account with this email address
     return models.Profile.where({ email }).fetch({
       withRelated: [{
@@ -174,17 +173,17 @@ passport.use('local-login', new LocalStrategy({
   }));
 
 passport.use('google', new GoogleStrategy({
-  clientID: config.Google.clientID,
-  clientSecret: config.Google.clientSecret,
-  callbackURL: `${config.Google.callbackURL}/auth/google/callback`,
+  clientID: config.passport.Google.clientID,
+  clientSecret: config.passport.Google.clientSecret,
+  callbackURL: `${config.env.serverUrl}/auth/google/callback`,
 },
   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done))
 );
 
 passport.use('facebook', new FacebookStrategy({
-  clientID: config.Facebook.clientID,
-  clientSecret: config.Facebook.clientSecret,
-  callbackURL: `${config.Facebook.callbackURL}/auth/facebook/callback`,
+  clientID: config.passport.Facebook.clientID,
+  clientSecret: config.passport.Facebook.clientSecret,
+  callbackURL: `${config.env.serverUrl}/auth/facebook/callback`,
   profileFields: ['id', 'emails', 'name']
 },
   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('facebook', profile, done))
@@ -192,9 +191,9 @@ passport.use('facebook', new FacebookStrategy({
 
 // REQUIRES PERMISSIONS FROM TWITTER TO OBTAIN USER EMAIL ADDRESSES
 const twitterOptions = {
-  consumerKey: config.Twitter.consumerKey,
-  consumerSecret: config.Twitter.consumerSecret,
-  callbackURL: `${config.Twitter.callbackURL}/auth/twitter/callback`,
+  consumerKey: config.passport.Twitter.consumerKey,
+  consumerSecret: config.passport.Twitter.consumerSecret,
+  callbackURL: `${config.env.serverUrl}/auth/twitter/callback`,
   userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
 };
 
