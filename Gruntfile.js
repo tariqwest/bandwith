@@ -1,5 +1,9 @@
 const config = require('config').knex;
 
+if (process.env.DATABASE_URL) {
+  config.knex.connection = process.env.DATABASE_URL;
+}
+
 module.exports = (grunt) => {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
