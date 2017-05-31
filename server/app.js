@@ -19,6 +19,7 @@ app.use(middleware.flash());
 
 
 app.use('/api/profiles', routes.profiles);
+app.use('/api/connections', routes.connections);
 app.use('/api', routes.api);
 app.use('/auth', routes.auth);
 app.use('/test', routes.test);
