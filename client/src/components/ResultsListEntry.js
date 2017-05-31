@@ -4,26 +4,16 @@ import TagList from './TagList';
 class ResultsListEntry extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      photo: this.props.result.photo,
-      first: this.props.result.first,
-      last: this.props.result.last,
-      display: this.props.result.display,
-      location: this.props.result.location,
-      bio: this.props.result.bio,
-      gender: this.props.result.gender,
-      video: this.props.result.video,
-      audio: this.props.result.songs,
-    };
+    this.state = {};
   }
 
   render() {
     return (
       <div>
         <div className="profile-main">
-          <img height="150" width="150" alt="profile-pic" src={this.state.photo} />
-          <div className="profile-display">{this.state.display}</div>
-          <div className="profile-bio">{this.state.bio}</div>
+          <img height="150" width="150" alt="profile-pic" src={this.props.result.photo} />
+          <div className="profile-display">{this.props.result.display}</div>
+          <div className="profile-bio">{this.props.result.bio}</div>
           <TagList tags={this.props.result.instruments} type="instrument" />
           <TagList tags={this.props.result.genres} type="genres" />
           <TagList tags={this.props.result.influences} type="influences" />
@@ -36,7 +26,7 @@ class ResultsListEntry extends React.Component {
               scrolling="no"
               frameBorder="no"
               title="audio"
-              src={this.state.audio}
+              src={this.props.result.song}
             />
           </div>
           <div className="profile-video">
@@ -46,7 +36,7 @@ class ResultsListEntry extends React.Component {
               frameBorder="0"
               allowFullScreen
               title="video"
-              src={this.state.video}
+              src={this.props.result.video}
             />
           </div>
         </div>
