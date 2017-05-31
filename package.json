@@ -9,7 +9,7 @@
     "debug": "nodemon --inspect",
     "test": "NODE_ENV=test grunt test",
     "test:jest": "jest",
-    "heroku-postbuild": "npm run build:prod && knex migrate:latest && knex seed:run"
+    "heroku-postbuild": "knex migrate:latest && knex seed:run"
   },
   "author": "Hack Reactor",
   "license": "MIT",
