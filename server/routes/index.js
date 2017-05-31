@@ -5,3 +5,4 @@ module.exports.chats = require('./chats');
 module.exports.test = require('./test');
 module.exports.connections = require('./connections');
 module.exports.preference = require('./preference');
+module.exports.signup = require('./signup');
