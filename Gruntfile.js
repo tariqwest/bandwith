@@ -28,6 +28,26 @@ module.exports = (grunt) => {
         },
         name: config.connection.database,
       },
+      dev: {
+        connection: {
+          user: config.connection.user,
+          password: config.connection.password,
+          host: config.connection.host,
+          port: config.connection.port,
+          database: 'template1',
+        },
+        name: config.connection.database,
+      },
+      test: {
+        connection: {
+          user: config.connection.user,
+          password: config.connection.password,
+          host: config.connection.host,
+          port: config.connection.port,
+          database: 'template1',
+        },
+        name: config.connection.database,
+      },
     },
 
   });
