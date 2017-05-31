@@ -9,11 +9,11 @@ class Signup extends React.Component {
       last: '',
       sex: '',
       bio: '',
+      song: '',
+      video: '',
       instruments: [],
       genres: [],
       influences: [],
-      song: '',
-      video: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.send = this.send.bind(this);
@@ -31,7 +31,15 @@ class Signup extends React.Component {
 
   send() {
     const body = {
+      first: this.state.first,
+      last: this.state.last,
+      sex: this.state.sex,
+      bio: this.state.bio,
+      instruments: this.state.instruments,
+      genres: this.state.genres,
+      influences: this.state.influences,
       song: this.state.song,
+      video: this.state.video,
     };
 
     const headers = {
@@ -45,7 +53,7 @@ class Signup extends React.Component {
       headers,
     };
 
-    fetch('/profile', options)
+    fetch('/api/signup', options)
       .then(res => res.json())
       .then(json => console.log(json))
       .catch(err => console.log(err));
@@ -92,6 +100,9 @@ class Signup extends React.Component {
             </textarea>
           </p>
           <p>
+          Your Sex:
+          </p>
+          <p>
             <label htmlFor="sex" />
             <select
               id="sex"
@@ -99,10 +110,77 @@ class Signup extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
             >
+              {/*<option selected="selected">Sex</option>*/}
               <option value="female">Female</option>
               <option value="male">Male</option>
               <option value="unspecified">Unspecified</option>
             </select>
+          </p>
+          <p>
+          Your instruments:
+          </p>
+          <p>
+            <select
+              multiple
+              id="instruments"
+              name="instruments"
+              value={this.state.value}
+              onChange={this.handleChange}
+            >
+              {/*<option selected="selected">Your instruments</option>*/}
+              <option value="guitar">guitar</option>
+              <option value="drums">drums</option>
+              <option value="bass">bass</option>
+              <option value="piano">piano</option>
+            </select>
+          </p>
+          <p>
+          Your Genres:
+          </p>
+          <p>
+            <select
+              multiple
+              id="genres"
+              name="genres"
+              value={this.state.value}
+              onChange={this.handleChange}
+            >
+              {/*<option selected="selected">Your genres</option>*/}
+              <option value="rock">rock</option>
+              <option value="country">country</option>
+              <option value="pop">pop</option>
+              <option value="punk">punk</option>
+            </select>
+          </p>
+          <p>
+            <label htmlFor="influences">Influences:</label>
+            <input
+              id="influences"
+              type="text"
+              name="influences"
+              value={this.state.influences}
+              onChange={this.handleChange}
+            />
+          </p>
+          <p>
+            <label htmlFor="song">SoundCloud Demo Link:</label>
+            <input
+              id="song"
+              type="text"
+              name="song"
+              value={this.state.song}
+              onChange={this.handleChange}
+            />
+          </p>
+          <p>
+            <label htmlFor="video">YouTube Video Link:</label>
+            <input
+              id="video"
+              type="text"
+              name="video"
+              value={this.state.video}
+              onChange={this.handleChange}
+            />
           </p>
           <p>
             <input type="submit" value="Submit" />
