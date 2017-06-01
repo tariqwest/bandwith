@@ -3,12 +3,36 @@ const models = require('../../db/models');
 module.exports.getAll = (req, res) => {
   models.Chat
     .fetchAll()
-    .then(chats => {
+    .then((chats) => {
       res
         .status(200)
         .send(chats);
     })
-    .catch(err => {
+    .catch((err) => {
+      // This code indicates an outside service (the database) did not respond in time
+      res
+        .status(503)
+        .send(err);
+    });
+};
+
+module.exports.getAllForUser = (req, res) => {
+  models.Chat
+    .query({
+      where: {
+        profile_id_to: req.query.userId,
+      },
+      orWhere: {
+        profile_id_from: req.query.userId,
+      },
+    })
+    .fetchAll()
+    .then((chats) => {
+      res
+        .status(200)
+        .send(chats);
+    })
+    .catch((err) => {
       // This code indicates an outside service (the database) did not respond in time
       res
         .status(503)
@@ -29,12 +53,12 @@ module.exports.getAllForUserMatch = (req, res) => {
       }
     })
     .fetchAll()
-    .then(chats => {
+    .then((chats) => {
       res
         .status(200)
         .send(chats);
     })
-    .catch(err => {
+    .catch((err) => {
       // This code indicates an outside service (the database) did not respond in time
       res
         .status(503)
@@ -49,12 +73,12 @@ module.exports.create = (req, res) => {
     message: req.body.message,
   })
     .save()
-    .then(chat => {
+    .then((chat) => {
       res
         .status(200)
         .send(chat);
     })
-    .catch(err => {
+    .catch((err) => {
       // This code indicates an outside service (the database) did not respond in time
       res
         .status(503)
