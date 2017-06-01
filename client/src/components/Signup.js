@@ -1,12 +1,5 @@
 import React from 'react';
-import {connect} from 'react-redux';
-
-const instruments = [
-  { value: 'guitar', label: 'guitar' },
-  { value: 'drums', label: 'drums' },
-  { value: 'piano', label: 'piano' },
-  { value: 'bass', label: 'bass' },
-];
+import { connect } from 'react-redux';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -18,7 +11,12 @@ class Signup extends React.Component {
       bio: '',
       song: '',
       video: '',
-      instruments: [],
+      instruments: [
+        { value: 'guitar', label: 'guitar' },
+        { value: 'drums', label: 'drums' },
+        { value: 'piano', label: 'piano' },
+        { value: 'bass', label: 'bass' },
+      ],
       genres: [],
       influences: [],
       test: [],
@@ -28,24 +26,26 @@ class Signup extends React.Component {
     this.handleInstrumentChange = this.handleInstrumentChange.bind(this);
   }
 
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  getArtWork() {
+    const body = {
+      influence: this.state.influence,
+    };
 
-    this.setState({
-      [name]: value,
-    });
-  }
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
 
-  handleInstrumentChange(event) {
-    const value = event[0].value;
-    const selected = this.state.instruments;
-    selected.push(value);
+    const options = {
+      method: 'GET',
+      body: JSON.stringify(body),
+      headers,
+    };
 
-    this.setState({
-      instruments: selected,
-    });
+    fetch('/api/influences', options)
+      .then(res => res.json())
+      .then(json => console.log(json))
+      .catch(err => console.log(err));
   }
 
   send() {
@@ -77,9 +77,24 @@ class Signup extends React.Component {
       .then(json => console.log(json))
       .catch(err => console.log(err));
   }
+  handleInstrumentChange(event) {
+    const value = event[0].value;
+    const selected = this.state.instruments;
+    selected.push(value);
 
-  getArtWork() {
+    this.setState({
+      instruments: selected,
+    });
+  }
 
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
   }
 
   render() {
