@@ -12,14 +12,13 @@ class Signup extends React.Component {
       bio: '',
       song: '',
       video: '',
-      instruments: [],
-      genres: [],
-      influences: [],
-      test: [],
+      instruments: {},
+      genres: {},
+      influences: {},
     };
     this.handleChange = this.handleChange.bind(this);
     this.send = this.send.bind(this);
-    this.handleInstrumentChange = this.handleInstrumentChange.bind(this);
+    this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
   }
 
   getArtWork() {
@@ -74,10 +73,16 @@ class Signup extends React.Component {
       .catch(err => console.log(err));
   }
 
-  handleInstrumentChange(event) {
-    const value = event[0].value;
+  handleSelectMultiple(event) {
+    const value = event.target.value;
+    console.log('*****: ', value);
     const selected = this.state.instruments;
-    selected.push(value);
+
+    if (!selected[value]) {
+      selected[value] = value;
+    } else {
+      delete selected[value];
+    }
 
     this.setState({
       instruments: selected,
@@ -154,10 +159,11 @@ class Signup extends React.Component {
             <select
               id="gender"
               name="gender"
+              defaultValue="unspecified"
               value={this.state.value}
               onChange={this.handleChange}
             >
-              <option value="unspecified" selected>Unspecified</option>
+              <option value="unspecified" >Unspecified</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
               <option value="other">Other</option>
@@ -172,7 +178,7 @@ class Signup extends React.Component {
               id="instruments"
               name="instruments"
               value={this.state.value}
-              onChange={this.handleChange}
+              onClick={this.handleSelectMultiple}
             >
               <option value="electricGuitar">electric guitar</option>
               <option value="acoutsticGuitar">acoustic guitar</option>
@@ -195,7 +201,7 @@ class Signup extends React.Component {
               id="genres"
               name="genres"
               value={this.state.value}
-              onChange={this.handleChange}
+              onClick={this.handleSelectMultiple}
             >
               <option value="rock">rock</option>
               <option value="jazz">jazz</option>
