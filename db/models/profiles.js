@@ -14,8 +14,11 @@ const Profile = db.Model.extend({
   photo: function() {
     return this.hasOne('Photo');
   },
-  connections: function() {
-    return this.hasMany('Connection');
+  connections_1: function() {
+    return this.belongsToMany('Profile', 'connections', 'profile_id_1', 'profile_id_2').withPivot(['likes_1_2', 'likes_2_1']);
+  },
+  connections_2: function() {
+    return this.belongsToMany('Profile', 'connections', 'profile_id_2', 'profile_id_1').withPivot(['likes_1_2', 'likes_2_1']);
   },
   chats: function() {
     return this.hasMany('Chat');
