@@ -2,28 +2,44 @@ import React from 'react';
 import { Redirect, Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
-import { checkLogin } from '../actions';
+import { checkLogin, setRedirectUrl } from '../actions';
 
+class PrivateRoute extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRender = this.handleRender.bind(this);
+  }
 
-const PrivateRoute = ({ component: Component, dispatch, ...rest }) => {
-  const handleRender = (props) => {
-    const isAuthenticated = props.isAuthenticated;
+  componentWillMount() {
+    const { dispatch, location, isAuthenticated } = this.props;
+    const redirect = location.pathname;
+
+    if (!isAuthenticated) {
+      dispatch(setRedirectUrl(redirect));
+      dispatch(checkLogin());
+    }
+  }
+
+  handleRender() {
+    const { isAuthenticated, location, component: Component } = this.props;
 
     if (isAuthenticated) {
-      return <Component {...props} />;
+      return <Component {...this.props} />;
     }
-
-    dispatch(checkLogin());
 
     const to = {
       pathname: '/login',
-      state: { from: props.location },
+      state: { from: location },
     };
     return <Redirect to={to} />;
-  };
+  }
 
-  return <Route {...rest} render={handleRender} />;
-};
+  render() {
+    const { component, ...rest } = this.props;
+    return <Route {...rest} render={this.handleRender} />;
+  }
+
+}
 
 const mapStateToProps = state => ({ isAuthenticated: state.auth.isAuthenticated });
 

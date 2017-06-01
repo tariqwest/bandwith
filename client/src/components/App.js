@@ -10,6 +10,7 @@ import Test from './Test';
 import Matches from './Matches';
 import Results from './Results';
 import Login from './Login';
+import Logout from './Logout';
 import Private from './Private';
 import PrivateRoute from './PrivateRoute';
 import store from '../store';
@@ -20,9 +21,11 @@ const App = () => (
       <div>
         <ul>
           <li><Link to="/login">Login</Link></li>
+          <li><Link to="/logout">Logout</Link></li>
           <li><Link to="/private">Protected Page</Link></li>
         </ul>
         <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
         <PrivateRoute path="/private" component={Private} />
         <Route path="/test" component={Test} />
         <Route path="/connections" component={Matches} />

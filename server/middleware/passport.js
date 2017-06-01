@@ -177,7 +177,9 @@ passport.use('google', new GoogleStrategy({
   clientSecret: config.passport.Google.clientSecret,
   callbackURL: `${config.env.serverUrl}/auth/google/callback`,
 },
-  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('google', profile, done))
+  (accessToken, refreshToken, profile, done) => {
+    getOrCreateOAuthProfile('google', profile, done)
+  })
 );
 
 passport.use('facebook', new FacebookStrategy({

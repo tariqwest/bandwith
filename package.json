@@ -9,7 +9,11 @@
     "debug": "nodemon --inspect",
     "test": "NODE_ENV=test grunt test",
     "test:jest": "jest",
-    "heroku-postbuild": "knex migrate:latest && knex seed:run"
+    "heroku-postbuild": "knex migrate:latest && knex seed:run",
+    "loaddb": "grunt pgcreatedb:default",
+    "migrate:latest": "knex migrate:latest",
+    "migrate:rollback": "knex migrate:rollback",
+    "seed": "knex seed:run"
   },
   "author": "Hack Reactor",
   "license": "MIT",

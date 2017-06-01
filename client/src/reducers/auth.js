@@ -1,5 +1,10 @@
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
 } from '../actions';
 
 const auth = (state = {
@@ -30,12 +35,23 @@ const auth = (state = {
         isAuthenticated: false,
         errorMessage: action.message,
       };
-    case LOGOUT_SUCCESS:
+    case LOGOUT_REQUEST:
       return {
         ...state,
         isFetching: true,
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
         isAuthenticated: false,
         userId: null,
+      };
+    case LOGOUT_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.message,
       };
     default:
       return state;

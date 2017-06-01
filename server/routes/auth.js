@@ -1,6 +1,5 @@
 const express = require('express');
 const middleware = require('../middleware');
-const path = require('path');
 
 const router = express.Router();
 
@@ -18,9 +17,11 @@ router.route('/signup')
     failureFlash: true,
   }));
 
+const prefix = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:1337';
+
 router.use((req, res, next) => {
   if (req.query && req.query.returnTo) {
-    req.session.returnTo = req.query.returnTo;
+    req.session.returnTo = prefix + req.query.returnTo;
   }
   next();
 });
