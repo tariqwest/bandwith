@@ -1,5 +1,11 @@
 import React from 'react';
-// import './styles.css';
+
+const instruments = [
+  { value: 'guitar', label: 'guitar' },
+  { value: 'drums', label: 'drums' },
+  { value: 'piano', label: 'piano' },
+  { value: 'bass', label: 'bass' },
+];
 
 class Signup extends React.Component {
   constructor(props) {
@@ -14,9 +20,11 @@ class Signup extends React.Component {
       instruments: [],
       genres: [],
       influences: [],
+      test: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.send = this.send.bind(this);
+    this.handleInstrumentChange = this.handleInstrumentChange.bind(this);
   }
 
   handleChange(event) {
@@ -26,6 +34,16 @@ class Signup extends React.Component {
 
     this.setState({
       [name]: value,
+    });
+  }
+
+  handleInstrumentChange(event) {
+    const value = event[0].value;
+    const selected = this.state.instruments;
+    selected.push(value);
+
+    this.setState({
+      instruments: selected,
     });
   }
 
@@ -110,10 +128,9 @@ class Signup extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
             >
-              {/*<option selected="selected">Sex</option>*/}
+              <option value="unspecified" selected>Unspecified</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
-              <option value="unspecified">Unspecified</option>
             </select>
           </p>
           <p>
@@ -127,7 +144,6 @@ class Signup extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
             >
-              {/*<option selected="selected">Your instruments</option>*/}
               <option value="guitar">guitar</option>
               <option value="drums">drums</option>
               <option value="bass">bass</option>
@@ -145,7 +161,6 @@ class Signup extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
             >
-              {/*<option selected="selected">Your genres</option>*/}
               <option value="rock">rock</option>
               <option value="country">country</option>
               <option value="pop">pop</option>
@@ -153,14 +168,17 @@ class Signup extends React.Component {
             </select>
           </p>
           <p>
-            <label htmlFor="influences">Influences:</label>
-            <input
-              id="influences"
-              type="text"
-              name="influences"
-              value={this.state.influences}
-              onChange={this.handleChange}
-            />
+            <form onSubmit={this.getArtWork}>
+              <label htmlFor="influences">Influences:</label>
+              <input
+                id="influences"
+                type="text"
+                name="influences"
+                value={this.state.influences}
+                onChange={this.handleChange}
+              />
+            </form>
+            <input type="submit" value="Submit Influence" />
           </p>
           <p>
             <label htmlFor="song">SoundCloud Demo Link:</label>
