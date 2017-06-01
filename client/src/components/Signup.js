@@ -77,6 +77,10 @@ class Signup extends React.Component {
       .catch(err => console.log(err));
   }
 
+  getArtWork() {
+
+  }
+
   render() {
     return (
       <div>
