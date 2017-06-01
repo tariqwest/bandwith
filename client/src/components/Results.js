@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import ResultsListEntry from './ResultsListEntry';
 import dummyData from '../data/dummyData';
 
@@ -11,13 +12,12 @@ class Results extends React.Component {
       size: dummyData.length - 1,
       currentResult: dummyData[0],
       noMoreResults: false,
-      userId: 2,
     };
   }
 
   updateConnections(choice) {
     const body = {
-      userId: this.state.userId,
+      userId: this.props.userId,
       profileId: this.state.currentResult.id,
       choice,
     };
@@ -89,4 +89,6 @@ class Results extends React.Component {
   }
 }
 
-export default Results;
+const mapStateToProps = state => ({ userId: state.auth.userId });
+
+export default connect(mapStateToProps)(Results);
