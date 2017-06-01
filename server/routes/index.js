@@ -3,3 +3,4 @@ module.exports.auth = require('./auth');
 module.exports.profiles = require('./profiles');
 module.exports.test = require('./test');
 module.exports.connections = require('./connections');
+module.exports.preference = require('./preference');
