@@ -19,28 +19,30 @@ class Signup extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.send = this.send.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
+    this.addInfluence = this.addInfluence.bind(this);
   }
 
-  getArtWork() {
-    const body = {
-      influence: this.state.influence,
-    };
+  addInfluence() {
 
-    const headers = {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    };
+    // const body = {
+    //   influence: this.state.influence,
+    // };
 
-    const options = {
-      method: 'GET',
-      body: JSON.stringify(body),
-      headers,
-    };
+    // const headers = {
+    //   Accept: 'application/json',
+    //   'Content-Type': 'application/json',
+    // };
 
-    fetch('/api/influences', options)
-      .then(res => res.json())
-      .then(json => console.log(json))
-      .catch(err => console.log(err));
+    // const options = {
+    //   method: 'GET',
+    //   body: JSON.stringify(body),
+    //   headers,
+    // };
+
+    // fetch('/api/influences', options)
+    //   .then(res => res.json())
+    //   .then(json => console.log(json))
+    //   .catch(err => console.log(err));
   }
 
   send() {
@@ -75,8 +77,8 @@ class Signup extends React.Component {
 
   handleSelectMultiple(event) {
     const value = event.target.value;
-    console.log('*****: ', value);
-    const selected = this.state.instruments;
+    const className = event.target.className;
+    const selected = this.state[className];
 
     if (!selected[value]) {
       selected[value] = value;
@@ -90,6 +92,16 @@ class Signup extends React.Component {
   }
 
   handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleInfluences(event) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -138,20 +150,6 @@ class Signup extends React.Component {
             />
           </p>
           <p>
-            <textarea
-              rows="4"
-              cols="50"
-              id="bio"
-              type="text"
-              name="bio"
-              placeholder="tell us about yourself ..."
-              value={this.state.bio}
-              onChange={this.handleChange}
-            >
-              Write a brief description of yourself
-            </textarea>
-          </p>
-          <p>
           Your Gender:
           </p>
           <p>
@@ -170,6 +168,42 @@ class Signup extends React.Component {
             </select>
           </p>
           <p>
+            <label htmlFor="influences">
+              Biography:
+            </label>
+          </p>
+          <p>
+            <textarea
+              rows="4"
+              cols="50"
+              id="bio"
+              type="text"
+              name="bio"
+              placeholder="tell us about yourself ..."
+              value={this.state.bio}
+              onChange={this.handleChange}
+            >
+              Write a brief description of yourself
+            </textarea>
+          </p>
+          <p>
+            <label htmlFor="influences">
+              Musical Influences:
+            </label>
+          </p>
+          <p>
+            <textarea
+              rows="4"
+              cols="50"
+              id="influences"
+              type="text"
+              name="influences"
+              placeholder="add your musical influences separated by a comma ..."
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </p>
+          <p>
           Your instruments:
           </p>
           <p>
@@ -180,16 +214,16 @@ class Signup extends React.Component {
               value={this.state.value}
               onClick={this.handleSelectMultiple}
             >
-              <option value="electricGuitar">electric guitar</option>
-              <option value="acoutsticGuitar">acoustic guitar</option>
-              <option value="bass">bass</option>
-              <option value="drums">drums</option>
-              <option value="piano">piano</option>
-              <option value="vocals">vocals</option>
-              <option value="ukulele">ukulele</option>
-              <option value="violin">violin</option>
-              <option value="saxaphone">saxaphone</option>
-              <option value="trumpet">trumpet</option>
+              <option className="instruments" value="electricGuitar">electric guitar</option>
+              <option className="instruments" value="acousticGuitar">acoustic guitar</option>
+              <option className="instruments" value="bass">bass</option>
+              <option className="instruments" value="drums">drums</option>
+              <option className="instruments" value="piano">piano</option>
+              <option className="instruments" value="vocals">vocals</option>
+              <option className="instruments" value="ukulele">ukulele</option>
+              <option className="instruments" value="violin">violin</option>
+              <option className="instruments" value="saxaphone">saxaphone</option>
+              <option className="instruments" value="trumpet">trumpet</option>
             </select>
           </p>
           <p>
@@ -203,35 +237,22 @@ class Signup extends React.Component {
               value={this.state.value}
               onClick={this.handleSelectMultiple}
             >
-              <option value="rock">rock</option>
-              <option value="jazz">jazz</option>
-              <option value="blues">blues</option>
-              <option value="folk">folk</option>
-              <option value="reggae">reggae</option>
-              <option value="country">country</option>
-              <option value="pop">pop</option>
-              <option value="punk">punk</option>
-              <option value="metal">metal</option>
-              <option value="edm">edm</option>
-              <option value="r&b">r&b</option>
-              <option value="funk">funk</option>
-              <option value="rap">rap</option>
-              <option value="disco">disco</option>
-              <option value="pop">pop</option>
+              <option className="genres" value="rock">rock</option>
+              <option className="genres" value="jazz">jazz</option>
+              <option className="genres" value="blues">blues</option>
+              <option className="genres" value="folk">folk</option>
+              <option className="genres" value="reggae">reggae</option>
+              <option className="genres" value="country">country</option>
+              <option className="genres" value="pop">pop</option>
+              <option className="genres" value="punk">punk</option>
+              <option className="genres" value="metal">metal</option>
+              <option className="genres" value="edm">edm</option>
+              <option className="genres" value="r&b">r&b</option>
+              <option className="genres" value="funk">funk</option>
+              <option className="genres" value="rap">rap</option>
+              <option className="genres" value="disco">disco</option>
+              <option className="genres" value="pop">pop</option>
             </select>
-          </p>
-          <p>
-            <form onSubmit={this.getArtWork}>
-              <label htmlFor="influences">Influences:</label>
-              <input
-                id="influences"
-                type="text"
-                name="influences"
-                value={this.state.influences}
-                onChange={this.handleChange}
-              />
-            </form>
-            <input type="submit" value="Submit Influence" />
           </p>
           <p>
             <label htmlFor="song">SoundCloud Demo Link:</label>
