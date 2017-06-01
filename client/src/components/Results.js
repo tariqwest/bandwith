@@ -33,9 +33,9 @@ class Results extends React.Component {
       headers,
     };
 
-    fetch('/api/connections', options)
+    fetch('/api/preference', options)
       .then(() => console.log('Successful POST request to /connections'))
-      .catch(err => console.log('Bad POST request to /connections', err));
+      .catch(err => console.log('Bad POST request to /connections: ', err));
   }
 
   clickNo() {
