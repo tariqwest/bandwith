@@ -1,14 +1,13 @@
 import React from 'react';
-import TagList from './TagList';
 
 class MatchListEntry extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      photo: this.props.match.photo,
+      photo: this.props.match.photo_src,
       display: this.props.match.display,
-      location: this.props.match.location,
+      location: this.props.match.zipCode,
     };
   }
 
@@ -21,8 +20,6 @@ class MatchListEntry extends React.Component {
         <div className="connection-info">
           <div className="connection-display">{this.state.display}</div>
           <div className="connection-locationy">{this.state.location}</div>
-          <TagList tags={this.props.match.instruments} type="instrument" />
-          <TagList tags={this.props.match.genres} type="genres" />
         </div>
       </div>
     );
