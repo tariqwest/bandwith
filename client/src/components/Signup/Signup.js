@@ -18,7 +18,8 @@ class Signup extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.send = this.send.bind(this);
-    this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
+    this.handleSelectMultipleInstruments = this.handleSelectMultipleInstruments.bind(this);
+    this.handleSelectMultipleGenres = this.handleSelectMultipleGenres.bind(this);
     this.addInfluence = this.addInfluence.bind(this);
   }
 
@@ -75,10 +76,9 @@ class Signup extends React.Component {
       .catch(err => console.log(err));
   }
 
-  handleSelectMultiple(event) {
+  handleSelectMultipleInstruments(event) {
     const value = event.target.value;
-    const className = event.target.className;
-    const selected = this.state[className];
+    const selected = this.state.instruments;
 
     if (!selected[value]) {
       selected[value] = value;
@@ -89,6 +89,25 @@ class Signup extends React.Component {
     this.setState({
       instruments: selected,
     });
+
+    event.stopPropagation();
+  }
+
+  handleSelectMultipleGenres(event) {
+    const value = event.target.value;
+    const selected = this.state.genres;
+
+    if (!selected[value]) {
+      selected[value] = value;
+    } else {
+      delete selected[value];
+    }
+
+    this.setState({
+      genres: selected,
+    });
+
+    event.stopPropagation();
   }
 
   handleChange(event) {
@@ -212,18 +231,18 @@ class Signup extends React.Component {
               id="instruments"
               name="instruments"
               value={this.state.value}
-              onClick={this.handleSelectMultiple}
+              onChange={this.handleSelectMultipleInstruments}
             >
-              <option className="instruments" value="electricGuitar">electric guitar</option>
-              <option className="instruments" value="acousticGuitar">acoustic guitar</option>
-              <option className="instruments" value="bass">bass</option>
-              <option className="instruments" value="drums">drums</option>
-              <option className="instruments" value="piano">piano</option>
-              <option className="instruments" value="vocals">vocals</option>
-              <option className="instruments" value="ukulele">ukulele</option>
-              <option className="instruments" value="violin">violin</option>
-              <option className="instruments" value="saxaphone">saxaphone</option>
-              <option className="instruments" value="trumpet">trumpet</option>
+              <option value="electricGuitar">electric guitar</option>
+              <option value="acousticGuitar">acoustic guitar</option>
+              <option value="bass">bass</option>
+              <option value="drums">drums</option>
+              <option value="piano">piano</option>
+              <option value="vocals">vocals</option>
+              <option value="ukulele">ukulele</option>
+              <option value="violin">violin</option>
+              <option value="saxaphone">saxaphone</option>
+              <option value="trumpet">trumpet</option>
             </select>
           </p>
           <p>
@@ -235,23 +254,23 @@ class Signup extends React.Component {
               id="genres"
               name="genres"
               value={this.state.value}
-              onClick={this.handleSelectMultiple}
+              onChange={this.handleSelectMultipleGenres}
             >
-              <option className="genres" value="rock">rock</option>
-              <option className="genres" value="jazz">jazz</option>
-              <option className="genres" value="blues">blues</option>
-              <option className="genres" value="folk">folk</option>
-              <option className="genres" value="reggae">reggae</option>
-              <option className="genres" value="country">country</option>
-              <option className="genres" value="pop">pop</option>
-              <option className="genres" value="punk">punk</option>
-              <option className="genres" value="metal">metal</option>
-              <option className="genres" value="edm">edm</option>
-              <option className="genres" value="r&b">r&b</option>
-              <option className="genres" value="funk">funk</option>
-              <option className="genres" value="rap">rap</option>
-              <option className="genres" value="disco">disco</option>
-              <option className="genres" value="pop">pop</option>
+              <option value="rock">rock</option>
+              <option value="jazz">jazz</option>
+              <option value="blues">blues</option>
+              <option value="folk">folk</option>
+              <option value="reggae">reggae</option>
+              <option value="country">country</option>
+              <option value="pop">pop</option>
+              <option value="punk">punk</option>
+              <option value="metal">metal</option>
+              <option value="edm">edm</option>
+              <option value="r&b">r&b</option>
+              <option value="funk">funk</option>
+              <option value="rap">rap</option>
+              <option value="disco">disco</option>
+              <option value="pop">pop</option>
             </select>
           </p>
           <p>
@@ -288,4 +307,3 @@ const mapStateToProps = state => (
 );
 
 export default connect(mapStateToProps)(Signup);
-
