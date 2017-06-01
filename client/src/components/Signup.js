@@ -20,31 +20,30 @@ class Signup extends React.Component {
     this.send = this.send.bind(this);
     this.handleSelectMultipleInstruments = this.handleSelectMultipleInstruments.bind(this);
     this.handleSelectMultipleGenres = this.handleSelectMultipleGenres.bind(this);
-    this.addInfluence = this.addInfluence.bind(this);
+    // this.addInfluence = this.addInfluence.bind(this);
   }
 
-  addInfluence() {
+  // addInfluence() {
+  //   const body = {
+  //     influence: this.state.influence,
+  //   };
 
-    // const body = {
-    //   influence: this.state.influence,
-    // };
+  //   const headers = {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //   };
 
-    // const headers = {
-    //   Accept: 'application/json',
-    //   'Content-Type': 'application/json',
-    // };
+  //   const options = {
+  //     method: 'GET',
+  //     body: JSON.stringify(body),
+  //     headers,
+  //   };
 
-    // const options = {
-    //   method: 'GET',
-    //   body: JSON.stringify(body),
-    //   headers,
-    // };
-
-    // fetch('/api/influences', options)
-    //   .then(res => res.json())
-    //   .then(json => console.log(json))
-    //   .catch(err => console.log(err));
-  }
+  //   fetch('/api/influences', options)
+  //     .then(res => res.json())
+  //     .then(json => console.log(json))
+  //     .catch(err => console.log(err));
+  // }
 
   send() {
     const body = {
@@ -89,8 +88,6 @@ class Signup extends React.Component {
     this.setState({
       instruments: selected,
     });
-
-    event.stopPropagation();
   }
 
   handleSelectMultipleGenres(event) {
@@ -106,8 +103,6 @@ class Signup extends React.Component {
     this.setState({
       genres: selected,
     });
-
-    event.stopPropagation();
   }
 
   handleChange(event) {
@@ -243,6 +238,7 @@ class Signup extends React.Component {
               <option value="violin">violin</option>
               <option value="saxaphone">saxaphone</option>
               <option value="trumpet">trumpet</option>
+              <option value="didgeridoo">didgeridoo</option>
             </select>
           </p>
           <p>
