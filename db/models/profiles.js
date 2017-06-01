@@ -2,12 +2,24 @@ const db = require('../');
 
 const Profile = db.Model.extend({
   tableName: 'profiles',
-  auths: () => this.hasMany('Auth'),
-  song: () => this.hasOne('Song'),
-  video: () => this.hasOne('Video'),
-  photo: () => this.hasOne('Photo'),
-  connections: () => this.hasMany('Connection'),
-  chats: () => this.hasMany('Chat'),
+  auths: function() {
+    return this.hasMany('Auth');
+  },
+  song: function() {
+    return this.hasOne('Song');
+  },
+  video: function() {
+    return this.hasOne('Video');
+  },
+  photo: function() {
+    return this.hasOne('Photo');
+  },
+  connections: function() {
+    return this.hasMany('Connection');
+  },
+  chats: function() {
+    return this.hasMany('Chat');
+  },
   instruments: function() {
     return this.belongsToMany('Instrument', 'users_instruments');
   },
