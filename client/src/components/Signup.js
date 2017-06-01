@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 const instruments = [
   { value: 'guitar', label: 'guitar' },
@@ -213,5 +214,9 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+const mapStateToProps = state => (
+  { userId: state.auth.userId }
+);
+
+export default connect(mapStateToProps)(Signup);
 
