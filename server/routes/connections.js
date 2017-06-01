@@ -4,6 +4,6 @@ const ConnectionsController = require('../controllers').Connections;
 const router = express.Router();
 
 router.route('/')
-  .post(ConnectionsController.update);
+  .get(ConnectionsController.getAll);
 
 module.exports = router;

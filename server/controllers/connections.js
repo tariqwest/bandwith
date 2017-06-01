@@ -1,68 +1,33 @@
 const models = require('../../db/models');
 
-module.exports.update = (req, res, done) => {
-  models.Connection.where({
-    profile_id_1: req.body.userId,
-    profile_id_2: req.body.profileId,
-  }).fetch()
-    .then((connection) => {
-      console.log('first connection: ', connection);
-      if (connection) {
-        console.log('first if');
-        throw connection;
-      }
-      return models.Connection.where({
-        profile_id_2: req.body.userId,
-        profile_id_1: req.body.profileId,
-      }).fetch();
+module.exports.getAll = (req, res, done) => {
+  console.log('getting ALL connections... ', req.query);
+  // create store for ids or user data
+  const store = [];
+
+  // query connections table for profile_id_1
+  models.Connection.where({ profile_id_1: req.query.userId }).fetchAll({ withRelated: ['profile_id_2'] })
+    .then((connections) => {
+      console.log('profile 1 connections: ', connections);
+      // push profile_id_2 value to store
+      // store.concat(connections);
+      // OR get related user info and push to store
     })
-    .then((connection) => {
-      console.log('second connection: ', connection);
-      if (connection) {
-        console.log('second if');
-        throw connection;
-      }
-      models.Connection.forge({
-        profile_id_1: req.body.userId,
-        profile_id_2: req.body.profileId,
-        likes_1_2: req.body.choice,
-      }).save()
-        .then(() => {
-          console.log('create new row')
-          res.sendStatus(201);
-          done();
-        })
-        .catch((err) => {
-          done(err);
-        });
+    .then(() => (
+      // query connections table for profile_id_2
+      models.Connection.where({ profile_id_2: req.query.userId }).fetchAll({ withRelated: ['profile_id_1'] })
+    ))
+    .then((connections) => {
+      console.log('profile 2 connections: ', connections);
+      // push profile_id_1 value to store
+      // store.concat(connections);
+      // OR get related user info and push to store
     })
-    .catch(() => {
-      console.log('first catch');
-      models.Connection.where({
-        profile_id_1: req.body.userId,
-        profile_id_2: req.body.profileId,
-      }).save({ likes_1_2: req.body.choice },
-      { method: 'update' })
-        .then((row) => {
-          console.log('first row updated: ', row);
-          res.sendStatus(201);
-          done();
-        })
-        .catch(() => {
-          console.log('second catch');
-          models.Connection.where({
-            profile_id_2: req.body.userId,
-            profile_id_1: req.body.profileId,
-          }).save({ likes_2_1: req.body.choice },
-          { method: 'update' })
-            .then(() => {
-              console.log('second row updated');
-              res.sendStatus(201);
-              done();
-            })
-            .catch((err) => {
-              done(err);
-            });
-        });
+    .catch((err) => {
+      done(err);
     });
+
+  // scenario 1 where we are only able to get user ids
+  // query profiles table with all user ids
+  res.sendStatus(200);
 };
