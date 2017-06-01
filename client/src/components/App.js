@@ -6,7 +6,6 @@ import {
   Link,
 } from 'react-router-dom';
 
-import Test from './Test';
 import Matches from './Matches';
 import Results from './Results';
 import Chats from './Chats';
