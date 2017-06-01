@@ -5,15 +5,6 @@ const Profile = db.Model.extend({
   auths: function() {
     return this.hasMany('Auth');
   },
-  song: function() {
-    return this.hasOne('Song');
-  },
-  video: function() {
-    return this.hasOne('Video');
-  },
-  photo: function() {
-    return this.hasOne('Photo');
-  },
   connections_1: function() {
     return this.belongsToMany('Profile', 'connections', 'profile_id_1', 'profile_id_2').withPivot(['likes_1_2', 'likes_2_1']);
   },

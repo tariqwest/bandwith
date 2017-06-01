@@ -8,10 +8,13 @@ exports.up = (knex, Promise) => (
       table.string('bio', 300).nullable();
       table.string('email', 100).nullable().unique();
       table.string('phone', 100).nullable();
-      table.string('location', 30).nullable();
+      table.string('zipCode', 30).nullable();
       table.integer('searchRadius').nullable();
       table.integer('age').nullable();
       table.string('gender', 30).nullable();
+      table.string('song_src', 300).nullable();
+      table.string('video_url', 300).nullable();
+      table.string('song_url', 300).nullable();
       table.timestamps(true, true);
     }),
     knex.schema.createTableIfNotExists('auths', (table) => {
@@ -20,21 +23,6 @@ exports.up = (knex, Promise) => (
       table.string('oauth_id', 30).nullable();
       table.string('password', 100).nullable();
       table.string('salt', 100).nullable();
-      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
-    }),
-    knex.schema.createTable('photos', (table) => {
-      table.increments('id').unsigned().primary();
-      table.string('photo_src', 100).nullable();
-      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
-    }),
-    knex.schema.createTable('songs', (table) => {
-      table.increments('id').unsigned().primary();
-      table.string('song_url', 100).nullable();
-      table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
-    }),
-    knex.schema.createTable('videos', (table) => {
-      table.increments('id').unsigned().primary();
-      table.string('video_url', 100).nullable();
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
     }),
     knex.schema.createTable('connections', (table) => {
@@ -90,9 +78,6 @@ exports.down = (knex, Promise) => (
   Promise.all([
     knex.schema.dropTable('auths'),
     knex.schema.dropTable('profiles'),
-    knex.schema.dropTable('songs'),
-    knex.schema.dropTable('videos'),
-    knex.schema.dropTable('photos'),
     knex.schema.dropTable('connections'),
     knex.schema.dropTable('chats'),
     knex.schema.dropTable('instruments'),
