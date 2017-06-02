@@ -274,6 +274,16 @@ class Signup extends React.Component {
             />
           </p>
           <p>
+            <label htmlFor="searchRadius">Im looking for a musician within this many miles:</label>
+            <input
+              id="searchRadius"
+              type="text"
+              name="searchRadius"
+              value={this.state.searchRadius}
+              onChange={this.handleChange}
+            />
+          </p>
+          <p>
             Im looking for a musician that plays:
           </p>
           <p>
