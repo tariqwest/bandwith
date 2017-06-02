@@ -22,10 +22,7 @@ class Signup extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.send = this.send.bind(this);
-    this.handleSelectMultipleInstruments = this.handleSelectMultipleInstruments.bind(this);
-    this.handleSelectMultipleGenres = this.handleSelectMultipleGenres.bind(this);
-    this.handleSelectMultiplePreferredInstruments = this.handleSelectMultiplePreferredInstruments.bind(this);
-    this.handleSelectMultiplePreferredGenres = this.handleSelectMultiplePreferredGenres.bind(this);
+    this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
   }
 
   send() {
@@ -64,9 +61,10 @@ class Signup extends React.Component {
       .catch(err => console.log(err));
   }
 
-  handleSelectMultipleInstruments(event) {
+  handleSelectMultiple(event) {
+    const name = event.target.name;
     const value = event.target.value;
-    const selected = this.state.instruments;
+    const selected = this.state[name];
 
     if (!selected[value]) {
       selected[value] = value;
@@ -75,52 +73,7 @@ class Signup extends React.Component {
     }
 
     this.setState({
-      instruments: selected,
-    });
-  }
-
-  handleSelectMultipleGenres(event) {
-    const value = event.target.value;
-    const selected = this.state.genres;
-
-    if (!selected[value]) {
-      selected[value] = value;
-    } else {
-      delete selected[value];
-    }
-
-    this.setState({
-      genres: selected,
-    });
-  }
-
-  handleSelectMultiplePreferredInstruments(event) {
-    const value = event.target.value;
-    const selected = this.state.preferred_instruments;
-
-    if (!selected[value]) {
-      selected[value] = value;
-    } else {
-      delete selected[value];
-    }
-
-    this.setState({
-      preferred_instruments: selected,
-    });
-  }
-
-  handleSelectMultiplePreferredGenres(event) {
-    const value = event.target.value;
-    const selected = this.state.preferred_genres;
-
-    if (!selected[value]) {
-      selected[value] = value;
-    } else {
-      delete selected[value];
-    }
-
-    this.setState({
-      preferred_genres: selected,
+      [name]: selected,
     });
   }
 
@@ -213,7 +166,7 @@ class Signup extends React.Component {
             </select>
           </p>
           <p>
-            <label htmlFor="influences">
+            <label htmlFor="bio">
               Biography:
             </label>
           </p>
@@ -257,7 +210,7 @@ class Signup extends React.Component {
               id="instruments"
               name="instruments"
               value={this.state.value}
-              onChange={this.handleSelectMultipleInstruments}
+              onChange={this.handleSelectMultiple}
             >
               <option value="electricGuitar">electric guitar</option>
               <option value="acousticGuitar">acoustic guitar</option>
@@ -281,7 +234,7 @@ class Signup extends React.Component {
               id="genres"
               name="genres"
               value={this.state.value}
-              onChange={this.handleSelectMultipleGenres}
+              onChange={this.handleSelectMultiple}
             >
               <option value="rock">rock</option>
               <option value="jazz">jazz</option>
@@ -329,7 +282,7 @@ class Signup extends React.Component {
               id="preferred_instruments"
               name="preferred_instruments"
               value={this.state.value}
-              onChange={this.handleSelectMultiplePreferredInstruments}
+              onChange={this.handleSelectMultiple}
             >
               <option value="electricGuitar">electric guitar</option>
               <option value="acousticGuitar">acoustic guitar</option>
@@ -345,15 +298,15 @@ class Signup extends React.Component {
             </select>
           </p>
           <p>
-            Im looking for a musician that plays:
+            Im looking for a musician that likes:
           </p>
           <p>
             <select
               multiple
-              id="genres"
-              name="genres"
+              id="preferred_genres"
+              name="preferred_genres"
               value={this.state.value}
-              onChange={this.handleSelectMultiplePreferredGenres}
+              onChange={this.handleSelectMultiple}
             >
               <option value="rock">rock</option>
               <option value="jazz">jazz</option>
