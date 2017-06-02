@@ -12,14 +12,62 @@ module.exports.getAll = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
-  models.Song.forge({ song_url: req.body.song })
-    .save()
-    .then((result) => {
-      res.status(201).send(result);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  const body = req.body;
+
+  // models.Song.forge({ song_url: body.song })
+  //   .save()
+  //   .then((result) => {
+  //     res.status(201).send(result);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send(err);
+  //   });
+
+  // models.Video.forge({ video_url: body.video })
+  //   .save()
+  //   .then((result) => {
+  //     res.status(201).send(result);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send(err);
+  //   });
+
+  models.Profile.forge({
+    // song_url: body.song,
+    first: body.song,
+    last: body.last,
+    bio: body.bio,
+    zipCode: body.zipCode,
+    gender: body.gender,
+  })
+  .save()
+  .then((result) => {
+    res.status(201).send(result);
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+  });
+
+  // instruments
+  // users_instruments
+
+  // influences
+  // users_influences
+
+  // genres
+  // users_genres
+
+  // preferred_instruments
+  // preferred_genres
+
+  // models.Song.forge({ song_url: body.song })
+  //   .save()
+  //   .then((result) => {
+  //     res.status(201).send(result);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).send(err);
+  //   });
 };
 
 module.exports.getOne = (req, res) => {
