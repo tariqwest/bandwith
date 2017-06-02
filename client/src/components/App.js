@@ -25,6 +25,8 @@ const App = () => (
           <li><Link to="/logout">Logout</Link></li>
           <li><Link to="/private">Protected Page</Link></li>
           <li><Link to="/chats">Chats</Link></li>
+          <li><Link to="/connections">Connections</Link></li>
+          <li><Link to="/results">Musicians</Link></li>
         </ul>
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
