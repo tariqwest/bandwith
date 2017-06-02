@@ -16,6 +16,7 @@ class Signup extends React.Component {
       searchRadius: '',
       instruments: {},
       genres: {},
+      influence: '',
       influences: {},
       preferred_instruments: {},
       preferred_genres: {},
@@ -23,6 +24,7 @@ class Signup extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.send = this.send.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
+    this.handleInfluences = this.handleInfluences.bind(this);
   }
 
   send() {
@@ -87,14 +89,17 @@ class Signup extends React.Component {
     });
   }
 
-  handleInfluences(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  handleInfluences() {
+    const influence = this.state.influence;
+    const updatedInfluences = this.state.influences;
 
-    this.setState({
-      [name]: value,
-    });
+    if (!updatedInfluences[influence]) {
+      updatedInfluences[influence] = influence;
+      this.setState({
+        influences: updatedInfluences,
+        influence: '',
+      });
+    }
   }
 
   render() {
@@ -186,20 +191,18 @@ class Signup extends React.Component {
           </p>
           <p>
             <label htmlFor="influences">
-              Musical Influences:
+              Add a musical influences:
             </label>
-          </p>
-          <p>
-            <textarea
-              rows="4"
-              cols="50"
-              id="influences"
+            <input
+              id="influence"
               type="text"
-              name="influences"
-              placeholder="add your musical influences separated by a comma ..."
-              value={this.state.value}
+              name="influence"
+              value={this.state.influence}
               onChange={this.handleChange}
             />
+            <button type="button" form="influences" name="influences" onClick={this.handleInfluences} >
+              Add Influence
+            </button>
           </p>
           <p>
           Your instruments:
