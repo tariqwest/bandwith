@@ -24,6 +24,12 @@ module.exports.update = (req, res) => {
     searchRadius: req.body.searchRadius,
   };
 
+  for (const key in profileBody) {
+    if (profileBody[key] === '') {
+      delete profileBody[key];
+    }
+  }
+
   models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
       if (!profile) {
