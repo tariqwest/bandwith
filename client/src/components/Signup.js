@@ -37,7 +37,7 @@ class Signup extends React.Component {
       instruments: this.state.instruments,
       genres: this.state.genres,
       influences: this.state.influences,
-      song_src: this.state.song,
+      song_url: this.state.song,
       video_url: this.state.video,
       zipCode: this.state.zipCode,
       id: this.props.userId,
