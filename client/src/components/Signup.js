@@ -56,6 +56,7 @@ class Signup extends React.Component {
       influences: this.state.influences,
       song: this.state.song,
       video: this.state.video,
+      zipCode: this.state.zipCode,
     };
 
     const headers = {
