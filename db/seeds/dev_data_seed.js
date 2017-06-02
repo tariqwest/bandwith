@@ -1,6 +1,4 @@
-const models = require('../models');
-
-import {
+const {
   seedUsers,
   seedInstruments,
   seedGenres,
@@ -10,21 +8,23 @@ import {
   seedChats,
   seedInstrumentRelationships,
   seedGenreRelationships,
-} from './helpers';
+} = require('./helpers');
 
 const profiles = seedUsers;
 const instruments = seedInstruments;
 const genres = seedGenres;
 
 const auth = profiles.then(seedAuth);
-const influences = profiles.then(seedInfluences);
-const connections = profiles.then(seedConnections)
-  .then(seedChats);
+// const influences = profiles.then(seedInfluences);
+// const connections = profiles.then(seedConnections)
+//   .then(seedChats);
+//
+// const instrumentR = Promise.all([profiles, instruments])
+//   .then(seedInstrumentRelationships); // two tables
+//
+// const genreR = Promise.all([profiles, genres])
+//   .then(seedGenreRelationships); // two tables
 
-const instrumentR = Promise.all([profiles, instruments])
-  .then(seedInstrumentRelationships) // two tables
+// Promise.all([influences, connections, instrumentR, genreR, auth]); //done
 
-const genreR = Promise.all([profiles, genres])
-  .then(seedGenreRelationships) // two tables
-
-Promise.all([influences, connections, instrumentR, genreR, auth]) //done
+exports.seed = (knex, Promise) => Promise.all([profiles, instruments, genres, auth]);

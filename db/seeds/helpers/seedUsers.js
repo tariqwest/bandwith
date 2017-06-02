@@ -1,3 +1,5 @@
+const models = require('../../models');
+
 const profiles = [
   {
     first: 'John',
@@ -73,16 +75,4 @@ const profiles = [
   },
 ];
 
-exports.seed = (knex, Promise) => (
-  Promise.all(profiles.map(profile => models.Profile.forge(profile).save()))
-  .then(savedProfiles => Promise.all(savedProfiles.map(profile =>
-      models.Auth.forge({
-        type: 'local',
-        password: 'admin123',
-        profile_id: profile.get('id'),
-      }).save()
-  )))
-  .catch(() => {
-    console.log('WARNING: default user already exists.');
-  })
-);
+module.exports = Promise.all(profiles.map(profile => models.Profile.forge(profile).save()));
