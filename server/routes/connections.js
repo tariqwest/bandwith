@@ -6,4 +6,7 @@ const router = express.Router();
 router.route('/')
   .get(ConnectionsController.getAll);
 
+router.route('/info')
+  .get(ConnectionsController.getOneWithRelations);
+
 module.exports = router;
