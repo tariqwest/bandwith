@@ -11,8 +11,47 @@ module.exports.getAll = (req, res) => {
     });
 };
 
-module.exports.create = (req, res) => {
-  const body = req.body;
+module.exports.update = (req, res) => {
+  const profileBody = {
+    first: req.body.first,
+    last: req.body.last,
+    gender: req.body.gender,
+    bio: req.body.bio,
+    song_src: req.body.song_src,
+    video_src: req.body.video_src,
+    zipCode: req.body.zipCode,
+  };
+
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+      return profile.save(profileBody, { method: 'update' });
+    })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .error((err) => {
+      res.status(500).send(err);
+    })
+    .catch(() => {
+      res.sendStatus(404);
+    });
+  // models.Profile.forge({
+  //   song_src: body.song,
+  //   first: body.song,
+  //   last: body.last,
+  //   bio: body.bio,
+  //   zipCode: body.zipCode,
+  //   gender: body.gender,
+  // })
+  // .save()
+  // .then((result) => {
+  //   res.status(201).send(result);
+  // })
+  // .catch((err) => {
+  //   res.status(500).send(err);
 
   // models.Song.forge({ song_url: body.song })
   //   .save()
@@ -31,22 +70,7 @@ module.exports.create = (req, res) => {
   //   .catch((err) => {
   //     res.status(500).send(err);
   //   });
-
-  models.Profile.forge({
-    // song_url: body.song,
-    first: body.song,
-    last: body.last,
-    bio: body.bio,
-    zipCode: body.zipCode,
-    gender: body.gender,
-  })
-  .save()
-  .then((result) => {
-    res.status(201).send(result);
-  })
-  .catch((err) => {
-    res.status(500).send(err);
-  });
+  // });
 
   // instruments
   // users_instruments
@@ -86,24 +110,24 @@ module.exports.getOne = (req, res) => {
     });
 };
 
-module.exports.update = (req, res) => {
-  models.Song.where({ id: req.params.id }).fetch()
-    .then((song) => {
-      if (!song) {
-        throw song;
-      }
-      return song.save(req.body, { method: 'update' });
-    })
-    .then(() => {
-      res.sendStatus(201);
-    })
-    .error((err) => {
-      res.status(500).send(err);
-    })
-    .catch(() => {
-      res.sendStatus(404);
-    });
-};
+// module.exports.update = (req, res) => {
+//   models.Song.where({ id: req.params.id }).fetch()
+//     .then((song) => {
+//       if (!song) {
+//         throw song;
+//       }
+//       return song.save(req.body, { method: 'update' });
+//     })
+//     .then(() => {
+//       res.sendStatus(201);
+//     })
+//     .error((err) => {
+//       res.status(500).send(err);
+//     })
+//     .catch(() => {
+//       res.sendStatus(404);
+//     });
+// };
 
 module.exports.deleteOne = (req, res) => {
   models.Song.where({ id: req.params.id }).fetch()
