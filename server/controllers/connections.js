@@ -32,3 +32,34 @@ module.exports.getAll = (req, res, done) => {
       done(err);
     });
 };
+
+module.exports.getOneWithRelations = (req, res, done) => {
+  models.Profile.where({ id: req.query.userId }).fetch({ withRelated: ['instruments', 'genres', 'instruments'] })
+    .then((profile) => {
+      const profileInfo = profile.attributes;
+
+      profileInfo.instruments = [];
+      profileInfo.genres = [];
+      profileInfo.influences = [];
+
+      profile.related('instruments').models.forEach((model) => {
+        profileInfo.instruments.push(model.attributes.instrument_name);
+      });
+
+      profile.related('genres').models.forEach((model) => {
+        profileInfo.genres.push(model.attributes.genre_name);
+      });
+
+      profile.related('influences').models.forEach((model) => {
+        profileInfo.influences.push(model.attributes.influence_name);
+      });
+
+      return profileInfo;
+    })
+    .then((profileInfo) => {
+      res.send(profileInfo);
+    })
+    .catch((err) => {
+      done(err);
+    });
+};
