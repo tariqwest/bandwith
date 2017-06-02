@@ -9,6 +9,7 @@ import {
 import Test from './Test';
 import Matches from './Matches';
 import Results from './Results';
+import Chats from './Chats';
 import Login from './Login';
 import Logout from './Logout';
 import Private from './Private';
@@ -23,6 +24,7 @@ const App = () => (
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/logout">Logout</Link></li>
           <li><Link to="/private">Protected Page</Link></li>
+          <li><Link to="/chats">Chats</Link></li>
         </ul>
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
@@ -30,6 +32,7 @@ const App = () => (
         <Route path="/test" component={Test} />
         <Route path="/connections" component={Matches} />
         <Route path="/results" component={Results} />
+        <PrivateRoute path="/chats" component={Chats} />
       </div>
     </Router>
   </Provider>
