@@ -12,6 +12,7 @@ exports.up = (knex, Promise) => (
       table.integer('age').nullable();
       table.string('gender', 30).nullable();
       table.string('photo_src', 300).nullable();
+      table.string('song_url', 300).nullable();
       table.string('video_url', 300).nullable();
       table.timestamps(true, true);
     }),
