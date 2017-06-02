@@ -24,7 +24,7 @@ class ChatsList extends React.Component {
           })
         );
       } else {
-        return (<div> No messages </div>);
+        return (<div>No messages form this user. Start a conversation!</div>);
       }
     };
 
@@ -42,7 +42,7 @@ class ChatsList extends React.Component {
   handleSendClick(event) {
     const { dispatch } = this.props;
     let message = document.getElementById("message").value;
-    dispatch(sendChat(this.props.userId, this.props.matchUserId, message));
+    dispatch(sendChat(this.props.userId, this.props.currentMatchUserId, message));
     document.getElementById("message").value ='';
   }
 }

@@ -77,7 +77,7 @@ export const sendChat = (userId, matchUserId, message) => (dispatch) => {
     .then(res => res.json())
     .then(json => {
       dispatch(sendChatSuccess(json));
-      dispatch(getChats(json.profile_id_from));
+      dispatch(getChats(json.profile_id_from, json.profile_id_to));
     })
     .catch(err => dispatch(sendChatFailure(err.message)));
 };
