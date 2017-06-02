@@ -12,38 +12,21 @@ class Signup extends React.Component {
       bio: '',
       song: '',
       video: '',
+      age: '',
+      searchRadius: '',
       instruments: {},
       genres: {},
       influences: {},
+      preferred_instruments: {},
+      preferred_genres: {},
     };
     this.handleChange = this.handleChange.bind(this);
     this.send = this.send.bind(this);
     this.handleSelectMultipleInstruments = this.handleSelectMultipleInstruments.bind(this);
     this.handleSelectMultipleGenres = this.handleSelectMultipleGenres.bind(this);
-    // this.addInfluence = this.addInfluence.bind(this);
+    this.handleSelectMultiplePreferredInstruments = this.handleSelectMultiplePreferredInstruments.bind(this);
+    this.handleSelectMultiplePreferredGenres = this.handleSelectMultiplePreferredGenres.bind(this);
   }
-
-  // addInfluence() {
-  //   const body = {
-  //     influence: this.state.influence,
-  //   };
-
-  //   const headers = {
-  //     Accept: 'application/json',
-  //     'Content-Type': 'application/json',
-  //   };
-
-  //   const options = {
-  //     method: 'GET',
-  //     body: JSON.stringify(body),
-  //     headers,
-  //   };
-
-  //   fetch('/api/influences', options)
-  //     .then(res => res.json())
-  //     .then(json => console.log(json))
-  //     .catch(err => console.log(err));
-  // }
 
   send() {
     const body = {
@@ -54,9 +37,14 @@ class Signup extends React.Component {
       instruments: this.state.instruments,
       genres: this.state.genres,
       influences: this.state.influences,
-      song: this.state.song,
-      video: this.state.video,
+      song_src: this.state.song,
+      video_url: this.state.video,
       zipCode: this.state.zipCode,
+      id: this.props.userId,
+      age: this.state.age,
+      searchRadius: this.state.searchRadius,
+      preferred_instruments: this.state.preferred_instruments,
+      preferred_genres: this.state.preferred_genres,
     };
 
     const headers = {
@@ -103,6 +91,36 @@ class Signup extends React.Component {
 
     this.setState({
       genres: selected,
+    });
+  }
+
+  handleSelectMultiplePreferredInstruments(event) {
+    const value = event.target.value;
+    const selected = this.state.preferred_instruments;
+
+    if (!selected[value]) {
+      selected[value] = value;
+    } else {
+      delete selected[value];
+    }
+
+    this.setState({
+      preferred_instruments: selected,
+    });
+  }
+
+  handleSelectMultiplePreferredGenres(event) {
+    const value = event.target.value;
+    const selected = this.state.preferred_genres;
+
+    if (!selected[value]) {
+      selected[value] = value;
+    } else {
+      delete selected[value];
+    }
+
+    this.setState({
+      preferred_genres: selected,
     });
   }
 
@@ -161,6 +179,18 @@ class Signup extends React.Component {
               type="text"
               name="zipCode"
               value={this.state.zipCode}
+              onChange={this.handleChange}
+            />
+          </p>
+          <p>
+            <label htmlFor="age">
+              How old are you?
+            </label>
+            <input
+              id="age"
+              type="text"
+              name="age"
+              value={this.state.age}
               onChange={this.handleChange}
             />
           </p>
@@ -289,6 +319,58 @@ class Signup extends React.Component {
               value={this.state.video}
               onChange={this.handleChange}
             />
+          </p>
+          <p>
+            Im looking for a musician that plays:
+          </p>
+          <p>
+            <select
+              multiple
+              id="preferred_instruments"
+              name="preferred_instruments"
+              value={this.state.value}
+              onChange={this.handleSelectMultiplePreferredInstruments}
+            >
+              <option value="electricGuitar">electric guitar</option>
+              <option value="acousticGuitar">acoustic guitar</option>
+              <option value="bass">bass</option>
+              <option value="drums">drums</option>
+              <option value="piano">piano</option>
+              <option value="vocals">vocals</option>
+              <option value="ukulele">ukulele</option>
+              <option value="violin">violin</option>
+              <option value="saxaphone">saxaphone</option>
+              <option value="trumpet">trumpet</option>
+              <option value="didgeridoo">didgeridoo</option>
+            </select>
+          </p>
+          <p>
+            Im looking for a musician that plays:
+          </p>
+          <p>
+            <select
+              multiple
+              id="genres"
+              name="genres"
+              value={this.state.value}
+              onChange={this.handleSelectMultiplePreferredGenres}
+            >
+              <option value="rock">rock</option>
+              <option value="jazz">jazz</option>
+              <option value="blues">blues</option>
+              <option value="folk">folk</option>
+              <option value="reggae">reggae</option>
+              <option value="country">country</option>
+              <option value="pop">pop</option>
+              <option value="punk">punk</option>
+              <option value="metal">metal</option>
+              <option value="edm">edm</option>
+              <option value="r&b">r&b</option>
+              <option value="funk">funk</option>
+              <option value="rap">rap</option>
+              <option value="disco">disco</option>
+              <option value="pop">pop</option>
+            </select>
           </p>
           <p>
             <input type="submit" value="Submit" />
