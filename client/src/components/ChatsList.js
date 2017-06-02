@@ -9,22 +9,16 @@ class ChatsList extends React.Component {
     this.handleSendClick = this.handleSendClick.bind(this);
   }
 
-
   componentDidMount(){
     const { dispatch } = this.props;
-    dispatch(getChats(this.props.userId));
+    dispatch(getChats(this.props.userId, this.props.currentMatchUserId));
   }
 
   render() {
     const chatMessages = () => {
-      if (this.props.allChatMessages.length > 0) {
+      if (this.props.currentMatchChatMessages.length > 0) {
         return (
-          this.props.allChatMessages
-          .filter((chatMessage)=>{
-            return (chatMessage.profile_id_to === this.props.matchUserId ||
-              chatMessage.profile_id_from === this.props.matchUserId
-            );
-          })
+          this.props.currentMatchChatMessages
           .map((chatMessage, i) => {
             return <ChatsListEntry key={i} chatMessage={chatMessage} />;
           })
@@ -55,8 +49,9 @@ class ChatsList extends React.Component {
 
 const mapStateToProps = state => ({
   allChatMessages: state.chat.allChatMessages,
+  currentMatchChatMessages: state.chat.currentMatchChatMessages,
   userId: state.auth.userId || 2,
-  matchUserId: state.chat.matchUserId || 1,
+  currentMatchUserId: state.chat.currentMatchUserId || 1,
 });
 
 export default connect(mapStateToProps)(ChatsList);

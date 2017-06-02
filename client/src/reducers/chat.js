@@ -5,9 +5,12 @@ import {
   CHATS_GET_FAILURE,
   CHATS_SEND_SUCCESS,
   CHATS_SEND_FAILURE,
+  CHATS_SET_CURRENT_MATCH,
 } from '../actions';
 
 const chat = (state = {
+  currentMatchUserId: null,
+  currentMatchChatMessages: [],
   isFetching: false,
   errorMessage: '',
   allChatMessages: [],
@@ -23,7 +26,7 @@ const chat = (state = {
         ...state,
         isFetching: false,
         errorMessage: null,
-        allChatMessages: action.allChatMessages,
+        currentMatchChatMessages: action.currentMatchChatMessages,
       };
     case CHATS_GET_FAILURE:
       return {
@@ -49,6 +52,11 @@ const chat = (state = {
         isFetching: false,
         errorMessage: action.errorMesage,
         chatMessage: action.chatMessage,
+      };
+    case CHATS_SET_CURRENT_MATCH:
+      return {
+        ...state,
+        currentMatchUserId: action.currentMatchUserId,
       };
     default:
       return state;
