@@ -12,17 +12,17 @@ module.exports.getAll = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
+  console.log('************* update called ********************');
   const profileBody = {
     first: req.body.first,
     last: req.body.last,
     zipCode: req.body.zipCode,
     gender: req.body.gender,
     bio: req.body.bio,
-    song_url: req.body.song_src,
-    video_url: req.body.video_src,
+    song_url: req.body.song_url,
+    video_url: req.body.video_url,
     age: req.body.age,
     searchRadius: req.body.searchRadius,
-    // phone: req.body.phone,
   };
 
   models.Profile.where({ id: req.body.id }).fetch()
