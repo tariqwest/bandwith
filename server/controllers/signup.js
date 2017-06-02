@@ -12,7 +12,6 @@ module.exports.getAll = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  console.log('************* update called ********************');
   const profileBody = {
     first: req.body.first,
     last: req.body.last,
