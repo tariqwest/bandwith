@@ -29,7 +29,6 @@ const genres = [
   'funk',
   'rap',
   'disco',
-  'pop',
 ];
 
 exports.seed = (knex, Promise) => {
