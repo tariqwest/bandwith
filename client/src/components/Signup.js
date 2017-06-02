@@ -274,7 +274,7 @@ class Signup extends React.Component {
             />
           </p>
           <p>
-            <label htmlFor="searchRadius">Im looking for a musician within this many miles:</label>
+            <label htmlFor="searchRadius">Im looking for musicians within this many miles:</label>
             <input
               id="searchRadius"
               type="text"
@@ -284,7 +284,7 @@ class Signup extends React.Component {
             />
           </p>
           <p>
-            Im looking for a musician that plays:
+            Im looking for musicians that play:
           </p>
           <p>
             <select
@@ -308,7 +308,7 @@ class Signup extends React.Component {
             </select>
           </p>
           <p>
-            Im looking for a musician that likes:
+            Im looking for musicians that like:
           </p>
           <p>
             <select
