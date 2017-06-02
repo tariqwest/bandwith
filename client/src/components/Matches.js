@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import MatchList from './MatchList';
+import { getMatchesInfo } from '../actions';
 
 class Matches extends React.Component {
   constructor(props) {
@@ -12,16 +13,18 @@ class Matches extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps: ', nextProps);
     if (nextProps.userId) {
-      console.log('executing get matches...');
       this.getMatches(this.setMatches.bind(this), nextProps.userId);
     }
   }
 
   setMatches(matches) {
-    console.log('setting matches: ', matches);
     this.setState({ matches });
+
+    const { dispatch } = this.props;
+    matches.forEach((match) => {
+      dispatch(getMatchesInfo(match.id));
+    });
   }
 
   getMatches(callback, userId) {
