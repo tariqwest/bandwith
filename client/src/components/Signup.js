@@ -161,7 +161,6 @@ class Signup extends React.Component {
               id="gender"
               name="gender"
               defaultValue="unspecified"
-              value={this.state.gender}
               onChange={this.handleChange}
             >
               <option value="unspecified" >Unspecified</option>
@@ -212,7 +211,6 @@ class Signup extends React.Component {
               multiple
               id="instruments"
               name="instruments"
-              value={this.state.instruments}
               onChange={this.handleSelectMultiple}
             >
               <option value="electricGuitar">electric guitar</option>
@@ -236,7 +234,6 @@ class Signup extends React.Component {
               multiple
               id="genres"
               name="genres"
-              value={this.state.genres}
               onChange={this.handleSelectMultiple}
             >
               <option value="rock">rock</option>
@@ -294,7 +291,6 @@ class Signup extends React.Component {
               multiple
               id="preferred_instruments"
               name="preferred_instruments"
-              value={this.state.preferred_instruments}
               onChange={this.handleSelectMultiple}
             >
               <option value="electricGuitar">electric guitar</option>
@@ -318,7 +314,6 @@ class Signup extends React.Component {
               multiple
               id="preferred_genres"
               name="preferred_genres"
-              value={this.state.preferred_genres}
               onChange={this.handleSelectMultiple}
             >
               <option value="rock">rock</option>
