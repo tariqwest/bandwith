@@ -1,4 +1,5 @@
 import React from 'react';
+import SocketIOClient from 'socket.io-client';
 import ChatsListEntry from './ChatsListEntry';
 import { connect } from 'react-redux';
 import { sendChat, getChats } from '../actions';
@@ -6,6 +7,7 @@ import { sendChat, getChats } from '../actions';
 class ChatsList extends React.Component {
   constructor(props) {
     super(props);
+    this.socket = SocketIOClient('http://localhost:3000');
     this.handleSendClick = this.handleSendClick.bind(this);
   }
 
@@ -42,7 +44,8 @@ class ChatsList extends React.Component {
   handleSendClick(event) {
     const { dispatch } = this.props;
     let message = document.getElementById("message").value;
-    dispatch(sendChat(this.props.userId, this.props.currentMatchUserId, message));
+    this.socket.emit('chat', message);
+    //dispatch(sendChat(this.props.userId, this.props.currentMatchUserId, message));
     document.getElementById("message").value ='';
   }
 }
