@@ -36,7 +36,7 @@ export const getChats = userId => (dispatch) => {
     .catch(err => dispatch(receiveChatsError(err.message)));
 };
 
-export const requestSendChat = chatMessage => ({
+export const requestSendChat = () => ({
   type: CHAT_SEND,
   isFetching: true,
 });
@@ -53,7 +53,7 @@ export const sendChatFailure = errorMessage => ({
   errorMessage,
 });
 
-export const sendChat = (userId, matchUserId) => (dispatch) => {
+export const sendChat = (userId, matchUserId, message) => (dispatch) => {
   dispatch(requestChats());
   return fetch(`/api/chats`, {
     method: 'POST',
@@ -63,6 +63,7 @@ export const sendChat = (userId, matchUserId) => (dispatch) => {
     body: JSON.stringify({
       userId,
       matchUserId,
+      message,
     }),
   })
     .then((response) => {
@@ -72,7 +73,10 @@ export const sendChat = (userId, matchUserId) => (dispatch) => {
       return response;
     })
     .then(res => res.json())
-    .then(json => dispatch(sendChatSuccess(json)))
+    .then(json => {
+      dispatch(sendChatSuccess(json));
+      dispatch(getChats(json.profile_id_from));
+    })
     .catch(err => dispatch(sendChatFailure(err.message)));
 };
 
