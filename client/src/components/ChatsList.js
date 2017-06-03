@@ -57,7 +57,7 @@ class ChatsList extends React.Component {
 const mapStateToProps = state => ({
   currentMatchChatMessages: state.chat.currentMatchChatMessages,
   userId: state.auth.userId,
-  currentMatchUserId: state.chat.currentMatchUserId || state.auth.userId === 2 ? 1 : 2,
+  currentMatchUserId: state.chat.currentMatchUserId,
 });
 
 export default connect(mapStateToProps)(ChatsList);
