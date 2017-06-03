@@ -7,40 +7,13 @@ import { getMatchesInfo } from '../actions';
 class Matches extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      matches: [],
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.userId) {
-      this.getMatches(this.setMatches.bind(this), nextProps.userId);
-    }
-  }
-
-  setMatches(matches) {
-    this.setState({ matches });
-
-    const { dispatch } = this.props;
-    matches.forEach((match) => {
-      dispatch(getMatchesInfo(match.id));
-    });
-  }
-
-  getMatches(callback, userId) {
-    axios.get(`/api/connections?userId=${userId}`)
-      .then((res) => {
-        console.log('Successful GET request to /api/connections: ', res.data);
-        callback(res.data);
-      })
-      .catch(err => console.log('Bad GET request to /api/connections: ', err));
   }
 
   render() {
     return (
       <div>
         <h1>Connections</h1>
-        <MatchList matches={this.state.matches} />
+        <MatchList />
       </div>
     );
   }
