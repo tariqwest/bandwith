@@ -95,8 +95,9 @@ module.exports.socketCreate = ({ matchUserId, userId, message }, socket, userToC
   })
     .save()
     .then((chat) => {
-      console.log('** Saved: ', chat);
-      socket.broadcast.to(userToClientMap[chat.attributes.profile_id_to]).emit('chat', chat.attributes);
+      console.log('** Saved: ', chat.attributes);
+      console.log('** Broadcasting to socket: ', userToClientMap[chat.attributes.profile_id_to]);
+      socket.broadcast.to(userToClientMap[chat.attributes.profile_id_to]).emit('chat', JSON.stringify(chat.attributes));
       // res
       //   .status(200)
       //   .send(chat);
