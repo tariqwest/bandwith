@@ -3,6 +3,7 @@ import { Redirect, Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { updateProfile } from '../actions';
 import List from './List';
+import FirstNameInput from './Signup/FirstNameInput';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -124,19 +125,7 @@ class Signup extends React.Component {
     return (
       <div>
         <form onSubmit={this.send}>
-          <p>
-            <label htmlFor="first">
-              First Name:
-            </label>
-            <input
-              required
-              id="first"
-              type="text"
-              name="first"
-              value={this.state.first}
-              onChange={this.handleChange}
-            />
-          </p>
+          <FirstNameInput value={this.state.first} onChange={this.handleChange} />
           <p>
             <label htmlFor="last">Last Name:</label>
             <input
