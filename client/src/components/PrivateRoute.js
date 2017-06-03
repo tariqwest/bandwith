@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
-import { checkLogin, setRedirectUrl } from '../actions';
+import { checkLogin, setRedirectUrl, getUserInfo } from '../actions';
 
 class PrivateRoute extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class PrivateRoute extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, location, isAuthenticated } = this.props;
+    const { dispatch, location, isAuthenticated, hasUserInfo, userId } = this.props;
 
     let redirect = location.pathname;
     if (redirect === '/logout' || redirect === '/login') {
@@ -21,6 +21,17 @@ class PrivateRoute extends React.Component {
     if (!isAuthenticated) {
       dispatch(setRedirectUrl(redirect));
       dispatch(checkLogin());
+    }
+
+    if (!hasUserInfo && isAuthenticated) {
+      dispatch(getUserInfo(userId));
+    }
+  }
+
+  componentDidUpdate() {
+    const { dispatch, hasUserInfo, isAuthenticated, userId } = this.props;
+    if (!hasUserInfo && isAuthenticated) {
+      dispatch(getUserInfo(userId));
     }
   }
 
@@ -45,6 +56,10 @@ class PrivateRoute extends React.Component {
 
 }
 
-const mapStateToProps = state => ({ isAuthenticated: state.auth.isAuthenticated });
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  userId: state.auth.userId,
+  hasUserInfo: state.user.hasInfo,
+});
 
 export default withRouter(connect(mapStateToProps)(PrivateRoute));

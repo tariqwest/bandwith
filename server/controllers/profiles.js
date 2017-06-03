@@ -28,9 +28,6 @@ module.exports.getAll = (req, res) => {
 module.exports.getOne = (req, res) => {
   models.Profile.where({ id: req.params.id }).fetch({
     withRelated: [
-      // 'connections_1',
-      // 'connections_2',
-      // 'chats',
       'influences',
       'instruments',
       'preferred_instruments',
@@ -42,9 +39,6 @@ module.exports.getOne = (req, res) => {
       throw profile;
     }
 
-    // const connections_1 = profile.related('connections_1');
-    // const connections_2 = profile.related('connections_2');
-    // const chats = profile.related('chats');
     const influences = profile.related('influences').map(i => i.attributes.influence_name);
     const instruments = profile.related('instruments').map(i => i.attributes.instrument_name);
     const preferredInstruments = profile.related('preferred_instruments').map(p => p.attributes.instrument_name);
