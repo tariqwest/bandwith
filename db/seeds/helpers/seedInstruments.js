@@ -14,6 +14,5 @@ const instruments = [
   'didgeridoo',
 ];
 
-
 module.exports = () => Promise.all(instruments.map(instrument =>
   models.Instrument.forge({ instrument_name: instrument }).save()));
