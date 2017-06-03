@@ -47,10 +47,102 @@ module.exports.update = (req, res) => {
     });
 
   // update the user_instruments
-  for (let j = 0; j < userInstrumentKeys.length; j++) {
-    models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
-      .then((instrument) => {
-        console.log('*****this is the instrument: ', instrument);
-      });
-  }
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+
+      for (let j = 0; j < userInstrumentKeys.length; j++) {
+        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
+          .then((instrument) => {
+            profile.instruments().attach(instrument);
+          }).error((err) => {
+            res.status(500).send(err);
+          })
+          .catch(() => {
+            res.sendStatus(404);
+          });
+      }
+    });
+
+  // update the user_instruments
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+
+      for (let j = 0; j < userInstrumentKeys.length; j++) {
+        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
+          .then((instrument) => {
+            profile.instruments().attach(instrument);
+          }).error((err) => {
+            res.status(500).send(err);
+          })
+          .catch(() => {
+            res.sendStatus(404);
+          });
+      }
+    });
+
+  // update the user_instruments
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+
+      for (let j = 0; j < userInstrumentKeys.length; j++) {
+        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
+          .then((instrument) => {
+            profile.instruments().attach(instrument);
+          }).error((err) => {
+            res.status(500).send(err);
+          })
+          .catch(() => {
+            res.sendStatus(404);
+          });
+      }
+    });
+
+  // update the user_instruments
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+
+      for (let j = 0; j < userInstrumentKeys.length; j++) {
+        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
+          .then((instrument) => {
+            profile.instruments().attach(instrument);
+          }).error((err) => {
+            res.status(500).send(err);
+          })
+          .catch(() => {
+            res.sendStatus(404);
+          });
+      }
+    });
+
+  // update the user_instruments
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+
+      for (let j = 0; j < userInstrumentKeys.length; j++) {
+        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
+          .then((instrument) => {
+            profile.instruments().attach(instrument);
+          }).error((err) => {
+            res.status(500).send(err);
+          })
+          .catch(() => {
+            res.sendStatus(404);
+          });
+      }
+    });
 };
