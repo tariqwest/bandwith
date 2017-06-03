@@ -13,10 +13,7 @@ class Login extends React.Component {
 
   checkAuth() {
     const { isAuthenticated, history, redirectURL } = this.props;
-    if (isAuthenticated) {
-      // TODO change this to our homepage for loggedIn users
-      history.push('/private');
-    }
+    if (isAuthenticated) { history.push(redirectURL); }
   }
 
   render() {

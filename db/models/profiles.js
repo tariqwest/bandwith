@@ -2,31 +2,31 @@ const db = require('../');
 
 const Profile = db.Model.extend({
   tableName: 'profiles',
-  auths: function() {
+  auths() {
     return this.hasMany('Auth');
   },
-  connections_1: function() {
+  connections_1() {
     return this.belongsToMany('Profile', 'connections', 'profile_id_1', 'profile_id_2').withPivot(['likes_1_2', 'likes_2_1']);
   },
-  connections_2: function() {
+  connections_2() {
     return this.belongsToMany('Profile', 'connections', 'profile_id_2', 'profile_id_1').withPivot(['likes_1_2', 'likes_2_1']);
   },
-  chats: function() {
+  chats() {
     return this.hasMany('Chat');
   },
-  instruments: function() {
+  instruments() {
     return this.belongsToMany('Instrument', 'users_instruments');
   },
-  genres: function() {
+  genres() {
     return this.belongsToMany('Genre', 'users_genres');
   },
-  influences: function() {
+  influences() {
     return this.belongsToMany('Influence', 'users_influences');
   },
-  preferred_instruments: function() {
+  preferred_instruments() {
     return this.belongsToMany('Instrument', 'preferred_instruments');
   },
-  preferred_genres: function() {
+  preferred_genres() {
     return this.belongsToMany('Genre', 'preferred_genres');
   },
 });

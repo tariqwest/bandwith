@@ -54,6 +54,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '/client/src/index.html'),
+      favicon: path.join(__dirname, '/client/src/favicon.ico'),
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],

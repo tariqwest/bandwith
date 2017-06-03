@@ -13,7 +13,7 @@ module.exports.update = (req, res) => {
     searchRadius: req.body.searchRadius,
   };
 
-  const keys = Object.keys(profileBody)
+  const keys = Object.keys(profileBody);
   for (let i = 0; i < keys.length; i++) {
     if (profileBody[keys[i]] === '') {
       delete profileBody[keys[i]];

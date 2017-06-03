@@ -4,7 +4,7 @@ const passportSocketIo = require('passport.socketio');
 const cookieParser = require('cookie-parser');
 const app = require('./app');
 const middleware = require('./middleware');
-const ChatController = require('./controllers').Chats
+const ChatController = require('./controllers').Chats;
 
 
 const PORT = process.env.PORT || 3000;
@@ -32,5 +32,3 @@ io.on('connection', (socket) => {
     ChatController.socketCreate(message, socket, userToClientMap);
   });
 });
-
-

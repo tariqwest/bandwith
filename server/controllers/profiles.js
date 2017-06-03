@@ -2,10 +2,10 @@ const models = require('../../db/models');
 
 module.exports.getAll = (req, res) => {
   models.Profile.fetchAll()
-    .then(profiles => {
+    .then((profiles) => {
       res.status(200).send(profiles);
     })
-    .catch(err => {
+    .catch((err) => {
       // This code indicates an outside service (the database) did not respond in time
       res.status(503).send(err);
     });
@@ -26,24 +26,47 @@ module.exports.getAll = (req, res) => {
 // };
 
 module.exports.getOne = (req, res) => {
-  models.Profile.where({ id: req.params.id }).fetch()
-    .then(profile => {
-      if (!profile) {
-        throw profile;
-      }
-      res.status(200).send(profile);
-    })
-    .error(err => {
-      res.status(500).send(err);
-    })
-    .catch(() => {
-      res.sendStatus(404);
-    });
+  models.Profile.where({ id: req.params.id }).fetch({
+    withRelated: [
+      // 'connections_1',
+      // 'connections_2',
+      // 'chats',
+      'influences',
+      'instruments',
+      'preferred_instruments',
+      'genres',
+      'preferred_genres',
+    ],
+  }).then((profile) => {
+    if (!profile) {
+      throw profile;
+    }
+
+    // const connections_1 = profile.related('connections_1');
+    // const connections_2 = profile.related('connections_2');
+    // const chats = profile.related('chats');
+    const influences = profile.related('influences').map(i => i.attributes.influence_name);
+    const instruments = profile.related('instruments').map(i => i.attributes.instrument_name);
+    const preferredInstruments = profile.related('preferred_instruments').map(p => p.attributes.instrument_name);
+    const genres = profile.related('genres').map(g => g.attributes.genre_name);
+    const preferredGenres = profile.related('preferred_genres').map(g => g.attributes.genre_name);
+
+    const fullInfo = Object.assign(profile.attributes,
+      { influences, instruments, preferredInstruments, genres, preferredGenres });
+
+    res.status(200).send(fullInfo);
+  })
+  .error((err) => {
+    res.status(500).send(err);
+  })
+  .catch(() => {
+    res.sendStatus(404);
+  });
 };
 
 module.exports.update = (req, res) => {
   models.Profile.where({ id: req.params.id }).fetch()
-    .then(profile => {
+    .then((profile) => {
       if (!profile) {
         throw profile;
       }
@@ -52,7 +75,7 @@ module.exports.update = (req, res) => {
     .then(() => {
       res.sendStatus(201);
     })
-    .error(err => {
+    .error((err) => {
       res.status(500).send(err);
     })
     .catch(() => {

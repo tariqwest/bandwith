@@ -12,7 +12,11 @@ class PrivateRoute extends React.Component {
 
   componentWillMount() {
     const { dispatch, location, isAuthenticated } = this.props;
-    const redirect = location.pathname;
+
+    let redirect = location.pathname;
+    if (redirect === '/logout' || redirect === '/login') {
+      redirect = '/results';
+    }
 
     if (!isAuthenticated) {
       dispatch(setRedirectUrl(redirect));
