@@ -10,7 +10,7 @@ module.exports = {
       // "no-console": [0, { "allow": ["warn", "error"]}],
       "react/forbid-prop-types": [0],
       "react/prop-types": [0],
-      // "no-plusplus": [0]
+      "no-plusplus": [0]
     },
     "env": {
       "browser": true,

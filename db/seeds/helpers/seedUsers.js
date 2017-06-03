@@ -75,4 +75,4 @@ const profiles = [
   },
 ];
 
-module.exports = Promise.all(profiles.map(profile => models.Profile.forge(profile).save()));
+module.exports = () => Promise.all(profiles.map(profile => models.Profile.forge(profile).save()));

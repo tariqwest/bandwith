@@ -17,5 +17,5 @@ const genres = [
   'disco',
 ];
 
-module.exports = Promise.all(genres.map(genre =>
+module.exports = () => Promise.all(genres.map(genre =>
   models.Genre.forge({ genre_name: genre }).save()));
