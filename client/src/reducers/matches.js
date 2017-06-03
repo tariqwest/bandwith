@@ -1,6 +1,6 @@
 import { MATCHES_INFO_REQUEST, MATCHES_INFO_SUCCESS, MATCHES_INFO_FAILURE } from '../actions';
 
-const matches = (state = { isFetching: false, errorMessage: '', matchInfo: [] }, action) => {
+const matches = (state = { isFetching: false, errorMessage: '', matches: [] }, action) => {
   switch (action.type) {
     case MATCHES_INFO_REQUEST:
       return {
@@ -11,7 +11,7 @@ const matches = (state = { isFetching: false, errorMessage: '', matchInfo: [] },
       return {
         ...state,
         isFetching: false,
-        matchInfo: [...state.matchInfo, action.matchInfo],
+        matches: action.matches,
         errorMessage: '',
       };
     case MATCHES_INFO_FAILURE:
@@ -19,7 +19,7 @@ const matches = (state = { isFetching: false, errorMessage: '', matchInfo: [] },
         ...state,
         isFetching: false,
         errorMessage: action.message,
-      }; 
+      };
     default:
       return state;
   }

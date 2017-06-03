@@ -9,13 +9,13 @@ export const requestMatchesInfo = () => ({
   isFetching: true,
 });
 
-export const receiveMatchInfo = matchInfo => ({
+export const receiveMatchesInfo = matches => ({
   type: MATCHES_INFO_SUCCESS,
   isFetching: false,
-  matchInfo,
+  matches,
 });
 
-export const matchInfoError = message => ({
+export const matchesInfoError = message => ({
   type: MATCHES_INFO_FAILURE,
   isFetching: false,
   message,
@@ -23,14 +23,13 @@ export const matchInfoError = message => ({
 
 export const getMatchesInfo = userId => (dispatch) => {
   dispatch(requestMatchesInfo());
-
-  return axios.get(`/api/connections/info?userId=${userId}`)
+  return axios.get(`/api/connections?userId=${userId}`)
     .then((response) => {
       if (response.statusText !== 'OK') {
         throw Error(response.statusText);
       }
       return response.data;
     })
-    .then(res => dispatch(receiveMatchInfo(res)))
-    .catch(err => dispatch(matchInfoError(err.message)));
+    .then(res => dispatch(receiveMatchesInfo(res)))
+    .catch(err => dispatch(matchesInfoError(err.message)));
 };
