@@ -13,15 +13,11 @@ module.exports.update = (req, res) => {
     searchRadius: req.body.searchRadius,
   };
 
-  const userInstruments = req.body.instruments;
-
-  const userGenres = req.body.genres;
-
-  const userInfluences = req.body.influences;
-
-  const preferredInstruments = req.body.preferred_instruments;
-
-  const preferredGenres = req.body.preferred_genres;
+  const userInstrumentKeys = Object.keys(req.body.instruments);
+  const userGenresKeys = Object.keys(req.body.genres);
+  const userInfluenceKeys = Object.keys(req.body.influences);
+  const preferredInstrumentKeys = Object.keys(req.body.preferred_instruments);
+  const preferredGenreKeys = Object.keys(req.body.preferred_genres);
 
   // make sure there are no blank fields because table insert will break
   const keys = Object.keys(profileBody);
@@ -49,4 +45,12 @@ module.exports.update = (req, res) => {
     .catch(() => {
       res.sendStatus(404);
     });
+
+  // update the user_instruments
+  for (let j = 0; j < userInstrumentKeys.length; j++) {
+    models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
+      .then((instrument) => {
+        console.log('*****this is the instrument: ', instrument);
+      });
+  }
 };
