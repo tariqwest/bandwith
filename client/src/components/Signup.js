@@ -200,7 +200,6 @@ class Signup extends React.Component {
           </p>
           <p>
             <input
-              required
               id="influence"
               type="text"
               name="influence"
