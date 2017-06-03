@@ -36,3 +36,6 @@ dist/
 node_modules/
 bower_components/
 styles.css
+
+# Editor config files
+.vscode
