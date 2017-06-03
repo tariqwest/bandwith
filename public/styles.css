@@ -1,42 +1,61 @@
+a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 100;
+}
+
+body {
+  margin: 0;
+  font: 100 16px/22px "Roboto", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+/*
 * {
   box-sizing: border-box;
 }
+*/
 
 /* 1- positionning the 2 divs */
+/*
 form {
 	display: flex;
 }
 form > div {
 	flex: 1;
-	min-width: 0; /* fix for min-width: auto */
+	min-width: 0; fix for min-width: auto
 }
 form > div + div {
 	margin-left: 1em;
 }
+*/
 
 /* 2- fluid inputs */
+/*
 div > p {
 	display: flex;
 }
 form input:not([type=submit]) {
-	flex: 1; /* fluid width */
-	display: block; /* IE fix */
-	min-width: 0; /* fix for min-width: auto */
+	flex: 1; fluid width
+	display: block; IE fix
+	min-width: 0; fix for min-width: auto
 }
+*/
 
 /* 3- fluid textarea */
+/*
 div + div {
 	display: flex;
 	flex-direction: column;
 }
 textarea {
-	flex: 1; /* fluid height */
-	display: block; /* IE fix */
+	flex: 1; fluid height
+	display: block; IE fix
 }
-
+*/
 
 /* Decoration */
-
+/*
 body {
 	max-width: 1000px;
 	margin: auto;
@@ -101,8 +120,9 @@ small {
 	font-size: 0.8rem;
 	color: #aaa;
 }
-
+*/
 /* small screens */
+/*
 @media (max-width: 600px) {
 	form {
 		flex-direction: column;
@@ -126,4 +146,4 @@ small {
 	input {
 		width : 100%
 	}
-}
+*/
