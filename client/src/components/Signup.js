@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { updateProfile } from '../actions';
-import InstrumentList from './InstrumentList';
+import List from './List';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -213,9 +213,10 @@ class Signup extends React.Component {
             </textarea>
           </p>
           <p>
-            <label htmlFor="influences">
-              Add a musical influence:
-            </label>
+            Add your musical influence:
+          <List
+            listItems={Object.keys(this.state.influences)}
+          />
           </p>
           <p>
             <input
@@ -236,9 +237,8 @@ class Signup extends React.Component {
           </p>
           <p>
           Your instruments:
-          <InstrumentList
-            instruments={Object.keys(this.state.instruments)}
-            onInstrumentClick={this.handleSelectMultiple}
+          <List
+            listItems={Object.keys(this.state.instruments)}
           />
           </p>
           <p>
@@ -264,6 +264,9 @@ class Signup extends React.Component {
           </p>
           <p>
           Your Genres:
+          <List
+            listItems={Object.keys(this.state.genres)}
+          />
           </p>
           <p>
             <select
@@ -325,6 +328,9 @@ class Signup extends React.Component {
           </p>
           <p>
             Im looking for musicians that play:
+          <List
+            listItems={Object.keys(this.state.preferred_instruments)}
+          />
           </p>
           <p>
             <select
@@ -349,6 +355,9 @@ class Signup extends React.Component {
           </p>
           <p>
             Im looking for musicians that like:
+          <List
+            listItems={Object.keys(this.state.preferred_genres)}
+          />
           </p>
           <p>
             <select
