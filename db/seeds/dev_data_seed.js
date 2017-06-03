@@ -21,12 +21,21 @@ const connections = profiles.then(seedConnections)
   .then(seedChats);
 
 const influenceR = Promise.all([profiles, influences])
-  .then(seedInfluenceRelationships); 
+  .then(seedInfluenceRelationships);
 
 const instrumentR = Promise.all([profiles, instruments])
-  .then(seedInstrumentRelationships); 
+  .then(seedInstrumentRelationships);
 
 const genreR = Promise.all([profiles, genres])
-  .then(seedGenreRelationships); 
+  .then(seedGenreRelationships);
 
-exports.seed = (knex, Promise) => Promise.all([profiles, instruments, genres, auth, influenceR]);
+exports.seed = (knex, Promise) => Promise.all([
+  profiles,
+  instruments,
+  genres,
+  auth,
+  influenceR,
+  connections,
+  instrumentR,
+  genreR,
+]);
