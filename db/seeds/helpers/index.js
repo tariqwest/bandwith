@@ -4,7 +4,8 @@ const seedGenres = require('./seedGenres');
 const seedAuth = require('./seedAuth');
 const seedInfluences = require('./seedInfluences');
 const seedInfluenceRelationships = require('./seedInfluenceRelationships');
-// const seedInstrumentRelationships = require('./seedInstrumentRelationships');
+const seedInstrumentRelationships = require('./seedInstrumentRelationships');
+const seedGenreRelationships = require('./seedGenreRelationships');
 
 
 module.exports = {
@@ -14,4 +15,6 @@ module.exports = {
   seedAuth,
   seedInfluences,
   seedInfluenceRelationships,
+  seedInstrumentRelationships,
+  seedGenreRelationships,
 };

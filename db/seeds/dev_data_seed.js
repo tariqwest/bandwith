@@ -23,11 +23,11 @@ const auth = profiles.then(seedAuth);
 const influenceR = Promise.all([profiles, influences])
   .then(seedInfluenceRelationships); // two tables
 
-// const instrumentR = Promise.all([profiles, instruments])
-//   .then(seedInstrumentRelationships); // two tables
-//
-// const genreR = Promise.all([profiles, genres])
-//   .then(seedGenreRelationships); // two tables
+const instrumentR = Promise.all([profiles, instruments])
+  .then(seedInstrumentRelationships); // two tables
+
+const genreR = Promise.all([profiles, genres])
+  .then(seedGenreRelationships); // two tables
 
 // Promise.all([influences, connections, instrumentR, genreR, auth]); //done
 
