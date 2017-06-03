@@ -4,7 +4,7 @@ class Tag extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state ={
+    this.state = {
       type: this.props.type,
       tagName: this.props.tag,
     };
@@ -12,7 +12,7 @@ class Tag extends React.Component {
 
   render() {
     return (
-      <div>{this.state.tagName}</div>
+      <span>{this.state.tagName} </span>
     );
   }
 }
