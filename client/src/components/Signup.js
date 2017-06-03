@@ -2,8 +2,20 @@ import React from 'react';
 import { Redirect, Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { updateProfile } from '../actions';
-import List from './List';
 import FirstNameInput from './Signup/FirstNameInput';
+import LastNameInput from './Signup/LastNameInput';
+import ZipCodeInput from './Signup/ZipCodeInput';
+import AgeInput from './Signup/AgeInput';
+import GenderInput from './Signup/GenderInput';
+import BiographyTextArea from './Signup/BiographyTextArea';
+import InfluencesInput from './Signup/InfluencesInput';
+import UserInstrumentsInput from './Signup/UserInstrumentsInput';
+import UserGenresInput from './Signup/UserGenresInput';
+import SongInput from './Signup/SongInput';
+import VideoInput from './Signup/VideoInput';
+import SearchRadiusInput from './Signup/SearchRadiusInput';
+import PreferredInstrumentsInput from './Signup/PreferredInstrumentsInput';
+import PreferredGenresInput from './Signup/PreferredGenresInput';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -126,253 +138,36 @@ class Signup extends React.Component {
       <div>
         <form onSubmit={this.send}>
           <FirstNameInput value={this.state.first} onChange={this.handleChange} />
-          <p>
-            <label htmlFor="last">Last Name:</label>
-            <input
-              required
-              id="last"
-              type="text"
-              name="last"
-              value={this.state.last}
-              onChange={this.handleChange}
-            />
-          </p>
-          <p>
-            <label htmlFor="zipCode">
-              Zip Code:
-            </label>
-            <input
-              required
-              id="zipCode"
-              type="number"
-              name="zipCode"
-              value={this.state.zipCode}
-              onChange={this.handleChange}
-            />
-          </p>
-          <p>
-            <label htmlFor="age">
-              How old are you?
-            </label>
-            <input
-              required
-              id="age"
-              type="number"
-              name="age"
-              value={this.state.age}
-              onChange={this.handleChange}
-            />
-          </p>
-          <p>
-          Your Gender:
-          </p>
-          <p>
-            <label htmlFor="gender" />
-            <select
-              required
-              id="gender"
-              name="gender"
-              defaultValue="unspecified"
-              onChange={this.handleChange}
-            >
-              <option value="unspecified" >Unspecified</option>
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-              <option value="other">Other</option>
-            </select>
-          </p>
-          <p>
-            <label htmlFor="bio">
-              Biography:
-            </label>
-          </p>
-          <p>
-            <textarea
-              required
-              rows="4"
-              cols="50"
-              id="bio"
-              type="text"
-              name="bio"
-              placeholder="tell us about yourself ..."
-              value={this.state.bio}
-              onChange={this.handleChange}
-            >
-              Write a brief description of yourself
-            </textarea>
-          </p>
-          <p>
-            Add your musical influence:
-          <List
-            listItems={Object.keys(this.state.influences)}
+          <LastNameInput value={this.state.last} onChange={this.handleChange} />
+          <ZipCodeInput value={this.state.zipCode} onChange={this.handleChange} />
+          <AgeInput value={this.state.age} onChange={this.handleChange} />
+          <GenderInput onChange={this.handleChange} />
+          <BiographyTextArea bio={this.state.bio} onChange={this.handleChange} />
+          <InfluencesInput
+            influence={this.state.influence}
+            influences={this.state.influences}
+            handleChange={this.handleChange}
+            onClick={this.handleInfluences}
           />
-          </p>
-          <p>
-            <input
-              id="influence"
-              type="text"
-              name="influence"
-              value={this.state.influence}
-              onChange={this.handleChange}
-            />
-            <button
-              type="button"
-              form="influences"
-              name="influences"
-              onClick={this.handleInfluences}
-            >
-              Add Influence
-            </button>
-          </p>
-          <p>
-          Your instruments:
-          <List
-            listItems={Object.keys(this.state.instruments)}
+          <UserInstrumentsInput
+            instruments={this.state.instruments}
+            onChange={this.handleSelectMultiple}
           />
-          </p>
-          <p>
-            <select
-              required
-              multiple
-              id="instruments"
-              name="instruments"
-              onChange={this.handleSelectMultiple}
-            >
-              <option value="electricGuitar">electric guitar</option>
-              <option value="acousticGuitar">acoustic guitar</option>
-              <option value="bass">bass</option>
-              <option value="drums">drums</option>
-              <option value="piano">piano</option>
-              <option value="vocals">vocals</option>
-              <option value="ukulele">ukulele</option>
-              <option value="violin">violin</option>
-              <option value="saxaphone">saxaphone</option>
-              <option value="trumpet">trumpet</option>
-              <option value="didgeridoo">didgeridoo</option>
-            </select>
-          </p>
-          <p>
-          Your Genres:
-          <List
-            listItems={Object.keys(this.state.genres)}
+          <UserGenresInput
+            onChange={this.handleSelectMultiple}
+            genres={this.state.genres}
           />
-          </p>
-          <p>
-            <select
-              required
-              multiple
-              id="genres"
-              name="genres"
-              onChange={this.handleSelectMultiple}
-            >
-              <option value="rock">rock</option>
-              <option value="jazz">jazz</option>
-              <option value="blues">blues</option>
-              <option value="folk">folk</option>
-              <option value="reggae">reggae</option>
-              <option value="country">country</option>
-              <option value="pop">pop</option>
-              <option value="punk">punk</option>
-              <option value="metal">metal</option>
-              <option value="edm">edm</option>
-              <option value="r&b">r&b</option>
-              <option value="funk">funk</option>
-              <option value="rap">rap</option>
-              <option value="disco">disco</option>
-              <option value="pop">pop</option>
-            </select>
-          </p>
-          <p>
-            <label htmlFor="song">SoundCloud Demo Link:</label>
-            <input
-              required
-              id="song"
-              type="text"
-              name="song"
-              value={this.state.song}
-              onChange={this.handleChange}
-            />
-          </p>
-          <p>
-            <label htmlFor="video">YouTube Video Link:</label>
-            <input
-              required
-              id="video"
-              type="text"
-              name="video"
-              value={this.state.video}
-              onChange={this.handleChange}
-            />
-          </p>
-          <p>
-            <label htmlFor="searchRadius">Im looking for musicians within this many miles:</label>
-            <input
-              required
-              id="searchRadius"
-              type="number"
-              name="searchRadius"
-              value={this.state.searchRadius}
-              onChange={this.handleChange}
-            />
-          </p>
-          <p>
-            Im looking for musicians that play:
-          <List
-            listItems={Object.keys(this.state.preferred_instruments)}
+          <SongInput song={this.state.song} onChange={this.handleChange} />
+          <VideoInput video={this.state.video} onChange={this.handleChange} />
+          <SearchRadiusInput radius={this.state.searchRadius} onChange={this.handleChange} />
+          <PreferredGenresInput
+            genres={this.state.preferred_genres}
+            onChange={this.handleSelectMultiple}
           />
-          </p>
-          <p>
-            <select
-              required
-              multiple
-              id="preferred_instruments"
-              name="preferred_instruments"
-              onChange={this.handleSelectMultiple}
-            >
-              <option value="electricGuitar">electric guitar</option>
-              <option value="acousticGuitar">acoustic guitar</option>
-              <option value="bass">bass</option>
-              <option value="drums">drums</option>
-              <option value="piano">piano</option>
-              <option value="vocals">vocals</option>
-              <option value="ukulele">ukulele</option>
-              <option value="violin">violin</option>
-              <option value="saxaphone">saxaphone</option>
-              <option value="trumpet">trumpet</option>
-              <option value="didgeridoo">didgeridoo</option>
-            </select>
-          </p>
-          <p>
-            Im looking for musicians that like:
-          <List
-            listItems={Object.keys(this.state.preferred_genres)}
+          <PreferredInstrumentsInput
+            instruments={this.state.preferred_instruments}
+            onChange={this.handleSelectMultiple}
           />
-          </p>
-          <p>
-            <select
-              required
-              multiple
-              id="preferred_genres"
-              name="preferred_genres"
-              onChange={this.handleSelectMultiple}
-            >
-              <option value="rock">rock</option>
-              <option value="jazz">jazz</option>
-              <option value="blues">blues</option>
-              <option value="folk">folk</option>
-              <option value="reggae">reggae</option>
-              <option value="country">country</option>
-              <option value="pop">pop</option>
-              <option value="punk">punk</option>
-              <option value="metal">metal</option>
-              <option value="edm">edm</option>
-              <option value="r&b">r&b</option>
-              <option value="funk">funk</option>
-              <option value="rap">rap</option>
-              <option value="disco">disco</option>
-              <option value="pop">pop</option>
-            </select>
-          </p>
           <p>
             <input type="submit" value="Submit" />
           </p>

@@ -1,10 +1,10 @@
 import React from 'react';
 import List from './List';
 
-const UserInstrumentsInput = ({ instruments, onChange }) => (
+const PreferredInstrumentsInput = ({ instruments, onChange }) => (
   <div>
     <p>
-    Your instruments:
+      Im looking for musicians that play:
     <List
       listItems={Object.keys(instruments)}
     />
@@ -13,8 +13,8 @@ const UserInstrumentsInput = ({ instruments, onChange }) => (
       <select
         required
         multiple
-        id="instruments"
-        name="instruments"
+        id="preferred_instruments"
+        name="preferred_instruments"
         onChange={onChange}
       >
         <option value="electricGuitar">electric guitar</option>
@@ -33,4 +33,4 @@ const UserInstrumentsInput = ({ instruments, onChange }) => (
   </div>
 );
 
-export default UserInstrumentsInput;
+export default PreferredInstrumentsInput;

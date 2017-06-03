@@ -1,20 +1,20 @@
 import React from 'react';
 import List from './List';
 
-const UserGenresInput = ({ genres, onChange }) => (
+const PreferredGenresInput = ({ genres, onChange }) => (
   <div>
     <p>
-      Your Genres:
-      <List
-        listItems={Object.keys(genres)}
-      />
+      Im looking for musicians that like:
+    <List
+      listItems={Object.keys(genres)}
+    />
     </p>
     <p>
       <select
         required
         multiple
-        id="genres"
-        name="genres"
+        id="preferred_genres"
+        name="preferred_genres"
         onChange={onChange}
       >
         <option value="rock">rock</option>
@@ -37,4 +37,4 @@ const UserGenresInput = ({ genres, onChange }) => (
   </div>
 );
 
-export default UserGenresInput;
+export default PreferredGenresInput;

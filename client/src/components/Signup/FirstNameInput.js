@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FirstNameInput = ({value, onChange}) => (
+const FirstNameInput = ({ value, onChange }) => (
   <p>
     <label htmlFor="first">
       First Name:
@@ -11,7 +11,7 @@ const FirstNameInput = ({value, onChange}) => (
       type="text"
       name="first"
       value={value}
-      onChange={handleChange}
+      onChange={onChange}
     />
   </p>
 );
