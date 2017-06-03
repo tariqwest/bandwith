@@ -59,6 +59,24 @@ class Signup extends React.Component {
       preferred_genres: this.state.preferred_genres,
     };
 
+    this.setState({
+      first: '',
+      last: '',
+      gender: '',
+      bio: '',
+      influence: '',
+      instruments: {},
+      genres: {},
+      influences: {},
+      song: '',
+      video: '',
+      zipCode: '',
+      age: '',
+      searchRadius: '',
+      preferred_instruments: {},
+      preferred_genres: {},
+    });
+
     dispatch(updateProfile(profile));
   }
 
