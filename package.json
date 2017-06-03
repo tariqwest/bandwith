@@ -6,7 +6,7 @@
     "build:watch": "webpack --watch",
     "build:prod": "webpack --env.prod -p",
     "client": "webpack-dev-server --env.dev --open",
-    "debug": "nodemon --inspect",
+    "debug": "nodemon --inspect=0.0.0.0:9229 server/index.js",
     "test": "NODE_ENV=test grunt test",
     "test:jest": "jest",
     "heroku-postbuild": "knex migrate:latest && knex seed:run",
