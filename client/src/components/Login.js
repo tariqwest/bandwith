@@ -26,7 +26,7 @@ class Login extends React.Component {
       <div className="col-sm-6 col-sm-offset-3">
         <h1>Login</h1>
         {/* <div className="alert alert-danger">CONDITIONAL MESSAGE</div> */}
-        <form action="/login" method="post">
+        <form action="/auth/login" method="post">
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input type="text" className="form-control" name="email" />

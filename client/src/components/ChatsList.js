@@ -43,10 +43,11 @@ class ChatsList extends React.Component {
 
   handleSendClick(event) {
     const { dispatch } = this.props;
-    let message = document.getElementById("message").value;
-    this.socket.emit('chat', message);
+    const message = document.getElementById('message').value;
+    this.socket.emit('chat', { userId: this.props.userId, matchUserId: this.props.currentMatchUserId, message });
     //dispatch(sendChat(this.props.userId, this.props.currentMatchUserId, message));
-    document.getElementById("message").value ='';
+    //dispatch(getChats(this.props.userId, this.props.currentMatchUserId));
+    document.getElementById('message').value = '';
   }
 }
 

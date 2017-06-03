@@ -85,3 +85,26 @@ module.exports.create = (req, res) => {
         .send(err);
     });
 };
+
+
+module.exports.socketCreate = ({ matchUserId, userId, message }, socket, userToClientMap) => {
+  new models.Chat({
+    profile_id_to: matchUserId,
+    profile_id_from: userId,
+    message,
+  })
+    .save()
+    .then((chat) => {
+      console.log('** Saved: ', chat);
+      socket.broadcast.to(userToClientMap[chat.attributes.profile_id_to]).emit('chat', chat.attributes);
+      // res
+      //   .status(200)
+      //   .send(chat);
+    })
+    .catch((err) => {
+      // This code indicates an outside service (the database) did not respond in time
+      // res
+      //   .status(503)
+      //   .send(err);
+    });
+};

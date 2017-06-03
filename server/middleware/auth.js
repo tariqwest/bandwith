@@ -10,11 +10,15 @@ module.exports.verify = (req, res, next) => {
   return next();
 };
 
-module.exports.session = session({
-  store: new RedisStore({
+const Store = new RedisStore({
     client: redisClient,
     url: config.env.redisUrl,
-  }),
+  });
+
+module.exports.Store = Store;
+
+module.exports.session = session({
+  store: Store,
   secret: 'more laughter, more love, more life',
   resave: true,
   saveUninitialized: true,
