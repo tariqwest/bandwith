@@ -1,5 +1,7 @@
 import React from 'react';
+import { Redirect, Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { updateProfile } from '../actions';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -27,8 +29,19 @@ class Signup extends React.Component {
     this.handleInfluences = this.handleInfluences.bind(this);
   }
 
-  send() {
-    const body = {
+  // componentWillUpdate() {
+  //   console.log('component will update');
+  //   // if (!isFetching && hasSaved) {
+  //   //   history.push('/profile');
+  //   // }
+  // }
+
+  send(event) {
+    event.preventDefault();
+
+    const { dispatch, history } = this.props;
+
+    const profile = {
       first: this.state.first,
       last: this.state.last,
       gender: this.state.gender,
@@ -46,21 +59,7 @@ class Signup extends React.Component {
       preferred_genres: this.state.preferred_genres,
     };
 
-    const headers = {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    };
-
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers,
-    };
-
-    fetch('/api/signup', options)
-      .then(res => res.json())
-      .then(json => console.log(json))
-      .catch(err => console.log(err));
+    dispatch(updateProfile(profile));
   }
 
   handleSelectMultiple(event) {
@@ -111,6 +110,7 @@ class Signup extends React.Component {
               First Name:
             </label>
             <input
+              required
               id="first"
               type="text"
               name="first"
@@ -121,6 +121,7 @@ class Signup extends React.Component {
           <p>
             <label htmlFor="last">Last Name:</label>
             <input
+              required
               id="last"
               type="text"
               name="last"
@@ -133,8 +134,9 @@ class Signup extends React.Component {
               Zip Code:
             </label>
             <input
+              required
               id="zipCode"
-              type="text"
+              type="number"
               name="zipCode"
               value={this.state.zipCode}
               onChange={this.handleChange}
@@ -145,8 +147,9 @@ class Signup extends React.Component {
               How old are you?
             </label>
             <input
+              required
               id="age"
-              type="text"
+              type="number"
               name="age"
               value={this.state.age}
               onChange={this.handleChange}
@@ -158,6 +161,7 @@ class Signup extends React.Component {
           <p>
             <label htmlFor="gender" />
             <select
+              required
               id="gender"
               name="gender"
               defaultValue="unspecified"
@@ -176,6 +180,7 @@ class Signup extends React.Component {
           </p>
           <p>
             <textarea
+              required
               rows="4"
               cols="50"
               id="bio"
@@ -190,9 +195,12 @@ class Signup extends React.Component {
           </p>
           <p>
             <label htmlFor="influences">
-              Add a musical influences:
+              Add a musical influence:
             </label>
+          </p>
+          <p>
             <input
+              required
               id="influence"
               type="text"
               name="influence"
@@ -208,6 +216,7 @@ class Signup extends React.Component {
           </p>
           <p>
             <select
+              required
               multiple
               id="instruments"
               name="instruments"
@@ -231,6 +240,7 @@ class Signup extends React.Component {
           </p>
           <p>
             <select
+              required
               multiple
               id="genres"
               name="genres"
@@ -256,6 +266,7 @@ class Signup extends React.Component {
           <p>
             <label htmlFor="song">SoundCloud Demo Link:</label>
             <input
+              required
               id="song"
               type="text"
               name="song"
@@ -266,6 +277,7 @@ class Signup extends React.Component {
           <p>
             <label htmlFor="video">YouTube Video Link:</label>
             <input
+              required
               id="video"
               type="text"
               name="video"
@@ -276,8 +288,9 @@ class Signup extends React.Component {
           <p>
             <label htmlFor="searchRadius">Im looking for musicians within this many miles:</label>
             <input
+              required
               id="searchRadius"
-              type="text"
+              type="number"
               name="searchRadius"
               value={this.state.searchRadius}
               onChange={this.handleChange}
@@ -288,6 +301,7 @@ class Signup extends React.Component {
           </p>
           <p>
             <select
+              required
               multiple
               id="preferred_instruments"
               name="preferred_instruments"
@@ -311,6 +325,7 @@ class Signup extends React.Component {
           </p>
           <p>
             <select
+              required
               multiple
               id="preferred_genres"
               name="preferred_genres"
@@ -346,4 +361,4 @@ const mapStateToProps = state => (
   { userId: state.auth.userId }
 );
 
-export default connect(mapStateToProps)(Signup);
+export default withRouter(connect(mapStateToProps)(Signup));
