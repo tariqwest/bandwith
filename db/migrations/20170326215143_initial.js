@@ -7,7 +7,7 @@ exports.up = (knex, Promise) => (
       table.string('display', 100).nullable();
       table.string('bio', 300).nullable();
       table.string('email', 100).nullable().unique();
-      table.string('zipCode', 15).nullable();
+      table.string('zipCode', 100).nullable();
       table.integer('searchRadius').nullable();
       table.integer('age').nullable();
       table.integer('phone').nullable();
