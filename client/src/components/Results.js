@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import FlatButton from 'material-ui/FlatButton';
 import ResultsListEntry from './ResultsListEntry';
 import dummyData from '../data/dummyData';
 
@@ -13,6 +14,8 @@ class Results extends React.Component {
       currentResult: dummyData[0],
       noMoreResults: false,
     };
+    this.clickNo = this.clickNo.bind(this);
+    this.clickYes = this.clickYes.bind(this);
   }
 
   updateConnections(choice) {
@@ -80,8 +83,8 @@ class Results extends React.Component {
       <div>
         <h1>Find a Musician</h1>
         <div className="profile-decide">
-          <button type="button" onClick={this.clickNo.bind(this)}>No</button>
-          <button type="button" onClick={this.clickYes.bind(this)}>Yes</button>
+          <FlatButton label="No" onClick={this.clickNo} />
+          <FlatButton label="Yes" onClick={this.clickYes} />
         </div>
         <ResultsListEntry result={this.state.currentResult} />
       </div>
