@@ -19,7 +19,7 @@ class Profile extends React.Component {
       age: 40,
       searchRadius: 5,
       photo_src: 'http://www.phrases.org.uk/quotes/last-words/images/john-lennon.jpg',
-      song_url: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/251343373&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true',
+      song_url: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/251343373',
       video_url: 'https://www.youtube.com/embed/DVg2EJvvlF8',
       instruments: ['vocals', 'acoustic guitar'],
       genres: ['rock'],
@@ -37,7 +37,7 @@ class Profile extends React.Component {
         <img height="150" width="150" src={this.state.photo_src} alt="profile-pic" />
         <div>Display Name: {this.state.display}</div>
         <div>Name: {this.state.first} {this.state.last}</div>
-        <div>Bio: {this.state.bio}</div>
+        <div>Biography: {this.state.bio}</div>
         <div>Email: {this.state.email}</div>
         <div>Phone: {this.state.phone}</div>
         <div>Gender: {this.state.gender}</div>
@@ -47,12 +47,13 @@ class Profile extends React.Component {
         <TagList tags={this.state.instruments} type="instrument" />
         <div>My Genres: </div>
         <TagList tags={this.state.genres} type="genres" />
-        <div>My Influences: </div>
+        <div>My Musical Influences: </div>
         <TagList tags={this.state.influences} type="influences" />
-        <div>Looking for someone who plays: </div>
+        <div>Looking for musicians who play: </div>
         <TagList tags={this.state.preferred_instruments} type="preferred-instruments" />
-        <div>Looking for someone who plays: </div>
+        <div>Looking for musicians into: </div>
         <TagList tags={this.state.preferred_genres} type="preferred-genres" />
+        <div>SoundCloud: </div>
         <div className="profile-audio">
           <iframe
             width="400"
@@ -63,6 +64,7 @@ class Profile extends React.Component {
             src={this.state.song_url}
           />
         </div>
+        <div>YouTube: </div>
         <div className="profile-video">
           <iframe
             width="560"
