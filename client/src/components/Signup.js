@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect, Route, withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { updateProfile } from '../actions';
+import InstrumentList from './InstrumentList';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -65,14 +66,14 @@ class Signup extends React.Component {
       gender: '',
       bio: '',
       influence: '',
-      instruments: {},
-      genres: {},
-      influences: {},
       song: '',
       video: '',
       zipCode: '',
       age: '',
       searchRadius: '',
+      instruments: {},
+      genres: {},
+      influences: {},
       preferred_instruments: {},
       preferred_genres: {},
     });
@@ -224,12 +225,21 @@ class Signup extends React.Component {
               value={this.state.influence}
               onChange={this.handleChange}
             />
-            <button type="button" form="influences" name="influences" onClick={this.handleInfluences} >
+            <button
+              type="button"
+              form="influences"
+              name="influences"
+              onClick={this.handleInfluences}
+            >
               Add Influence
             </button>
           </p>
           <p>
           Your instruments:
+          <InstrumentList
+            instruments={Object.keys(this.state.instruments)}
+            onInstrumentClick={this.handleSelectMultiple}
+          />
           </p>
           <p>
             <select
