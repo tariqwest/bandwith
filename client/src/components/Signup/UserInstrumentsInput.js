@@ -17,8 +17,8 @@ const UserInstrumentsInput = ({ instruments, onChange }) => (
         name="instruments"
         onChange={onChange}
       >
-        <option value="electricGuitar">electric guitar</option>
-        <option value="acousticGuitar">acoustic guitar</option>
+        <option value="electric guitar">electric guitar</option>
+        <option value="acoustic guitar">acoustic guitar</option>
         <option value="bass">bass</option>
         <option value="drums">drums</option>
         <option value="piano">piano</option>
