@@ -48,25 +48,24 @@ class Nav extends React.Component {
           <FlatButton label="Musicians" containerElement={<Link to="/results" />} />
         </div>
       );
-    } else {
-      return (
-        <div>
-          <AppBar
-            title={<NavLink exact to="/" >BandWith</NavLink>}
-            onLeftIconButtonTouchTap={this.handleToggle}
-            style={{ backgroundColor: 'black' }}
-            iconElementRight={<FlatButton label="Login" containerElement={<Link to="/login" />} />}
-          />
-          <Drawer
-            docked={false}
-            open={this.state.open}
-            onRequestChange={open => this.setState({ open })}
-          >
-            <MenuItem primaryText="Login" containerElement={<Link to="/login" />} />
-          </Drawer>
-        </div>
-      );
     }
+    return (
+      <div>
+        <AppBar
+          title={<NavLink exact to="/" >BandWith</NavLink>}
+          onLeftIconButtonTouchTap={this.handleToggle}
+          style={{ backgroundColor: 'black' }}
+          iconElementRight={<FlatButton label="Login" containerElement={<Link to="/login" />} />}
+        />
+        <Drawer
+          docked={false}
+          open={this.state.open}
+          onRequestChange={open => this.setState({ open })}
+        >
+          <MenuItem primaryText="Login" containerElement={<Link to="/login" />} />
+        </Drawer>
+      </div>
+    );
   }
 }
 
