@@ -18,6 +18,8 @@ import Profile from './Profile';
 import PrivateRoute from './PrivateRoute';
 import Signup from './Signup';
 import Nav from './Nav';
+import Home from './Home';
+
 import store from '../store';
 
 injectTapEventPlugin();
@@ -35,7 +37,8 @@ const App = () => (
           <PrivateRoute path="/connections" component={Matches} />
           <PrivateRoute path="/results" component={Results} />
           <PrivateRoute path="/chats" component={Chats} />
-          <Route path="/signup" component={Signup} />
+          <PrivateRoute path="/signup" component={Signup} />
+          <Route exact path="/" component={Home} />
         </div>
       </Router>
     </MuiThemeProvider>
