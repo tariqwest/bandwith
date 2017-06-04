@@ -14,7 +14,7 @@ module.exports.update = (req, res) => {
   };
 
   const userInstrumentKeys = Object.keys(req.body.instruments);
-  const userGenresKeys = Object.keys(req.body.genres);
+  const userGenreKeys = Object.keys(req.body.genres);
   const userInfluenceKeys = Object.keys(req.body.influences);
   const preferredInstrumentKeys = Object.keys(req.body.preferred_instruments);
   const preferredGenreKeys = Object.keys(req.body.preferred_genres);
@@ -53,8 +53,8 @@ module.exports.update = (req, res) => {
         throw profile;
       }
 
-      for (let j = 0; j < userInstrumentKeys.length; j++) {
-        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
+      for (let i = 0; i < userInstrumentKeys.length; i++) {
+        models.Instrument.where({ instrument_name: userInstrumentKeys[i] }).fetch()
           .then((instrument) => {
             profile.instruments().attach(instrument);
           }).error((err) => {
@@ -66,17 +66,17 @@ module.exports.update = (req, res) => {
       }
     });
 
-  // update the user_instruments
+  // update the user_genres
   models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
       if (!profile) {
         throw profile;
       }
 
-      for (let j = 0; j < userInstrumentKeys.length; j++) {
-        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
-          .then((instrument) => {
-            profile.instruments().attach(instrument);
+      for (let i = 0; i < userGenreKeys.length; i++) {
+        models.Genre.where({ genre_name: userGenreKeys[i] }).fetch()
+          .then((genre) => {
+            profile.genres().attach(genre);
           }).error((err) => {
             res.status(500).send(err);
           })
@@ -86,17 +86,17 @@ module.exports.update = (req, res) => {
       }
     });
 
-  // update the user_instruments
+  // update the preferred_instruments
   models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
       if (!profile) {
         throw profile;
       }
 
-      for (let j = 0; j < userInstrumentKeys.length; j++) {
-        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
+      for (let i = 0; i < preferredInstrumentKeys.length; i++) {
+        models.Instrument.where({ instrument_name: preferredInstrumentKeys[i] }).fetch()
           .then((instrument) => {
-            profile.instruments().attach(instrument);
+            profile.preferred_instruments().attach(instrument);
           }).error((err) => {
             res.status(500).send(err);
           })
@@ -106,43 +106,46 @@ module.exports.update = (req, res) => {
       }
     });
 
-  // update the user_instruments
+  // update the preferred_genres
   models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
       if (!profile) {
         throw profile;
       }
 
-      for (let j = 0; j < userInstrumentKeys.length; j++) {
-        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
-          .then((instrument) => {
-            profile.instruments().attach(instrument);
+      for (let i = 0; i < preferredGenreKeys.length; i++) {
+        models.Genre.where({ genre: preferredGenreKeys[i] }).fetch()
+          .then((genre) => {
+            profile.preferred_genres().attach(genre);
           }).error((err) => {
-            res.status(500).send(err);
           })
           .catch(() => {
-            res.sendStatus(404);
           });
       }
     });
 
-  // update the user_instruments
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
+  // update the user_influences
+  for (let i = 0; i < userInfluenceKeys.length; i++) {
+    models.Influence.where({ influence_name: userInfluenceKeys[i] }).fetch()
+      .then((influence) => {
+        if (!influence) {
+          throw influence;
+        } else {
+          return influence;
+        }
+      })
+      .catch(() => (
+        models.Influence.forge({ influence_name: userInfluenceKeys[i] }).save()
+      ))
+      .then((influence) => {
+        models.Profile.where({ id: req.body.id }).fetch()
+          .then((profile) => {
+            if (!profile) {
+              throw profile;
+            }
 
-      for (let j = 0; j < userInstrumentKeys.length; j++) {
-        models.Instrument.where({ instrument_name: userInstrumentKeys[j] }).fetch()
-          .then((instrument) => {
-            profile.instruments().attach(instrument);
-          }).error((err) => {
-            res.status(500).send(err);
-          })
-          .catch(() => {
-            res.sendStatus(404);
+            profile.influences().attach(influence);
           });
-      }
-    });
+      });
+  }
 };
