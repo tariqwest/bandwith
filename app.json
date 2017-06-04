@@ -1,0 +1,50 @@
+{
+  "name": "bandwith",
+  "description": "",
+  "scripts": {
+  },
+  "env": {
+    "CLOUDINARY_URL": {
+      "required": true
+    },
+    "FACEBOOK_CLIENTID": {
+      "required": true
+    },
+    "FACEBOOK_CLIENTSECRET": {
+      "required": true
+    },
+    "GOOGLE_CLIENTID": {
+      "required": true
+    },
+    "GOOGLE_CLIENTSECRET": {
+      "required": true
+    },
+    "NPM_CONFIG_PRODUCTION": {
+      "required": true
+    },
+    "REDIS_URL": {
+      "required": true
+    },
+    "SERVER_URL": {
+      "required": true
+    },
+    "TWITTER_CONSUMERKEY": {
+      "required": true
+    },
+    "TWITTER_CONSUMERSECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "cloudinary",
+    "heroku-postgresql",
+    "heroku-redis"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
