@@ -1,9 +1,10 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 
 const SongInput = ({ song, onChange }) => (
-  <p>
-    <label htmlFor="song">SoundCloud Demo Link:</label>
-    <input
+  <div>
+    <TextField
+      floatingLabelText="SoundCloud Demo Link"
       required
       id="song"
       type="text"
@@ -11,7 +12,7 @@ const SongInput = ({ song, onChange }) => (
       value={song}
       onChange={onChange}
     />
-  </p>
+  </div>
 );
 
 export default SongInput;

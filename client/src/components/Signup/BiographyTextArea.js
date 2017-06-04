@@ -1,27 +1,21 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 
 const BiographyTextArea = ({ bio, onChange }) => (
   <div>
-    <p>
-      <label htmlFor="bio">
-        Biography:
-      </label>
-    </p>
-    <p>
-      <textarea
-        required
-        rows="4"
-        cols="50"
-        id="bio"
-        type="text"
-        name="bio"
-        placeholder="tell us about yourself ..."
-        value={bio}
-        onChange={onChange}
-      >
-        Write a brief description of yourself
-      </textarea>
-    </p>
+    <TextField
+      floatingLabelText="Write a brief description of yourself"
+      required
+      multiLine={true}
+      rows={4}
+      rowsMax={4}
+      textareaStyle={{ border: '1px solid #C0C0C0' }}
+      id="bio"
+      type="text"
+      name="bio"
+      value={bio}
+      onChange={onChange}
+    />
   </div>
 );
 

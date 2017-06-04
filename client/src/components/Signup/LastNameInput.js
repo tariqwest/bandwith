@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 const LastNameInput = ({ value, onChange }) => (
   <div>
     <TextField
-      hintText="Last Name"
+      floatingLabelText="Last Name"
       required
       id="last"
       type="text"

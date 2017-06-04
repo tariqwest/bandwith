@@ -2,15 +2,15 @@ import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const GenderInput = ({ onChange, gender }) => (
+const GenderInput = ({ onChange, value }) => (
   <div>
     <SelectField
       floatingLabelText="Your Gender"
       required
+      value={value}
       id="gender"
       name="gender"
       onChange={onChange}
-      value={gender}
     >
       <MenuItem value="female" primaryText="female" />
       <MenuItem value="male" primaryText="male" />

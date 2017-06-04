@@ -1,14 +1,16 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 
-const ZipCodeInput = ({ value, onChange }) => (
+const ZipCodeInput = ({ value, onChange, zipErrorText }) => (
   <div>
     <TextField
       required
       hintText="Zip Code"
+      floatingLabelText="Zip Code"
       id="zipCode"
-      type="number"
       name="zipCode"
+      data-name="zip code"
+      errorText={zipErrorText}
       value={value}
       onChange={onChange}
     />

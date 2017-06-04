@@ -1,9 +1,10 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 
 const SongInput = ({ video, onChange }) => (
-  <p>
-    <label htmlFor="video">YouTube Video Link:</label>
-    <input
+  <div>
+    <TextField
+      floatingLabelText="YouTube Video Link"
       required
       id="video"
       type="text"
@@ -11,7 +12,7 @@ const SongInput = ({ video, onChange }) => (
       value={video}
       onChange={onChange}
     />
-  </p>
+  </div>
 );
 
 export default SongInput;
