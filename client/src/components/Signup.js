@@ -6,6 +6,8 @@ import { Redirect, Route, withRouter } from 'react-router';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 import { updateProfile } from '../actions';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 import FirstNameInput from './Signup/FirstNameInput';
 import LastNameInput from './Signup/LastNameInput';
 import ZipCodeInput from './Signup/ZipCodeInput';
@@ -172,40 +174,54 @@ class Signup extends React.Component {
     return (
       <div>
         <form onSubmit={this.send}>
-          <FirstNameInput value={this.state.first} onChange={this.handleChange} />
-          <LastNameInput value={this.state.last} onChange={this.handleChange} />
-          <ZipCodeInput value={this.state.zipCode} onChange={this.handleChange} />
-          <AgeInput value={this.state.age} onChange={this.handleChange} />
-          <GenderInput onChange={this.handleChange} gender={this.state.gender} />
-          <BiographyTextArea bio={this.state.bio} onChange={this.handleChange} />
-          <InfluencesInput
-            influence={this.state.influence}
-            influences={this.state.influences}
-            handleChange={this.handleChange}
-            onClick={this.handleInfluences}
-          />
-          <UserInstrumentsInput
-            instruments={this.state.instruments}
-            onChange={this.handleSelectMultiple}
-          />
-          <UserGenresInput
-            onChange={this.handleSelectMultiple}
-            genres={this.state.genres}
-          />
-          <SongInput song={this.state.song} onChange={this.handleChange} />
-          <VideoInput video={this.state.video} onChange={this.handleChange} />
-          <SearchRadiusInput radius={this.state.searchRadius} onChange={this.handleChange} />
-          <PreferredGenresInput
-            genres={this.state.preferred_genres}
-            onChange={this.handleSelectMultiple}
-          />
-          <PreferredInstrumentsInput
-            instruments={this.state.preferred_instruments}
-            onChange={this.handleSelectMultiple}
-          />
-          <p>
-            <input type="submit" value="Submit" />
-          </p>
+          <Paper zDepth={2} >
+            <FirstNameInput value={this.state.first} onChange={this.handleChange} /><br />
+            <LastNameInput value={this.state.last} onChange={this.handleChange} /><br />
+            <ZipCodeInput
+              value={this.state.zipCode}
+              onChange={this.handleNumberChange}
+              zipErrorText={this.state.zipCodeErrorText}
+            /><br />
+            <AgeInput
+              value={this.state.age}
+              onChange={this.handleNumberChange}
+              ageErrorText={this.state.ageErrorText}
+            /><br />
+            <GenderInput onChange={this.handleGender} value={this.state.gender} /><br />
+            <BiographyTextArea bio={this.state.bio} onChange={this.handleChange} /><br />
+            <InfluencesInput
+              influence={this.state.influence}
+              influences={this.state.influences}
+              handleChange={this.handleChange}
+              onClick={this.handleInfluences}
+            /><br />
+            <UserInstrumentsInput
+              instruments={this.state.instruments}
+              onChange={this.handleSelectMultiple}
+            /><br />
+            <UserGenresInput
+              onChange={this.handleSelectMultiple}
+              genres={this.state.genres}
+            /><br />
+            <SongInput song={this.state.song} onChange={this.handleChange} /><br />
+            <VideoInput video={this.state.video} onChange={this.handleChange} /><br />
+            <SearchRadiusInput
+              radius={this.state.searchRadius}
+              onChange={this.handleNumberChange}
+              radiusErrorText={this.state.searchRadiusErrorText}
+            /><br />
+            <PreferredGenresInput
+              genres={this.state.preferred_genres}
+              onChange={this.handleSelectMultiple}
+            /><br />
+            <PreferredInstrumentsInput
+              instruments={this.state.preferred_instruments}
+              onChange={this.handleSelectMultiple}
+            /><br />
+            <p>
+              <input type="submit" value="Submit" />
+            </p>
+          </Paper>
         </form>
       </div>
     );

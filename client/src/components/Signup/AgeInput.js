@@ -1,11 +1,11 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 
-const AgeInput = ({ value, onChange }) => (
+const AgeInput = ({ value, onChange, ageErrorText }) => (
   <div>
     <TextField
       required
-      hintText="How old are you?"
+      floatingLabelText="How old are you?"
       id="age"
       name="age"
       data-name="age"
