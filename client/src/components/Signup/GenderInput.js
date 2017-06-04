@@ -1,25 +1,21 @@
 import React from 'react';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
-const GenderInput = ({ onChange }) => (
+const GenderInput = ({ onChange, gender }) => (
   <div>
-    <p>
-      Your Gender:
-    </p>
-    <p>
-      <label htmlFor="gender" />
-      <select
-        required
-        id="gender"
-        name="gender"
-        defaultValue="unspecified"
-        onChange={onChange}
-      >
-        <option value="unspecified" >Unspecified</option>
-        <option value="female">Female</option>
-        <option value="male">Male</option>
-        <option value="other">Other</option>
-      </select>
-    </p>
+    <SelectField
+      floatingLabelText="Your Gender"
+      required
+      id="gender"
+      name="gender"
+      onChange={onChange}
+      value={gender}
+    >
+      <MenuItem value="female" primaryText="female" />
+      <MenuItem value="male" primaryText="male" />
+      <MenuItem value="other" primaryText="other" />
+    </SelectField>
   </div>
 );
 

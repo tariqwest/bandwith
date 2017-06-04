@@ -1,11 +1,10 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 
 const LastNameInput = ({ value, onChange }) => (
-  <p>
-    <label htmlFor="last">
-      Last Name:
-    </label>
-    <input
+  <div>
+    <TextField
+      hintText="Last Name"
       required
       id="last"
       type="text"
@@ -13,7 +12,7 @@ const LastNameInput = ({ value, onChange }) => (
       value={value}
       onChange={onChange}
     />
-  </p>
+  </div>
 );
 
 export default LastNameInput;

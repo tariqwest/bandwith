@@ -1,11 +1,10 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 
 const FirstNameInput = ({ value, onChange }) => (
-  <p>
-    <label htmlFor="first">
-      First Name:
-    </label>
-    <input
+  <div>
+    <TextField
+      hintText="First Name"
       required
       id="first"
       type="text"
@@ -13,7 +12,7 @@ const FirstNameInput = ({ value, onChange }) => (
       value={value}
       onChange={onChange}
     />
-  </p>
+  </div>
 );
 
 export default FirstNameInput;

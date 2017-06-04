@@ -141,7 +141,7 @@ class Signup extends React.Component {
           <LastNameInput value={this.state.last} onChange={this.handleChange} />
           <ZipCodeInput value={this.state.zipCode} onChange={this.handleChange} />
           <AgeInput value={this.state.age} onChange={this.handleChange} />
-          <GenderInput onChange={this.handleChange} />
+          <GenderInput onChange={this.handleChange} gender={this.state.gender} />
           <BiographyTextArea bio={this.state.bio} onChange={this.handleChange} />
           <InfluencesInput
             influence={this.state.influence}

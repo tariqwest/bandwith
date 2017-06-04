@@ -1,19 +1,18 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 
 const AgeInput = ({ value, onChange }) => (
-  <p>
-    <label htmlFor="age">
-      How old are you?
-    </label>
-    <input
+  <div>
+    <TextField
       required
+      hintText="How old are you?"
       id="age"
       type="number"
       name="age"
       value={value}
       onChange={onChange}
     />
-  </p>
+  </div>
 );
 
 export default AgeInput;

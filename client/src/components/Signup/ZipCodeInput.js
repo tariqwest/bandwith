@@ -1,19 +1,18 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 
 const ZipCodeInput = ({ value, onChange }) => (
-  <p>
-    <label htmlFor="zipCode">
-      Zip Code:
-    </label>
-    <input
+  <div>
+    <TextField
       required
+      hintText="Zip Code"
       id="zipCode"
       type="number"
       name="zipCode"
       value={value}
       onChange={onChange}
     />
-  </p>
+  </div>
 );
 
 export default ZipCodeInput;
