@@ -11,26 +11,33 @@ class PrivateRoute extends React.Component {
   }
 
   componentWillMount() {
-    const { dispatch, location, isAuthenticated, hasUserInfo, userId } = this.props;
+    const {
+      dispatch,
+      location,
+      isAuthenticated,
+      isFetchingAuth,
+    } = this.props;
 
     let redirect = location.pathname;
     if (redirect === '/logout' || redirect === '/login') {
       redirect = '/results';
     }
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated && !isFetchingAuth) {
       dispatch(setRedirectUrl(redirect));
       dispatch(checkLogin());
     }
 
-    if (!hasUserInfo && isAuthenticated) {
-      dispatch(getUserInfo(userId));
-    }
+    this.getUserInfoIfReady();
   }
 
   componentDidUpdate() {
-    const { dispatch, hasUserInfo, isAuthenticated, userId } = this.props;
-    if (!hasUserInfo && isAuthenticated) {
+    this.getUserInfoIfReady();
+  }
+
+  getUserInfoIfReady() {
+    const { dispatch, hasUserInfo, isAuthenticated, userId, isFetchingUser } = this.props;
+    if (isAuthenticated && !hasUserInfo && !isFetchingUser) {
       dispatch(getUserInfo(userId));
     }
   }
@@ -58,7 +65,9 @@ class PrivateRoute extends React.Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  isFetchingAuth: state.auth.isFetching,
   userId: state.auth.userId,
+  isFetchingUser: state.user.isFetching,
   hasUserInfo: state.user.hasInfo,
 });
 
