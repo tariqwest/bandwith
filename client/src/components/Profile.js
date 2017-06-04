@@ -7,79 +7,68 @@ import TagList from './TagList';
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      first: 'John',
-      last: 'Lennon',
-      display: 'johnlennon',
-      bio: 'I started the beatles...',
-      email: 'john@lennon.com',
-      phone: '415 234 5678',
-      gender: 'Male',
-      zipCode: '94131',
-      age: 40,
-      searchRadius: 5,
-      photo_src: 'http://www.phrases.org.uk/quotes/last-words/images/john-lennon.jpg',
-      song_url: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/251343373',
-      video_url: 'https://www.youtube.com/embed/DVg2EJvvlF8',
-      instruments: ['vocals', 'acoustic guitar'],
-      genres: ['rock'],
-      influences: ['Kanye', 'Jay Z'],
-      preferred_instruments: ['ukulele', 'drums'],
-      preferred_genres: ['punk', 'funk'],
-    };
+    this.state = {};
   }
 
   render() {
+    if (this.props.hasInfo) {
+      return (
+        <div>
+          <Link to="/signup">Edit</Link>
+          <br />
+          <img height="150" width="150" src={this.props.user.photo_src} alt="profile-pic" />
+          <div>Display Name: {this.props.user.display}</div>
+          <div>Name: {this.props.user.first} {this.props.user.last}</div>
+          <div>Biography: {this.props.user.bio}</div>
+          <div>Email: {this.props.user.email}</div>
+          <div>Phone: {this.props.user.phone}</div>
+          <div>Gender: {this.props.user.gender}</div>
+          <div>Zip Code: {this.props.user.zipCode}</div>
+          <div>Search Radius: {this.props.user.searchRadius} miles</div>
+          <div>My Instruments: </div>
+          <TagList tags={this.props.user.instruments} type="instrument" />
+          <div>My Genres: </div>
+          <TagList tags={this.props.user.genres} type="genres" />
+          <div>My Musical Influences: </div>
+          <TagList tags={this.props.user.influences} type="influences" />
+          <div>Looking for musicians who play: </div>
+          <TagList tags={this.props.user.preferredInstruments} type="preferred-instruments" />
+          <div>Looking for musicians into: </div>
+          <TagList tags={this.props.user.preferredGenres} type="preferred-genres" />
+          <div>SoundCloud: </div>
+          <div className="profile-audio">
+            <iframe
+              width="400"
+              height="100"
+              scrolling="no"
+              frameBorder="no"
+              title="audio"
+              src={this.props.user.song_url}
+            />
+          </div>
+          <div>YouTube: </div>
+          <div className="profile-video">
+            <iframe
+              width="560"
+              height="315"
+              frameBorder="0"
+              allowFullScreen
+              title="video"
+              src={this.props.user.video_url}
+            />
+          </div>
+        </div>
+      );
+    }
     return (
-      <div>
-        <Link to="/signup">Edit</Link>
-        <br />
-        <img height="150" width="150" src={this.state.photo_src} alt="profile-pic" />
-        <div>Display Name: {this.state.display}</div>
-        <div>Name: {this.state.first} {this.state.last}</div>
-        <div>Biography: {this.state.bio}</div>
-        <div>Email: {this.state.email}</div>
-        <div>Phone: {this.state.phone}</div>
-        <div>Gender: {this.state.gender}</div>
-        <div>Zip Code: {this.state.zipCode}</div>
-        <div>Search Radius: {this.state.searchRadius} miles</div>
-        <div>My Instruments: </div>
-        <TagList tags={this.state.instruments} type="instrument" />
-        <div>My Genres: </div>
-        <TagList tags={this.state.genres} type="genres" />
-        <div>My Musical Influences: </div>
-        <TagList tags={this.state.influences} type="influences" />
-        <div>Looking for musicians who play: </div>
-        <TagList tags={this.state.preferred_instruments} type="preferred-instruments" />
-        <div>Looking for musicians into: </div>
-        <TagList tags={this.state.preferred_genres} type="preferred-genres" />
-        <div>SoundCloud: </div>
-        <div className="profile-audio">
-          <iframe
-            width="400"
-            height="100"
-            scrolling="no"
-            frameBorder="no"
-            title="audio"
-            src={this.state.song_url}
-          />
-        </div>
-        <div>YouTube: </div>
-        <div className="profile-video">
-          <iframe
-            width="560"
-            height="315"
-            frameBorder="0"
-            allowFullScreen
-            title="video"
-            src={this.state.video_url}
-          />
-        </div>
-      </div>
+      <div>Loading</div>
     );
   }
 }
 
-const mapStateToProps = state => ({ user: state.auth.userId }); // change this to getting user info
+const mapStateToProps = state => ({
+  user: state.user.profile,
+  hasInfo: state.user.hasInfo,
+});
 
 export default connect(mapStateToProps)(Profile);
