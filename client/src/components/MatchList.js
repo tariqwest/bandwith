@@ -2,6 +2,10 @@ import React from 'react';
 import MatchListEntry from './MatchListEntry';
 import { connect } from 'react-redux';
 import { getMatchesInfo } from '../actions';
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
+import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
 class MatchList extends React.Component {
   constructor(props){
@@ -15,11 +19,13 @@ class MatchList extends React.Component {
 
   render(){
     return (
+      <List>
       <div>
         {this.props.matches.map((match) =>
           (<MatchListEntry match={match} key={match.id} />)
         )}
       </div>
+      </List>
     );
   }
 };

@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentMatch } from '../actions';
 import { Redirect } from 'react-router';
+import Avatar from 'material-ui/Avatar';
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Divider from 'material-ui/Divider';
+import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
 class MatchListEntry extends React.Component {
   constructor(props) {
@@ -20,15 +25,11 @@ class MatchListEntry extends React.Component {
   render() {
     return (
       <Link to="/chats" onClick={this.chatWithMatch}>
-      <div>
-        <div className="connection-pic">
-          <img height="150" width="150" alt="profile-pic" src={this.props.match.photo_src} />
-        </div>
-        <div className="connection-info">
-          <div className="connection-display">{this.props.match.display}</div>
-          <div className="connection-locationy">{this.props.match.zipCode}</div>
-        </div>
-      </div>
+      <ListItem
+        primaryText={this.props.match.display}
+        leftAvatar={<Avatar src={this.props.match.photo_src || '/assets/avatar.jpg'} />}
+        rightIcon={<CommunicationChatBubble />}
+        />
       </Link>
     );
   }
