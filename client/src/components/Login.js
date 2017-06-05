@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton';
 
 class Login extends React.Component {
   componentDidMount() {
@@ -52,8 +54,9 @@ class Login extends React.Component {
 
         <hr />
 
-        <p>Need to sign up for an account? <a href="/signup">Signup</a></p>
-        <p><a href="/">home</a></p>
+        <p>Need to sign up for an account?</p>
+        <FlatButton label="Sign Up" containerElement={<Link to="/signup" />} />
+        <FlatButton label="Home" containerElement={<Link to="/" />} />
       </div>
     );
   }

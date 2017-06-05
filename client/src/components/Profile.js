@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton';
 
 import TagList from './TagList';
 
@@ -14,7 +15,7 @@ class Profile extends React.Component {
     if (this.props.hasInfo) {
       return (
         <div>
-          <Link to="/signup">Edit</Link>
+          <FlatButton label="Edit" containerElement={<Link to="/signup" />} />
           <br />
           <img height="150" width="150" src={this.props.user.photo_src} alt="profile-pic" />
           <div>Display Name: {this.props.user.display}</div>
