@@ -11,7 +11,7 @@ class ResultsListEntry extends React.Component {
     return (
       <div>
         <div className="profile-main">
-          <img height="150" width="150" alt="profile-pic" src={this.props.result.photo} />
+          <img height="150" width="150" alt="profile-pic" src={this.props.result.photo || '/assets/avatar.jpg'} />
           <div className="profile-display">{this.props.result.display}</div>
           <div className="profile-bio">{this.props.result.bio}</div>
           <TagList tags={this.props.result.instruments} type="instrument" />
