@@ -17,7 +17,7 @@ const InfluenceInput = ({ influence, influences, handleChange, onClick }) => (
       name="influence"
       value={influence}
       onChange={handleChange}
-    /><br />
+    />
     <RaisedButton
       label="Add Influence"
       style={style}
