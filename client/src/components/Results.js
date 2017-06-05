@@ -16,6 +16,11 @@ class Results extends React.Component {
     };
     this.clickNo = this.clickNo.bind(this);
     this.clickYes = this.clickYes.bind(this);
+    this.getSearchResults = this.getSearchResults.bind(this);
+  }
+
+  componentDidMount(){
+    this.getSearchResults();
   }
 
   updateConnections(choice) {
@@ -39,6 +44,18 @@ class Results extends React.Component {
     fetch('/api/preference', options)
       .then(() => console.log('Successful POST request to /connections'))
       .catch(err => console.log('Bad POST request to /connections: ', err));
+  }
+
+  getSearchResults() {
+    fetch(`/api/search?userId=${this.props.userId}`)
+      .then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response;
+    })
+    .then(res => res.json())
+    .then(json => this.setState({ results: json, currentResult: json[0], size: json.length - 1 }));
   }
 
   clickNo() {

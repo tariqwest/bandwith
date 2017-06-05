@@ -83,7 +83,7 @@ module.exports.search = (req, res) => {
     if (!results) {
       throw results;
     }
-    res.status(200).json(results);
+    res.status(200).send(results);
   })
   .error(err => res.status(500).send(err))
   .catch(() => res.sendStatus(404));
