@@ -2,8 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
-
-import TagList from './TagList';
+import { Card,
+  CardHeader,
+  CardTitle,
+  CardMedia,
+  CardActions,
+} from 'material-ui/Card';
+import { List, ListItem } from 'material-ui/List';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -12,53 +17,126 @@ class Profile extends React.Component {
   }
 
   render() {
+    const {
+      first,
+      last,
+      display,
+      bio,
+      age,
+      gender,
+      email,
+      zipCode,
+      searchRadius,
+      instruments,
+      genres,
+      influences,
+      preferredInstruments,
+      preferredGenres,
+      video_url,
+      song_url,
+      photo_src,
+    } = this.props.user;
+    const fullname = first + ' ' + last;
+    const search = 'Searching within ' + searchRadius + ' miles';
+    const profile = gender + ', ' + age;
+
     if (this.props.hasInfo) {
       return (
-        <div>
-          <FlatButton label="Edit" containerElement={<Link to="/signup" />} />
-          <br />
-          <img height="150" width="150" src={this.props.user.photo_src} alt="profile-pic" />
-          <div>Display Name: {this.props.user.display}</div>
-          <div>Name: {this.props.user.first} {this.props.user.last}</div>
-          <div>Biography: {this.props.user.bio}</div>
-          <div>Email: {this.props.user.email}</div>
-          <div>Phone: {this.props.user.phone}</div>
-          <div>Gender: {this.props.user.gender}</div>
-          <div>Zip Code: {this.props.user.zipCode}</div>
-          <div>Search Radius: {this.props.user.searchRadius} miles</div>
-          <div>My Instruments: </div>
-          <TagList tags={this.props.user.instruments} type="instrument" />
-          <div>My Genres: </div>
-          <TagList tags={this.props.user.genres} type="genres" />
-          <div>My Musical Influences: </div>
-          <TagList tags={this.props.user.influences} type="influences" />
-          <div>Looking for musicians who play: </div>
-          <TagList tags={this.props.user.preferredInstruments} type="preferred-instruments" />
-          <div>Looking for musicians into: </div>
-          <TagList tags={this.props.user.preferredGenres} type="preferred-genres" />
-          <div>SoundCloud: </div>
-          <div className="profile-audio">
-            <iframe
-              width="400"
-              height="100"
-              scrolling="no"
-              frameBorder="no"
-              title="audio"
-              src={this.props.user.song_url}
+        <Card>
+          <CardHeader avatar={photo_src} title={fullname} subtitle={display} />
+          <CardTitle title={fullname} subtitle={bio} />
+          <List>
+            <ListItem
+              leftIcon={<i className="material-icons">account_circle</i>}
+              primaryText={profile}
             />
-          </div>
-          <div>YouTube: </div>
-          <div className="profile-video">
-            <iframe
-              width="560"
-              height="315"
-              frameBorder="0"
-              allowFullScreen
-              title="video"
-              src={this.props.user.video_url}
+            <ListItem
+              leftIcon={<i className="material-icons">email</i>}
+              primaryText={email}
             />
-          </div>
-        </div>
+            <ListItem
+              leftIcon={<i className="material-icons">place</i>}
+              primaryText={zipCode}
+            />
+            <ListItem
+              leftIcon={<i className="material-icons">near_me</i>}
+              primaryText={search}
+            />
+            <ListItem
+              leftIcon={<i className="material-icons">speaker</i>}
+              primaryText="My Instruments"
+              primaryTogglesNestedList={true}
+              nestedItems={instruments.map(instrument =>
+                <ListItem key={instrument} primaryText={instrument} /> // eslint-disable-line
+              )}
+            />
+            <ListItem
+              leftIcon={<i className="material-icons">album</i>}
+              primaryText="My Genres"
+              primaryTogglesNestedList={true}
+              nestedItems={genres.map(genre =>
+                <ListItem key={genre} primaryText={genre} /> // eslint-disable-line
+              )}
+            />
+            <ListItem
+              leftIcon={<i className="material-icons">headset</i>}
+              primaryText="My Influences"
+              primaryTogglesNestedList={true}
+              nestedItems={influences.map(influence =>
+                <ListItem key={influence} primaryText={influence} /> // eslint-disable-line
+              )}
+            />
+            <ListItem
+              leftIcon={<i className="material-icons">grade</i>}
+              primaryText="Preferred Instruments"
+              primaryTogglesNestedList={true}
+              nestedItems={preferredInstruments.map(instrument =>
+                <ListItem key={instrument} primaryText={instrument} /> // eslint-disable-line
+              )}
+            />
+            <ListItem
+              leftIcon={<i className="material-icons">favorite</i>}
+              primaryText="Preferred Genres"
+              primaryTogglesNestedList={true}
+              nestedItems={preferredGenres.map(genre =>
+                <ListItem key={genre} primaryText={genre} /> // eslint-disable-line
+              )}
+            />
+            <ListItem
+              leftIcon={<i className="material-icons">music_video</i>}
+              primaryText="YouTube"
+              primaryTogglesNestedList={true}
+              nestedItems={[
+                <CardMedia key={video_url}>
+                  <iframe
+                    frameBorder="0"
+                    allowFullScreen
+                    title="video"
+                    src={video_url}
+                  />
+                </CardMedia>,
+              ]}
+            />
+            <ListItem
+              leftIcon={<i className="material-icons">audiotrack</i>}
+              primaryText="SoundCloud"
+              primaryTogglesNestedList={true}
+              nestedItems={[
+                <CardMedia key={song_url}>
+                  <iframe
+                    scrolling="no"
+                    frameBorder="no"
+                    title="audio"
+                    src={song_url}
+                  />
+                </CardMedia>,
+              ]}
+            />
+          </List>
+          <CardActions>
+            <FlatButton label="Edit" containerElement={<Link to="/signup" />} />
+          </CardActions>
+        </Card>
       );
     }
     return (
