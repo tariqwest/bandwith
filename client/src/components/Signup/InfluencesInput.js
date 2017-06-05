@@ -1,31 +1,33 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import List from './List';
+
+const style = {
+  margin: 12,
+};
 
 const InfluenceInput = ({ influence, influences, handleChange, onClick }) => (
   <div>
-    <p>
-      Add a musical influence:
+    <TextField
+      floatingLabelText="Add a musical influence"
+      required
+      id="influence"
+      type="text"
+      name="influence"
+      value={influence}
+      onChange={handleChange}
+    />
+    <RaisedButton
+      label="Add Influence"
+      style={style}
+      name="influences"
+      form="influences"
+      onTouchTap={onClick}
+    />
     <List
       listItems={Object.keys(influences)}
     />
-    </p>
-    <p>
-      <input
-        id="influence"
-        type="text"
-        name="influence"
-        value={influence}
-        onChange={handleChange}
-      />
-      <button
-        type="button"
-        form="influences"
-        name="influences"
-        onClick={onClick}
-      >
-        Add Influence
-      </button>
-    </p>
   </div>
 );
 
