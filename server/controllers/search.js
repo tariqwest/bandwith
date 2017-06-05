@@ -1,7 +1,7 @@
 const models = require('../../db/models');
-const _ = require('underscore');
 
 let currentUserProfile;
+let currentMatchedProfiles;
 
 const processProfileRelations = (profile) => {
   const influences = profile.related('influences').map(i => i.attributes.id);
@@ -16,16 +16,14 @@ const processProfileRelations = (profile) => {
 
 const prefsMatch = (matchProfile, category, preference) => {
   // Check if the potential match has one of the current user's desired instruments or genres
-  const matchLeft = _.any(matchProfile[category], (item) => {
-    return _.contains(currentUserProfile[preference], item);
-  });
+  const twoMatchesOne = matchProfile[category].some((item) =>
+  currentUserProfile[preference].includes(item));
 
   // Check if the current user has one of the match's desired instruments or genres
-  const matchRight = _.any(currentUserProfile[category], (item) => {
-    return _.contains(matchProfile[preference], item);
-  });
+  const oneMatchesTwo = currentUserProfile[category].some((item) =>
+  matchProfile[preference].includes(item));
 
-  return matchLeft && matchRight;
+  return twoMatchesOne && oneMatchesTwo;
 };
 
 const profileMatches = (profile) => {
@@ -33,7 +31,7 @@ const profileMatches = (profile) => {
   const instrumentPrefsMatch = prefsMatch(profile, 'instruments', 'preferredInstruments');
   const genrePrefsMatch = prefsMatch(profile, 'genres', 'preferredGenres');
   console.log('** Instruments, Genres match: ', instrumentPrefsMatch, genrePrefsMatch);
-  return (instrumentPrefsMatch && genrePrefsMatch);
+  return instrumentPrefsMatch && genrePrefsMatch;
 };
 
 module.exports.search = (req, res) => {
@@ -79,6 +77,46 @@ module.exports.search = (req, res) => {
     console.log('** Matched profiles: ', matchedProfiles.length);
     return matchedProfiles;
   })
+  .then((matchedProfiles) => {
+    currentMatchedProfiles = matchedProfiles;
+    const connections = matchedProfiles.map((profile) => {
+      return models.Connection.query({
+        where:{
+          profile_id_1: profile.id,
+          profile_id_2: currentUserProfile.id,
+        },
+        orWhere: {
+          profile_id_1: currentUserProfile.id,
+          profile_id_2: profile.id,
+        },
+      })
+      .fetch();
+    });
+    return Promise.all(connections);
+  })
+  .then((connections) => {
+    console.log('** All connections: ', connections);
+    connections.forEach((connection, i) => {
+      if (connection) {
+        console.log('** Connection: ', connection);
+        console.log('** CurrentMatchedProfile: ', currentMatchedProfiles[i]);
+
+        const conn = connection.serialize();
+
+        if (conn.profile_id_1 === currentMatchedProfiles[i].id) {
+          if (conn.likes_2_1 !== null) {
+            currentMatchedProfiles.splice(i, 1);
+          }
+        }
+        if (conn.profile_id_2 === currentMatchedProfiles[i].id) {
+          if (conn.likes_1_2 !== null) {
+            currentMatchedProfiles.splice(i, 1);
+          }
+        }
+      }
+    });
+    return currentMatchedProfiles;
+  })
   .then((results) => {
     if (!results) {
       throw results;
@@ -86,5 +124,8 @@ module.exports.search = (req, res) => {
     res.status(200).send(results);
   })
   .error(err => res.status(500).send(err))
-  .catch(() => res.sendStatus(404));
+  .catch((err) => {
+    console.log(err);
+    res.sendStatus(404);
+  });
 };
