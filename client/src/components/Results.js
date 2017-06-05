@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import ResultsListEntry from './ResultsListEntry';
-import dummyData from '../data/dummyData';
+// import dummyData from '../data/dummyData';
 
 class Results extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       index: 0,
-      results: dummyData,
-      size: dummyData.length - 1,
-      currentResult: dummyData[0],
-      noMoreResults: false,
+      results: [],
+      size: 0,
+      currentResult: {},
+      noMoreResults: true,
     };
     this.clickNo = this.clickNo.bind(this);
     this.clickYes = this.clickYes.bind(this);
@@ -55,7 +55,14 @@ class Results extends React.Component {
       return response;
     })
     .then(res => res.json())
-    .then(json => this.setState({ results: json, currentResult: json[0], size: json.length - 1 }));
+    .then(json => {
+      this.setState({
+        results: json,
+        currentResult: json[0],
+        size: json.length - 1,
+        noMoreResults: json.length > 0 ? false : true,
+      });
+    });
   }
 
   clickNo() {
