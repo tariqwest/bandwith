@@ -27,7 +27,7 @@ class Nav extends React.Component {
       return (
         <div>
           <AppBar
-            title={<NavLink exact to="/" >BandWith</NavLink>}
+            title={<NavLink exact to="/" >Bandwith</NavLink>}
             onLeftIconButtonTouchTap={this.handleToggle}
             style={{ backgroundColor: 'black' }}
             iconElementRight={<FlatButton
@@ -52,7 +52,7 @@ class Nav extends React.Component {
     return (
       <div>
         <AppBar
-          title={<NavLink exact to="/" >BandWith</NavLink>}
+          title={<NavLink exact to="/" >Bandwith</NavLink>}
           onLeftIconButtonTouchTap={this.handleToggle}
           style={{ backgroundColor: 'black' }}
           iconElementRight={<FlatButton label="Login" containerElement={<Link to="/login" />} />}
