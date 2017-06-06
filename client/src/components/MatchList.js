@@ -1,15 +1,13 @@
 import React from 'react';
-import MatchListEntry from './MatchListEntry';
 import { connect } from 'react-redux';
+import { List } from 'material-ui/List';
+import MatchListEntry from './MatchListEntry';
 import { getMatchesInfo } from '../actions';
-import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import Divider from 'material-ui/Divider';
-import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 
 class MatchList extends React.Component {
   constructor(props){
     super(props);
+    this.state = {};
   }
 
   componentDidMount(){
@@ -20,20 +18,17 @@ class MatchList extends React.Component {
   render(){
     return (
       <List>
-      <div>
-        {this.props.matches.map((match) =>
-          (<MatchListEntry match={match} key={match.id} />)
+        {this.props.matches.map(match =>
+          (<MatchListEntry match={match} key={match.id} />) // eslint-disable-line
         )}
-      </div>
       </List>
     );
   }
-};
+}
 
 const mapStateToProps = state => ({
   matches: state.matches.matches,
   userId: state.auth.userId,
-  //currentMatchUserId: state.auth.userId === 2 ? 1 : 2, //state.chat.currentMatchUserId,
 });
 
 export default connect(mapStateToProps)(MatchList);
