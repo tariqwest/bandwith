@@ -1,4 +1,11 @@
 import React from 'react';
+import Chip from 'material-ui/Chip';
+
+const styles = {
+  chip: {
+    margin: 4,
+  },
+};
 
 class Tag extends React.Component {
   constructor(props) {
@@ -12,7 +19,7 @@ class Tag extends React.Component {
 
   render() {
     return (
-      <span>{this.state.tagName} </span>
+      <Chip style={styles.chip}>{this.state.tagName}</Chip>
     );
   }
 }
