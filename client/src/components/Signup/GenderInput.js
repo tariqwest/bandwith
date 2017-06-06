@@ -7,6 +7,7 @@ const GenderInput = ({ onChange, value }) => (
     <SelectField
       floatingLabelText="Your Gender"
       required
+      style={{ textAlign: 'left' }}
       value={value}
       id="gender"
       name="gender"
