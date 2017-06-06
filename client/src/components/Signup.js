@@ -170,72 +170,76 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div>
-        <Card>
-          <form onSubmit={this.send}>
-            <Paper
-              zDepth={2}
-            >
-              <Card>
-                <CardHeader
-                  title="Profile"
-                  actAsExpander={true}
-                  showExpandableButton={true}
-                />
-                <CardText expandable={true}>
-                  <FirstNameInput value={this.state.first} onChange={this.handleChange} /><br />
-                  <LastNameInput value={this.state.last} onChange={this.handleChange} /><br />
-                  <ZipCodeInput
-                    value={this.state.zipCode}
-                    onChange={this.handleNumberChange}
-                    zipErrorText={this.state.zipCodeErrorText}
-                  /><br />
-                  <AgeInput
-                    value={this.state.age}
-                    onChange={this.handleNumberChange}
-                    ageErrorText={this.state.ageErrorText}
-                  /><br />
-                  <GenderInput onChange={this.handleGender} value={this.state.gender} /><br />
-                  <BiographyTextArea bio={this.state.bio} onChange={this.handleChange} /><br />
-                  <InfluencesInput
-                    influence={this.state.influence}
-                    influences={this.state.influences}
-                    handleChange={this.handleChange}
-                    onClick={this.handleInfluences}
-                  /><br />
-                  <UserInstrumentsInput
-                    instruments={this.state.instruments}
-                    instrument={this.state.instrument}
-                    onChange={this.handleSelectMultiple}
-                  /><br />
-                  <UserGenresInput
-                    onChange={this.handleSelectMultiple}
-                    genres={this.state.genres}
-                  /><br />
-                  <SongInput song={this.state.song} onChange={this.handleChange} /><br />
-                  <VideoInput video={this.state.video} onChange={this.handleChange} /><br />
-                  <SearchRadiusInput
-                    radius={this.state.searchRadius}
-                    onChange={this.handleNumberChange}
-                    radiusErrorText={this.state.searchRadiusErrorText}
-                  /><br />
-                  <PreferredGenresInput
-                    genres={this.state.preferred_genres}
-                    onChange={this.handleSelectMultiple}
-                  /><br />
-                  <PreferredInstrumentsInput
-                    instruments={this.state.preferred_instruments}
-                    onChange={this.handleSelectMultiple}
-                  /><br />
-                  <p>
-                    <input type="submit" value="Submit" />
-                  </p>
-                </CardText>
-              </Card>
-            </Paper>
-          </form>
-        </Card>
-      </div>
+      <Row>
+        <Col xs={12}>
+          <Row center="xs">
+            <Card>
+              <form onSubmit={this.send}>
+                <Paper
+                  zDepth={2}
+                >
+                  <Card>
+                    <CardHeader
+                      title="Profile"
+                      actAsExpander={true}
+                      showExpandableButton={true}
+                    />
+                    <CardText>
+                      <FirstNameInput value={this.state.first} onChange={this.handleChange} /><br />
+                      <LastNameInput value={this.state.last} onChange={this.handleChange} /><br />
+                      <ZipCodeInput
+                        value={this.state.zipCode}
+                        onChange={this.handleNumberChange}
+                        zipErrorText={this.state.zipCodeErrorText}
+                      /><br />
+                      <AgeInput
+                        value={this.state.age}
+                        onChange={this.handleNumberChange}
+                        ageErrorText={this.state.ageErrorText}
+                      /><br />
+                      <GenderInput onChange={this.handleGender} value={this.state.gender} /><br />
+                      <BiographyTextArea bio={this.state.bio} onChange={this.handleChange} /><br />
+                      <InfluencesInput
+                        influence={this.state.influence}
+                        influences={this.state.influences}
+                        handleChange={this.handleChange}
+                        onClick={this.handleInfluences}
+                      /><br />
+                      <UserInstrumentsInput
+                        instruments={this.state.instruments}
+                        instrument={this.state.instrument}
+                        onChange={this.handleSelectMultiple}
+                      /><br />
+                      <UserGenresInput
+                        onChange={this.handleSelectMultiple}
+                        genres={this.state.genres}
+                      /><br />
+                      <SongInput song={this.state.song} onChange={this.handleChange} /><br />
+                      <VideoInput video={this.state.video} onChange={this.handleChange} /><br />
+                      <SearchRadiusInput
+                        radius={this.state.searchRadius}
+                        onChange={this.handleNumberChange}
+                        radiusErrorText={this.state.searchRadiusErrorText}
+                      /><br />
+                      <PreferredGenresInput
+                        genres={this.state.preferred_genres}
+                        onChange={this.handleSelectMultiple}
+                      /><br />
+                      <PreferredInstrumentsInput
+                        instruments={this.state.preferred_instruments}
+                        onChange={this.handleSelectMultiple}
+                      /><br />
+                      <p>
+                        <input type="submit" value="Submit" />
+                      </p>
+                    </CardText>
+                  </Card>
+                </Paper>
+              </form>
+            </Card>
+          </Row>
+        </Col>
+      </Row>
     );
   }
 }
