@@ -10,7 +10,7 @@
     "debug": "nodemon --inspect=0.0.0.0:9229 server/index.js",
     "test": "NODE_ENV=test grunt test",
     "test:jest": "jest",
-    "heroku-postbuild": "npm run build:prod && knex migrate:latest && knex seed:run",
+    "heroku-postbuild": "npm run build:prod",
     "loaddb": "grunt pgcreatedb:default",
     "migrate:latest": "knex migrate:latest",
     "migrate:rollback": "knex migrate:rollback",
@@ -87,5 +87,8 @@
     "supertest": "^3.0.0",
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2"
+  },
+  "engines": {
+    "node": "7.10.0"
   }
 }
