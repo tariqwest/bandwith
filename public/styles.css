@@ -10,6 +10,15 @@ body {
   font-size: 16px;
 }
 
+.chat-title {
+  text-align: center;
+}
+
+.chat-picture {
+  margin-top: 20px;
+  border-radius: 50%;
+}
+
 /*
 * {
   box-sizing: border-box;
