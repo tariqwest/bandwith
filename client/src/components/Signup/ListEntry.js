@@ -1,13 +1,14 @@
 import React from 'react';
+import Chip from 'material-ui/Chip';
 
-const ListEntry = ({ item, length, index }) => (
-  index === length - 1 ?
-    <span className="list-entry">
-      {` ${item} `}
-    </span> :
-    <span className="list-entry">
-      {` ${item}, `}
-    </span>
+const styles = {
+  margin: 4,
+};
+
+const ListEntry = ({ item }) => (
+  <Chip style={styles} >
+    {` ${item} `}
+  </Chip>
 );
 
 export default ListEntry;

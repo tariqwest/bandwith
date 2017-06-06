@@ -6,7 +6,6 @@ const List = ({ listItems }) => (
     {listItems.map((item, index) =>
       (<ListEntry
         key={item}
-        length={listItems.length}
         index={index}
         item={item}
       />),

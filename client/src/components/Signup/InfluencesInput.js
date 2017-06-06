@@ -10,7 +10,7 @@ const style = {
 const InfluenceInput = ({ influence, influences, handleChange, onClick }) => (
   <div>
     <TextField
-      floatingLabelText="Add a musical influence"
+      floatingLabelText="musical influence"
       id="influence"
       type="text"
       name="influence"

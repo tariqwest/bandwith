@@ -5,7 +5,7 @@ const ZipCodeInput = ({ value, onChange, zipErrorText }) => (
   <div>
     <TextField
       required
-      floatingLabelText="Zip Code"
+      floatingLabelText="zip code"
       id="zipCode"
       name="zipCode"
       data-name="zip code"

@@ -5,7 +5,7 @@ const AgeInput = ({ value, onChange, ageErrorText }) => (
   <div>
     <TextField
       required
-      floatingLabelText="How old are you?"
+      floatingLabelText="age"
       id="age"
       name="age"
       data-name="age"

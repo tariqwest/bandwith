@@ -5,7 +5,7 @@ const SearchRadiusInput = ({ radius, onChange, radiusErrorText }) => (
   <div>
     <TextField
       required
-      floatingLabelText="Im looking for musicians within this many miles"
+      floatingLabelText="search radius"
       id="searchRadius"
       name="searchRadius"
       data-name="search radius"

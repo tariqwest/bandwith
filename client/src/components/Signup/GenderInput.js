@@ -5,7 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 const GenderInput = ({ onChange, value }) => (
   <div>
     <SelectField
-      floatingLabelText="Your Gender"
+      floatingLabelText="gender"
       required
       style={{ textAlign: 'left' }}
       value={value}

@@ -5,8 +5,8 @@ const BiographyTextArea = ({ bio, onChange }) => (
   <div>
     <TextField
       required
-      floatingLabelText="describe yourself"
-      multiLine={true}
+      floatingLabelText="about you"
+      multiLine
       rows={1}
       style={{ textAlign: 'left' }}
       id="bio"
