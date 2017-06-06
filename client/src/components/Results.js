@@ -108,11 +108,7 @@ class Results extends React.Component {
     return (
       <div>
         <h1>Find a Musician</h1>
-        <div className="profile-decide">
-          <FlatButton label="No" onClick={this.clickNo} />
-          <FlatButton label="Yes" onClick={this.clickYes} />
-        </div>
-        <ResultsListEntry result={this.state.currentResult} />
+        <ResultsListEntry result={this.state.currentResult} clickYes={this.clickYes} clickNo={this.clickNo} />
       </div>
     );
   }

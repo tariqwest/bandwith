@@ -36,6 +36,7 @@
     "knex": "^0.12.9",
     "material-ui": "^0.18.1",
     "moment": "^2.18.1",
+    "material-ui-fullscreen-dialog": "^0.4.0",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
