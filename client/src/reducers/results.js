@@ -1,6 +1,18 @@
-import { RESULTS_INFO_REQUEST, RESULTS_INFO_SUCCESS, RESULTS_INFO_FAILURE, RESULTS_ACTION_REQUEST, RESULTS_ACTION_SUCCESS, RESULTS_ACTION_FAILURE, RESULTS_SET_CURRENT } from '../actions';
+import {
+  RESULTS_INFO_REQUEST,
+  RESULTS_INFO_SUCCESS,
+  RESULTS_INFO_FAILURE,
+  RESULTS_ACTION_REQUEST,
+  RESULTS_ACTION_SUCCESS,
+  RESULTS_ACTION_FAILURE,
+  RESULTS_SET_CURRENT } from '../actions';
 
-const results = (state = { isFetching: false, errorMessage: '', results: [], currentResult: null, hasResults: false }, action) => {
+const results = (state = {
+  isFetching: false,
+  errorMessage: '',
+  results: [],
+  currentResult: null,
+}, action) => {
   switch (action.type) {
     case RESULTS_INFO_REQUEST:
       return {
@@ -12,7 +24,6 @@ const results = (state = { isFetching: false, errorMessage: '', results: [], cur
         ...state,
         isFetching: false,
         results: action.results,
-        hasResults: true,
         errorMessage: '',
       };
     case RESULTS_INFO_FAILURE:
@@ -31,8 +42,6 @@ const results = (state = { isFetching: false, errorMessage: '', results: [], cur
         ...state,
         isFetching: false,
         results: state.results.slice(0, -1),
-        currentResult: state.results.slice()[state.results.length-2],
-        hasResults: state.results.length === 1 ? false : true,
         errorMessage: '',
       };
     case RESULTS_ACTION_FAILURE:

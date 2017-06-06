@@ -27,7 +27,7 @@ export const resultsInfoError = message => ({
 
 
 export const getResultsInfo = userId => (dispatch) => {
-  //dispatch(requestResultsInfo());
+  dispatch(requestResultsInfo());
   return axios.get(`/api/search?userId=${userId}`)
     .then((response) => {
       if (response.statusText !== 'OK') {
