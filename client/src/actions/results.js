@@ -75,8 +75,6 @@ export const sendResultsAction = (choice, userId, currentResultId) => (dispatch)
   };
 
   fetch('/api/preference', options)
-    .then(() => {
-      dispatch(resultsActionSuccess());
-    })
+    .then(() => dispatch(resultsActionSuccess()))
     .catch(err => dispatch(resultsActionFailure(err)));
 };

@@ -5,7 +5,8 @@ import {
   RESULTS_ACTION_REQUEST,
   RESULTS_ACTION_SUCCESS,
   RESULTS_ACTION_FAILURE,
-  RESULTS_SET_CURRENT } from '../actions';
+  RESULTS_SET_CURRENT,
+} from '../actions';
 
 const results = (state = {
   isFetching: false,
@@ -41,7 +42,7 @@ const results = (state = {
       return {
         ...state,
         isFetching: false,
-        results: state.results.slice(0, -1),
+        results: state.results.slice(1),
         errorMessage: '',
       };
     case RESULTS_ACTION_FAILURE:
@@ -49,11 +50,6 @@ const results = (state = {
         ...state,
         isFetching: false,
         errorMessage: action.message,
-      };
-    case RESULTS_SET_CURRENT:
-      return {
-        ...state,
-        currentResult: state.results.length > 0 ? state.results.slice()[0] : null,
       };
     default:
       return state;

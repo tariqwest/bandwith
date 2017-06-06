@@ -16,65 +16,55 @@ class ResultsListEntry extends React.Component {
       showFullProfile: false,
     };
 
-    this.clickNo = this.clickNo.bind(this);
-    this.clickYes = this.clickYes.bind(this);
+    this.handleChoice = this.handleChoice.bind(this);
   }
 
-  clickNo() {
-    console.log('Click no...');
-    const { dispatch } = this.props;
-    dispatch(sendResultsAction(false, this.props.userId, this.props.currentResult.id));
-  }
-
-  clickYes() {
-    console.log('Click yes...');
-    const { dispatch } = this.props;
-    dispatch(sendResultsAction(true, this.props.userId, this.props.currentResult.id));
+  handleChoice(choice) {
+    const { dispatch, userId, currentResult } = this.props;
+    dispatch(sendResultsAction(choice, userId, currentResult.id));
   }
 
   render() {
-    if (this.props.hasResults) {
-      return (
-        <div>
-          <Card>
-            <div onClick={() => this.setState({ showFullProfile: true })}>
-            <CardMedia
-              overlay={
-                <div>
-                  <CardTitle title={this.props.currentResult.display} subtitle={this.props.currentResult.bio} />
-                  <TagList tags={this.props.currentResult.instruments} type="instrument" />
-                  <TagList tags={this.props.currentResult.genres} type="genres" />
-                </div>}
-            >
-              <img src={this.props.currentResult.photo || '/assets/avatar.jpg'} />
-            </CardMedia>
-            </div>
-            <CardActions>
-              <FlatButton label="Yes" onClick={ this.clickYes } />
-              <FlatButton label="No" onClick={ this.clickNo} />
-            </CardActions>
-          </Card>
-          <FullscreenDialog
-            open={this.state.showFullProfile}
-            onRequestClose={() => this.setState({ showFullProfile: false })}
-            title={this.props.currentResult.display}
-            actionButton={<FlatButton
-              label='Close'
-              onTouchTap={() => this.setState({ showFullProfile: false })}
-            />}
+    return (
+      <div>
+        <Card>
+          <div onClick={() => this.setState({ showFullProfile: true })}>
+          <CardMedia
+            overlay={
+              <div>
+                <CardTitle title={this.props.currentResult.display} subtitle={this.props.currentResult.bio} />
+                <TagList tags={this.props.currentResult.instruments} type="instrument" />
+                <TagList tags={this.props.currentResult.genres} type="genres" />
+              </div>}
           >
-            <CardActions>
-              <FlatButton label="Yes" onClick={ this.clickYes } />
-              <FlatButton label="No" onClick={ this.clickNo} />
-            </CardActions>
-            <ResultsProfile user={this.props.result} />
-          </FullscreenDialog>
-        </div>
-      );
-    }
+            <img src={this.props.currentResult.photo || '/assets/avatar.jpg'} />
+          </CardMedia>
+          </div>
+          <CardActions>
+            <FlatButton label="Yes" onClick={() => this.handleChoice(true)} />
+            <FlatButton label="No" onClick={() => this.handleChoice(false)} />
+          </CardActions>
+        </Card>
+        <FullscreenDialog
+          open={this.state.showFullProfile}
+          onRequestClose={() => this.setState({ showFullProfile: false })}
+          title={this.props.currentResult.display}
+          actionButton={<FlatButton
+            label='Close'
+            onTouchTap={() => this.setState({ showFullProfile: false })}
+          />}
+        >
+          <CardActions>
+            <FlatButton label="Yes" onClick={() => this.handleChoice(true)} />
+            <FlatButton label="No" onClick={() => this.handleChoice(true)} />
+          </CardActions>
+          <ResultsProfile user={this.props.result} />
+        </FullscreenDialog>
+      </div>
+    );
   }
 }
 
-const mapStateToProps = state => ({ userId: state.auth.userId, hasResults: state.results.hasResults });
+const mapStateToProps = state => ({ userId: state.auth.userId });
 
 export default connect(mapStateToProps)(ResultsListEntry);

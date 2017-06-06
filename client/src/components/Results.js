@@ -5,10 +5,6 @@ import FlatButton from 'material-ui/FlatButton';
 import ResultsListEntry from './ResultsListEntry';
 
 class Results extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
 
   componentDidMount() {
     const { dispatch, userId } = this.props;
@@ -30,7 +26,7 @@ class Results extends React.Component {
     return (
       <div>
         <h1>Find a Musician</h1>
-        {/* <ResultsListEntry currentResult={this.props.results[0]} /> */}
+        <ResultsListEntry currentResult={currentResult} />
       </div>
     );
   }
@@ -38,8 +34,6 @@ class Results extends React.Component {
 
 const mapStateToProps = state => ({
   userId: state.auth.userId,
-  currentResult: state.results.currentResult,
-  hasResults: state.results.hasResults,
   results: state.results.results,
 });
 
