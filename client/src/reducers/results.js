@@ -5,7 +5,6 @@ import {
   RESULTS_ACTION_REQUEST,
   RESULTS_ACTION_SUCCESS,
   RESULTS_ACTION_FAILURE,
-  RESULTS_SET_CURRENT,
 } from '../actions';
 
 const results = (state = {
