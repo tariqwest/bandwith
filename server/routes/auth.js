@@ -17,6 +17,7 @@ router.route('/signup')
     failureFlash: true,
   }));
 
+console.log({env: process.env.NODE_ENV})
 const prefix = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:1337';
 
 router.use((req, res, next) => {
