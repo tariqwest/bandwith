@@ -1,6 +1,5 @@
 const express = require('express');
 const middleware = require('../middleware');
-const config = require('config');
 
 const router = express.Router();
 
@@ -59,14 +58,6 @@ router.get('/status', (req, res) => {
   const userId = user && user.id;
   res.send({ loggedIn: req.isAuthenticated(), userId });
 });
-
-router.get('/test', (req, res) => {
-  const obj = {
-    redisurl: config.env.redisUrl,
-    env: process.env.NODE_ENV
-  };
-  res.send(obj);
-})
 
 router.route('/logout')
   .get((req, res) => {
