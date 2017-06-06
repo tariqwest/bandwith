@@ -1,5 +1,6 @@
 const express = require('express');
 const middleware = require('../middleware');
+const config = require('config');
 
 const router = express.Router();
 
@@ -17,7 +18,6 @@ router.route('/signup')
     failureFlash: true,
   }));
 
-console.log({env: process.env.NODE_ENV})
 const prefix = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:1337';
 
 router.use((req, res, next) => {
@@ -59,6 +59,14 @@ router.get('/status', (req, res) => {
   const userId = user && user.id;
   res.send({ loggedIn: req.isAuthenticated(), userId });
 });
+
+router.get('/test', (req, res) => {
+  const obj = {
+    redisurl: config.env.redisUrl,
+    env: process.env.NODE_ENV
+  };
+  res.send(obj);
+})
 
 router.route('/logout')
   .get((req, res) => {

@@ -10,11 +10,10 @@ module.exports.verify = (req, res, next) => {
   return next();
 };
 
-console.log({redisurl: config.env.redisUrl})
 const Store = new RedisStore({
-    client: redisClient,
-    url: config.env.redisUrl,
-  });
+  client: redisClient,
+  url: config.env.redisUrl,
+});
 
 module.exports.Store = Store;
 
