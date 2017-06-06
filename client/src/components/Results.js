@@ -19,7 +19,7 @@ class Results extends React.Component {
     this.getSearchResults = this.getSearchResults.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getSearchResults();
   }
 
@@ -49,13 +49,13 @@ class Results extends React.Component {
   getSearchResults() {
     fetch(`/api/search?userId=${this.props.userId}`)
       .then((response) => {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      return response;
-    })
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response;
+      })
     .then(res => res.json())
-    .then(json => {
+    .then((json) => {
       this.setState({
         results: json,
         currentResult: json[0],
@@ -96,7 +96,9 @@ class Results extends React.Component {
   }
 
   render() {
-    if (this.state.noMoreResults) {
+    const { results } = this.props;
+    const currentResult = results[0];
+    if (!results.length) {
       return (
         <div>
           <h1>No more musicians match your preferences</h1>
