@@ -1,98 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getResultsInfo } from '../actions';
 import FlatButton from 'material-ui/FlatButton';
 import ResultsListEntry from './ResultsListEntry';
-// import dummyData from '../data/dummyData';
 
 class Results extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      index: 0,
-      results: [],
-      size: 0,
-      currentResult: {},
-      noMoreResults: true,
-    };
-    this.clickNo = this.clickNo.bind(this);
-    this.clickYes = this.clickYes.bind(this);
-    this.getSearchResults = this.getSearchResults.bind(this);
   }
 
-  componentDidMount() {
-    this.getSearchResults();
-  }
-
-  updateConnections(choice) {
-    const body = {
-      userId: this.props.userId,
-      profileId: this.state.currentResult.id,
-      choice,
-    };
-
-    const headers = {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    };
-
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers,
-    };
-
-    fetch('/api/preference', options)
-      .then(() => console.log('Successful POST request to /connections'))
-      .catch(err => console.log('Bad POST request to /connections: ', err));
-  }
-
-  getSearchResults() {
-    fetch(`/api/search?userId=${this.props.userId}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response;
-      })
-    .then(res => res.json())
-    .then((json) => {
-      this.setState({
-        results: json,
-        currentResult: json[0],
-        size: json.length - 1,
-        noMoreResults: json.length > 0 ? false : true,
-      });
-    });
-  }
-
-  clickNo() {
-    this.updateConnections(false);
-    const newIndex = this.state.index + 1;
-    if (newIndex > this.state.size) {
-      this.setState({
-        noMoreResults: true,
-      });
-    } else {
-      this.setState({
-        index: newIndex,
-        currentResult: this.state.results[newIndex],
-      });
-    }
-  }
-
-  clickYes() {
-    this.updateConnections(true);
-    const newIndex = this.state.index + 1;
-    if (newIndex > this.state.size) {
-      this.setState({
-        noMoreResults: true,
-      });
-    } else {
-      this.setState({
-        index: newIndex,
-        currentResult: this.state.results[newIndex],
-      });
-    }
+  componentDidMount(){
+    const { dispatch } = this.props;
+    dispatch(getResultsInfo(this.props.userId));
   }
 
   render() {
@@ -101,19 +20,20 @@ class Results extends React.Component {
     if (!results.length) {
       return (
         <div>
-          <h1>No more musicians match your preferences</h1>
+          <h1>Find a Musician</h1>
+          <ResultsListEntry currentResult={this.props.results[0]} />
         </div>
       );
     }
     return (
       <div>
         <h1>Find a Musician</h1>
-        <ResultsListEntry result={this.state.currentResult} clickYes={this.clickYes} clickNo={this.clickNo} />
+        <h3>No more musicians match your preferences</h3>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ userId: state.auth.userId });
+const mapStateToProps = state => ({ userId: state.auth.userId, currentResult: state.results.currentResult, hasResults: state.results.hasResults, results: state.results.results });
 
 export default connect(mapStateToProps)(Results);

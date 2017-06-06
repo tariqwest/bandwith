@@ -6,6 +6,7 @@ import chat from './chat';
 import matches from './matches';
 import signup from './signup';
 import user from './user';
+import results from './results';
 
 const rootReducer = combineReducers({
   auth,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   matches,
   signup,
   user,
+  results,
 });
 
 export default rootReducer;
