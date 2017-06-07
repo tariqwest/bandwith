@@ -54,8 +54,6 @@ module.exports.update = (req, res) => {
           .then((instrument) => {
             profile.instruments().attach(instrument);
           })
-          .then((test) => {
-          })
           .catch((err) => {
             res.status(500).send(err);
           });
@@ -95,7 +93,7 @@ module.exports.update = (req, res) => {
           .then((instrument) => {
             return profile.preferred_instruments().attach(instrument);
           })
-          .error((err) => {
+          .catch((err) => {
             res.status(500).send(err);
           });
       }
@@ -111,9 +109,8 @@ module.exports.update = (req, res) => {
         models.Genre.where({ genre_name: req.body.preferred_genres[i] }).fetch()
           .then((genre) => {
             profile.preferred_genres().attach(genre);
-          }).error((err) => {
-          })
-          .catch(() => {
+          }).catch((err) => {
+            res.status(500).send(err);
           });
       }
     });
