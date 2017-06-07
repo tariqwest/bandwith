@@ -6,3 +6,4 @@ module.exports.search = require('./search');
 module.exports.connections = require('./connections');
 module.exports.preference = require('./preference');
 module.exports.signup = require('./signup');
+module.exports.location = require('./location');
