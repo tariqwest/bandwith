@@ -51,7 +51,9 @@ const getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
 };
 
 const locationMatches = (profile) => {
-  const minSearchRadius = Math.min(profile.searchRadius, currentUserProfile.searchRadius);
+  const minSearchRadius = Math.min(profile.searchRadius, currentUserProfile.searchRadius) === 0 ?
+  Math.max(profile.searchRadius, currentUserProfile.searchRadius) :
+  Math.min(profile.searchRadius, currentUserProfile.searchRadius);
 
   const distance = getDistanceFromLatLonInKm(
     currentUserProfile.lat,
