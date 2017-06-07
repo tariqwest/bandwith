@@ -11,6 +11,8 @@ import { Card,
 import { List, ListItem } from 'material-ui/List';
 import { Row, Col } from 'react-flexbox-grid';
 import axios from 'axios';
+import FullscreenDialog from 'material-ui-fullscreen-dialog';
+import Signup from './Signup';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -18,6 +20,7 @@ class Profile extends React.Component {
     this.state = {
       city: '',
       state: '',
+      showEditProfile: false,
     };
   }
 
@@ -57,6 +60,7 @@ class Profile extends React.Component {
 
     if (this.props.hasInfo) {
       return (
+        <div>
         <Row>
           <Col xs={0} sm={3} md={3} lg={3} />
           <Col xs={12} sm={6} md={6} lg={6}>
@@ -152,12 +156,26 @@ class Profile extends React.Component {
                 />
               </List>
               <CardActions>
-                <FlatButton label="Edit" containerElement={<Link to="/signup" />} />
+                <FlatButton label="Edit" onClick={() => this.setState({ showEditProfile: true })} />
               </CardActions>
             </Card>
           </Col>
           <Col xs={0} sm={3} md={3} lg={3} />
         </Row>
+
+          <FullscreenDialog
+              open={this.state.showEditProfile}
+              onRequestClose={() => this.setState({ showEditProfile: false })}
+              title={this.props.user.display}
+              actionButton={<FlatButton
+                label='Close'
+                onTouchTap={() => this.setState({ showEditProfile: false })}
+              />}
+              appBarStyle={{backgroundColor: '#000000'}}
+            >
+              <Signup />
+          </FullscreenDialog>
+        </div>
       );
     }
     return (
