@@ -170,7 +170,7 @@ class Signup extends React.Component {
     const influence = this.state.influence;
     const updatedInfluences = this.state.influences;
 
-    if (!updatedInfluences.includes(influence) && influence) {
+    if (!updatedInfluences.includes(influence) && influence !== '') {
       updatedInfluences.push(influence);
       this.setState({
         influences: updatedInfluences,
@@ -182,89 +182,85 @@ class Signup extends React.Component {
   render() {
     return (
       <Row>
-        <Col xs={12}>
-          <Row center="xs">
-            <Col xs={4} >
-              <Card style={style.card}>
-                <CardHeader />
-                <Paper
-                  zDepth={2}
-                >
-                  <Card>
-                    <CardText>
-                      <FirstNameInput
-                        value={this.state.first}
-                        onChange={this.handleChange}
-                      />
-                      <LastNameInput value={this.state.last} onChange={this.handleChange} />
-                      <ZipCodeInput
-                        value={this.state.zipCode}
-                        onChange={this.handleNumberChange}
-                        zipErrorText={this.state.zipCodeErrorText}
-                      />
-                      <AgeInput
-                        value={this.state.age}
-                        onChange={this.handleNumberChange}
-                        ageErrorText={this.state.ageErrorText}
-                      />
-                      <GenderInput onChange={this.handleGender} value={this.state.gender} />
-                      <BiographyTextArea
-                        bio={this.state.bio}
-                        onChange={this.handleChange}
-                      />
-                      <SongInput song={this.state.song} onChange={this.handleChange} /><br />
-                      <VideoInput video={this.state.video} onChange={this.handleChange} /><br />
-                      <InfluencesInput
-                        influence={this.state.influence}
-                        influences={this.state.influences}
-                        handleChange={this.handleChange}
-                        onClick={this.handleInfluences}
-                      /><br />
-                      <PopoverMenu
-                        itemName="instruments"
-                        className="instruments"
-                        listItems={instruments}
-                        addChip={this.handleSelectMultiple}
-                        selectedItems={this.state.instruments}
-                      /><br />
-                      <PopoverMenu
-                        className="genres"
-                        itemName="genres"
-                        listItems={genres}
-                        addChip={this.handleSelectMultiple}
-                        selectedItems={this.state.genres}
-                      /><br />
-                      <PopoverMenu
-                        itemName="preferred_genres"
-                        className="preferred genre matches"
-                        listItems={genres}
-                        addChip={this.handleSelectMultiple}
-                        selectedItems={this.state.preferred_genres}
-                      /><br />
-                      <PopoverMenu
-                        itemName="preferred_instruments"
-                        className="preferred instrument matches"
-                        listItems={instruments}
-                        addChip={this.handleSelectMultiple}
-                        selectedItems={this.state.preferred_instruments}
-                      />
-                      <SearchRadiusInput
-                        radius={this.state.searchRadius}
-                        onChange={this.handleNumberChange}
-                        radiusErrorText={this.state.searchRadiusErrorText}
-                      /><br />
-                      <RaisedButton
-                        secondary
-                        style={style.button}
-                        label="submit profile"
-                        onTouchTap={this.send}
-                      />
-                    </CardText>
-                  </Card>
-                </Paper>
+        <Col xs={12} sm={6} smOffset={3}>
+          <Card style={style.card}>
+            <CardHeader />
+            <Paper
+              zDepth={2}
+            >
+              <Card>
+                <CardText>
+                  <FirstNameInput
+                    value={this.state.first}
+                    onChange={this.handleChange}
+                  />
+                  <LastNameInput value={this.state.last} onChange={this.handleChange} />
+                  <ZipCodeInput
+                    value={this.state.zipCode}
+                    onChange={this.handleNumberChange}
+                    zipErrorText={this.state.zipCodeErrorText}
+                  />
+                  <AgeInput
+                    value={this.state.age}
+                    onChange={this.handleNumberChange}
+                    ageErrorText={this.state.ageErrorText}
+                  />
+                  <GenderInput onChange={this.handleGender} value={this.state.gender} />
+                  <BiographyTextArea
+                    bio={this.state.bio}
+                    onChange={this.handleChange}
+                  />
+                  <SongInput song={this.state.song} onChange={this.handleChange} /><br />
+                  <VideoInput video={this.state.video} onChange={this.handleChange} /><br />
+                  <InfluencesInput
+                    influence={this.state.influence}
+                    influences={this.state.influences}
+                    handleChange={this.handleChange}
+                    onClick={this.handleInfluences}
+                  /><br />
+                  <PopoverMenu
+                    itemName="instruments"
+                    className="instruments"
+                    listItems={instruments}
+                    addChip={this.handleSelectMultiple}
+                    selectedItems={this.state.instruments}
+                  /><br />
+                  <PopoverMenu
+                    className="genres"
+                    itemName="genres"
+                    listItems={genres}
+                    addChip={this.handleSelectMultiple}
+                    selectedItems={this.state.genres}
+                  /><br />
+                  <PopoverMenu
+                    itemName="preferred_genres"
+                    className="preferred genre matches"
+                    listItems={genres}
+                    addChip={this.handleSelectMultiple}
+                    selectedItems={this.state.preferred_genres}
+                  /><br />
+                  <PopoverMenu
+                    itemName="preferred_instruments"
+                    className="preferred instrument matches"
+                    listItems={instruments}
+                    addChip={this.handleSelectMultiple}
+                    selectedItems={this.state.preferred_instruments}
+                  />
+                  <SearchRadiusInput
+                    radius={this.state.searchRadius}
+                    onChange={this.handleNumberChange}
+                    radiusErrorText={this.state.searchRadiusErrorText}
+                  /><br />
+                  <RaisedButton
+                    secondary
+                    style={style.button}
+                    label="submit profile"
+                    onTouchTap={this.send}
+                  />
+                </CardText>
               </Card>
-            </Col>
-          </Row>
+            </Paper>
+          </Card>
         </Col>
       </Row>
     );
