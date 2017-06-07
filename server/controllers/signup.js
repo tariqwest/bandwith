@@ -13,7 +13,6 @@ module.exports.update = (req, res) => {
     searchRadius: req.body.searchRadius,
   };
 
-
   // make sure there are no blank fields because table insert will break
   const keys = Object.keys(profileBody);
 
@@ -41,7 +40,6 @@ module.exports.update = (req, res) => {
       res.sendStatus(404);
     });
 
-
   // update the user_instruments
   models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
@@ -59,7 +57,6 @@ module.exports.update = (req, res) => {
           });
       }
     });
-
 
   // update the user_genres
   models.Profile.where({ id: req.body.id }).fetch()
