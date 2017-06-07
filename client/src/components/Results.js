@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
-import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import { getResultsInfo } from '../actions';
 import ResultsListEntry from './ResultsListEntry';
