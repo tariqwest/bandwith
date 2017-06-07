@@ -11,6 +11,10 @@ const style = {
 };
 
 class Results extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   componentDidMount() {
     const { dispatch, userId } = this.props;
