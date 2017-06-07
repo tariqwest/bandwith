@@ -224,28 +224,28 @@ class Signup extends React.Component {
                         itemName="instruments"
                         className="instruments"
                         listItems={instruments}
-                        onChange={this.handleSelectMultiple}
+                        addChip={this.handleSelectMultiple}
                         selectedItems={this.state.instruments}
                       /><br />
                       <PopoverMenu
                         className="genres"
                         itemName="genres"
                         listItems={genres}
-                        onChange={this.handleSelectMultiple}
+                        addChip={this.handleSelectMultiple}
                         selectedItems={this.state.genres}
                       /><br />
                       <PopoverMenu
                         itemName="preferred_genres"
                         className="preferred genre matches"
                         listItems={genres}
-                        onChange={this.handleSelectMultiple}
+                        addChip={this.handleSelectMultiple}
                         selectedItems={this.state.preferred_genres}
                       /><br />
                       <PopoverMenu
                         itemName="preferred_instruments"
                         className="preferred instrument matches"
                         listItems={instruments}
-                        onChange={this.handleSelectMultiple}
+                        addChip={this.handleSelectMultiple}
                         selectedItems={this.state.preferred_instruments}
                       />
                       <SearchRadiusInput
