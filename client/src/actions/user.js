@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { setUserLocation } from './location';
+
 export const USER_INFO_REQUEST = 'USER_INFO_REQUEST';
 export const USER_INFO_SUCCESS = 'USER_INFO_SUCCESS';
 export const USER_INFO_FAILURE = 'USER_INFO_FAILURE';
@@ -26,6 +29,18 @@ export const getUserInfo = userId => (dispatch) => {
       return response;
     })
     .then(res => res.json())
-    .then(json => dispatch(receiveUserInfo(json)))
+    .then((json) => {
+      dispatch(receiveUserInfo(json));
+      return json;
+    })
+    .then((json) => {
+      axios.get(`/api/location/${json.zipCode}`)
+        .then((response) => {
+          dispatch(setUserLocation(response.data));
+        })
+        .catch((err) => {
+          throw err;
+        });
+    })
     .catch(err => dispatch(userInfoError(err.message)));
 };
