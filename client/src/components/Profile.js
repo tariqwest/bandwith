@@ -13,25 +13,34 @@ import { Row, Col } from 'react-flexbox-grid';
 import axios from 'axios';
 import FullscreenDialog from 'material-ui-fullscreen-dialog';
 import Signup from './Signup';
+import { setUserLocation } from '../actions';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       city: '',
+      county: '',
+      lat: 0.0,
+      lng: 0.0,
       state: '',
       showEditProfile: false,
+      state_abbrev: '',
+      zipcode: 0,
     };
   }
 
-  componentDidMount() {
-    // axios.get(`/api/zipcode/${this.props.user.zipCode}`)
-    //   .then((response) => {
-    //     console.log('got the repsonse: ', response.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log('is broken: ', err);
-    //   });
+  componentWillReceiveProps(nextProps) {
+    axios.get(`/api/location/${nextProps.user.zipCode}`)
+      .then((response) => {
+        const location = response.data;
+        this.setState(location);
+        const { dispatch } = this.props;
+        dispatch(setUserLocation(location));
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 
   render() {
@@ -57,6 +66,7 @@ class Profile extends React.Component {
     const fullname = first + ' ' + last;
     const search = 'Searching within ' + searchRadius + ' miles';
     const profile = gender + ', ' + age;
+    const location = this.state.city + ', ' + this.state.state + ' ' + zipCode;
 
     if (this.props.hasInfo) {
       return (
@@ -78,7 +88,7 @@ class Profile extends React.Component {
                 />
                 <ListItem
                   leftIcon={<i className="material-icons">place</i>}
-                  primaryText={zipCode}
+                  primaryText={location}
                 />
                 <ListItem
                   leftIcon={<i className="material-icons">near_me</i>}
