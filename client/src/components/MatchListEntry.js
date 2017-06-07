@@ -17,7 +17,7 @@ class MatchListEntry extends React.Component {
     };
   }
 
-  chatWithMatch(){
+  chatWithMatch() {
     const { dispatch, match } = this.props;
     dispatch(setCurrentMatch(match.id, match.first, match.last, match.photo_src));
     this.setState({ showChat: true });
@@ -28,7 +28,7 @@ class MatchListEntry extends React.Component {
       <div>
         <div onClick={this.chatWithMatch}>
           <ListItem
-            primaryText={this.props.match.first + ' ' + this.props.match.last}
+            primaryText={`${this.props.match.first} ${this.props.match.last}`}
             leftAvatar={<Avatar src={this.props.match.photo_src || '/assets/avatar.jpg'} />}
             rightIcon={<CommunicationChatBubble />}
           />
