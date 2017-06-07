@@ -29,14 +29,6 @@ app.use('/auth', routes.auth);
 app.use('/api/signup', routes.signup);
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.get('/test', (req, res) => {
-  const obj = {
-    redisurl: config.env.redisUrl,
-    env: process.env.NODE_ENV,
-  };
-  res.send(obj);
-});
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../public', 'index.html'));
 });
