@@ -25,7 +25,7 @@ const InfluenceInput = ({ influence, influences, handleChange, onClick }) => (
       onTouchTap={onClick}
     />
     <List
-      listItems={Object.keys(influences)}
+      selectedItems={influences}
     />
   </div>
 );

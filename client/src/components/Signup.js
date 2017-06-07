@@ -18,7 +18,10 @@ import SongInput from './Signup/SongInput';
 import VideoInput from './Signup/VideoInput';
 import SearchRadiusInput from './Signup/SearchRadiusInput';
 import PreferredInstrumentsInput from './Signup/PreferredInstrumentsInput';
+import PopoverMenu from './Signup/PopoverMenu';
 import PreferredGenresInput from './Signup/PreferredGenresInput';
+
+const instruments = ['electric guitar', 'acoustic guitar', 'bass', 'drums', 'piano', 'vocals', 'ukulele', 'violin', 'saxophone', 'trumpet'];
 
 class Signup extends React.Component {
   constructor(props) {
@@ -37,12 +40,12 @@ class Signup extends React.Component {
       ageErrorText: '',
       searchRadiusErrorText: '',
       instrument: '',
-      instruments: {},
-      genres: {},
+      instruments: [],
+      genres: [],
       influence: '',
-      influences: {},
-      preferred_instruments: {},
-      preferred_genres: {},
+      influences: [],
+      preferred_instruments: [],
+      preferred_genres: [],
     };
     this.send = this.send.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -62,7 +65,7 @@ class Signup extends React.Component {
   send(event) {
     event.preventDefault();
 
-    const { dispatch, history } = this.props;
+    const { dispatch } = this.props;
 
     const profile = {
       first: this.state.first,
@@ -93,29 +96,31 @@ class Signup extends React.Component {
       zipCode: '',
       age: '',
       searchRadius: '',
-      instruments: {},
-      genres: {},
-      influences: {},
-      preferred_instruments: {},
-      preferred_genres: {},
+      instruments: [],
+      genres: [],
+      influences: [],
+      preferred_instruments: [],
+      preferred_genres: [],
     });
 
     dispatch(updateProfile(profile));
   }
 
-  handleSelectMultiple(event) {
-    const name = event.target.name;
-    const value = event.target.value;
-    const selected = this.state[name];
+  handleSelectMultiple(item, collection) {
+    const selected = this.state[collection];
 
-    if (!selected[value]) {
-      selected[value] = value;
+    if (!selected.includes(item)) {
+      selected.push(item);
     } else {
-      delete selected[value];
+      selected.forEach((ele, i) => {
+        if (item === ele) {
+          selected.splice(i, 1);
+        }
+      });
     }
 
     this.setState({
-      [name]: selected,
+      [collection]: selected,
     });
   }
 
@@ -158,8 +163,8 @@ class Signup extends React.Component {
     const influence = this.state.influence;
     const updatedInfluences = this.state.influences;
 
-    if (!updatedInfluences[influence]) {
-      updatedInfluences[influence] = influence;
+    if (!updatedInfluences.includes(influence)) {
+      updatedInfluences.push(influence);
       this.setState({
         influences: updatedInfluences,
         influence: '',
@@ -201,13 +206,19 @@ class Signup extends React.Component {
                           bio={this.state.bio}
                           onChange={this.handleChange}
                         /><br />
+                        <PopoverMenu
+                          onChange={this.handleSelectMultiple}
+                          itemName="instruments"
+                          listItems={instruments}
+                          selectedItems={this.state.instruments}
+                        />
                         <InfluencesInput
                           influence={this.state.influence}
                           influences={this.state.influences}
                           handleChange={this.handleChange}
                           onClick={this.handleInfluences}
-                        /><br />
-                        <UserInstrumentsInput
+                        />
+                        {/* <UserInstrumentsInput
                           instruments={this.state.instruments}
                           instrument={this.state.instrument}
                           onChange={this.handleSelectMultiple}
@@ -225,7 +236,7 @@ class Signup extends React.Component {
                         <PreferredInstrumentsInput
                           instruments={this.state.preferred_instruments}
                           onChange={this.handleSelectMultiple}
-                        /><br />
+                        /><br />*/}
                         <SearchRadiusInput
                           radius={this.state.searchRadius}
                           onChange={this.handleNumberChange}

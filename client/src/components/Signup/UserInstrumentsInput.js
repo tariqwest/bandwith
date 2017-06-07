@@ -7,6 +7,7 @@ const UserInstrumentsInput = ({ instruments, onChange }) => (
     Your instruments:
     <List
       listItems={Object.keys(instruments)}
+      onChange={onChange}
     />
     </p>
     <p>
