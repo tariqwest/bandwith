@@ -30,7 +30,7 @@ export const updateProfile = profile => (dispatch) => {
   };
 
   return fetch('/api/signup', options)
-    .then(res => res.json())
+    .then(res => res.text())
     .then(json => console.log(json))
     .catch(err => console.log(err));
 };
