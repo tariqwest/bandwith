@@ -192,20 +192,20 @@ passport.use('facebook', new FacebookStrategy({
 );
 
 // REQUIRES PERMISSIONS FROM TWITTER TO OBTAIN USER EMAIL ADDRESSES
-const twitterOptions = {
-  consumerKey: config.passport.Twitter.consumerKey,
-  consumerSecret: config.passport.Twitter.consumerSecret,
-  callbackURL: `${config.env.serverUrl}/auth/twitter/callback`,
-  userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
-};
-
-passport.use('twitter', new TwitterStrategy(twitterOptions,
-  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('twitter', profile, done))
-);
-
-const twitterCallback = (accessToken, refreshToken, profile, done) =>
-  getOrCreateOAuthProfile('twitter', profile, done);
-
-passport.use('twitter', new TwitterStrategy(twitterOptions, twitterCallback));
+// const twitterOptions = {
+//   consumerKey: config.passport.Twitter.consumerKey,
+//   consumerSecret: config.passport.Twitter.consumerSecret,
+//   callbackURL: `${config.env.serverUrl}/auth/twitter/callback`,
+//   userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
+// };
+//
+// passport.use('twitter', new TwitterStrategy(twitterOptions,
+//   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('twitter', profile, done))
+// );
+//
+// const twitterCallback = (accessToken, refreshToken, profile, done) =>
+//   getOrCreateOAuthProfile('twitter', profile, done);
+//
+// passport.use('twitter', new TwitterStrategy(twitterOptions, twitterCallback));
 
 module.exports = passport;
