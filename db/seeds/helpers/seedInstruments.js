@@ -9,7 +9,7 @@ const instruments = [
   'vocals',
   'ukulele',
   'violin',
-  'saxaphone',
+  'saxophone',
   'trumpet',
   'didgeridoo',
 ];
