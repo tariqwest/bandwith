@@ -34,6 +34,10 @@ const profileMatches = (profile) => {
   return instrumentPrefsMatch && genrePrefsMatch;
 };
 
+const addLocationInfo = (profile) => {
+  
+};
+
 module.exports.search = (req, res) => {
   models.Profile.where({ id: req.query.userId }).fetch({
     withRelated: [
@@ -116,6 +120,13 @@ module.exports.search = (req, res) => {
       }
     });
     return currentMatchedProfiles;
+  })
+  .then((connections) => {
+    console.log('aprils connections: ', connections);
+    // remove self if included in list
+    // get location data for each - helper function?
+    // get search radius
+    return connections;
   })
   .then((results) => {
     if (!results) {
