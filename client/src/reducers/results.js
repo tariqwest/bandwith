@@ -11,7 +11,6 @@ const results = (state = {
   isFetching: false,
   errorMessage: '',
   results: [],
-  currentResult: null,
 }, action) => {
   switch (action.type) {
     case RESULTS_INFO_REQUEST:

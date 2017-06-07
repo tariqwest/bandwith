@@ -13,9 +13,10 @@ class Results extends React.Component {
 
   render() {
     const { results } = this.props;
-    const currentResult = results[0];
+    const result = results[0];
 
-    if (!results.length) {
+
+    if (!result) {
       return (
         <div>
           <h1>Find a Musician</h1>
@@ -26,7 +27,7 @@ class Results extends React.Component {
     return (
       <div>
         <h1>Find a Musician</h1>
-        <ResultsListEntry currentResult={currentResult} />
+        <ResultsListEntry result={result} />
       </div>
     );
   }

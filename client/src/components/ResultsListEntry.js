@@ -20,8 +20,8 @@ class ResultsListEntry extends React.Component {
   }
 
   handleChoice(choice) {
-    const { dispatch, userId, currentResult } = this.props;
-    dispatch(sendResultsAction(choice, userId, currentResult.id));
+    const { dispatch, userId, result } = this.props;
+    dispatch(sendResultsAction(choice, userId, result.id));
   }
 
   render() {
@@ -32,12 +32,12 @@ class ResultsListEntry extends React.Component {
           <CardMedia
             overlay={
               <div>
-                <CardTitle title={this.props.currentResult.display} subtitle={this.props.currentResult.bio} />
-                <TagList tags={this.props.currentResult.instruments} type="instrument" />
-                <TagList tags={this.props.currentResult.genres} type="genres" />
+                <CardTitle title={this.props.result.display} subtitle={this.props.result.bio} />
+                <TagList tags={this.props.result.instruments} type="instrument" />
+                <TagList tags={this.props.result.genres} type="genres" />
               </div>}
           >
-            <img src={this.props.currentResult.photo || '/assets/avatar.jpg'} />
+            <img src={this.props.result.photo || '/assets/avatar.jpg'} />
           </CardMedia>
           </div>
           <CardActions>
@@ -48,7 +48,7 @@ class ResultsListEntry extends React.Component {
         <FullscreenDialog
           open={this.state.showFullProfile}
           onRequestClose={() => this.setState({ showFullProfile: false })}
-          title={this.props.currentResult.display}
+          title={this.props.result.display}
           actionButton={<FlatButton
             label='Close'
             onTouchTap={() => this.setState({ showFullProfile: false })}
