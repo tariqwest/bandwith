@@ -10,11 +10,25 @@ import { Card,
 } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import { Row, Col } from 'react-flexbox-grid';
+import axios from 'axios';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      city: '',
+      state: '',
+    };
+  }
+
+  componentDidMount() {
+    // axios.get(`/api/zipcode/${this.props.user.zipCode}`)
+    //   .then((response) => {
+    //     console.log('got the repsonse: ', response.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log('is broken: ', err);
+    //   });
   }
 
   render() {
