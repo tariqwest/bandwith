@@ -211,7 +211,12 @@ class Signup extends React.Component {
                     onChange={this.handleChange}
                   />
                   <SongInput song={this.state.song} onChange={this.handleChange} /><br />
-                  <VideoInput video={this.state.video} onChange={this.handleChange} /><br />
+                  <VideoInput video={this.state.video} onChange={this.handleChange} />
+                  <SearchRadiusInput
+                    radius={this.state.searchRadius}
+                    onChange={this.handleNumberChange}
+                    radiusErrorText={this.state.searchRadiusErrorText}
+                  />
                   <InfluencesInput
                     influence={this.state.influence}
                     influences={this.state.influences}
@@ -247,11 +252,6 @@ class Signup extends React.Component {
                     handleChip={this.handleSelectMultiple}
                     selectedItems={this.state.preferred_instruments}
                   />
-                  <SearchRadiusInput
-                    radius={this.state.searchRadius}
-                    onChange={this.handleNumberChange}
-                    radiusErrorText={this.state.searchRadiusErrorText}
-                  /><br />
                   <RaisedButton
                     secondary
                     style={style.button}
