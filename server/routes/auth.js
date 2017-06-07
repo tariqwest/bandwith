@@ -20,9 +20,10 @@ router.route('/signup')
 const prefix = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:1337';
 
 router.use((req, res, next) => {
-  console.log({ req })
+  // console.log({ req })
+  console.log("**************************")
+  console.log({ session: req.session })
   if (req.query && req.query.returnTo) {
-    console.log('WTF')
     req.session.returnTo = prefix + req.query.returnTo;
   }
   next();
