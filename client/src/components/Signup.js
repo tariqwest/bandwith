@@ -12,16 +12,13 @@ import AgeInput from './Signup/AgeInput';
 import GenderInput from './Signup/GenderInput';
 import BiographyTextArea from './Signup/BiographyTextArea';
 import InfluencesInput from './Signup/InfluencesInput';
-import UserInstrumentsInput from './Signup/UserInstrumentsInput';
-import UserGenresInput from './Signup/UserGenresInput';
 import SongInput from './Signup/SongInput';
 import VideoInput from './Signup/VideoInput';
 import SearchRadiusInput from './Signup/SearchRadiusInput';
-import PreferredInstrumentsInput from './Signup/PreferredInstrumentsInput';
 import PopoverMenu from './Signup/PopoverMenu';
-import PreferredGenresInput from './Signup/PreferredGenresInput';
 
 const instruments = ['electric guitar', 'acoustic guitar', 'bass', 'drums', 'piano', 'vocals', 'ukulele', 'violin', 'saxophone', 'trumpet'];
+const genres = ['rock', 'jazz', 'blues', 'folk', 'reggae', 'country', 'pop', 'punk', 'metal', 'edm', 'r&b', 'funk', 'rap', 'disco'];
 
 class Signup extends React.Component {
   constructor(props) {
@@ -163,7 +160,7 @@ class Signup extends React.Component {
     const influence = this.state.influence;
     const updatedInfluences = this.state.influences;
 
-    if (!updatedInfluences.includes(influence)) {
+    if (!updatedInfluences.includes(influence) && influence) {
       updatedInfluences.push(influence);
       this.setState({
         influences: updatedInfluences,
@@ -189,54 +186,59 @@ class Signup extends React.Component {
                         <FirstNameInput
                           value={this.state.first}
                           onChange={this.handleChange}
-                        /><br />
-                        <LastNameInput value={this.state.last} onChange={this.handleChange} /><br />
+                        />
+                        <LastNameInput value={this.state.last} onChange={this.handleChange} />
                         <ZipCodeInput
                           value={this.state.zipCode}
                           onChange={this.handleNumberChange}
                           zipErrorText={this.state.zipCodeErrorText}
-                        /><br />
+                        />
                         <AgeInput
                           value={this.state.age}
                           onChange={this.handleNumberChange}
                           ageErrorText={this.state.ageErrorText}
-                        /><br />
-                        <GenderInput onChange={this.handleGender} value={this.state.gender} /><br />
+                        />
+                        <GenderInput onChange={this.handleGender} value={this.state.gender} />
                         <BiographyTextArea
                           bio={this.state.bio}
                           onChange={this.handleChange}
-                        /><br />
-                        <PopoverMenu
-                          onChange={this.handleSelectMultiple}
-                          itemName="instruments"
-                          listItems={instruments}
-                          selectedItems={this.state.instruments}
                         />
+                        <SongInput song={this.state.song} onChange={this.handleChange} /><br />
+                        <VideoInput video={this.state.video} onChange={this.handleChange} /><br />
                         <InfluencesInput
                           influence={this.state.influence}
                           influences={this.state.influences}
                           handleChange={this.handleChange}
                           onClick={this.handleInfluences}
+                        /><br />
+                        <PopoverMenu
+                          itemName="instruments"
+                          className="instruments"
+                          listItems={instruments}
+                          onChange={this.handleSelectMultiple}
+                          selectedItems={this.state.instruments}
+                        /><br />
+                        <PopoverMenu
+                          className="genres"
+                          itemName="genres"
+                          listItems={genres}
+                          onChange={this.handleSelectMultiple}
+                          selectedItems={this.state.genres}
+                        /><br />
+                        <PopoverMenu
+                          itemName="preferred_genres"
+                          className="preferred genre matches"
+                          listItems={genres}
+                          onChange={this.handleSelectMultiple}
+                          selectedItems={this.state.preferred_genres}
+                        /><br />
+                        <PopoverMenu
+                          itemName="preferred_instruments"
+                          className="preferred instrument matches"
+                          listItems={instruments}
+                          onChange={this.handleSelectMultiple}
+                          selectedItems={this.state.preferred_instruments}
                         />
-                        {/* <UserInstrumentsInput
-                          instruments={this.state.instruments}
-                          instrument={this.state.instrument}
-                          onChange={this.handleSelectMultiple}
-                        /><br />
-                        <UserGenresInput
-                          onChange={this.handleSelectMultiple}
-                          genres={this.state.genres}
-                        /><br />
-                        <SongInput song={this.state.song} onChange={this.handleChange} /><br />
-                        <VideoInput video={this.state.video} onChange={this.handleChange} /><br />
-                        <PreferredGenresInput
-                          genres={this.state.preferred_genres}
-                          onChange={this.handleSelectMultiple}
-                        /><br />
-                        <PreferredInstrumentsInput
-                          instruments={this.state.preferred_instruments}
-                          onChange={this.handleSelectMultiple}
-                        /><br />*/}
                         <SearchRadiusInput
                           radius={this.state.searchRadius}
                           onChange={this.handleNumberChange}
