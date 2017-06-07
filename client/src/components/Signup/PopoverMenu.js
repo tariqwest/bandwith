@@ -30,7 +30,6 @@ class PopoverMenu extends Component {
     event.preventDefault();
     const id = event.currentTarget.id;
     const className = event.currentTarget.className;
-    // this.event.currentTarget.checked = true;
     this.props.onChange(id, className);
   }
 
