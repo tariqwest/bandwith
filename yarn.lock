@@ -4368,6 +4368,12 @@ map-stream@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.1.0.tgz#e56aa94c4c8055a16404a0674b78f215f7c8e194"
 
+material-ui-fullscreen-dialog@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/material-ui-fullscreen-dialog/-/material-ui-fullscreen-dialog-0.4.0.tgz#e562b77a6e95ddd8c1ae9d20ee44d70295bb423c"
+  dependencies:
+    prop-types "^15.5.8"
+
 material-ui@^0.18.1:
   version "0.18.1"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.18.1.tgz#1c8a47d7e930ff0b07064dd8633035984a5a3569"
@@ -4522,6 +4528,10 @@ mocha@^3.2.0:
     lodash.create "3.1.1"
     mkdirp "0.5.1"
     supports-color "3.1.2"
+
+moment@^2.18.1:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
 morgan@^1.8.1:
   version "1.8.2"
@@ -6293,7 +6303,7 @@ socket.io-adapter@~1.1.0:
   dependencies:
     debug "2.3.3"
 
-socket.io-client@~2.0.2:
+socket.io-client@^2.0.2, socket.io-client@~2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-2.0.2.tgz#86f59db59ba1168724220f39be281ad49af742c1"
   dependencies:

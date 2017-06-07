@@ -53,6 +53,7 @@ class ResultsListEntry extends React.Component {
             label='Close'
             onTouchTap={() => this.setState({ showFullProfile: false })}
           />}
+          appBarStyle={{backgroundColor: '#000000'}}
         >
           <CardActions>
             <FlatButton label="Yes" onClick={() => this.handleChoice(true)} />
