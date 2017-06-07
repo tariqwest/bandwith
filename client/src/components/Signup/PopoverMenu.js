@@ -45,7 +45,7 @@ class PopoverMenu extends Component {
       <div>
         <RaisedButton
           onTouchTap={this.handleTouchTap}
-          label={`your ${this.props.itemName}`}
+          label={`your ${this.props.className}`}
         />
         <Popover
           open={this.state.open}
