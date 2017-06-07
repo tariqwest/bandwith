@@ -7,7 +7,7 @@ const style = {
   margin: 12,
 };
 
-const InfluenceInput = ({ influence, influences, handleChange, onClick }) => (
+const InfluenceInput = ({ influence, influences, handleChange, onClick, handleChip }) => (
   <div>
     <TextField
       floatingLabelText="musical influence"
@@ -25,7 +25,10 @@ const InfluenceInput = ({ influence, influences, handleChange, onClick }) => (
       onTouchTap={onClick}
     />
     <List
+      handleChip={handleChip}
       selectedItems={influences}
+      influence={influence}
+      className="influences"
     />
   </div>
 );

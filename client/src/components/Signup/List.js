@@ -17,10 +17,9 @@ class List extends Component {
     this.handleChipDelete = this.handleChipDelete.bind(this);
   }
 
-  handleChipDelete(key) {
+  handleChipDelete(item) {
     const collection = this.props.className;
-
-    this.props.addChip(key, collection);
+    this.props.addChip(item, collection);
   }
 
   render() {

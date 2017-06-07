@@ -30,7 +30,7 @@ class PopoverMenu extends Component {
     event.preventDefault();
     const id = event.currentTarget.id;
     const className = event.currentTarget.className;
-    this.props.addChip(id, className);
+    this.props.handleChip(id, className);
   }
 
   handleRequestClose() {
@@ -49,6 +49,7 @@ class PopoverMenu extends Component {
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
+          canAutoPosition
           anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
           targetOrigin={{ horizontal: 'left', vertical: 'top' }}
           onRequestClose={this.handleRequestClose}
@@ -67,7 +68,7 @@ class PopoverMenu extends Component {
         </Popover>
         <List
           selectedItems={this.props.selectedItems}
-          addChip={this.props.addChip}
+          handleChip={this.props.handleChip}
           className={this.props.itemName}
         />
       </div>

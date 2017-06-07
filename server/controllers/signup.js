@@ -13,11 +13,6 @@ module.exports.update = (req, res) => {
     searchRadius: req.body.searchRadius,
   };
 
-  const userInstrumentKeys = Object.keys(req.body.instruments);
-  const userGenreKeys = Object.keys(req.body.genres);
-  const userInfluenceKeys = Object.keys(req.body.influences);
-  const preferredInstrumentKeys = Object.keys(req.body.preferred_instruments);
-  const preferredGenreKeys = Object.keys(req.body.preferred_genres);
 
   // make sure there are no blank fields because table insert will break
   const keys = Object.keys(profileBody);
@@ -46,6 +41,7 @@ module.exports.update = (req, res) => {
       res.sendStatus(404);
     });
 
+
   // update the user_instruments
   models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
@@ -53,18 +49,19 @@ module.exports.update = (req, res) => {
         throw profile;
       }
 
-      for (let i = 0; i < userInstrumentKeys.length; i++) {
-        models.Instrument.where({ instrument_name: userInstrumentKeys[i] }).fetch()
+      for (let i = 0; i < req.body.instruments.length; i++) {
+        models.Instrument.where({ instrument_name: req.body.instruments[i] }).fetch()
           .then((instrument) => {
             profile.instruments().attach(instrument);
-          }).error((err) => {
-            res.status(500).send(err);
           })
-          .catch(() => {
-            res.sendStatus(404);
+          .then((test) => {
+          })
+          .catch((err) => {
+            res.status(500).send(err);
           });
       }
     });
+
 
   // update the user_genres
   models.Profile.where({ id: req.body.id }).fetch()
@@ -73,8 +70,8 @@ module.exports.update = (req, res) => {
         throw profile;
       }
 
-      for (let i = 0; i < userGenreKeys.length; i++) {
-        models.Genre.where({ genre_name: userGenreKeys[i] }).fetch()
+      for (let i = 0; i < req.body.genres.length; i++) {
+        models.Genre.where({ genre_name: req.body.genres[i] }).fetch()
           .then((genre) => {
             profile.genres().attach(genre);
           }).error((err) => {
@@ -93,15 +90,13 @@ module.exports.update = (req, res) => {
         throw profile;
       }
 
-      for (let i = 0; i < preferredInstrumentKeys.length; i++) {
-        models.Instrument.where({ instrument_name: preferredInstrumentKeys[i] }).fetch()
+      for (let i = 0; i < req.body.preferred_instruments.length; i++) {
+        models.Instrument.where({ instrument_name: req.body.preferred_instruments[i] }).fetch()
           .then((instrument) => {
-            profile.preferred_instruments().attach(instrument);
-          }).error((err) => {
-            res.status(500).send(err);
+            return profile.preferred_instruments().attach(instrument);
           })
-          .catch(() => {
-            res.sendStatus(404);
+          .error((err) => {
+            res.status(500).send(err);
           });
       }
     });
@@ -112,9 +107,8 @@ module.exports.update = (req, res) => {
       if (!profile) {
         throw profile;
       }
-
-      for (let i = 0; i < preferredGenreKeys.length; i++) {
-        models.Genre.where({ genre: preferredGenreKeys[i] }).fetch()
+      for (let i = 0; i < req.body.preferred_genres.length; i++) {
+        models.Genre.where({ genre_name: req.body.preferred_genres[i] }).fetch()
           .then((genre) => {
             profile.preferred_genres().attach(genre);
           }).error((err) => {
@@ -125,8 +119,8 @@ module.exports.update = (req, res) => {
     });
 
   // update the user_influences
-  for (let i = 0; i < userInfluenceKeys.length; i++) {
-    models.Influence.where({ influence_name: userInfluenceKeys[i] }).fetch()
+  for (let i = 0; i < req.body.influences.length; i++) {
+    models.Influence.where({ influence_name: req.body.influences[i] }).fetch()
       .then((influence) => {
         if (!influence) {
           throw influence;
@@ -135,7 +129,7 @@ module.exports.update = (req, res) => {
         }
       })
       .catch(() => (
-        models.Influence.forge({ influence_name: userInfluenceKeys[i] }).save()
+        models.Influence.forge({ influence_name: req.body.influences[i] }).save()
       ))
       .then((influence) => {
         models.Profile.where({ id: req.body.id }).fetch()
