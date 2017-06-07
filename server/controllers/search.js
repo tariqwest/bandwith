@@ -181,6 +181,9 @@ module.exports.search = (req, res) => {
   .then(connections => (
     connections.filter(connection => locationMatches(connection))
   ))
+  .then(connections => (
+    connections.filter(connection => connection.email !== currentUserProfile.email)
+  ))
   .then((results) => {
     if (!results) {
       throw results;
