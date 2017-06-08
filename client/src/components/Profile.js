@@ -10,6 +10,7 @@ import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
 import { Row, Col } from 'react-flexbox-grid';
 import FullscreenDialog from 'material-ui-fullscreen-dialog';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Signup from './Signup';
 
 const style = {
@@ -61,7 +62,13 @@ class Profile extends React.Component {
               <Paper style={style}>
                 <Card className="chat-title">
                   <div className="edit-div">
-                    <i onClick={() => this.setState({ showEditProfile: true })} className="material-icons edit-button">create</i>
+                    <FloatingActionButton
+                      className="edit-button"
+                      onClick={() => this.setState({ showEditProfile: true })}
+                      mini={true}
+                      backgroundColor="black"
+                      children={<i className="material-icons">create</i>}
+                    />
                   </div>
                   <img
                     className="chat-picture"
