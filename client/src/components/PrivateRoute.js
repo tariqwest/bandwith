@@ -29,16 +29,27 @@ class PrivateRoute extends React.Component {
     }
 
     this.getUserInfoIfReady();
+    this.checkProfileEstablished();
   }
 
   componentDidUpdate() {
     this.getUserInfoIfReady();
+    this.checkProfileEstablished();
   }
+
 
   getUserInfoIfReady() {
     const { dispatch, hasUserInfo, isAuthenticated, userId, isFetchingUser } = this.props;
     if (isAuthenticated && !hasUserInfo && !isFetchingUser) {
       dispatch(getUserInfo(userId));
+    }
+  }
+
+  checkProfileEstablished() {
+    const { hasProfile, hasUserInfo, history, location } = this.props;
+
+    if (hasUserInfo && !hasProfile && location.pathname !== '/signup') {
+      history.push('/signup');
     }
   }
 
@@ -60,7 +71,6 @@ class PrivateRoute extends React.Component {
     const { component, ...rest } = this.props;
     return <Route {...rest} render={this.handleRender} />;
   }
-
 }
 
 const mapStateToProps = state => ({
@@ -69,6 +79,7 @@ const mapStateToProps = state => ({
   userId: state.auth.userId,
   isFetchingUser: state.user.isFetching,
   hasUserInfo: state.user.hasInfo,
+  hasProfile: state.user.profile.hasProfile,
 });
 
 export default withRouter(connect(mapStateToProps)(PrivateRoute));
