@@ -1,19 +1,38 @@
 const models = require('../../db/models');
+const db = require('../../db');
 
-let currentUserProfile;
-let currentMatchedProfiles;
+const findMatchQuery = userId =>
+  `
+  SELECT DISTINCT ID FROM (SELECT
+  PROFILES.ID,
+  PROFILES.DISPLAY,
+  PREFERRED_GENRES.GENRE_ID AS PREFERRED_GENRES_ID,
+  PREFERRED_INSTRUMENTS.INSTRUMENT_ID AS PREFERRED_INSTRUMENTS_ID,
+  USERS_INSTRUMENTS.INSTRUMENT_ID AS USER_INSTRUMENTS_ID,
+  USERS_GENRES.GENRE_ID AS USER_GENRE_ID
+  FROM PROFILES
+  INNER JOIN PREFERRED_GENRES ON PROFILES.ID = PREFERRED_GENRES.PROFILE_ID
+  INNER JOIN PREFERRED_INSTRUMENTS ON PROFILES.ID = PREFERRED_INSTRUMENTS.PROFILE_ID
+  INNER JOIN USERS_GENRES ON  PROFILES.ID = USERS_GENRES.PROFILE_ID
+  INNER JOIN USERS_INSTRUMENTS ON  PROFILES.ID = USERS_INSTRUMENTS.PROFILE_ID
+  WHERE USERS_INSTRUMENTS.INSTRUMENT_ID IN (SELECT INSTRUMENT_ID FROM PREFERRED_INSTRUMENTS WHERE PROFILE_ID = ${userId})
+  AND USERS_GENRES.GENRE_ID IN (SELECT GENRE_ID FROM PREFERRED_GENRES WHERE PROFILE_ID = ${userId}))
+  AS PROFILE_MATCHES `
+;
 
 const processProfileRelations = (profile) => {
-  const influences = profile.related('influences').map(i => i.attributes.id);
-  const instruments = profile.related('instruments').map(i => i.attributes.id);
-  const preferredInstruments = profile.related('preferred_instruments').map(p => p.attributes.id);
-  const genres = profile.related('genres').map(g => g.attributes.id);
-  const preferredGenres = profile.related('preferred_genres').map(g => g.attributes.id);
+  console.log('** Profile: ', profile);
+  const influences = profile.related('influences').map(i => i.attributes.influence_name);
+  const instruments = profile.related('instruments').map(i => i.attributes.instrument_name);
+  const preferredInstruments = profile.related('preferred_instruments').map(p => p.attributes.instrument_name);
+  const genres = profile.related('genres').map(g => g.attributes.genre_name);
+  const preferredGenres = profile.related('preferred_genres').map(g => g.attributes.genre_name);
   const fullInfo = Object.assign(profile.attributes,
     { influences, instruments, preferredInstruments, genres, preferredGenres });
   return fullInfo;
 };
 
+<<<<<<< HEAD
 const prefsMatch = (matchProfile, category, preference) => {
   // Check if the potential match has one of the current user's desired instruments or genres
   const twoMatchesOne = matchProfile[category].some((item) =>
@@ -95,6 +114,37 @@ module.exports.search = (req, res) => {
   })
   .then(() => (
     models.Profile.fetchAll({
+=======
+module.exports.search = (req, res) => {
+  let potentialMatches;
+  db.knex.raw(findMatchQuery(req.query.userId))
+  .then((results) => {
+    if (!results) {
+      throw results;
+    }
+    potentialMatches = results.rows.map((row) => {
+      return row.id;
+    });
+    const matchesOfAllMatches = potentialMatches.map((userId) => {
+      return db.knex.raw(findMatchQuery(userId));
+    });
+    return Promise.all(matchesOfAllMatches);
+  })
+  .then((matchesOfAllMatches) => {
+    if (!matchesOfAllMatches) {
+      throw matchesOfAllMatches;
+    }
+    const mutualMatches = [];
+    matchesOfAllMatches.forEach((match, i) => {
+      const matchesOfMatch = match.rows.map((match) => {
+        return match.id;
+      });
+      if (matchesOfMatch.includes(Number(req.query.userId))) {
+        mutualMatches.push(potentialMatches[i]);
+      }
+    });
+    return models.Profile.where('id', 'IN', mutualMatches).fetchAll({
+>>>>>>> Refactor search to use raw sql queries instead of in-memory matching
       withRelated: [
         'influences',
         'instruments',
@@ -102,64 +152,25 @@ module.exports.search = (req, res) => {
         'genres',
         'preferred_genres',
       ],
+<<<<<<< HEAD
     })
   ))
   .then((profiles) => {
     if (!profiles) {
       throw profiles;
+=======
+    });
+  })
+  .then((rawResults) => {
+    if (!rawResults) {
+      throw rawResults;
+>>>>>>> Refactor search to use raw sql queries instead of in-memory matching
     }
-    const allProfiles = profiles.map((profile) => {
-      return processProfileRelations(profile);
+    const results = [];
+    rawResults.forEach((result) => {
+      results.push(processProfileRelations(result));
     });
-    console.log('** All profiles: ', allProfiles.length);
-    const matchedProfiles = [];
-    allProfiles.forEach((profile) => {
-      if (profileMatches(profile)) {
-        matchedProfiles.push(profile);
-      }
-    });
-    console.log('** Matched profiles: ', matchedProfiles.length);
-    return matchedProfiles;
-  })
-  .then((matchedProfiles) => {
-    currentMatchedProfiles = matchedProfiles;
-    const connections = matchedProfiles.map((profile) => {
-      return models.Connection.query({
-        where:{
-          profile_id_1: profile.id,
-          profile_id_2: currentUserProfile.id,
-        },
-        orWhere: {
-          profile_id_1: currentUserProfile.id,
-          profile_id_2: profile.id,
-        },
-      })
-      .fetch();
-    });
-    return Promise.all(connections);
-  })
-  .then((connections) => {
-    console.log('** All connections: ', connections);
-    connections.forEach((connection, i) => {
-      if (connection) {
-        console.log('** Connection: ', connection);
-        console.log('** CurrentMatchedProfile: ', currentMatchedProfiles[i]);
-
-        const conn = connection.serialize();
-
-        if (conn.profile_id_1 === currentMatchedProfiles[i].id) {
-          if (conn.likes_2_1 !== null) {
-            currentMatchedProfiles.splice(i, 1);
-          }
-        }
-        if (conn.profile_id_2 === currentMatchedProfiles[i].id) {
-          if (conn.likes_1_2 !== null) {
-            currentMatchedProfiles.splice(i, 1);
-          }
-        }
-      }
-    });
-    return currentMatchedProfiles;
+    return results;
   })
   .then((connections) => {
     const connectionsWithLocation = connections.map((connection) => {
