@@ -91,7 +91,6 @@ module.exports.search = (req, res) => {
           }
         }
         currentUserProfile = Object.assign(profile, location);
-        console.log('currentUserProfile: ', currentUserProfile);
       });
   })
   .then(() => (
