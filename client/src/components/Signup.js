@@ -17,6 +17,7 @@ import SongInput from './Signup/SongInput';
 import VideoInput from './Signup/VideoInput';
 import SearchRadiusInput from './Signup/SearchRadiusInput';
 import PopoverMenu from './Signup/PopoverMenu';
+import ProfileImage from './Signup/ProfileImage';
 
 const style = {
   card: {
@@ -41,6 +42,7 @@ class Signup extends React.Component {
       bio: '',
       song_url: '',
       video_url: '',
+      photo: '',
       age: '',
       search_radius: '',
       zipcodeErrorText: '',
@@ -75,6 +77,7 @@ class Signup extends React.Component {
     if (props.hasUserInfo) {
       const { profile } = props;
       const keys = Object.keys(profile);
+
       keys.forEach((key) => {
         if (profile[key] === null) {
           profile[key] = '';
@@ -100,6 +103,7 @@ class Signup extends React.Component {
       song_url: this.state.song_url,
       video_url: this.state.video_url,
       zipcode: this.state.zipcode,
+      photo_src: this.state.photo,
       id: this.props.userId,
       age: this.state.age,
       search_radius: this.state.search_radius,
@@ -116,6 +120,7 @@ class Signup extends React.Component {
       song_url: '',
       video_url: '',
       zipcode: '',
+      photo: '',
       age: '',
       search_radius: '',
       instruments: [],
@@ -204,6 +209,7 @@ class Signup extends React.Component {
             <Paper zDepth={2}>
               <Card>
                 <CardText>
+                  <ProfileImage />
                   <FirstNameInput
                     value={this.state.first}
                     onChange={this.handleChange}
