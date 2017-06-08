@@ -11,6 +11,7 @@ module.exports.update = (req, res) => {
     video_url: req.body.video_url,
     age: req.body.age,
     searchRadius: req.body.searchRadius,
+    hasProfile: true,
   };
 
   // make sure there are no blank fields because table insert will break
