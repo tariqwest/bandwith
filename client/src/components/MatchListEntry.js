@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Avatar from 'material-ui/Avatar';
 import { ListItem } from 'material-ui/List';
@@ -21,7 +20,7 @@ class MatchListEntry extends React.Component {
   chatWithMatch(){
     const { dispatch, match } = this.props;
     dispatch(setCurrentMatch(match.id, match.first, match.last, match.photo_src));
-    this.setState({showChat: true});
+    this.setState({ showChat: true });
   }
 
   render() {
@@ -35,22 +34,25 @@ class MatchListEntry extends React.Component {
           />
         </div>
         <FullscreenDialog
-            open={this.state.showChat}
-            onRequestClose={() => this.setState({ showChat: false })}
-            title={this.props.match.display}
-            actionButton={<FlatButton
-              label='Close'
-              onTouchTap={() => this.setState({ showChat: false })}
-            />}
-            appBarStyle={{backgroundColor: '#000000'}}
-          >
-            <Chats />
-          </FullscreenDialog>
-        </div>
+          open={this.state.showChat}
+          onRequestClose={() => this.setState({ showChat: false })}
+          title={this.props.match.display}
+          actionButton={<FlatButton
+            label="Close"
+            onTouchTap={() => this.setState({ showChat: false })}
+          />}
+          appBarStyle={{ backgroundColor: '#000000' }}
+        >
+          <Chats />
+        </FullscreenDialog>
+      </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ userId: state.auth.userId, currentMatch: state.chat.currenMatch });
+const mapStateToProps = state => ({
+  userId: state.auth.userId,
+  currentMatch: state.chat.currenMatch,
+});
 
 export default connect(mapStateToProps)(MatchListEntry);
