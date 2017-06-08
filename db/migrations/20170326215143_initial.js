@@ -14,7 +14,7 @@ exports.up = (knex, Promise) => (
       table.string('photo_src', 300).nullable();
       table.string('song_url', 300).nullable();
       table.string('video_url', 300).nullable();
-      table.boolean('hasProfile').defaultTo(false);
+      table.boolean('has_profile').defaultTo(false);
       table.timestamps(true, true);
     }),
     knex.schema.createTableIfNotExists('auths', (table) => {

@@ -4,14 +4,14 @@ module.exports.update = (req, res) => {
   const profileBody = {
     first: req.body.first,
     last: req.body.last,
-    zipCode: req.body.zipCode,
+    zip_code: req.body.zipCode,
     gender: req.body.gender,
     bio: req.body.bio,
     song_url: req.body.song_url,
     video_url: req.body.video_url,
     age: req.body.age,
-    searchRadius: req.body.searchRadius,
-    hasProfile: true,
+    search_radius: req.body.searchRadius,
+    has_profile: true,
   };
 
   // make sure there are no blank fields because table insert will break
@@ -127,9 +127,7 @@ module.exports.update = (req, res) => {
 
       for (let i = 0; i < req.body.preferred_instruments.length; i++) {
         models.Instrument.where({ instrument_name: req.body.preferred_instruments[i] }).fetch()
-          .then((instrument) => {
-            return profile.preferred_instruments().attach(instrument);
-          })
+          .then(instrument => profile.preferred_instruments().attach(instrument))
           .catch((err) => {
             res.status(500).send(err);
           });

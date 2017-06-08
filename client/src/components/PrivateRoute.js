@@ -47,7 +47,6 @@ class PrivateRoute extends React.Component {
 
   checkProfileEstablished() {
     const { hasProfile, hasUserInfo, history, location } = this.props;
-
     if (hasUserInfo && !hasProfile && location.pathname !== '/signup') {
       history.push('/signup');
     }
@@ -79,7 +78,7 @@ const mapStateToProps = state => ({
   userId: state.auth.userId,
   isFetchingUser: state.user.isFetching,
   hasUserInfo: state.user.hasInfo,
-  hasProfile: state.user.profile.hasProfile,
+  hasProfile: state.user.profile.has_profile,
 });
 
 export default withRouter(connect(mapStateToProps)(PrivateRoute));
