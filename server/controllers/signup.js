@@ -11,6 +11,7 @@ module.exports.update = (req, res) => {
     zipcode: req.body.zipcode,
     gender: req.body.gender,
     bio: req.body.bio,
+    photo_src: req.body.photo_src,
     song_url: req.body.song_url,
     video_url: id,
     age: req.body.age,
