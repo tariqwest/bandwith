@@ -19,6 +19,18 @@ body {
   border-radius: 50%;
 }
 
+.edit-div {
+  text-align: right;
+}
+
+.edit-button {
+  margin: 10px;
+}
+
+.edit-button:hover {
+  cursor: pointer;
+}
+
 /*
 * {
   box-sizing: border-box;
