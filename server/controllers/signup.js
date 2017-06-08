@@ -33,11 +33,23 @@ module.exports.update = (req, res) => {
     .then(() => {
       res.sendStatus(201);
     })
-    .error((err) => {
+    .catch((err) => {
       res.status(500).send(err);
+    });
+
+  // delete the user_instruments table
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+      return profile.instruments().detach({ profile_id: profile.attributes.id });
     })
-    .catch(() => {
-      res.sendStatus(404);
+    .then(() => {
+      res.sendstatus(201);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
     });
 
   // update the user_instruments
@@ -58,6 +70,21 @@ module.exports.update = (req, res) => {
       }
     });
 
+// delete the user_genres table
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+      return profile.genres().detach({ profile_id: profile.attributes.id });
+    })
+    .then(() => {
+      res.sendstatus(201);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+
   // update the user_genres
   models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
@@ -69,13 +96,25 @@ module.exports.update = (req, res) => {
         models.Genre.where({ genre_name: req.body.genres[i] }).fetch()
           .then((genre) => {
             profile.genres().attach(genre);
-          }).error((err) => {
+          }).catch((err) => {
             res.status(500).send(err);
-          })
-          .catch(() => {
-            res.sendStatus(404);
           });
       }
+    });
+
+// delete the preferred_instruments table
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+      return profile.preferred_instruments().detach({ profile_id: profile.attributes.id });
+    })
+    .then(() => {
+      res.sendstatus(201);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
     });
 
   // update the preferred_instruments
@@ -96,6 +135,22 @@ module.exports.update = (req, res) => {
       }
     });
 
+
+  // delete the preferred_genres table
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+      return profile.preferred_genres().detach({ profile_id: profile.attributes.id });
+    })
+    .then(() => {
+      res.sendstatus(201);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+
   // update the preferred_genres
   models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
@@ -110,6 +165,21 @@ module.exports.update = (req, res) => {
             res.status(500).send(err);
           });
       }
+    });
+
+  // delete the influences table
+  models.Profile.where({ id: req.body.id }).fetch()
+    .then((profile) => {
+      if (!profile) {
+        throw profile;
+      }
+      return profile.influences().detach({ profile_id: profile.attributes.id });
+    })
+    .then(() => {
+      res.sendstatus(201);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
     });
 
   // update the user_influences
