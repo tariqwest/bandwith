@@ -4,7 +4,6 @@ import FlatButton from 'material-ui/FlatButton';
 import { Card,
   CardTitle,
   CardMedia,
-  CardActions,
 } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
@@ -14,7 +13,8 @@ import FullscreenDialog from 'material-ui-fullscreen-dialog';
 import Signup from './Signup';
 
 const style = {
-  marginTop: 15,
+  marginTop: 8,
+  marginBottom: 8,
 };
 const chipStyle = {
   marginTop: 5,
@@ -32,7 +32,6 @@ class Profile extends React.Component {
     const {
       first,
       last,
-      display,
       bio,
       age,
       gender,
@@ -61,6 +60,9 @@ class Profile extends React.Component {
             <Col xs={12} sm={8} xsOffset={0} smOffset={2}>
               <Paper style={style}>
                 <Card className="chat-title">
+                  <div className="edit-div">
+                    <i onClick={() => this.setState({ showEditProfile: true })} className="material-icons edit-button">create</i>
+                  </div>
                   <img
                     className="chat-picture"
                     width="100"
@@ -77,6 +79,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={4} smOffset={2}>
               <Paper style={style}>
                 <Card>
+                  <CardTitle title="Personal Info" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">account_circle</i>}
@@ -97,6 +100,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={4}>
               <Paper style={style}>
                 <Card>
+                  <CardTitle title="Checkout my skills..." />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">music_video</i>}
@@ -137,13 +141,14 @@ class Profile extends React.Component {
             <Col xs={12} sm={4} smOffset={2}>
               <Paper style={style}>
                 <Card>
+                  <CardTitle title="Me as a Musician" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">speaker</i>}
                       primaryText="My Instruments"
                       primaryTogglesNestedList={true}
                       nestedItems={instruments.map(instrument =>
-                        <Chip style={chipStyle}>{instrument}</Chip> // eslint-disable-line
+                        <Chip key={instrument} style={chipStyle}>{instrument}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
@@ -151,7 +156,7 @@ class Profile extends React.Component {
                       primaryText="My Genres"
                       primaryTogglesNestedList={true}
                       nestedItems={genres.map(genre =>
-                        <Chip style={chipStyle}>{genre}</Chip> // eslint-disable-line
+                        <Chip key={genre} style={chipStyle}>{genre}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
@@ -159,7 +164,7 @@ class Profile extends React.Component {
                       primaryText="My Influences"
                       primaryTogglesNestedList={true}
                       nestedItems={influences.map(influence =>
-                        <Chip style={chipStyle}>{influence}</Chip> // eslint-disable-line
+                        <Chip key={influence} style={chipStyle}>{influence}</Chip> // eslint-disable-line
                       )}
                     />
                   </List>
@@ -169,6 +174,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={4}>
               <Paper style={style}>
                 <Card>
+                  <CardTitle title="I am looking for Musicians..." />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">near_me</i>}
@@ -179,7 +185,7 @@ class Profile extends React.Component {
                       primaryText="Preferred Instruments"
                       primaryTogglesNestedList={true}
                       nestedItems={preferredInstruments.map(instrument =>
-                        <Chip style={chipStyle}>{instrument}</Chip> // eslint-disable-line
+                        <Chip key={instrument} style={chipStyle}>{instrument}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
@@ -187,24 +193,10 @@ class Profile extends React.Component {
                       primaryText="Preferred Genres"
                       primaryTogglesNestedList={true}
                       nestedItems={preferredGenres.map(genre =>
-                        <Chip style={chipStyle}>{genre}</Chip> // eslint-disable-line
+                        <Chip key={genre} style={chipStyle}>{genre}</Chip> // eslint-disable-line
                       )}
                     />
                   </List>
-                </Card>
-              </Paper>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Paper style={style}>
-                <Card>
-                  <CardActions>
-                    <FlatButton
-                      label="Edit"
-                      onClick={() => this.setState({ showEditProfile: true })}
-                    />
-                  </CardActions>
                 </Card>
               </Paper>
             </Col>
