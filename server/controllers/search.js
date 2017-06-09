@@ -50,89 +50,6 @@ const processProfileRelations = (profile) => {
   return fullInfo;
 };
 
-<<<<<<< HEAD
-const prefsMatch = (matchProfile, category, preference) => {
-  // Check if the potential match has one of the current user's desired instruments or genres
-  const twoMatchesOne = matchProfile[category].some((item) =>
-  currentUserProfile[preference].includes(item));
-
-  // Check if the current user has one of the match's desired instruments or genres
-  const oneMatchesTwo = currentUserProfile[category].some((item) =>
-  matchProfile[preference].includes(item));
-
-  return twoMatchesOne && oneMatchesTwo;
-};
-
-const profileMatches = (profile) => {
-  console.log('** Matching profile: ', currentUserProfile.display, ' with ', profile.display);
-  const instrumentPrefsMatch = prefsMatch(profile, 'instruments', 'preferredInstruments');
-  const genrePrefsMatch = prefsMatch(profile, 'genres', 'preferredGenres');
-  console.log('** Instruments, Genres match: ', instrumentPrefsMatch, genrePrefsMatch);
-  return instrumentPrefsMatch && genrePrefsMatch;
-};
-
-const deg2rad = deg => (deg * (Math.PI/180));
-
-const getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
-  const R = 6371; // Radius of the earth in km
-  const dLat = deg2rad(lat2 - lat1);  // deg2rad below
-  const dLon = deg2rad(lon2 - lon1);
-  const a =
-    (Math.sin(dLat / 2) * Math.sin(dLat / 2)) +
-    (Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-    Math.sin(dLon / 2) * Math.sin(dLon / 2))
-    ;
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  const d = R * c; // Distance in km
-  return d * 0.62137119; // convert to miles
-};
-
-const locationMatches = (profile) => {
-  const minSearchRadius = Math.min(profile.searchRadius, currentUserProfile.searchRadius) === 0 ?
-  Math.max(profile.searchRadius, currentUserProfile.searchRadius) :
-  Math.min(profile.searchRadius, currentUserProfile.searchRadius);
-
-  const distance = getDistanceFromLatLonInKm(
-    currentUserProfile.lat,
-    currentUserProfile.lng,
-    profile.lat,
-    profile.lng);
-
-  return distance <= minSearchRadius;
-};
-
-module.exports.search = (req, res) => {
-  models.Profile.where({ id: req.query.userId }).fetch({
-    withRelated: [
-      'influences',
-      'instruments',
-      'preferred_instruments',
-      'genres',
-      'preferred_genres',
-    ],
-  })
-  .then((profile) => {
-    if (!profile) {
-      throw profile;
-    }
-    currentUserProfile = processProfileRelations(profile);
-    return currentUserProfile;
-  })
-  .then((profile) => {
-    models.Location.where({ zipcode: profile.zipCode }).fetch()
-      .then((result) => {
-        const location = {};
-        for (var prop in result.attributes) {
-          if (prop !== 'id' && prop !== 'zipcode') {
-            location[prop] = result.attributes[prop];
-          }
-        }
-        currentUserProfile = Object.assign(profile, location);
-      });
-  })
-  .then(() => (
-    models.Profile.fetchAll({
-=======
 module.exports.search = (req, res) => {
   let potentialMatches;
   let mutualMatches;
@@ -169,7 +86,6 @@ module.exports.search = (req, res) => {
       }
     });
     return models.Profile.where('id', 'IN', mutualMatches).fetchAll({
->>>>>>> Refactor search to use raw sql queries instead of in-memory matching
       withRelated: [
         'influences',
         'instruments',
@@ -177,19 +93,11 @@ module.exports.search = (req, res) => {
         'genres',
         'preferred_genres',
       ],
-<<<<<<< HEAD
-    })
-  ))
-  .then((profiles) => {
-    if (!profiles) {
-      throw profiles;
-=======
     });
   })
   .then((rawResults) => {
     if (!rawResults) {
       throw rawResults;
->>>>>>> Refactor search to use raw sql queries instead of in-memory matching
     }
     const results = [];
     rawResults.forEach((result) => {
@@ -197,30 +105,6 @@ module.exports.search = (req, res) => {
     });
     return results;
   })
-  .then((connections) => {
-    const connectionsWithLocation = connections.map((connection) => {
-      return models.Location.where({ zipcode: connection.zipCode }).fetch()
-        .then((result) => {
-          const location = {};
-          for (var prop in result.attributes) {
-            if (prop !== 'id' && prop !== 'zipcode') {
-              location[prop] = result.attributes[prop];
-            }
-          }
-          return Object.assign(connection, location);
-        })
-        .catch((err) => {
-          throw err;
-        });
-    });
-    return Promise.all(connectionsWithLocation);
-  })
-  .then(connections => (
-    connections.filter(connection => locationMatches(connection))
-  ))
-  .then(connections => (
-    connections.filter(connection => connection.email !== currentUserProfile.email)
-  ))
   .then((results) => {
     if (!results) {
       throw results;
