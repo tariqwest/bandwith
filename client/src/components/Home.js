@@ -1,13 +1,22 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardMedia } from 'material-ui/Card';
 
-import { Link } from 'react-router-dom';
+const style = {
+  textAlign: 'center',
+  position: 'relative',
+  color: 'transparent',
+};
 
 const Home = () => (
-  <div>
-    <RaisedButton label="I'm new" containerElement={<Link to="/signup" />} />
-    <RaisedButton label="I'm returning" containerElement={<Link to="/results" />} />
-  </div>
+  <Card>
+    <CardMedia
+      overlay={<h1>Welcome to Bandwith</h1>}
+      overlayContainerStyle={style}
+      overlayContentStyle={{ color: 'white' }}
+    >
+      <img alt="splash-img" src="/assets/hans-vivek-176134.jpg" />
+    </CardMedia>
+  </Card>
 );
 
 export default Home;
