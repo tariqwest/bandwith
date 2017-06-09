@@ -10,6 +10,10 @@ body {
   font-size: 16px;
 }
 
+html {
+  background-color: #EEEEEE;
+}
+
 .chat-title {
   text-align: center;
 }
@@ -29,6 +33,10 @@ body {
 
 .edit-button:hover {
   cursor: pointer;
+}
+
+.background {
+  background-color: #EEEEEE;
 }
 
 /*

@@ -28,7 +28,7 @@ const App = () => (
   <Provider store={store}>
     <MuiThemeProvider muiTheme={getMuiTheme()}>
       <Router>
-        <div>
+        <div className="background">
           <Nav />
           <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
