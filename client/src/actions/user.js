@@ -30,6 +30,7 @@ export const getUserInfo = userId => (dispatch) => {
     })
     .then(res => res.json())
     .then((json) => {
+      json.video_url = `https://www.youtube.com/watch?v=${json.video_url}`;
       dispatch(receiveUserInfo(json));
       return json;
     })
