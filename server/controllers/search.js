@@ -31,10 +31,10 @@ const findConnectionsQuery = (userId, matchIds) =>
   FROM
     CONNECTIONS
   WHERE
-    (profile_id_1 = 1
+    (profile_id_1 = ${userId}
     AND profile_id_2 IN (${matchIds.toString()}))
   OR
-    (profile_id_2 = 1
+    (profile_id_2 = ${userId}
     AND profile_id_1 IN (${matchIds.toString()}))
   `
 ;
