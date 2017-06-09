@@ -4,7 +4,7 @@ module.exports.update = (req, res) => {
   const profileBody = {
     first: req.body.first,
     last: req.body.last,
-    zip_code: req.body.zipCode,
+    zipcode: req.body.zipcode,
     gender: req.body.gender,
     bio: req.body.bio,
     song_url: req.body.song_url,
