@@ -25,7 +25,7 @@ class ResultsProfile extends React.Component {
       age,
       gender,
       email,
-      zipCode,
+      zipcode,
       searchRadius,
       instruments,
       genres,
@@ -55,7 +55,7 @@ class ResultsProfile extends React.Component {
             />
             <ListItem
               leftIcon={<i className="material-icons">place</i>}
-              primaryText={zipCode}
+              primaryText={zipcode}
             />
             <ListItem
               leftIcon={<i className="material-icons">near_me</i>}

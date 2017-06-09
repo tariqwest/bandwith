@@ -34,7 +34,7 @@ export const getUserInfo = userId => (dispatch) => {
       return json;
     })
     .then((json) => {
-      axios.get(`/api/location/${json.zipCode}`)
+      axios.get(`/api/location/${json.zipcode}`)
         .then((response) => {
           dispatch(setUserLocation(response.data));
         })
