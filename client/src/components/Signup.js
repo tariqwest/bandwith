@@ -57,6 +57,7 @@ class Signup extends React.Component {
       preferred_genres: [],
     };
     this.send = this.send.bind(this);
+    this.handlePhotoChange = this.handlePhotoChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleGender = this.handleGender.bind(this);
     this.handleNumberChange = this.handleNumberChange.bind(this);
@@ -131,6 +132,12 @@ class Signup extends React.Component {
     });
 
     dispatch(updateProfile(profile));
+  }
+
+  handlePhotoChange(url) {
+    this.setState({
+      photo: url,
+    });
   }
 
   handleSelectMultiple(item, collection) {
@@ -209,7 +216,9 @@ class Signup extends React.Component {
             <Paper zDepth={2}>
               <Card>
                 <CardText>
-                  <ProfileImage />
+                  <ProfileImage
+                    handlePhotoChange={this.handlePhotoChange}
+                  />
                   <FirstNameInput
                     value={this.state.first}
                     onChange={this.handleChange}
