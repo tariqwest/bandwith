@@ -36,13 +36,13 @@ class Profile extends React.Component {
       age,
       gender,
       email,
-      zipCode,
+      zipcode,
       searchRadius,
       instruments,
       genres,
       influences,
-      preferredInstruments,
-      preferredGenres,
+      preferred_instruments,
+      preferred_genres,
       video_url,
       song_url,
       photo_src,
@@ -51,7 +51,7 @@ class Profile extends React.Component {
     const fullname = `${first} ${last}`;
     const search = `Searching within ${searchRadius} miles`;
     const profile = `${gender}, ${age}`;
-    const location = `${city}, ${state} ${zipCode}`;
+    const location = `${city}, ${state} ${zipcode}`;
 
     if (this.props.hasInfo) {
       return (
@@ -184,7 +184,7 @@ class Profile extends React.Component {
                       leftIcon={<i className="material-icons">grade</i>}
                       primaryText="Preferred Instruments"
                       primaryTogglesNestedList={true}
-                      nestedItems={preferredInstruments.map(instrument =>
+                      nestedItems={preferred_instruments.map(instrument =>
                         <Chip key={instrument} style={chipStyle}>{instrument}</Chip> // eslint-disable-line
                       )}
                     />
@@ -192,7 +192,7 @@ class Profile extends React.Component {
                       leftIcon={<i className="material-icons">favorite</i>}
                       primaryText="Preferred Genres"
                       primaryTogglesNestedList={true}
-                      nestedItems={preferredGenres.map(genre =>
+                      nestedItems={preferred_genres.map(genre =>
                         <Chip key={genre} style={chipStyle}>{genre}</Chip> // eslint-disable-line
                       )}
                     />
