@@ -1,6 +1,10 @@
 const models = require('../../db/models');
 
 module.exports.update = (req, res) => {
+  const videoUrl = req.body.video_url.split('/');
+  const query = videoUrl[videoUrl.length - 1].split('=');
+  const id = query[query.length - 1];
+
   const profileBody = {
     first: req.body.first,
     last: req.body.last,
@@ -8,7 +12,7 @@ module.exports.update = (req, res) => {
     gender: req.body.gender,
     bio: req.body.bio,
     song_url: req.body.song_url,
-    video_url: req.body.video_url,
+    video_url: id,
     age: req.body.age,
     search_radius: req.body.searchRadius,
     has_profile: true,
