@@ -39,10 +39,10 @@ class Signup extends React.Component {
       zipcode: '',
       gender: '',
       bio: '',
-      song: '',
-      video: '',
+      song_url: '',
+      video_url: '',
       age: '',
-      searchRadius: '',
+      search_radius: '',
       zipcodeErrorText: '',
       ageErrorText: '',
       search_radiusErrorText: '',
@@ -97,12 +97,12 @@ class Signup extends React.Component {
       instruments: this.state.instruments,
       genres: this.state.genres,
       influences: this.state.influences,
-      song_url: this.state.song,
-      video_url: this.state.video,
+      song_url: this.state.song_url,
+      video_url: this.state.video_url,
       zipcode: this.state.zipcode,
       id: this.props.userId,
       age: this.state.age,
-      search_radius: this.state.searchRadius,
+      search_radius: this.state.search_radius,
       preferred_instruments: this.state.preferred_instruments,
       preferred_genres: this.state.preferred_genres,
     };
@@ -113,11 +113,11 @@ class Signup extends React.Component {
       gender: '',
       bio: '',
       influence: '',
-      song: '',
-      video: '',
+      song_url: '',
+      video_url: '',
       zipcode: '',
       age: '',
-      searchRadius: '',
+      search_radius: '',
       instruments: [],
       genres: [],
       influences: [],
@@ -224,10 +224,10 @@ class Signup extends React.Component {
                     bio={this.state.bio}
                     onChange={this.handleChange}
                   />
-                  <SongInput song={this.state.song} onChange={this.handleChange} /><br />
-                  <VideoInput video={this.state.video} onChange={this.handleChange} />
+                  <SongInput song={this.state.song_url} onChange={this.handleChange} /><br />
+                  <VideoInput video={this.state.video_url} onChange={this.handleChange} />
                   <SearchRadiusInput
-                    radius={this.state.radius}
+                    radius={this.state.search_radius}
                     onChange={this.handleNumberChange}
                     radiusErrorText={this.state.search_radiusErrorText}
                   />

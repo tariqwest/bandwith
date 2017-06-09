@@ -6,9 +6,9 @@ const SongInput = ({ song, onChange }) => (
     <TextField
       floatingLabelText="SoundCloud Demo Link"
       required
-      id="song"
+      id="song_url"
       type="text"
-      name="song"
+      name="song_url"
       value={song}
       onChange={onChange}
     />

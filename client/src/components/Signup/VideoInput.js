@@ -6,9 +6,9 @@ const SongInput = ({ video, onChange }) => (
     <TextField
       floatingLabelText="YouTube Video Link"
       required
-      id="video"
+      id="video_url"
       type="text"
-      name="video"
+      name="video_url"
       value={video}
       onChange={onChange}
     />

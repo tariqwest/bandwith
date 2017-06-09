@@ -6,8 +6,8 @@ const SearchRadiusInput = ({ radius, onChange, radiusErrorText }) => (
     <TextField
       required
       floatingLabelText="search radius"
-      id="searchRadius"
-      name="searchRadius"
+      id="search_radius"
+      name="search_radius"
       data-name="search radius"
       style={{ width: '40%' }}
       errorText={radiusErrorText}
