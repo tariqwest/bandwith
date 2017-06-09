@@ -59,6 +59,8 @@ module.exports.search = (req, res) => {
       throw results;
     }
     potentialMatches = results.rows.map(row => row.id);
+    potentialMatches = potentialMatches.filter(matchId => matchId !== Number(req.query.userId));
+
     const matchesOfAllMatches = potentialMatches.map(userId =>
       db.knex.raw(findMatchQuery(userId)));
     return Promise.all(matchesOfAllMatches);
