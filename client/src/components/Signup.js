@@ -36,16 +36,16 @@ class Signup extends React.Component {
     this.state = {
       first: '',
       last: '',
-      zipCode: '',
+      zipcode: '',
       gender: '',
       bio: '',
-      song: '',
-      video: '',
+      song_url: '',
+      video_url: '',
       age: '',
-      searchRadius: '',
-      zipCodeErrorText: '',
+      search_radius: '',
+      zipcodeErrorText: '',
       ageErrorText: '',
-      searchRadiusErrorText: '',
+      search_radiusErrorText: '',
       instrument: '',
       instruments: [],
       genres: [],
@@ -60,14 +60,30 @@ class Signup extends React.Component {
     this.handleNumberChange = this.handleNumberChange.bind(this);
     this.handleInfluences = this.handleInfluences.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
+    this.fillFormData = this.fillFormData.bind(this);
   }
 
-  // componentWillUpdate() {
-  //   console.log('component will update');
-  //   // if (!isFetching && hasSaved) {
-  //   //   history.push('/profile');
-  //   // }
-  // }
+  componentDidMount() {
+    this.fillFormData(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.fillFormData(nextProps);
+  }
+
+  fillFormData(props) {
+    if (props.hasUserInfo) {
+      const { profile } = props;
+      const keys = Object.keys(profile);
+      debugger;
+      keys.forEach((key) => {
+        if (profile[key] === null) {
+          profile[key] = '';
+        }
+      });
+      this.setState({ ...profile });
+    }
+  }
 
   send(event) {
     event.preventDefault();
@@ -82,12 +98,12 @@ class Signup extends React.Component {
       instruments: this.state.instruments,
       genres: this.state.genres,
       influences: this.state.influences,
-      song_url: this.state.song,
-      video_url: this.state.video,
-      zipCode: this.state.zipCode,
+      song_url: this.state.song_url,
+      video_url: this.state.video_url,
+      zipcode: this.state.zipcode,
       id: this.props.userId,
       age: this.state.age,
-      searchRadius: this.state.searchRadius,
+      search_radius: this.state.search_radius,
       preferred_instruments: this.state.preferred_instruments,
       preferred_genres: this.state.preferred_genres,
     };
@@ -98,11 +114,11 @@ class Signup extends React.Component {
       gender: '',
       bio: '',
       influence: '',
-      song: '',
-      video: '',
-      zipCode: '',
+      song_url: '',
+      video_url: '',
+      zipcode: '',
       age: '',
-      searchRadius: '',
+      search_radius: '',
       instruments: [],
       genres: [],
       influences: [],
@@ -182,12 +198,11 @@ class Signup extends React.Component {
   render() {
     return (
       <Row>
+        <pre>{this.props.user && this.props.user.profile}</pre>
         <Col xs={12} sm={6} smOffset={3}>
           <Card style={style.card}>
             <CardHeader />
-            <Paper
-              zDepth={2}
-            >
+            <Paper zDepth={2}>
               <Card>
                 <CardText>
                   <FirstNameInput
@@ -196,9 +211,9 @@ class Signup extends React.Component {
                   />
                   <LastNameInput value={this.state.last} onChange={this.handleChange} />
                   <ZipCodeInput
-                    value={this.state.zipCode}
+                    value={this.state.zipcode}
                     onChange={this.handleNumberChange}
-                    zipErrorText={this.state.zipCodeErrorText}
+                    zipErrorText={this.state.zipcodeErrorText}
                   />
                   <AgeInput
                     value={this.state.age}
@@ -210,12 +225,12 @@ class Signup extends React.Component {
                     bio={this.state.bio}
                     onChange={this.handleChange}
                   />
-                  <SongInput song={this.state.song} onChange={this.handleChange} /><br />
-                  <VideoInput video={this.state.video} onChange={this.handleChange} />
+                  <SongInput song={this.state.song_url} onChange={this.handleChange} /><br />
+                  <VideoInput video={this.state.video_url} onChange={this.handleChange} />
                   <SearchRadiusInput
-                    radius={this.state.searchRadius}
+                    radius={this.state.search_radius}
                     onChange={this.handleNumberChange}
-                    radiusErrorText={this.state.searchRadiusErrorText}
+                    radiusErrorText={this.state.search_radiusErrorText}
                   />
                   <InfluencesInput
                     influence={this.state.influence}
@@ -268,8 +283,10 @@ class Signup extends React.Component {
   }
 }
 
-const mapStateToProps = state => (
-  { userId: state.auth.userId }
-);
+const mapStateToProps = state => ({
+  userId: state.auth.userId,
+  profile: state.user.profile,
+  hasUserInfo: state.user.hasInfo,
+});
 
 export default withRouter(connect(mapStateToProps)(Signup));
