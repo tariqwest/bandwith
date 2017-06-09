@@ -38,7 +38,7 @@ class Profile extends React.Component {
       gender,
       email,
       zipcode,
-      searchRadius,
+      search_radius,
       instruments,
       genres,
       influences,
@@ -50,7 +50,7 @@ class Profile extends React.Component {
     } = this.props.user;
     const { city, state } = this.props.location;
     const fullname = `${first} ${last}`;
-    const search = `Searching within ${searchRadius} miles`;
+    const search = `Searching within ${search_radius} miles`;
     const profile = `${gender}, ${age}`;
     const location = `${city}, ${state} ${zipcode}`;
 
@@ -119,7 +119,7 @@ class Profile extends React.Component {
                             frameBorder="0"
                             allowFullScreen
                             title="video"
-                            src={video_url}
+                            src={`https://www.youtube.com/embed/${video_url}`}
                           />
                         </CardMedia>,
                       ]}
