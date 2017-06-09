@@ -42,7 +42,7 @@ class Signup extends React.Component {
       bio: '',
       song_url: '',
       video_url: '',
-      photo: '',
+      photo_src: '',
       age: '',
       search_radius: '',
       zipcodeErrorText: '',
@@ -104,7 +104,7 @@ class Signup extends React.Component {
       song_url: this.state.song_url,
       video_url: this.state.video_url,
       zipcode: this.state.zipcode,
-      photo_src: this.state.photo,
+      photo_src: this.state.photo_src,
       id: this.props.userId,
       age: this.state.age,
       search_radius: this.state.search_radius,
@@ -121,7 +121,7 @@ class Signup extends React.Component {
       song_url: '',
       video_url: '',
       zipcode: '',
-      photo: '',
+      photo_src: '',
       age: '',
       search_radius: '',
       instruments: [],
@@ -138,11 +138,11 @@ class Signup extends React.Component {
     const { dispatch } = this.props;
 
     this.setState({
-      photo: url,
+      photo_src: url,
     });
 
     const profile = {
-      photo_src: this.state.photo,
+      photo_src: this.state.photo_src,
       id: this.props.userId,
     };
 

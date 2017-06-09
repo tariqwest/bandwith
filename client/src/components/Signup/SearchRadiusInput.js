@@ -4,7 +4,6 @@ import TextField from 'material-ui/TextField';
 const SearchRadiusInput = ({ radius, onChange, radiusErrorText }) => (
   <div>
     <TextField
-      required
       floatingLabelText="search radius"
       id="search_radius"
       name="search_radius"
