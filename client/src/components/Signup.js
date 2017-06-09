@@ -5,7 +5,7 @@ import { Card, CardHeader, CardText } from 'material-ui/Card';
 import { withRouter } from 'react-router';
 import { Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
-import { updateProfile } from '../actions';
+import { updateProfile, updatePhoto } from '../actions';
 import FirstNameInput from './Signup/FirstNameInput';
 import LastNameInput from './Signup/LastNameInput';
 import ZipCodeInput from './Signup/ZipCodeInput';
@@ -135,9 +135,18 @@ class Signup extends React.Component {
   }
 
   handlePhotoChange(url) {
+    const { dispatch } = this.props;
+
     this.setState({
       photo: url,
     });
+
+    const profile = {
+      photo_src: this.state.photo,
+      id: this.props.userId,
+    };
+
+    dispatch(updatePhoto(profile));
   }
 
   handleSelectMultiple(item, collection) {

@@ -6,3 +6,4 @@ export * from './matches.js';
 export * from './signup.js';
 export * from './results.js';
 export * from './location.js';
+export * from './photo.js';

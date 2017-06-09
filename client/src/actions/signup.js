@@ -36,5 +36,6 @@ export const updateProfile = profile => (dispatch) => {
     .then(res => res.text())
     .then(json => console.log(json))
     .then(() => dispatch(getUserInfo(profile.id)))
+    // TODO dispatch fail action below
     .catch(err => console.log(err));
 };
