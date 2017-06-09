@@ -1,4 +1,5 @@
 const models = require('../../models');
+const knex = require('knex');
 
 const profiles = [
   {
@@ -11,6 +12,7 @@ const profiles = [
     search_radius: 5,
     age: 40,
     gender: 'Male',
+    geo: knex.raw('ST_SetSRID( ST_Point(37.7726402, -122.4099154) , 4326)'),
   },
   {
     first: 'Trey',
@@ -22,6 +24,7 @@ const profiles = [
     search_radius: 5,
     age: 40,
     gender: 'Male',
+    geo: knex.raw('ST_SetSRID( ST_Point(37.7726402, -122.4099154) , 4326)'),
   },
   {
     first: 'Jake',
@@ -33,6 +36,7 @@ const profiles = [
     search_radius: 5,
     age: 40,
     gender: 'Male',
+    geo: knex.raw('ST_SetSRID( ST_Point(37.7726402, -122.4099154) , 4326)'),
   },
   {
     first: 'Miles',
@@ -44,6 +48,7 @@ const profiles = [
     search_radius: 5,
     age: 40,
     gender: 'Male',
+    geo: knex.raw('ST_SetSRID( ST_Point(37.7726402, -122.4099154) , 4326)'),
   },
   {
     first: 'Herbie',
@@ -55,6 +60,7 @@ const profiles = [
     search_radius: 5,
     age: 40,
     gender: 'Male',
+    geo: knex.raw('ST_SetSRID( ST_Point(37.7726402, -122.4099154) , 4326)'),
   },
   {
     first: 'Stewart',
@@ -66,6 +72,7 @@ const profiles = [
     search_radius: 5,
     age: 40,
     gender: 'Male',
+    geo: knex.raw('ST_SetSRID( ST_Point(37.7726402, -122.4099154) , 4326)'),
   },
 ];
 

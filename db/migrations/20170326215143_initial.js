@@ -15,6 +15,7 @@ exports.up = (knex, Promise) => (
       table.string('song_url', 300).nullable();
       table.string('video_url', 300).nullable();
       table.boolean('has_profile').defaultTo(false);
+      table.specificType('geo', 'geometry(point, 4326)');
       table.timestamps(true, true);
     }),
     knex.schema.createTableIfNotExists('auths', (table) => {
