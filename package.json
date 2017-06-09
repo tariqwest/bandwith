@@ -59,6 +59,8 @@
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
     "socket.io": "^2.0.2",
     "socket.io-client": "^2.0.2",
     "superagent": "^3.5.2",
