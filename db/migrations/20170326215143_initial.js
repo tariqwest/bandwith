@@ -51,6 +51,7 @@ exports.up = (knex, Promise) => (
     knex.schema.createTable('influences', (table) => {
       table.increments('id').unsigned().primary();
       table.string('influence_name', 20).notNullable().unique();
+      table.string('influence_album_art', 300).nullable();
     }),
     knex.schema.createTable('users_instruments', (table) => {
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
