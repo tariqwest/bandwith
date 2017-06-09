@@ -27,6 +27,7 @@ app.use('/api/location', routes.location);
 app.use('/api', routes.api);
 app.use('/auth', routes.auth);
 app.use('/api/signup', routes.signup);
+app.use('/api/photo', routes.photo);
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('*', (req, res) => {
