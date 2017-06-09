@@ -1,7 +1,7 @@
 const config = require('config');
 const models = require('../../db/models');
 const db = require('../../db');
-const request = require('request-promise');
+const axios = require('axios');
 
 module.exports.update = (req, res) => {
   const videoUrl = req.body.video_url.split('/');
@@ -32,13 +32,18 @@ module.exports.update = (req, res) => {
   }
 
   // Convert zipcode to geocoordinates for radius search
-  request(`https://maps.googleapis.com/maps/api/geocode/json?address=${profileBody.zipcode}&key=${config.apiKeys.google}`)
+  axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${profileBody.zipcode}&key=${config.apiKeys.google}`)
     .then((response) => {
-      const location = JSON.parse(response).results[0].geometry.location;
+      const location = response.data.results[0].geometry.location;
       const geoUpdateQuery = `UPDATE profiles SET geo = ST_SetSRID(ST_Point(${location.lat}, ${location.lng}), 4326) WHERE id = ${req.body.id}`;
       return db.knex.raw(geoUpdateQuery);
     })
-    .error((err) => { console.log('Error with zipcode geocode or db update: ', err); });
+    .then((updated) => {
+      if (!updated) {
+        throw updated;
+      }
+    })
+    .catch((err) => { console.log('Error with zipcode geocode or db update: ', err); });
 
   // update the user profile table
   models.Profile.where({ id: req.body.id }).fetch()
@@ -49,7 +54,7 @@ module.exports.update = (req, res) => {
       return profile.save(profileBody, { method: 'update' });
     })
     .then(() => {
-      // res.sendStatus(201);
+      res.sendStatus(201);
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -63,12 +68,6 @@ module.exports.update = (req, res) => {
       }
       return profile.instruments().detach({ profile_id: profile.attributes.id });
     })
-<<<<<<< HEAD
-    .then(() => {
-      // res.sendstatus(201);
-    })
-=======
->>>>>>> Update signup controller to set postgres gis coordinates  on profile save
     .catch((err) => {
       res.status(500).send(err);
     });
