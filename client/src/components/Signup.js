@@ -39,10 +39,10 @@ class Signup extends React.Component {
       zipcode: '',
       gender: '',
       bio: '',
-      song_url: '',
-      video_url: '',
+      song: '',
+      video: '',
       age: '',
-      search_radius: '',
+      searchRadius: '',
       zipcodeErrorText: '',
       ageErrorText: '',
       search_radiusErrorText: '',
@@ -75,7 +75,6 @@ class Signup extends React.Component {
     if (props.hasUserInfo) {
       const { profile } = props;
       const keys = Object.keys(profile);
-      debugger;
       keys.forEach((key) => {
         if (profile[key] === null) {
           profile[key] = '';
@@ -98,12 +97,12 @@ class Signup extends React.Component {
       instruments: this.state.instruments,
       genres: this.state.genres,
       influences: this.state.influences,
-      song_url: this.state.song_url,
-      video_url: this.state.video_url,
+      song_url: this.state.song,
+      video_url: this.state.video,
       zipcode: this.state.zipcode,
       id: this.props.userId,
       age: this.state.age,
-      search_radius: this.state.search_radius,
+      search_radius: this.state.searchRadius,
       preferred_instruments: this.state.preferred_instruments,
       preferred_genres: this.state.preferred_genres,
     };
@@ -114,11 +113,11 @@ class Signup extends React.Component {
       gender: '',
       bio: '',
       influence: '',
-      song_url: '',
-      video_url: '',
+      song: '',
+      video: '',
       zipcode: '',
       age: '',
-      search_radius: '',
+      searchRadius: '',
       instruments: [],
       genres: [],
       influences: [],
@@ -225,10 +224,10 @@ class Signup extends React.Component {
                     bio={this.state.bio}
                     onChange={this.handleChange}
                   />
-                  <SongInput song={this.state.song_url} onChange={this.handleChange} /><br />
-                  <VideoInput video={this.state.video_url} onChange={this.handleChange} />
+                  <SongInput song={this.state.song} onChange={this.handleChange} /><br />
+                  <VideoInput video={this.state.video} onChange={this.handleChange} />
                   <SearchRadiusInput
-                    radius={this.state.search_radius}
+                    radius={this.state.radius}
                     onChange={this.handleNumberChange}
                     radiusErrorText={this.state.search_radiusErrorText}
                   />
