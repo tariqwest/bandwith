@@ -13,9 +13,9 @@ const GenderInput = ({ onChange, value }) => (
       name="gender"
       onChange={onChange}
     >
-      <MenuItem value="female" primaryText="female" />
-      <MenuItem value="male" primaryText="male" />
-      <MenuItem value="other" primaryText="other" />
+      <MenuItem value="Female" primaryText="Female" />
+      <MenuItem value="Male" primaryText="Male" />
+      <MenuItem value="Other" primaryText="Other" />
     </SelectField>
   </div>
 );
