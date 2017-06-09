@@ -73,7 +73,7 @@ class Profile extends React.Component {
                     <FloatingActionButton
                       className="edit-button"
                       onClick={() => this.setState({ showEditProfile: true })}
-                      mini={true}
+                      mini
                       backgroundColor="black"
                       children={<i className="material-icons">create</i>}
                     />
@@ -120,7 +120,7 @@ class Profile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">music_video</i>}
                       primaryText="YouTube"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={[
                         <CardMedia key={videoId}>
                           <iframe
@@ -135,7 +135,7 @@ class Profile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">audiotrack</i>}
                       primaryText="SoundCloud"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={[
                         <CardMedia key={song_url}>
                           <iframe
@@ -161,7 +161,7 @@ class Profile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">speaker</i>}
                       primaryText="My Instruments"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={instruments.map(instrument =>
                         <Chip key={instrument} style={chipStyle}>{instrument}</Chip> // eslint-disable-line
                       )}
@@ -169,7 +169,7 @@ class Profile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">album</i>}
                       primaryText="My Genres"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={genres.map(genre =>
                         <Chip key={genre} style={chipStyle}>{genre}</Chip> // eslint-disable-line
                       )}
@@ -177,7 +177,7 @@ class Profile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">headset</i>}
                       primaryText="My Influences"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={influences.map(influence => (
                         <Card key={influence.name}>
                           <CardHeader title={influence.name} avatar={influence.img} />
@@ -200,7 +200,7 @@ class Profile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">grade</i>}
                       primaryText="Preferred Instruments"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={preferred_instruments.map(instrument =>
                         <Chip key={instrument} style={chipStyle}>{instrument}</Chip> // eslint-disable-line
                       )}
@@ -208,7 +208,7 @@ class Profile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">favorite</i>}
                       primaryText="Preferred Genres"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={preferred_genres.map(genre =>
                         <Chip key={genre} style={chipStyle}>{genre}</Chip> // eslint-disable-line
                       )}
