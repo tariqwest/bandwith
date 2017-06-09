@@ -39,12 +39,12 @@ module.exports.getOne = (req, res) => {
 
     const influences = profile.related('influences').map(i => i.attributes.influence_name);
     const instruments = profile.related('instruments').map(i => i.attributes.instrument_name);
-    const preferredInstruments = profile.related('preferred_instruments').map(p => p.attributes.instrument_name);
+    const preferred_instruments = profile.related('preferred_instruments').map(p => p.attributes.instrument_name);
     const genres = profile.related('genres').map(g => g.attributes.genre_name);
-    const preferredGenres = profile.related('preferred_genres').map(g => g.attributes.genre_name);
+    const preferred_genres = profile.related('preferred_genres').map(g => g.attributes.genre_name);
 
     const fullInfo = Object.assign(profile.attributes,
-      { influences, instruments, preferredInstruments, genres, preferredGenres });
+      { influences, instruments, preferred_instruments, genres, preferred_genres });
 
     res.status(200).send(fullInfo);
   })
