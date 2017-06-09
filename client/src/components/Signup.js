@@ -243,7 +243,6 @@ class Signup extends React.Component {
   render() {
     return (
       <Row>
-        <pre>{this.props.user && this.props.user.profile}</pre>
         <Col xs={12} sm={6} smOffset={3}>
           <Card style={style.card}>
             <CardHeader />
