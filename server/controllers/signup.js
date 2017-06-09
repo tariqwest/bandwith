@@ -37,7 +37,7 @@ module.exports.update = (req, res) => {
       return profile.save(profileBody, { method: 'update' });
     })
     .then(() => {
-      res.sendStatus(201);
+      // res.sendStatus(201);
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -52,7 +52,7 @@ module.exports.update = (req, res) => {
       return profile.instruments().detach({ profile_id: profile.attributes.id });
     })
     .then(() => {
-      res.sendstatus(201);
+      // res.sendstatus(201);
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -85,7 +85,7 @@ module.exports.update = (req, res) => {
       return profile.genres().detach({ profile_id: profile.attributes.id });
     })
     .then(() => {
-      res.sendstatus(201);
+      // res.sendstatus(201);
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -117,7 +117,7 @@ module.exports.update = (req, res) => {
       return profile.preferred_instruments().detach({ profile_id: profile.attributes.id });
     })
     .then(() => {
-      res.sendstatus(201);
+      // res.sendstatus(201);
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -149,7 +149,7 @@ module.exports.update = (req, res) => {
       return profile.preferred_genres().detach({ profile_id: profile.attributes.id });
     })
     .then(() => {
-      res.sendstatus(201);
+      // res.sendstatus(201);
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -180,7 +180,7 @@ module.exports.update = (req, res) => {
       return profile.influences().detach({ profile_id: profile.attributes.id });
     })
     .then(() => {
-      res.sendstatus(201);
+      // res.sendstatus(201);
     })
     .catch((err) => {
       res.status(500).send(err);

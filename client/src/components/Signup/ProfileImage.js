@@ -28,7 +28,7 @@ class ProfileImage extends React.Component {
           className="chat-picture"
           width="100"
           height="100"
-          alt="profile-pic"
+          alt="upload pic"
           src={photo_src}
         />
         <i
