@@ -29,7 +29,7 @@ class ProfileImage extends React.Component {
           width="100"
           height="100"
           alt="upload pic"
-          src={photo_src}
+          src={photo_src || '/assets/avatar.jpg'}
         />
         <i
           onClick={() => this.setState({ showEditPhoto: true })}

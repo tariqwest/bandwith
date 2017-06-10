@@ -83,7 +83,7 @@ class Profile extends React.Component {
                     width="100"
                     height="100"
                     alt="profile-pic"
-                    src={photo_src}
+                    src={photo_src || '/assets/avatar.jpg'}
                   />
                   <CardTitle title={fullname} subtitle={bio} />
                 </Card>
