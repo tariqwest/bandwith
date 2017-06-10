@@ -6,3 +6,4 @@ module.exports.Preference = require('./preference');
 module.exports.Signup = require('./signup');
 module.exports.Location = require('./location');
 module.exports.Photo = require('./photo');
+module.exports.Influence = require('./influence');

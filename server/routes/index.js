@@ -8,3 +8,4 @@ module.exports.preference = require('./preference');
 module.exports.signup = require('./signup');
 module.exports.location = require('./location');
 module.exports.photo = require('./photo');
+module.exports.influence = require('./influence');
