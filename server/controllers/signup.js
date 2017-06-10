@@ -18,7 +18,7 @@ module.exports.update = (req, res) => {
     song_url: req.body.song_url,
     video_url: id,
     age: req.body.age,
-    search_radius: req.body.searchRadius,
+    search_radius: req.body.search_radius,
     has_profile: true,
   };
 
@@ -192,7 +192,7 @@ module.exports.update = (req, res) => {
 
   // update the user_influences
   for (let i = 0; i < req.body.influences.length; i++) {
-    models.Influence.where({ influence_name: req.body.influences[i] }).fetch()
+    models.Influence.where({ influence_name: req.body.influences[i].name }).fetch()
       .then((influence) => {
         if (!influence) {
           throw influence;
@@ -201,7 +201,7 @@ module.exports.update = (req, res) => {
         }
       })
       .catch(() => (
-        models.Influence.forge({ influence_name: req.body.influences[i] }).save()
+        models.Influence.forge({ influence_name: req.body.influences[i].name, influence_img: req.body.influences[i].img }).save()
       ))
       .then((influence) => {
         models.Profile.where({ id: req.body.id }).fetch()
