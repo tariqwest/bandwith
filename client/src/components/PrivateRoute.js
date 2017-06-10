@@ -47,9 +47,9 @@ class PrivateRoute extends React.Component {
 
   checkProfileEstablished() {
     const { hasProfile, hasUserInfo, history, location } = this.props;
-    const locationCheck = !['/login', '/logout', '/signup'].includes(location.pathname);
+    const locationCheck = !['/login', '/logout', '/signup', '/profile'].includes(location.pathname);
     if (hasUserInfo && !hasProfile && locationCheck) {
-      history.push('/signup');
+      history.push('/profile');
     }
   }
 

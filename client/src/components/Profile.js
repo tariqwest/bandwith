@@ -29,6 +29,22 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = { showEditProfile: false };
+    this.checkFormRedirect = this.checkFormRedirect.bind(this);
+  }
+
+  componentWillMount() {
+    this.checkFormRedirect();
+  }
+
+  componentWillReceiveProps() {
+    this.checkFormRedirect();
+  }
+
+  checkFormRedirect() {
+    const { hasProfile, hasUserInfo } = this.props;
+    if (hasUserInfo && !hasProfile) {
+      this.setState({ showEditProfile: true });
+    }
   }
 
   render() {
@@ -225,7 +241,7 @@ class Profile extends React.Component {
             onRequestClose={() => this.setState({ showEditProfile: false })}
             title={this.props.user.display}
             actionButton={<FlatButton
-              label="Close"
+              label="Save"
               onTouchTap={() => this.setState({ showEditProfile: false })}
             />}
             appBarStyle={{ backgroundColor: '#000000' }}
@@ -245,6 +261,8 @@ const mapStateToProps = state => ({
   user: state.user.profile,
   hasInfo: state.user.hasInfo,
   location: state.location,
+  hasProfile: state.user.profile.has_profile,
+  hasUserInfo: state.user.hasInfo,
 });
 
 export default connect(mapStateToProps)(Profile);

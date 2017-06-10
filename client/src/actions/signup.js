@@ -20,7 +20,7 @@ export const updateError = message => ({
 
 export const updateProfile = profile => (dispatch) => {
   dispatch(requestUpdate());
-
+  debugger;
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -34,8 +34,6 @@ export const updateProfile = profile => (dispatch) => {
 
   return fetch('/api/signup', options)
     .then(res => res.text())
-    .then(json => console.log(json))
     .then(() => dispatch(getUserInfo(profile.id)))
-    // TODO dispatch fail action below
-    .catch(err => console.log(err));
+    .catch(err => dispatch(updateError(err)));
 };

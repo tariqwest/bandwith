@@ -76,6 +76,10 @@ class Signup extends React.Component {
     this.fillFormData(nextProps);
   }
 
+  componentWillUnmount() {
+    this.send();
+  }
+
   fillFormData(props) {
     if (props.hasUserInfo) {
       const { profile } = props;
@@ -90,9 +94,7 @@ class Signup extends React.Component {
     }
   }
 
-  send(event) {
-    event.preventDefault();
-
+  send() {
     const { dispatch } = this.props;
 
     const profile = {
@@ -314,12 +316,12 @@ class Signup extends React.Component {
                     handleChip={this.handleSelectMultiple}
                     selectedItems={this.state.preferred_instruments}
                   />
-                  <RaisedButton
+                  {/*<RaisedButton
                     secondary
                     style={style.button}
                     label="submit profile"
                     onTouchTap={this.send}
-                  />
+                  />*/}
                 </CardText>
               </Card>
             </Paper>
