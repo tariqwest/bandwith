@@ -58,6 +58,9 @@ module.exports.search = (req, res) => {
     if (!results) {
       throw results;
     }
+    if (results.rows.length === 0) {
+      throw 'no matches';
+    }
     potentialMatches = results.rows.map(row => row.id);
     potentialMatches = potentialMatches.filter(matchId => matchId !== Number(req.query.userId));
 
@@ -76,6 +79,9 @@ module.exports.search = (req, res) => {
         mutualMatches.push(potentialMatches[i]);
       }
     });
+    if (mutualMatches.length === 0) {
+      throw 'no matches';
+    }
     return db.knex.raw(findConnectionsQuery(req.query.userId, mutualMatches));
   })
   .then((connections) => {
@@ -87,6 +93,9 @@ module.exports.search = (req, res) => {
         mutualMatches = mutualMatches.filter(matchId => matchId !== connection.profile_id_1);
       }
     });
+    if (mutualMatches.length === 0) {
+      throw 'no matches';
+    }
     return models.Profile.where('id', 'IN', mutualMatches).fetchAll({
       withRelated: [
         'influences',
@@ -115,7 +124,10 @@ module.exports.search = (req, res) => {
   })
   .error(err => res.status(500).send(err))
   .catch((err) => {
-    console.log(err);
-    res.sendStatus(404);
+    if (err === 'no matches') {
+      res.send([]);
+    } else {
+      res.sendStatus(404);
+    }
   });
 };
