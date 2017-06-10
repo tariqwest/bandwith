@@ -24,19 +24,26 @@ class MatchListEntry extends React.Component {
   }
 
   render() {
+    const {
+      first,
+      last,
+      photo_src,
+    } = this.props.match;
+    const fullname = `${first} ${last}`;
+
     return (
       <div>
         <div onClick={this.chatWithMatch}>
           <ListItem
-            primaryText={`${this.props.match.first} ${this.props.match.last}`}
-            leftAvatar={<Avatar src={this.props.match.photo_src || '/assets/avatar.jpg'} />}
+            primaryText={`${first} ${last}`}
+            leftAvatar={<Avatar src={photo_src || '/assets/avatar.jpg'} />}
             rightIcon={<CommunicationChatBubble />}
           />
         </div>
         <FullscreenDialog
           open={this.state.showChat}
           onRequestClose={() => this.setState({ showChat: false })}
-          title={this.props.match.display}
+          title={fullname}
           actionButton={<FlatButton
             label="Close"
             onTouchTap={() => this.setState({ showChat: false })}

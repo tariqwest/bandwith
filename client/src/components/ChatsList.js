@@ -51,12 +51,13 @@ class ChatsList extends React.Component {
   }
 
   render() {
+    //const currentMatch = this.props.matches.filter((match) => match.id === this.props.currentMatchUserId)[0];
     const chatMessages = () => {
       if (this.props.currentMatchChatMessages.length > 0) {
         return (
           this.props.currentMatchChatMessages
           .map((chatMessage, i) => (
-            <ChatsListEntry key={i} chatMessage={chatMessage} />
+            <ChatsListEntry key={i} chatMessage={chatMessage} currentMatch={this.props.currentMatch} />
           ))
         );
       }

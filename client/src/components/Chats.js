@@ -30,6 +30,11 @@ class Chats extends React.Component {
 
   render() {
     const currentMatch = this.props.matches.filter((match) => match.id === this.props.currentMatchUserId)[0];
+    const {
+      first,
+      last,
+      photo_src
+    } = currentMatch;
     return (
       <Row>
         <Col xs={12} sm={6} smOffset={3}>
@@ -47,20 +52,20 @@ class Chats extends React.Component {
               showExpandableButton={false}
             >
             <div className="chat-title">
-              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={currentMatch.photo_src || '/assets/avatar.jpg'} />
+              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src || '/assets/avatar.jpg'} />
               <CardTitle
-                title={`${currentMatch.first} ${currentMatch.last}`}
+                title={`${first} ${last}`}
               />
             </div>
             </CardText>
             <CardText expandable={true} >
-              <ResultsProfile user={currentMatch} />
+              <ResultsProfile currentMatch={currentMatch} />
             </CardText>
           </Card>
           </Paper>
           <Paper style={styles.paper} >
           <Card>
-            <ChatsList />
+            <ChatsList currentMatch={currentMatch} />
           </Card>
           </Paper>
         </Col>

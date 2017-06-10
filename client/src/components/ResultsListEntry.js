@@ -25,6 +25,17 @@ class ResultsListEntry extends React.Component {
   }
 
   render() {
+    const {
+      first,
+      last,
+      display,
+      bio,
+      photo_src,
+      instruments,
+      genres,
+    } = this.props.result;
+    const fullname = `${first} ${last}`;
+
     return (
       <div>
         <Card>
@@ -32,12 +43,12 @@ class ResultsListEntry extends React.Component {
           <CardMedia
             overlay={
               <div>
-                <CardTitle title={this.props.result.display} subtitle={this.props.result.bio} />
-                <TagList tags={this.props.result.instruments} type="instrument" />
-                <TagList tags={this.props.result.genres} type="genres" />
+                <CardTitle title={fullname} subtitle={this.props.result.bio} />
+                <TagList tags={instruments} type="instrument" />
+                <TagList tags={genres} type="genres" />
               </div>}
           >
-            <img src={this.props.result.photo || '/assets/avatar.jpg'} />
+            <img src={photo_src || '/assets/avatar.jpg'} />
           </CardMedia>
           </div>
           <CardActions>
@@ -48,7 +59,7 @@ class ResultsListEntry extends React.Component {
         <FullscreenDialog
           open={this.state.showFullProfile}
           onRequestClose={() => this.setState({ showFullProfile: false })}
-          title={this.props.result.display}
+          title={display}
           actionButton={<FlatButton
             label='Close'
             onTouchTap={() => this.setState({ showFullProfile: false })}
@@ -60,9 +71,8 @@ class ResultsListEntry extends React.Component {
             <FlatButton label="No" onClick={() => this.handleChoice(true)} />
           </CardActions>
           <Card>
-            <CardHeader avatar={photo_src} title={fullname} subtitle={display} />
             <CardTitle title={fullname} subtitle={bio} />
-              <ResultsProfile user={this.props.result} />
+              <ResultsProfile currentResult={this.props.result} />
             </Card>
         </FullscreenDialog>
       </div>
@@ -70,6 +80,9 @@ class ResultsListEntry extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ userId: state.auth.userId });
+const mapStateToProps = state => ({
+  userId: state.auth.userId,
+  user: state.user.profile,
+});
 
 export default connect(mapStateToProps)(ResultsListEntry);
