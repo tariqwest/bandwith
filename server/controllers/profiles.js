@@ -37,7 +37,10 @@ module.exports.getOne = (req, res) => {
       throw profile;
     }
 
-    const influences = profile.related('influences').map(i => i.attributes.influence_name);
+    const influences = profile.related('influences').map(i => ({
+      name: i.attributes.influence_name,
+      img: i.attributes.influence_img,
+    }));
     const instruments = profile.related('instruments').map(i => i.attributes.instrument_name);
     const preferred_instruments = profile.related('preferred_instruments').map(p => p.attributes.instrument_name);
     const genres = profile.related('genres').map(g => g.attributes.genre_name);
