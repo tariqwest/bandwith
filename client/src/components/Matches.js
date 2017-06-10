@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { Card, CardTitle } from 'material-ui/Card';
 import { Row, Col } from 'react-flexbox-grid';
 import MatchList from './MatchList';
+import Paper from 'material-ui/Paper';
+
+const style = {
+  margin: 10,
+};
 
 class Matches extends React.Component {
   constructor(props) {
@@ -13,14 +18,14 @@ class Matches extends React.Component {
   render() {
     return (
       <Row>
-        <Col xs={0} sm={3} md={3} lg={3} />
-        <Col xs={12} sm={6} md={6} lg={6}>
-          <Card>
-            <CardTitle title="Connections" />
-            <MatchList />
-          </Card>
+        <Col xs={12} sm={6} smOffset={3}>
+          <Paper style={style} zDepth={1}>
+            <Card>
+              <CardTitle title="Connections" />
+              <MatchList />
+            </Card>
+          </Paper>
         </Col>
-        <Col xs={0} sm={3} md={3} lg={3} />
       </Row>
     );
   }

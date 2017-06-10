@@ -19,7 +19,7 @@ class MatchListEntry extends React.Component {
 
   chatWithMatch() {
     const { dispatch, match } = this.props;
-    dispatch(setCurrentMatch(match.id, match.first, match.last, match.photo_src));
+    dispatch(setCurrentMatch(match.id));
     this.setState({ showChat: true });
   }
 
@@ -52,7 +52,6 @@ class MatchListEntry extends React.Component {
 
 const mapStateToProps = state => ({
   userId: state.auth.userId,
-  currentMatch: state.chat.currenMatch,
 });
 
 export default connect(mapStateToProps)(MatchListEntry);

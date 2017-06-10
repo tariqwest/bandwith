@@ -82,11 +82,8 @@ export const sendChat = (userId, matchUserId, message) => (dispatch) => {
     .catch(err => dispatch(sendChatFailure(err.message)));
 };
 
-export const setCurrentMatch = (currentMatchUserId, currentMatchFirstName, currentMatchLastName, currentMatchPhotoSrc) => ({
+export const setCurrentMatch = (currentMatchUserId) => ({
   type: CHATS_SET_CURRENT_MATCH,
   isFetching: false,
-  currentMatchUserId,
-  currentMatchFirstName,
-  currentMatchLastName,
-  currentMatchPhotoSrc,
+  currentMatchUserId
 });

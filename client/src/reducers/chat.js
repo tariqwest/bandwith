@@ -57,9 +57,6 @@ const chat = (state = {
       return {
         ...state,
         currentMatchUserId: action.currentMatchUserId,
-        currentMatchFirstName: action.currentMatchFirstName,
-        currentMatchLastName: action.currentMatchLastName,
-        currentMatchPhotoSrc: action.currentMatchPhotoSrc,
       };
     default:
       return state;
