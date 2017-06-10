@@ -13,6 +13,9 @@ import Chip from 'material-ui/Chip';
 import { Row, Col } from 'react-flexbox-grid';
 import FullscreenDialog from 'material-ui-fullscreen-dialog';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
+import CircularProgress from 'material-ui/CircularProgress';
+
+
 import Signup from './Signup';
 
 const style = {
@@ -33,17 +36,21 @@ class Profile extends React.Component {
   }
 
   componentWillMount() {
-    this.checkFormRedirect();
+    this.checkFormRedirect(this.props);
   }
 
-  componentWillReceiveProps() {
-    this.checkFormRedirect();
+  componentWillReceiveProps(next) {
+    this.checkFormRedirect(next);
   }
 
-  checkFormRedirect() {
-    const { hasProfile, hasUserInfo } = this.props;
-    if (hasUserInfo && !hasProfile) {
+  checkFormRedirect(props) {
+    const { hasProfile, hasUserInfo, isSavingUser } = props;
+    
+    if (hasUserInfo && !hasProfile && !isSavingUser) {3
       this.setState({ showEditProfile: true });
+    }
+    if (hasUserInfo && hasProfile) {
+      this.setState({ showEditProfile: false });
     }
   }
 
@@ -66,13 +73,15 @@ class Profile extends React.Component {
       song_url,
       photo_src,
     } = this.props.user;
+
+    const { hasUserInfo, isFetchingUser, isSavingUser } = this.props;
     const { city, state } = this.props.location;
     const fullname = `${first} ${last}`;
     const search = `Searching within ${search_radius} miles`;
     const profile = `${gender}, ${age}`;
     const location = `${city}, ${state} ${zipcode}`;
 
-    if (this.props.hasInfo) {
+    if (hasUserInfo) {
       let videoId = '';
       if (video_url) {
         const videoUrl = video_url.split('/');
@@ -252,17 +261,18 @@ class Profile extends React.Component {
       );
     }
     return (
-      <div>Loading</div>
+      <CircularProgress size={100} thickness={5} />
     );
   }
 }
 
 const mapStateToProps = state => ({
   user: state.user.profile,
-  hasInfo: state.user.hasInfo,
   location: state.location,
   hasProfile: state.user.profile.has_profile,
   hasUserInfo: state.user.hasInfo,
+  isFetchingUser: state.user.isFetching,
+  isSavingUser: state.signup.isFetching,
 });
 
 export default connect(mapStateToProps)(Profile);
