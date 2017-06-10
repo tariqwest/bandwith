@@ -5,7 +5,18 @@ import request from 'superagent';
 import IconButton from 'material-ui/IconButton';
 import Dropzone from 'react-dropzone';
 
-const style={margin: 0}
+const style = {
+  parent: {
+    position: 'relative',
+  },
+  child: {
+    position: 'relative',
+    left: '100px',
+    right: '-100px',
+    top: '-25px',
+    bottom: '25px',
+  },
+};
 const CLOUDINARY_UPLOAD_PRESET = 'bandwith';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dropiffy/image/upload';
 
@@ -38,27 +49,7 @@ class ProfileImage extends React.Component {
   render() {
     const { photo_src } = this.props.user;
     return (
-      <div>
-        <Dropzone
-          style={style}
-          multiple={false}
-          accept="image/*"
-          onDrop={this.onDrop}
-        >
-          <Badge
-            badgeContent={
-              <IconButton
-                tooltip="Update Photo"
-                touch
-                tooltipPosition="bottom-right"
-              >
-                <i
-                  className="material-icons"
-                >mode_edit</i>
-              </IconButton>
-            }
-          />
-        </Dropzone>
+      <div style={style.parent}>
         <img
           className="chat-picture"
           width="100"
@@ -66,6 +57,28 @@ class ProfileImage extends React.Component {
           alt="upload pic"
           src={photo_src || '/assets/avatar.jpg'}
         />
+        <div style={style.child}>
+          <Dropzone
+            style={style}
+            multiple={false}
+            accept="image/*"
+            onDrop={this.onDrop}
+          >
+            <Badge
+              badgeContent={
+                <IconButton
+                  tooltip="Update Photo"
+                  touch
+                  tooltipPosition="bottom-right"
+                >
+                  <i
+                    className="material-icons"
+                  >mode_edit</i>
+                </IconButton>
+              }
+            />
+          </Dropzone>
+        </div>
       </div>
     );
   }
