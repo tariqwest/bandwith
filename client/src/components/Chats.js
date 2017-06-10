@@ -33,7 +33,7 @@ class Chats extends React.Component {
     return (
       <Row>
         <Col xs={12} sm={6} smOffset={3}>
-          <Paper style={styles.paper} >
+          <Paper style={styles.paper}>
           <Card
             expanded={this.state.showFullMatchProfile}
             onExpandChange={this.handleProfileDisplayToggle}
@@ -42,12 +42,17 @@ class Chats extends React.Component {
               actAsExpander={true}
               showExpandableButton={true}
             />
+            <CardText
+              actAsExpander={true}
+              showExpandableButton={false}
+            >
             <div className="chat-title">
               <img className="chat-picture" width="100" height="100" alt="profile-pic" src={currentMatch.photo_src || '/assets/avatar.jpg'} />
               <CardTitle
                 title={`${currentMatch.first} ${currentMatch.last}`}
               />
             </div>
+            </CardText>
             <CardText expandable={true} >
               <ResultsProfile user={currentMatch} />
             </CardText>
