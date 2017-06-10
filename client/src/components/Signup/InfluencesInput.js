@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import List from './List';
+import InfluenceList from './InfluenceList';
 
 const style = {
   margin: 12,
@@ -24,7 +24,7 @@ const InfluenceInput = ({ influence, influences, handleChange, onClick, handleCh
       form="influences"
       onTouchTap={onClick}
     />
-    <List
+    <InfluenceList
       handleChip={handleChip}
       selectedItems={influences}
       influence={influence}
