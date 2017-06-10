@@ -23,7 +23,7 @@ class ChatListEntry extends React.Component {
     axios.get(`/api/profiles/${userId}`)
       .then((response) => {
         this.setState({
-          fromName: response.data.first + ' ' + response.data.last,
+          fromName: `${response.data.first} ${response.data.last}`,
           fromPhotoSrc: response.data.photo_src,
         });
       })
@@ -39,7 +39,7 @@ class ChatListEntry extends React.Component {
         <ListItem
           primaryText={this.props.chatMessage.message}
           secondaryText={secondary}
-          rightAvatar={<Avatar src={this.state.fromPhotoSrc} />}
+          rightAvatar={<Avatar src={this.state.fromPhotoSrc || '/assets/avatar.jpg'} />}
           style={{ textAlign: 'right' }}
         />
       );
@@ -48,7 +48,7 @@ class ChatListEntry extends React.Component {
       <ListItem
         primaryText={this.props.chatMessage.message}
         secondaryText={secondary}
-        leftAvatar={<Avatar src={this.state.fromPhotoSrc} />}
+        leftAvatar={<Avatar src={this.state.fromPhotoSrc || '/assets/avatar.jpg'} />}
       />
     );
   }

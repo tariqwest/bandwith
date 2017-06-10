@@ -21,7 +21,6 @@ class Matches extends React.Component {
         <Col xs={12} sm={6} smOffset={3}>
           <Paper style={style} zDepth={1}>
             <Card>
-              <CardTitle title="Connections" />
               <MatchList />
             </Card>
           </Paper>

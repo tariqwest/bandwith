@@ -43,7 +43,7 @@ class Chats extends React.Component {
               showExpandableButton={true}
             />
             <div className="chat-title">
-              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={currentMatch.photo_src} />
+              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={currentMatch.photo_src || '/assets/avatar.jpg'} />
               <CardTitle
                 title={`${currentMatch.first} ${currentMatch.last}`}
               />

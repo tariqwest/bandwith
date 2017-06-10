@@ -1,12 +1,21 @@
 import React from 'react';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
-import { CardText } from 'material-ui/Card';
+import { Row, Col } from 'react-flexbox-grid';
+import { CardText, CardActions } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import { List } from 'material-ui/List';
 import ChatsListEntry from './ChatsListEntry';
 import { getChats } from '../actions';
+
+const styles = {
+  button: {
+    position: 'relative',
+    top: '27px',
+    backgroundColor: '000000',
+  },
+};
 
 class ChatsList extends React.Component {
   constructor(props) {
@@ -16,7 +25,7 @@ class ChatsList extends React.Component {
     this.saveMessage = this.saveMessage.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { dispatch } = this.props;
     this.socket = io('http://localhost:3000');
     this.socket.on('chat', () => {
@@ -56,21 +65,35 @@ class ChatsList extends React.Component {
 
     return (
       <div>
-        <CardText>
-          <TextField
-            id="message"
-            type="text"
-            floatingLabelShrinkStyle={{ color: '#000' }}
-            underlineFocusStyle={{ borderColor: '#000' }}
-            value={this.state.message}
-            onChange={this.saveMessage}
-            floatingLabelText="Enter your message..."
-          />
-          <FlatButton label="Send" onClick={this.handleSendClick} />
-        </CardText>
         <List>
           {chatMessages()}
         </List>
+        <CardActions>
+          <Row>
+            <Col xs={9}>
+              <TextField
+                id="message"
+                type="text"
+                fullWidth={true}
+                multiLine={true}
+                floatingLabelShrinkStyle={{ color: '#000' }}
+                underlineFocusStyle={{ borderColor: '#000' }}
+                value={this.state.message}
+                onChange={this.saveMessage}
+                floatingLabelText="Enter your message..."
+              />
+            </Col>
+            <Col xs={3}>
+              <RaisedButton
+                style={styles.button}
+                label="Send"
+                backgroundColor={styles.button.backgroundColor}
+                fullWidth={true}
+                onClick={this.handleSendClick}
+              />
+            </Col>
+          </Row>
+        </CardActions>
       </div>
     );
   }
