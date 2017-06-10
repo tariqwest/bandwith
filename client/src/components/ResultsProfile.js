@@ -35,10 +35,10 @@ class ResultsProfile extends React.Component {
       video_url,
       song_url,
       photo_src,
-    } = this.props.user;
-    const fullname = first + ' ' + last;
-    const search = 'Searching within ' + searchRadius + ' miles';
-    const profile = gender + ', ' + age;
+    } =  this.props.currentResult || this.props.currentMatch;
+    const fullname = `${first} ${last}`;
+    const search = `Searching within ${searchRadius} miles`;
+    const profile = `${gender}, ${age}`;
 
       return (
 
