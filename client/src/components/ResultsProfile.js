@@ -41,9 +41,7 @@ class ResultsProfile extends React.Component {
     const profile = gender + ', ' + age;
 
       return (
-        <Card>
-          <CardHeader avatar={photo_src} title={fullname} subtitle={display} />
-          <CardTitle title={fullname} subtitle={bio} />
+
           <List>
             <ListItem
               leftIcon={<i className="material-icons">account_circle</i>}
@@ -132,7 +130,6 @@ class ResultsProfile extends React.Component {
               ]}
             />
           </List>
-        </Card>
       );
   }
 }

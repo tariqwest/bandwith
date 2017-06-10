@@ -59,7 +59,11 @@ class ResultsListEntry extends React.Component {
             <FlatButton label="Yes" onClick={() => this.handleChoice(true)} />
             <FlatButton label="No" onClick={() => this.handleChoice(true)} />
           </CardActions>
-          <ResultsProfile user={this.props.result} />
+          <Card>
+            <CardHeader avatar={photo_src} title={fullname} subtitle={display} />
+            <CardTitle title={fullname} subtitle={bio} />
+              <ResultsProfile user={this.props.result} />
+            </Card>
         </FullscreenDialog>
       </div>
     );
