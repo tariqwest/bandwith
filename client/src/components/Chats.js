@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardTitle, CardText, CardMedia, CardHeader } from 'material-ui/Card';
+import { Card, CardTitle, CardText, CardMedia, CardHeader, CardActions } from 'material-ui/Card';
 import { Row, Col } from 'react-flexbox-grid';
 import ChatsList from './ChatsList';
 import ResultsProfile from './ResultsProfile';
 import Paper from 'material-ui/Paper';
 import ResultsListEntry from './ResultsListEntry';
+import Divider from 'material-ui/Divider';
+import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
   paper: { margin: 10 },
+  profileContainer: { padding: 10 },
   title: { textAlign: 'center' },
 };
 
@@ -16,15 +19,17 @@ class Chats extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      showFullMatchProfile: false,
+      showProfile: false,
+      showChat: true,
     };
+    this.toggleChatAndProfile = this.toggleChatAndProfile.bind(this);
   }
 
-  handleProfileDisplayToggle = () => {
-    if(this.state.showFullMatchProfile){
-      this.setState({showFullMatchProfile: false});
+  toggleChatAndProfile = (show) => {
+    if(show === 'chat'){
+      this.setState({showChat: true, showProfile: false});
     }else{
-      this.setState({showFullMatchProfile: true});
+      this.setState({showProfile: true, showChat: false});
     }
   };
 
@@ -33,41 +38,43 @@ class Chats extends React.Component {
     const {
       first,
       last,
+      bio,
       photo_src
     } = currentMatch;
+
+    const chatOrProfile = () => {
+      if(this.state.showChat){
+        return (<Paper style={styles.paper} ><Card><ChatsList currentMatch={currentMatch} /></Card></Paper>)
+      }else{
+        return (<div style={styles.profileContainer}><ResultsProfile currentMatch={currentMatch} /></div>)
+      }
+    }
+
     return (
       <Row>
-        <Col xs={12} sm={6} smOffset={3}>
+        <Col xs={12} sm={8} smOffset={2}>
           <Paper style={styles.paper}>
-          <Card
-            expanded={this.state.showFullMatchProfile}
-            onExpandChange={this.handleProfileDisplayToggle}
-            >
-            <CardHeader
-              actAsExpander={true}
-              showExpandableButton={true}
-            />
-            <CardText
-              actAsExpander={true}
-              showExpandableButton={false}
-            >
+          <Card>
             <div className="chat-title">
               <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src || '/assets/avatar.jpg'} />
               <CardTitle
-                title={`${first} ${last}`}
+                title={`${first} ${last}`} subtitle={bio}
               />
+              <Divider />
+            <CardActions>
+              <Row>
+                <Col xs={6}>
+                  <FlatButton fullWidth={true} label="Chat" onClick={() => this.toggleChatAndProfile('chat')} />
+                </Col>
+                <Col xs={6}>
+                  <FlatButton fullWidth={true} label="Profile" onClick={() => this.toggleChatAndProfile('profile')} />
+                </Col>
+              </Row>
+            </CardActions>
             </div>
-            </CardText>
-            <CardText expandable={true} >
-              <ResultsProfile currentMatch={currentMatch} />
-            </CardText>
           </Card>
           </Paper>
-          <Paper style={styles.paper} >
-          <Card>
-            <ChatsList currentMatch={currentMatch} />
-          </Card>
-          </Paper>
+            {chatOrProfile()}
         </Col>
       </Row>
     );

@@ -106,7 +106,11 @@ class ResultsListEntry extends React.Component {
               </Row>
             </CardActions>
           </Card>
-          <ResultsProfile currentResult={this.props.result} />
+           <Row>
+            <Col xs={12} sm={8} smOffset={2}>
+             <ResultsProfile currentResult={this.props.result} />
+            </Col>
+          </Row>
         </FullscreenDialog>
       </div>
     );

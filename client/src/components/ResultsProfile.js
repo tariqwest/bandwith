@@ -60,26 +60,33 @@ class ResultsProfile extends React.Component {
         videoId = videoQuery[videoQuery.length - 1];
       }
 
+      const profileHeader = () => {
+        if(this.props.currentResult){
+          return (<Row>
+              <Col xs={12}>
+                <Paper style={style}>
+                  <Card className="chat-title">
+                    <img
+                      className="chat-picture"
+                      width="100"
+                      height="100"
+                      alt="profile-pic"
+                      src={photo_src || '/assets/avatar.jpg'}
+                    />
+                    <CardTitle title={fullname} subtitle={bio} />
+                  </Card>
+                </Paper>
+              </Col>
+            </Row>)
+        }
+      };
+
+
       return (
         <div>
+          {profileHeader()}
           <Row>
-            <Col xs={12} sm={8} xsOffset={0} smOffset={2}>
-              <Paper style={style}>
-                <Card className="chat-title">
-                  <img
-                    className="chat-picture"
-                    width="100"
-                    height="100"
-                    alt="profile-pic"
-                    src={photo_src || '/assets/avatar.jpg'}
-                  />
-                  <CardTitle title={fullname} subtitle={bio} />
-                </Card>
-              </Paper>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} sm={4} smOffset={2}>
+            <Col xs={12} sm={6}>
               <Paper style={style}>
                 <Card>
                   <CardTitle title="Personal Info" />
@@ -100,7 +107,7 @@ class ResultsProfile extends React.Component {
                 </Card>
               </Paper>
             </Col>
-            <Col xs={12} sm={4}>
+            <Col xs={12} sm={6}>
               <Paper style={style}>
                 <Card>
                   <CardTitle title="Checkout my skills..." />
@@ -141,7 +148,7 @@ class ResultsProfile extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col xs={12} sm={4} smOffset={2}>
+            <Col xs={12} sm={6}>
               <Paper style={style}>
                 <Card>
                   <CardTitle title="Me as a Musician" />
@@ -176,7 +183,7 @@ class ResultsProfile extends React.Component {
                 </Card>
               </Paper>
             </Col>
-            <Col xs={12} sm={4}>
+            <Col xs={12} sm={6}>
               <Paper style={style}>
                 <Card>
                   <CardTitle title="I am looking for Musicians..." />

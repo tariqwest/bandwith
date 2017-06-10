@@ -248,7 +248,7 @@ class Profile extends React.Component {
           <FullscreenDialog
             open={this.state.showEditProfile}
             onRequestClose={() => this.setState({ showEditProfile: false })}
-            title={this.props.user.display}
+            title={fullname}
             actionButton={<FlatButton
               label="Save"
               onTouchTap={() => this.setState({ showEditProfile: false })}
