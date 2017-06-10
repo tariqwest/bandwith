@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import { Card,
+  CardHeader,
   CardTitle,
   CardMedia,
 } from 'material-ui/Card';
@@ -177,9 +178,11 @@ class Profile extends React.Component {
                       leftIcon={<i className="material-icons">headset</i>}
                       primaryText="My Influences"
                       primaryTogglesNestedList={true}
-                      nestedItems={influences.map(influence =>
-                        <Chip key={influence.name} style={chipStyle}>{influence.name}</Chip> // eslint-disable-line
-                      )}
+                      nestedItems={influences.map(influence => (
+                        <Card key={influence.name}>
+                          <CardHeader title={influence.name} avatar={influence.img} />
+                        </Card> // eslint-disable-line
+                      ))}
                     />
                   </List>
                 </Card>

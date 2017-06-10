@@ -35,6 +35,17 @@ html {
   cursor: pointer;
 }
 
+.remove-div {
+  display: inline-block;
+  text-align: right;
+  cursor: pointer;
+}
+
+.remove-button {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
 .background {
   background-color: #EEEEEE;
 }
