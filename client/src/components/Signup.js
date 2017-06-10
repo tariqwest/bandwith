@@ -222,14 +222,19 @@ class Signup extends React.Component {
       const influenceURI = encodeURI(influence);
       axios.get(`https://rest.bandsintown.com/artists/${influenceURI}?app_id=bandwith`)
         .then((response) => {
-          updatedInfluences.push({
+          const influencesObj = {
             name: response.data.name,
             img: response.data.thumb_url,
-          });
+          };
+          updatedInfluences.push(influencesObj);
           this.setState({
             influences: updatedInfluences,
             influence: '',
           });
+          return influencesObj;
+        })
+        .then((influencesObj) => {
+          axios.post('/api/influence', influencesObj);
         })
         .catch((err) => {throw err;});
     }
