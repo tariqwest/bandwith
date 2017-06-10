@@ -55,6 +55,13 @@ class Profile extends React.Component {
     const location = `${city}, ${state} ${zipcode}`;
 
     if (this.props.hasInfo) {
+      let videoId = '';
+      if (video_url) {
+        const videoUrl = video_url.split('/');
+        const videoQuery = videoUrl[videoUrl.length - 1].split('=');
+        videoId = videoQuery[videoQuery.length - 1];
+      }
+
       return (
         <div>
           <Row>
@@ -114,12 +121,12 @@ class Profile extends React.Component {
                       primaryText="YouTube"
                       primaryTogglesNestedList={true}
                       nestedItems={[
-                        <CardMedia key={video_url}>
+                        <CardMedia key={videoId}>
                           <iframe
                             frameBorder="0"
                             allowFullScreen
                             title="video"
-                            src={`https://www.youtube.com/embed/${video_url}`}
+                            src={`https://www.youtube.com/embed/${videoId}`}
                           />
                         </CardMedia>,
                       ]}
@@ -171,7 +178,7 @@ class Profile extends React.Component {
                       primaryText="My Influences"
                       primaryTogglesNestedList={true}
                       nestedItems={influences.map(influence =>
-                        <Chip key={influence} style={chipStyle}>{influence}</Chip> // eslint-disable-line
+                        <Chip key={influence.name} style={chipStyle}>{influence.name}</Chip> // eslint-disable-line
                       )}
                     />
                   </List>
