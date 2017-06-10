@@ -12,7 +12,7 @@ module.exports.saveOne = (req, res) => {
     .catch(() => {
       models.Influence.forge({
         influence_name: req.body.name,
-        influence_img: req.body.thumb_url,
+        influence_img: req.body.img,
       }).save();
       res.sendStatus(201);
     });
