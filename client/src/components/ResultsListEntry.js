@@ -4,9 +4,33 @@ import { sendResultsAction } from '../actions';
 import { connect } from 'react-redux';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Chip from 'material-ui/Chip';
+import Divider from 'material-ui/Divider';
 import FullscreenDialog from 'material-ui-fullscreen-dialog';
 import ResultsProfile from './ResultsProfile';
+import { Row, Col } from 'react-flexbox-grid';
+
+const styles = {
+  fullProfile: {
+    choiceBar: {
+      zIndex: 100,
+      position: 'absolute',
+      width: '100%',
+      textAlign: 'center',
+      bottom: 0,
+      background: '#000',
+      paddingTop: 5,
+      paddingBottom: 5,
+    },
+    choiceButton: {
+      color: '#fff',
+    },
+    containerStyle: {
+      paddingBottom: '50px',
+    },
+  },
+};
 
 
 class ResultsListEntry extends React.Component {
@@ -39,41 +63,50 @@ class ResultsListEntry extends React.Component {
     return (
       <div>
         <Card>
-          <div onClick={() => this.setState({ showFullProfile: true })}>
-          <CardMedia
-            overlay={
-              <div>
-                <CardTitle title={fullname} subtitle={this.props.result.bio} />
-                <TagList tags={instruments} type="instrument" />
-                <TagList tags={genres} type="genres" />
-              </div>}
-          >
-            <img src={photo_src || '/assets/avatar.jpg'} />
-          </CardMedia>
-          </div>
+          <CardText onClick={() => this.setState({ showFullProfile: true })} >
+            <div className="chat-title">
+              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src || '/assets/avatar.jpg'} />
+              <CardTitle title={`${first} ${last}`} subtitle={bio} />
+            </div>
+            <CardText> <TagList tags={instruments.concat(genres)} type="instrument" /> </CardText>
+          </CardText>
+
+          <Divider />
           <CardActions>
-            <FlatButton label="Yes" onClick={() => this.handleChoice(true)} />
-            <FlatButton label="No" onClick={() => this.handleChoice(false)} />
+            <Row>
+              <Col xs={6}>
+                <FlatButton fullWidth={true} label="Yes" onClick={() => this.handleChoice(true)} />
+              </Col>
+              <Col xs={6}>
+                <FlatButton fullWidth={true} label="No" onClick={() => this.handleChoice(true)} />
+              </Col>
+            </Row>
           </CardActions>
         </Card>
         <FullscreenDialog
           open={this.state.showFullProfile}
           onRequestClose={() => this.setState({ showFullProfile: false })}
-          title={display}
+          title={fullname}
           actionButton={<FlatButton
             label='Close'
             onTouchTap={() => this.setState({ showFullProfile: false })}
           />}
           appBarStyle={{backgroundColor: '#000000'}}
+          containerStyle={styles.fullProfile.containerStyle}
         >
-          <CardActions>
-            <FlatButton label="Yes" onClick={() => this.handleChoice(true)} />
-            <FlatButton label="No" onClick={() => this.handleChoice(true)} />
-          </CardActions>
-          <Card>
-            <CardTitle title={fullname} subtitle={bio} />
-              <ResultsProfile currentResult={this.props.result} />
-            </Card>
+          <Card style={styles.fullProfile.choiceBar}>
+            <CardActions>
+              <Row>
+                <Col xs={6}>
+                  <FlatButton style={styles.fullProfile.choiceButton} fullWidth={true} label="Yes" onClick={() => this.handleChoice(true)} />
+                </Col>
+                <Col xs={6}>
+                  <FlatButton style={styles.fullProfile.choiceButton} fullWidth={true} label="No" onClick={() => this.handleChoice(true)} />
+                </Col>
+              </Row>
+            </CardActions>
+          </Card>
+          <ResultsProfile currentResult={this.props.result} />
         </FullscreenDialog>
       </div>
     );
