@@ -18,7 +18,7 @@ const style = {
   },
 };
 const CLOUDINARY_UPLOAD_PRESET = 'bandwith';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dropiffy/image/upload';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/hjwsarwnv/image/upload';
 
 class ProfileImage extends React.Component {
   constructor(props) {
