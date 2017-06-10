@@ -36,7 +36,7 @@ module.exports.update = (req, res) => {
   }
 
   // Convert zipcode to geocoordinates for radius search
-  axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${profileBody.zipcode}&key=${config.apiKeys.google}`)
+  const GetCoordinates = axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${profileBody.zipcode}&key=${config.apiKeys.google}`)
     .then((response) => {
       const location = response.data.results[0].geometry.location;
       const geoUpdateQuery = `UPDATE profiles SET geo = ST_SetSRID(ST_Point(${location.lat}, ${location.lng}), 4326) WHERE id = ${req.body.id}`;
@@ -46,83 +46,97 @@ module.exports.update = (req, res) => {
       if (!updated) {
         throw updated;
       }
-    })
-    .catch((err) => { console.log('Error with zipcode geocode or db update: ', err); });
+    });
 
   const Profile = models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
       if (!profile) {
         throw profile;
       }
+      return profile;
     });
 
   // update the user profile table
-  const BasicProfile = Profile.then(p => p.save(profileBody, { method: 'update' }));
+  const SaveBasicProfile = Profile.then(p => p.save(profileBody, { method: 'update' }));
 
   // delete the user_instruments table
-  const DeleteUserInstruments = Profile.then(p => (
+  const DeleteUserInstruments = Profile.tap(p => (
     p.instruments().detach({ profile_id: p.attributes.id })
   ));
 
   // update the user_instruments
-  const SaveUserInstruments = Profile.then(p => (
-    Promise.All(instruments.map(instrument => (
+  const SaveUserInstruments = DeleteUserInstruments.then(p => (
+    Promise.all(instruments.map(instrument => (
       models.Instrument.where({ instrument_name: instrument }).fetch()
       .then((i) => { p.instruments().attach(i); })
     )))
   ));
 
   // delete the user_genres table
-  const DeleteUserGenres = Profile.then(p => (
+  const DeleteUserGenres = Profile.tap(p => (
     p.genres().detach({ profile_id: p.attributes.id })
   ));
 
   // update the user_genres
-  const SaveUserGenres = Profile.then(p => (
-    Promise.All(genres.map(genre => (
+  const SaveUserGenres = DeleteUserGenres.then(p => (
+    Promise.all(genres.map(genre => (
       models.Genre.where({ genre_name: genre }).fetch()
       .then((g) => { p.genres().attach(g); })
     )))
   ));
 
 // delete the preferred_instruments table
-  const DeletePreferredInstruments = Profile.then(p => (
+  const DeletePreferredInstruments = Profile.tap(p => (
     p.preferred_instruments().detach({ profile_id: p.attributes.id })
   ));
 
   // update the preferred_instruments
-  const SavePreferredInstruments = Profile.then(p => (
-    Promise.All(preferredInstruments.map(preferredInstrument => (
+  const SavePreferredInstruments = DeletePreferredInstruments.then(p => (
+    Promise.all(preferredInstruments.map(preferredInstrument => (
       models.Instrument.where({ instrument_name: preferredInstrument }).fetch()
       .then((pI) => { p.preferred_instruments().attach(pI); })
     )))
   ));
 
   // delete the preferred_genres table
-  const DeletePreferredGenres = Profile.then(p => (
+  const DeletePreferredGenres = Profile.tap(p => (
     p.preferred_genres().detach({ profile_id: p.attributes.id })
   ));
 
   // update the preferred_genres
-  const SavePreferredGenres = Profile.then(p => (
-    Promise.All(preferredGenres.map(preferredGenre => (
+  const SavePreferredGenres = DeletePreferredGenres.then(p => (
+    Promise.all(preferredGenres.map(preferredGenre => (
       models.Genre.where({ genre_name: preferredGenre }).fetch()
       .then((pG) => { p.preferred_genres().attach(pG); })
     )))
   ));
 
   // delete the influences table
-  const DeleteInfluences = Profile.then(p => (
+  const DeleteInfluences = Profile.tap(p => (
     p.influences().detach({ profile_id: p.attributes.id })
   ));
 
   // update the user_influences
-  const SaveInfluences = Profile.then(p => (
-    Promise.All(influences.map(influence => (
-      models.Influence.where({ influence }).fetch()
+  const SaveInfluences = DeleteInfluences.then(p => (
+    Promise.all(influences.map(influence => (
+      models.Influence.where({ influence_name: influence }).fetch()
       .then((i) => { p.influences().attach(i); })
     )))
   ));
 
-  Promise.All([])
+  Promise.all([
+    SaveBasicProfile,
+    SaveUserInstruments,
+    SaveUserGenres,
+    SavePreferredInstruments,
+    SavePreferredGenres,
+    SaveInfluences,
+    GetCoordinates,
+  ])
+  .then(() => {
+    res.sendStatus(201);
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+  });
 };
