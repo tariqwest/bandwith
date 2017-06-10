@@ -1,5 +1,6 @@
-const config = require('config');
+const Promise = require('bluebird');
 const models = require('../../db/models');
+const config = require('config');
 const db = require('../../db');
 const axios = require('axios');
 
@@ -7,7 +8,11 @@ module.exports.update = (req, res) => {
   const videoUrl = req.body.video_url.split('/');
   const query = videoUrl[videoUrl.length - 1].split('=');
   const id = query[query.length - 1];
-
+  const instruments = req.body.instruments;
+  const genres = req.body.genres;
+  const preferredInstruments = req.body.preferred_instruments;
+  const preferredGenres = req.body.preferred_genres;
+  const influences = req.body.influences;
   const profileBody = {
     first: req.body.first,
     last: req.body.last,
@@ -21,10 +26,9 @@ module.exports.update = (req, res) => {
     search_radius: req.body.search_radius,
     has_profile: true,
   };
-
-  // make sure there are no blank fields because table insert will break
   const keys = Object.keys(profileBody);
 
+  // make sure there are no blank fields because table insert will break
   for (let i = 0; i < keys.length; i++) {
     if (profileBody[keys[i]] === '') {
       delete profileBody[keys[i]];
@@ -45,173 +49,80 @@ module.exports.update = (req, res) => {
     })
     .catch((err) => { console.log('Error with zipcode geocode or db update: ', err); });
 
-  // update the user profile table
-  models.Profile.where({ id: req.body.id }).fetch()
+  const Profile = models.Profile.where({ id: req.body.id }).fetch()
     .then((profile) => {
       if (!profile) {
         throw profile;
       }
-      return profile.save(profileBody, { method: 'update' });
-    })
-    .then(() => {
-      res.sendStatus(201);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
     });
+
+  // update the user profile table
+  const BasicProfile = Profile.then(p => p.save(profileBody, { method: 'update' }));
 
   // delete the user_instruments table
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
-      return profile.instruments().detach({ profile_id: profile.attributes.id });
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  const DeleteUserInstruments = Profile.then(p => (
+    p.instruments().detach({ profile_id: p.attributes.id })
+  ));
 
   // update the user_instruments
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
+  const SaveUserInstruments = Profile.then(p => (
+    Promise.All(instruments.map(instrument => (
+      models.Instrument.where({ instrument_name: instrument }).fetch()
+      .then((i) => { p.instruments().attach(i); })
+    )))
+  ));
 
-      for (let i = 0; i < req.body.instruments.length; i++) {
-        models.Instrument.where({ instrument_name: req.body.instruments[i] }).fetch()
-          .then((instrument) => {
-            profile.instruments().attach(instrument);
-          })
-          .catch((err) => {
-            res.status(500).send(err);
-          });
-      }
-    });
-
-// delete the user_genres table
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
-      return profile.genres().detach({ profile_id: profile.attributes.id });
-    })
-    .then(() => {
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  // delete the user_genres table
+  const DeleteUserGenres = Profile.then(p => (
+    p.genres().detach({ profile_id: p.attributes.id })
+  ));
 
   // update the user_genres
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
-
-      for (let i = 0; i < req.body.genres.length; i++) {
-        models.Genre.where({ genre_name: req.body.genres[i] }).fetch()
-          .then((genre) => {
-            profile.genres().attach(genre);
-          }).catch((err) => {
-            res.status(500).send(err);
-          });
-      }
-    });
+  const SaveUserGenres = Profile.then(p => (
+    Promise.All(genres.map(genre => (
+      models.Genre.where({ genre_name: genre }).fetch()
+      .then((g) => { p.genres().attach(g); })
+    )))
+  ));
 
 // delete the preferred_instruments table
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
-      return profile.preferred_instruments().detach({ profile_id: profile.attributes.id });
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  const DeletePreferredInstruments = Profile.then(p => (
+    p.preferred_instruments().detach({ profile_id: p.attributes.id })
+  ));
 
   // update the preferred_instruments
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
-
-      for (let i = 0; i < req.body.preferred_instruments.length; i++) {
-        models.Instrument.where({ instrument_name: req.body.preferred_instruments[i] }).fetch()
-          .then(instrument => profile.preferred_instruments().attach(instrument))
-          .catch((err) => {
-            res.status(500).send(err);
-          });
-      }
-    });
-
+  const SavePreferredInstruments = Profile.then(p => (
+    Promise.All(preferredInstruments.map(preferredInstrument => (
+      models.Instrument.where({ instrument_name: preferredInstrument }).fetch()
+      .then((pI) => { p.preferred_instruments().attach(pI); })
+    )))
+  ));
 
   // delete the preferred_genres table
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
-      return profile.preferred_genres().detach({ profile_id: profile.attributes.id });
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  const DeletePreferredGenres = Profile.then(p => (
+    p.preferred_genres().detach({ profile_id: p.attributes.id })
+  ));
 
   // update the preferred_genres
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
-      for (let i = 0; i < req.body.preferred_genres.length; i++) {
-        models.Genre.where({ genre_name: req.body.preferred_genres[i] }).fetch()
-          .then((genre) => {
-            profile.preferred_genres().attach(genre);
-          }).catch((err) => {
-            res.status(500).send(err);
-          });
-      }
-    });
+  const SavePreferredGenres = Profile.then(p => (
+    Promise.All(preferredGenres.map(preferredGenre => (
+      models.Genre.where({ genre_name: preferredGenre }).fetch()
+      .then((pG) => { p.preferred_genres().attach(pG); })
+    )))
+  ));
 
   // delete the influences table
-  models.Profile.where({ id: req.body.id }).fetch()
-    .then((profile) => {
-      if (!profile) {
-        throw profile;
-      }
-      return profile.influences().detach({ profile_id: profile.attributes.id });
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+  const DeleteInfluences = Profile.then(p => (
+    p.influences().detach({ profile_id: p.attributes.id })
+  ));
 
   // update the user_influences
-  for (let i = 0; i < req.body.influences.length; i++) {
-    models.Influence.where({ influence_name: req.body.influences[i].name }).fetch()
-      .then((influence) => {
-        if (!influence) {
-          throw influence;
-        } else {
-          return influence;
-        }
-      })
-      .catch(() => (
-        models.Influence.forge({ influence_name: req.body.influences[i].name, influence_img: req.body.influences[i].img }).save()
-      ))
-      .then((influence) => {
-        models.Profile.where({ id: req.body.id }).fetch()
-          .then((profile) => {
-            if (!profile) {
-              throw profile;
-            }
+  const SaveInfluences = Profile.then(p => (
+    Promise.All(influences.map(influence => (
+      models.Influence.where({ influence }).fetch()
+      .then((i) => { p.influences().attach(i); })
+    )))
+  ));
 
-            profile.influences().attach(influence);
-          });
-      });
-  }
+  Promise.All([])
 };
