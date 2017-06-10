@@ -97,10 +97,13 @@ class Profile extends React.Component {
                 <Card className="chat-title">
                   <div className="edit-div">
                     <FloatingActionButton
+                      zDepth={1}
                       className="edit-button"
                       onClick={() => this.setState({ showEditProfile: true })}
-                      mini
-                      backgroundColor="black"
+                      mini={true}
+                      labelColor="#cfcfcf"
+                      backgroundColor="white"
+                      iconStyle={{ color: 'black' }}
                       children={<i className="material-icons">create</i>}
                     />
                   </div>
@@ -123,14 +126,17 @@ class Profile extends React.Component {
                   <CardTitle title="Personal Info" />
                   <List>
                     <ListItem
+                      disabled={true}
                       leftIcon={<i className="material-icons">account_circle</i>}
                       primaryText={profile}
                     />
                     <ListItem
+                      disabled={true}
                       leftIcon={<i className="material-icons">email</i>}
                       primaryText={email}
                     />
                     <ListItem
+                      disabled={true}
                       leftIcon={<i className="material-icons">place</i>}
                       primaryText={location}
                     />
