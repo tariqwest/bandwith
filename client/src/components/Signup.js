@@ -5,6 +5,7 @@ import { Card, CardHeader, CardText } from 'material-ui/Card';
 import { withRouter } from 'react-router';
 import { Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { updateProfile, updatePhoto } from '../actions';
 import FirstNameInput from './Signup/FirstNameInput';
 import LastNameInput from './Signup/LastNameInput';
@@ -63,6 +64,7 @@ class Signup extends React.Component {
     this.handleNumberChange = this.handleNumberChange.bind(this);
     this.handleInfluences = this.handleInfluences.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
+    this.handleRemoveInfluence = this.handleRemoveInfluence.bind(this);
     this.fillFormData = this.fillFormData.bind(this);
   }
 
@@ -167,6 +169,16 @@ class Signup extends React.Component {
     });
   }
 
+  handleRemoveInfluence(item) {
+    const influencesList = this.state.influences;
+    for (var i = 0; i < influencesList.length; i++) {
+      if (influencesList[i].name === item) {
+        influencesList.splice(i, 1);
+      }
+    }
+    this.setState({ influences: influencesList });
+  }
+
   handleGender(event, index, value) {
     this.setState({
       gender: value,
@@ -207,11 +219,19 @@ class Signup extends React.Component {
     const updatedInfluences = this.state.influences;
 
     if (!updatedInfluences.includes(influence) && influence !== '') {
-      updatedInfluences.push(influence);
-      this.setState({
-        influences: updatedInfluences,
-        influence: '',
-      });
+      const influenceURI = encodeURI(influence);
+      axios.get(`https://rest.bandsintown.com/artists/${influenceURI}?app_id=bandwith`)
+        .then((response) => {
+          updatedInfluences.push({
+            name: response.data.name,
+            img: response.data.thumb_url,
+          });
+          this.setState({
+            influences: updatedInfluences,
+            influence: '',
+          });
+        })
+        .catch((err) => {throw err;});
     }
   }
 
@@ -260,7 +280,7 @@ class Signup extends React.Component {
                     influences={this.state.influences}
                     handleChange={this.handleChange}
                     onClick={this.handleInfluences}
-                    handleChip={this.handleSelectMultiple}
+                    handleChip={this.handleRemoveInfluence}
                   /><br />
                   <PopoverMenu
                     itemName="instruments"
@@ -310,6 +330,7 @@ const mapStateToProps = state => ({
   userId: state.auth.userId,
   profile: state.user.profile,
   hasUserInfo: state.user.hasInfo,
+  influenceInfo: state.influence,
 });
 
 export default withRouter(connect(mapStateToProps)(Signup));
