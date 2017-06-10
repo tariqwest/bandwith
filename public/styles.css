@@ -31,10 +31,6 @@ html {
   margin: 10px;
 }
 
-.edit-button:hover {
-  cursor: pointer;
-}
-
 .remove-div {
   display: inline-block;
   text-align: right;
