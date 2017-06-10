@@ -1,22 +1,37 @@
 import React from 'react';
+import Badge from 'material-ui/Badge';
 import { connect } from 'react-redux';
-import FullscreenDialog from 'material-ui-fullscreen-dialog';
-import FlatButton from 'material-ui/FlatButton';
-import DropZone from './DropZone';
+import request from 'superagent';
+import IconButton from 'material-ui/IconButton';
+import Dropzone from 'react-dropzone';
+
+const style={margin: 0}
+const CLOUDINARY_UPLOAD_PRESET = 'bandwith';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dropiffy/image/upload';
 
 class ProfileImage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showEditPhoto: false,
-    };
-
-    this.closeDropZone = this.closeDropZone.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
-  closeDropZone() {
-    this.setState({
-      showEditPhoto: false,
+  onDrop(photo) {
+    const upload = request.post(CLOUDINARY_UPLOAD_URL)
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+      .field('file', photo);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== '') {
+        this.setState({
+          cloudinaryUrl: response.body.secure_url,
+        });
+
+        this.props.handlePhotoChange(this.state.cloudinaryUrl);
+      }
     });
   }
 
@@ -24,6 +39,26 @@ class ProfileImage extends React.Component {
     const { photo_src } = this.props.user;
     return (
       <div>
+        <Dropzone
+          style={style}
+          multiple={false}
+          accept="image/*"
+          onDrop={this.onDrop}
+        >
+          <Badge
+            badgeContent={
+              <IconButton
+                tooltip="Update Photo"
+                touch
+                tooltipPosition="bottom-right"
+              >
+                <i
+                  className="material-icons"
+                >mode_edit</i>
+              </IconButton>
+            }
+          />
+        </Dropzone>
         <img
           className="chat-picture"
           width="100"
@@ -31,26 +66,6 @@ class ProfileImage extends React.Component {
           alt="upload pic"
           src={photo_src || '/assets/avatar.jpg'}
         />
-        <i
-          onClick={() => this.setState({ showEditPhoto: true })}
-          className="material-icons"
-        >mode_edit</i>
-
-        <FullscreenDialog
-          open={this.state.showEditPhoto}
-          onRequestClose={() => this.setState({ showEditPhoto: false })}
-          title={this.props.user.display}
-          actionButton={<FlatButton
-            label="Close"
-            onTouchTap={() => this.setState({ showEditPhoto: false })}
-          />}
-          appBarStyle={{ backgroundColor: '#000000' }}
-        >
-          <DropZone
-            handlePhotoChange={this.props.handlePhotoChange}
-            closeDropZone={this.closeDropZone}
-          />
-        </FullscreenDialog>
       </div>
     );
   }
