@@ -3,6 +3,9 @@
     "serverUrl": "SERVER_URL",
     "redisUrl":  "REDIS_URL"
   },
+  "apiKeys":{
+    "google": "GOOGLE_KEY"
+  },
   "knex": {
     "connection": "DATABASE_URL"
   },
