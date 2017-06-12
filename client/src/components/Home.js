@@ -1,6 +1,6 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import { Card, CardMedia, CardText, CardTitle } from 'material-ui/Card';
+import { Card, CardMedia, CardText } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import { Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
@@ -12,22 +12,6 @@ class Home extends React.Component {
     this.state = {};
   }
 
-        // <div id="container">
-        //   <Card>
-        //     <CardMedia id="base">
-        //       <img alt="splash-img" src="/assets/matheus-ferrero-183749.jpg" />
-        //     </CardMedia>
-        //   </Card>
-        //   <div id="overlay">
-        //     <Row /*className="vertical-center"*/>
-        //       <Col xs={0} sm={5} smOffset={1}>
-        //         <Card style={{ backgroundColor: 'rgba(0, 0, 0, 0.25)', boxShadow: 'none', borderRadius: '25px' }}>
-        //           <CardText className="home-header" style={{ color: 'white', fontSize: '30px' }}>Find, Connect, and Jam with local musicians</CardText>
-        //         </Card>
-        //       </Col>
-        //     </Row>
-        //   </div>
-        // </div>
   render() {
     const { redirectURL } = this.props;
     return (
@@ -35,7 +19,9 @@ class Home extends React.Component {
         <div className="parallax-top">
           <div className="vertical-center">
             <div className="center-text">
-              <span className="homepage-text opaque-background">Find, Connect, and Jam with local musicians</span>
+              <span className="homepage-text opaque-background">
+                Find, Connect, and Jam with local musicians
+              </span>
             </div>
           </div>
         </div>
@@ -129,20 +115,6 @@ class Home extends React.Component {
     );
   }
 }
-                // <CardTitle style={{ verticalAlign: 'middle' }} title="hello" />
-        // <Row>
-        //   <Card style={{ boxShadow: 'none' }}>
-        //     <Col xs={12} sm={6}>
-        //       <CardTitle title="" />
-        //       <CardMedia>
-        //         <img alt="splash-img" src="/assets/clem-onojeghuo-122041.jpg" />
-        //       </CardMedia>
-        //     </Col>
-        //     <Col xs={12} sm={6} smOffset={6}>
-        //       <CardTitle title="" />
-        //     </Col>
-        //   </Card>
-        // </Row>
 
 const mapStateToProps = state => ({
   redirectURL: state.redirectURL,
