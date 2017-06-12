@@ -42,7 +42,7 @@ class ResultsProfile extends React.Component {
       preferredGenres,
       video_url,
       song_url,
-      photo_src,
+      photo_src_small,
     } = this.props.currentResult || this.props.currentMatch;
     const { city, state } = { city: 'city', state: 'state' };
     const fullname = `${first} ${last}`;
@@ -69,7 +69,7 @@ class ResultsProfile extends React.Component {
                       width="100"
                       height="100"
                       alt="profile-pic"
-                      src={photo_src || '/assets/avatar.jpg'}
+                      src={photo_src_small || '/assets/avatar.jpg'}
                     />
                     <CardTitle title={fullname} subtitle={bio} />
                   </Card>
