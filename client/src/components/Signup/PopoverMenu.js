@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Subheader from 'material-ui/Subheader';
+import IconButton from 'material-ui/IconButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
@@ -42,10 +44,14 @@ class PopoverMenu extends Component {
   render() {
     return (
       <div>
-        <RaisedButton
-          onTouchTap={this.handleTouchTap}
-          label={`your ${this.props.className}`}
-        />
+        <Subheader>{this.props.itemName}
+          <IconButton
+            onTouchTap={this.handleTouchTap}
+            label={`your ${this.props.className}`}
+          >
+            <i className="material-icons">control_point</i>
+          </IconButton>
+        </Subheader>
         <Popover
           open={this.state.open}
           anchorEl={this.state.anchorEl}
