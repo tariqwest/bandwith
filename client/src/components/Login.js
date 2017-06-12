@@ -42,13 +42,13 @@ class Login extends React.Component {
         <div>
           Or login with any of the following services:<br />
           <a style={{ marginRight: '15px' }} href={`/auth/facebook/?returnTo=${redirectURL}`}>
-            <img src="/assets/fb-logo.png" alt="facebook-logo" />
+            <img style={{ width: '29px' }} src="/assets/fb-art.png" alt="facebook-logo" />
           </a>
           <a style={{ marginLeft: '15px', marginRight: '15px' }} href={`/auth/google/?returnTo=${redirectURL}`}>
-            <img style={{ width: '29px' }} src="/assets/google-logo.png" alt="google-logo" />
+            <img style={{ width: '29px' }} src="/assets/google_logo_transparent.png" alt="google-logo" />
           </a>
           <a style={{ marginLeft: '15px' }} href={`/auth/twitter/?returnTo=${redirectURL}`}>
-            <img style={{ width: '48px' }} src="/assets/twitter-logo.png" alt="twitter-logo" />
+            <img style={{ width: '29px' }} src="/assets/twitter-128.png" alt="twitter-logo" />
           </a>
         </div>
 
