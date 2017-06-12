@@ -14,8 +14,17 @@ html {
   background-color: #EEEEEE;
 }
 
+.background {
+  background-color: #EEEEEE;
+}
+
 .chat-title {
   text-align: center;
+}
+
+.center-text {
+  text-align: center;
+  width: 100%;
 }
 
 .chat-picture {
@@ -31,6 +40,52 @@ html {
   margin: 10px;
 }
 
+.fixed-column {
+  height: 550px;
+}
+
+.homepage-text {
+  font: 400 16px/22px "Lato";
+  font-size: 26px;
+  letter-spacing: 5px;
+  line-height: 76px;
+  text-transform: uppercase;
+}
+
+.parallel-text {
+  font: 400 16px/22px "Lato";
+  font-size: 26px;
+  letter-spacing: 5px;
+  line-height: 50px;
+  text-transform: uppercase;
+  display: block;
+}
+
+.opaque-background {
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff
+}
+
+.parallax-top { 
+    background-image: url("/assets/matheus-ferrero-183749.jpg");
+    height: 700px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-bottom { 
+    background-image: url("/assets/kimberly-richards-335.jpg");
+    height: 400px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
 .remove-div {
   display: inline-block;
   text-align: right;
@@ -42,9 +97,33 @@ html {
   margin-right: 5px;
 }
 
-.background {
-  background-color: #EEEEEE;
+.vertical-center {
+  height: inherit;
+  min-height: 50%;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
 }
+
+/*#container {
+    position: relative;
+}
+
+#overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 25%;
+    z-index: 10;
+}
+
+#base {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}*/
 
 /*
 * {
