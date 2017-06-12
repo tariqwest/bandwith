@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardTitle } from 'material-ui/Card';
+import { Card } from 'material-ui/Card';
 import { Row, Col } from 'react-flexbox-grid';
-import MatchList from './MatchList';
 import Paper from 'material-ui/Paper';
+
+import MatchList from './MatchList';
 
 const style = {
   margin: 10,
