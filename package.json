@@ -46,6 +46,7 @@
     "passport.socketio": "^3.7.0",
     "pg": "^6.1.5",
     "react": "^15.5.4",
+    "react-cropper": "^0.12.0",
     "react-dom": "^15.5.4",
     "react-dropzone": "^3.13.2",
     "react-flexbox-grid": "^1.1.3",
