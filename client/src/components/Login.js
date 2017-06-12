@@ -2,7 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Row, Col } from 'react-flexbox-grid';
+import Paper from 'material-ui/Paper';
+import Card from 'material-ui/Card';
+import { List, ListItem } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  margin: 30,
+};
+
 
 class Login extends React.Component {
   componentDidMount() {
@@ -22,42 +32,60 @@ class Login extends React.Component {
     const { redirectURL } = this.props;
 
     return (
-      <div className="col-sm-6 col-sm-offset-3">
+      <div>
         <div className="bump-tab-bar" />
-        <h1>Login</h1>
-        {/* <div className="alert alert-danger">CONDITIONAL MESSAGE</div> */}
-        <form action="/auth/login" method="post">
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input type="text" className="form-control" name="email" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" name="password" />
-          </div>
-
-          <button type="submit" className="btn btn-warning btn-lg">Login</button>
-        </form>
-
-        <hr />
-        <div>
-          Or login with any of the following services:<br />
-          <a style={{ marginRight: '15px' }} href={`/auth/facebook/?returnTo=${redirectURL}`}>
-            <img style={{ width: '29px' }} src="/assets/fb-art.png" alt="facebook-logo" />
-          </a>
-          <a style={{ marginLeft: '15px', marginRight: '15px' }} href={`/auth/google/?returnTo=${redirectURL}`}>
-            <img style={{ width: '29px' }} src="/assets/google_logo_transparent.png" alt="google-logo" />
-          </a>
-          <a style={{ marginLeft: '15px' }} href={`/auth/twitter/?returnTo=${redirectURL}`}>
-            <img style={{ width: '29px' }} src="/assets/twitter-128.png" alt="twitter-logo" />
-          </a>
-        </div>
-
-        <hr />
-
-        <p>Need to sign up for an account?</p>
-        <FlatButton label="Sign Up" containerElement={<Link to="/signup" />} />
-        <FlatButton label="Home" containerElement={<Link to="/" />} />
+        <Row>
+          <Col xs={12} sm={6} smOffset={3}>
+            <Paper style={style} zDepth={1}>
+              <Card>
+                <List>
+                  <ListItem
+                    disabled
+                    className="homepage-text"
+                    style={{ fontSize: '26px' }}
+                    primaryText="Join Us!"
+                  />
+                  <ListItem disabled>
+                    <FlatButton
+                      label="Log in with Facebook"
+                      icon={<img
+                        style={{ width: '24px' }}
+                        src="/assets/fb-art.png"
+                        alt="facebook-logo"
+                      />}
+                      href={`/auth/facebook/?returnTo=${redirectURL}`}
+                    />
+                  </ListItem>
+                  <ListItem disabled>
+                    <FlatButton
+                      label="Log in with Google"
+                      icon={<img
+                        style={{ width: '24px' }}
+                        src="/assets/google_logo_transparent.png"
+                        alt="google-logo"
+                      />}
+                      href={`/auth/google/?returnTo=${redirectURL}`}
+                    />
+                  </ListItem>
+                  <ListItem disabled>
+                    <FlatButton
+                      label="Log in with Twitter"
+                      icon={<img
+                        style={{ width: '24px' }}
+                        src="/assets/twitter-128.png"
+                        alt="twitter-logo"
+                      />}
+                      href={`/auth/twitter/?returnTo=${redirectURL}`}
+                    />
+                  </ListItem>
+                </List>
+                <ListItem>
+                  <RaisedButton label="Return to Home Page" containerElement={<Link to="/" />} />
+                </ListItem>
+              </Card>
+            </Paper>
+          </Col>
+        </Row>
       </div>
     );
   }
