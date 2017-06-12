@@ -31,6 +31,10 @@ class Nav extends React.Component {
       this.setState({
         slideIndex: 2,
       });
+    } else if (location.pathname === '/') {
+      this.setState({
+        slideIndex: -1,
+      });
     }
   }
 
@@ -90,7 +94,14 @@ class Nav extends React.Component {
           >
             <MenuItem primaryText="Logout" containerElement={<Link to="/logout" />} />
           </Drawer>
-          <Tabs onChange={this.changeTab} value={this.state.slideIndex} inkBarStyle={{ background: '#ff5bff' }} tabItemContainerStyle={{ background: 'black' }}>
+          <div className="bump-bar" />
+          <Tabs
+            onChange={this.changeTab}
+            value={this.state.slideIndex}
+            style={{ position: 'fixed', width: '100%', zIndex: '20' }}
+            inkBarStyle={{ background: '#ff5bff' }}
+            tabItemContainerStyle={{ background: 'black' }}
+          >
             <Tab
               style={styles.tab[0]}
               value={0}
