@@ -39,7 +39,7 @@ class Chats extends React.Component {
       first,
       last,
       bio,
-      photo_src
+      photo_src_small
     } = currentMatch;
 
     const chatOrProfile = () => {
@@ -58,7 +58,7 @@ class Chats extends React.Component {
             <Paper style={styles.paper}>
             <Card>
               <div className="chat-title">
-                <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src || '/assets/avatar.jpg'} />
+                <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src_small || '/assets/avatar.jpg'} />
                 <CardTitle
                   title={`${first} ${last}`} subtitle={bio}
                 />
