@@ -18,6 +18,14 @@ html {
   background-color: #EEEEEE;
 }
 
+.bump-bar {
+  height: 64px;
+}
+
+.bump-tab-bar {
+  height: 48px;
+}
+
 .chat-title {
   text-align: center;
 }
