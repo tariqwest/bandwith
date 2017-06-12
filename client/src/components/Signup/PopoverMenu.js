@@ -43,7 +43,7 @@ class PopoverMenu extends Component {
   render() {
     return (
       <div>
-        <Subheader>{this.props.itemName}
+        <Subheader>{this.props.itemName.split('_').join(' ')}
           <IconButton
             onTouchTap={this.handleTouchTap}
             label={`your ${this.props.className}`}

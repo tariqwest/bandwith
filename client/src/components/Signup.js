@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
@@ -34,7 +34,7 @@ const chipStyle = {
 const instruments = ['electric guitar', 'acoustic guitar', 'bass', 'drums', 'piano', 'vocals', 'ukulele', 'violin', 'saxophone', 'trumpet'];
 const genres = ['rock', 'jazz', 'blues', 'folk', 'reggae', 'country', 'pop', 'punk', 'metal', 'edm', 'r&b', 'funk', 'rap', 'disco'];
 
-class Signup extends React.Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -248,7 +248,6 @@ class Signup extends React.Component {
         .catch((err) => {throw err;});
     }
   }
-
 
   render() {
     return (
