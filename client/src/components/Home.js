@@ -51,7 +51,7 @@ class Home extends React.Component {
             <div className="parallax-bottom">
               <div className="vertical-center">
                 <div className="center-text">
-                  <span className="homepage-text opaque-background">Don't jam alone</span>
+                  <span className="homepage-text opaque-background">{'Don\'t jam alone'}</span>
                 </div>
               </div>
             </div>
@@ -62,12 +62,12 @@ class Home extends React.Component {
             <Card style={{ textAlign: 'center' }}>
               <List>
                 <ListItem
-                  disabled={true}
+                  disabled
                   className="homepage-text"
                   style={{ fontSize: '26px' }}
                   primaryText="Join the community"
                 />
-                <ListItem disabled={true}>
+                <ListItem disabled>
                   <FlatButton
                     label="Sign up wth Facebook"
                     icon={<img
@@ -78,7 +78,7 @@ class Home extends React.Component {
                     href={`/auth/facebook/?returnTo=${redirectURL}`}
                   />
                 </ListItem>
-                <ListItem disabled={true}>
+                <ListItem disabled>
                   <FlatButton
                     label="Sign up wth Google"
                     icon={<img
@@ -89,7 +89,7 @@ class Home extends React.Component {
                     href={`/auth/google/?returnTo=${redirectURL}`}
                   />
                 </ListItem>
-                <ListItem disabled={true}>
+                <ListItem disabled>
                   <FlatButton
                     label="Sign up wth Twitter"
                     icon={<img
