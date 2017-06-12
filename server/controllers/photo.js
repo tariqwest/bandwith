@@ -2,7 +2,8 @@ const models = require('../../db/models');
 
 module.exports.update = (req, res) => {
   const profileBody = {
-    photo_src: req.body.photo_src,
+    photo_src_large: req.body.photo_src_large,
+    photo_src_small: req.body.photo_src_small,
   };
 
   // update the user profile table with new photo
