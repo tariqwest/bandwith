@@ -1,6 +1,5 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import { withRouter } from 'react-router';
 import { Row, Col } from 'react-flexbox-grid';
@@ -43,7 +42,8 @@ class Signup extends React.Component {
       bio: '',
       song_url: '',
       video_url: '',
-      photo_src: '',
+      photo_src_large: '',
+      photo_src_small: '',
       age: '',
       search_radius: '',
       zipcodeErrorText: '',
@@ -108,7 +108,8 @@ class Signup extends React.Component {
       song_url: this.state.song_url,
       video_url: this.state.video_url,
       zipcode: this.state.zipcode,
-      photo_src: this.state.photo_src,
+      photo_src_large: this.state.photo_src_large,
+      photo_src_small: this.state.photo_src_small,
       id: this.props.userId,
       age: this.state.age,
       search_radius: this.state.search_radius,
@@ -125,7 +126,8 @@ class Signup extends React.Component {
       song_url: '',
       video_url: '',
       zipcode: '',
-      photo_src: '',
+      photo_src_large: '',
+      photo_src_small: '',
       age: '',
       search_radius: '',
       instruments: [],
@@ -138,19 +140,21 @@ class Signup extends React.Component {
     dispatch(updateProfile(profile));
   }
 
-  handlePhotoChange(url) {
-    const { dispatch } = this.props;
+  handlePhotoChange(urlLrg, urlSml) {
+    // const { dispatch } = this.props;
 
     this.setState({
-      photo_src: url,
+      photo_src_large: urlLrg,
+      photo_src_small: urlSml,
     });
 
-    const profile = {
-      photo_src: this.state.photo_src,
-      id: this.props.userId,
-    };
+    // const profile = {
+    //   photo_src_large: this.state.photo_src_large,
+    //   photo_src_small: this.state.photo_src_small,
+    //   id: this.props.userId,
+    // };
 
-    dispatch(updatePhoto(profile));
+    // dispatch(updatePhoto(profile));
   }
 
   handleSelectMultiple(item, collection) {
@@ -173,7 +177,7 @@ class Signup extends React.Component {
 
   handleRemoveInfluence(item) {
     const influencesList = this.state.influences;
-    for (var i = 0; i < influencesList.length; i++) {
+    for (let i = 0; i < influencesList.length; i++) {
       if (influencesList[i].name === item) {
         influencesList.splice(i, 1);
       }
@@ -316,12 +320,6 @@ class Signup extends React.Component {
                     handleChip={this.handleSelectMultiple}
                     selectedItems={this.state.preferred_instruments}
                   />
-                  {/*<RaisedButton
-                    secondary
-                    style={style.button}
-                    label="submit profile"
-                    onTouchTap={this.send}
-                  />*/}
                 </CardText>
               </Card>
             </Paper>
