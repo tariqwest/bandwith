@@ -69,7 +69,7 @@ class Home extends React.Component {
                 />
                 <ListItem disabled>
                   <FlatButton
-                    label="Sign up wth Facebook"
+                    label="Sign up with Facebook"
                     icon={<img
                       style={{ width: '24px' }}
                       src="/assets/fb-art.png"
@@ -80,7 +80,7 @@ class Home extends React.Component {
                 </ListItem>
                 <ListItem disabled>
                   <FlatButton
-                    label="Sign up wth Google"
+                    label="Sign up with Google"
                     icon={<img
                       style={{ width: '24px' }}
                       src="/assets/google_logo_transparent.png"
@@ -91,7 +91,7 @@ class Home extends React.Component {
                 </ListItem>
                 <ListItem disabled>
                   <FlatButton
-                    label="Sign up wth Twitter"
+                    label="Sign up with Twitter"
                     icon={<img
                       style={{ width: '24px' }}
                       src="/assets/twitter-128.png"
