@@ -23,6 +23,7 @@ class Login extends React.Component {
 
     return (
       <div className="col-sm-6 col-sm-offset-3">
+        <div className="bump-tab-bar" />
         <h1>Login</h1>
         {/* <div className="alert alert-danger">CONDITIONAL MESSAGE</div> */}
         <form action="/auth/login" method="post">

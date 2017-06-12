@@ -28,19 +28,25 @@ class Results extends React.Component {
 
     if (!result) {
       return (
-        <Row>
-          <Col xs={12} sm={6} smOffset={3} >
-            <h3 style={styles.title}>No more matches for now, check again soon!</h3>
-          </Col>
-        </Row>
+        <div>
+          <div className="bump-tab-bar" />
+          <Row>
+            <Col xs={12} sm={6} smOffset={3} >
+              <h3 style={styles.title}>No more matches for now, check again soon!</h3>
+            </Col>
+          </Row>
+        </div>
       );
     }
     return (
-      <Col xs={12} sm={6} smOffset={3} >
-        <Paper style={styles.paper} zDepth={1}>
-          <ResultsListEntry result={result} />
-        </Paper>
-      </Col>
+      <div>
+        <div className="bump-tab-bar" />
+        <Col xs={12} sm={6} smOffset={3} >
+          <Paper style={styles.paper} zDepth={1}>
+            <ResultsListEntry result={result} />
+          </Paper>
+        </Col>
+      </div>
     );
   }
 }

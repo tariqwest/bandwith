@@ -51,32 +51,35 @@ class Chats extends React.Component {
     }
 
     return (
-      <Row>
-        <Col xs={12} sm={8} smOffset={2}>
-          <Paper style={styles.paper}>
-          <Card>
-            <div className="chat-title">
-              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src || '/assets/avatar.jpg'} />
-              <CardTitle
-                title={`${first} ${last}`} subtitle={bio}
-              />
-              <Divider />
-            <CardActions>
-              <Row>
-                <Col xs={6}>
-                  <FlatButton fullWidth={true} label="Chat" onClick={() => this.toggleChatAndProfile('chat')} />
-                </Col>
-                <Col xs={6}>
-                  <FlatButton fullWidth={true} label="Profile" onClick={() => this.toggleChatAndProfile('profile')} />
-                </Col>
-              </Row>
-            </CardActions>
-            </div>
-          </Card>
-          </Paper>
-            {chatOrProfile()}
-        </Col>
-      </Row>
+      <div>
+        <div className="bump-tab-bar" />
+        <Row>
+          <Col xs={12} sm={8} smOffset={2}>
+            <Paper style={styles.paper}>
+            <Card>
+              <div className="chat-title">
+                <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src || '/assets/avatar.jpg'} />
+                <CardTitle
+                  title={`${first} ${last}`} subtitle={bio}
+                />
+                <Divider />
+              <CardActions>
+                <Row>
+                  <Col xs={6}>
+                    <FlatButton fullWidth={true} label="Chat" onClick={() => this.toggleChatAndProfile('chat')} />
+                  </Col>
+                  <Col xs={6}>
+                    <FlatButton fullWidth={true} label="Profile" onClick={() => this.toggleChatAndProfile('profile')} />
+                  </Col>
+                </Row>
+              </CardActions>
+              </div>
+            </Card>
+            </Paper>
+              {chatOrProfile()}
+          </Col>
+        </Row>
+      </div>
     );
   }
 

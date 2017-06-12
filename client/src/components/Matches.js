@@ -17,15 +17,18 @@ class Matches extends React.Component {
 
   render() {
     return (
-      <Row>
-        <Col xs={12} sm={6} smOffset={3}>
-          <Paper style={style} zDepth={1}>
-            <Card>
-              <MatchList />
-            </Card>
-          </Paper>
-        </Col>
-      </Row>
+      <div>
+        <div className="bump-tab-bar" />
+        <Row>
+          <Col xs={12} sm={6} smOffset={3}>
+            <Paper style={style} zDepth={1}>
+              <Card>
+                <MatchList />
+              </Card>
+            </Paper>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
