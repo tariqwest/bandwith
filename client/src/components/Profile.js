@@ -45,8 +45,8 @@ class Profile extends React.Component {
 
   checkFormRedirect(props) {
     const { hasProfile, hasUserInfo, isSavingUser } = props;
-    
-    if (hasUserInfo && !hasProfile && !isSavingUser) {3
+
+    if (hasUserInfo && !hasProfile && !isSavingUser) {
       this.setState({ showEditProfile: true });
     }
     if (hasUserInfo && hasProfile) {
@@ -91,6 +91,7 @@ class Profile extends React.Component {
 
       return (
         <div>
+          <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={8} xsOffset={0} smOffset={2}>
               <Paper style={style}>
@@ -101,7 +102,6 @@ class Profile extends React.Component {
                       className="edit-button"
                       onClick={() => this.setState({ showEditProfile: true })}
                       mini={true}
-                      labelColor="#cfcfcf"
                       backgroundColor="white"
                       iconStyle={{ color: 'black' }}
                       children={<i className="material-icons">create</i>}
