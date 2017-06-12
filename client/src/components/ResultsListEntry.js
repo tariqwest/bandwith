@@ -54,7 +54,7 @@ class ResultsListEntry extends React.Component {
       last,
       display,
       bio,
-      photo_src,
+      photo_src_small,
       instruments,
       genres,
     } = this.props.result;
@@ -65,7 +65,7 @@ class ResultsListEntry extends React.Component {
         <Card>
           <CardText onClick={() => this.setState({ showFullProfile: true })} >
             <div className="chat-title">
-              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src || '/assets/avatar.jpg'} />
+              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src_small || '/assets/avatar.jpg'} />
               <CardTitle title={`${first} ${last}`} subtitle={bio} />
             </div>
             <CardText> <TagList tags={instruments.concat(genres)} type="instrument" /> </CardText>
