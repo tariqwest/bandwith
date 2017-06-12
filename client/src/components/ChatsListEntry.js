@@ -17,7 +17,7 @@ class ChatListEntry extends React.Component {
         <ListItem
           primaryText={this.props.chatMessage.message}
           secondaryText={secondary}
-          rightAvatar={<Avatar src={this.props.user.photo_src || '/assets/avatar.jpg'} />}
+          rightAvatar={<Avatar src={this.props.user.photo_src_small || '/assets/avatar.jpg'} />}
           style={{ textAlign: 'right' }}
         />
       );
@@ -26,7 +26,7 @@ class ChatListEntry extends React.Component {
       <ListItem
         primaryText={this.props.chatMessage.message}
         secondaryText={secondary}
-        leftAvatar={<Avatar src={this.props.currentMatch.photo_src || '/assets/avatar.jpg'} />}
+        leftAvatar={<Avatar src={this.props.currentMatch.photo_src_small || '/assets/avatar.jpg'} />}
       />
     );
   }
