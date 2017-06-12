@@ -64,6 +64,13 @@ class Nav extends React.Component {
     styles.tab[2] = styles.default_tab;
     styles.tab[this.state.slideIndex] = styles.active_tab;
 
+    const rightButtons = (
+      <div>
+        <FlatButton label="Sign Up" containerElement={<Link to="/login" />} style={{ color: 'white' }} />
+        <FlatButton label="Login" containerElement={<Link to="/login" />} style={{ color: 'white' }} />
+      </div>
+    );
+
     if (this.props.isAuthenticated) {
       return (
         <div>
@@ -71,7 +78,7 @@ class Nav extends React.Component {
             title={<NavLink exact to="/" >Bandwith</NavLink>}
             onRightIconButtonTouchTap={this.handleToggle}
             showMenuIconButton={false}
-            style={{ backgroundColor: 'black', fontFamily: 'Pacifico' }}
+            style={{ backgroundColor: 'black', fontFamily: 'Pacifico', position: 'fixed' }}
             iconElementRight={<IconButton><MoreVertIcon /></IconButton>}
             iconStyleRight={{ color: 'white' }}
           />
@@ -111,8 +118,8 @@ class Nav extends React.Component {
         <AppBar
           title={<NavLink exact to="/" >Bandwith</NavLink>}
           showMenuIconButton={false}
-          style={{ backgroundColor: 'black', fontFamily: 'Pacifico' }}
-          iconElementRight={<FlatButton label="Login" containerElement={<Link to="/login" />} />}
+          style={{ backgroundColor: 'black', fontFamily: 'Pacifico', position: 'fixed' }}
+          iconElementRight={rightButtons}
         />
       </div>
     );
