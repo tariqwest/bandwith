@@ -74,7 +74,7 @@ class Profile extends React.Component {
       photo_src,
     } = this.props.user;
 
-    const { hasUserInfo, isFetchingUser, isSavingUser } = this.props;
+    const { hasUserInfo } = this.props;
     const { city, state } = this.props.location;
     const fullname = `${first} ${last}`;
     const search = `Searching within ${search_radius} miles`;
@@ -101,11 +101,12 @@ class Profile extends React.Component {
                       zDepth={1}
                       className="edit-button"
                       onClick={() => this.setState({ showEditProfile: true })}
-                      mini={true}
+                      mini
                       backgroundColor="white"
                       iconStyle={{ color: 'black' }}
-                      children={<i className="material-icons">create</i>}
-                    />
+                    >
+                      <i className="material-icons">create</i>
+                    </FloatingActionButton>
                   </div>
                   <img
                     className="chat-picture"
@@ -126,17 +127,17 @@ class Profile extends React.Component {
                   <CardTitle title="Personal Info" />
                   <List>
                     <ListItem
-                      disabled={true}
+                      disabled
                       leftIcon={<i className="material-icons">account_circle</i>}
                       primaryText={profile}
                     />
                     <ListItem
-                      disabled={true}
+                      disabled
                       leftIcon={<i className="material-icons">email</i>}
                       primaryText={email}
                     />
                     <ListItem
-                      disabled={true}
+                      disabled
                       leftIcon={<i className="material-icons">place</i>}
                       primaryText={location}
                     />

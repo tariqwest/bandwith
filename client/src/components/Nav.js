@@ -54,10 +54,10 @@ class Nav extends React.Component {
 
   render() {
     const styles = {
-      default_tab:{
+      default_tab: {
         color: '#6d6d6d',
       },
-      active_tab:{
+      active_tab: {
         color: '#fff',
       },
     };
@@ -89,7 +89,7 @@ class Nav extends React.Component {
           <Drawer
             docked={false}
             open={this.state.open}
-            openSecondary={true}
+            openSecondary
             onRequestChange={open => this.setState({ open })}
           >
             <MenuItem primaryText="Logout" containerElement={<Link to="/logout" />} />
