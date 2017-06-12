@@ -15,7 +15,6 @@ import FullscreenDialog from 'material-ui-fullscreen-dialog';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CircularProgress from 'material-ui/CircularProgress';
 
-
 import Signup from './Signup';
 
 const style = {
@@ -71,7 +70,7 @@ class Profile extends React.Component {
       preferred_genres,
       video_url,
       song_url,
-      photo_src,
+      photo_src_small,
     } = this.props.user;
 
     const { hasUserInfo } = this.props;
@@ -113,7 +112,8 @@ class Profile extends React.Component {
                     width="100"
                     height="100"
                     alt="profile-pic"
-                    src={photo_src || '/assets/avatar.jpg'}
+                    id="profile-pic"
+                    src={photo_src_small || '/assets/avatar.jpg'}
                   />
                   <CardTitle title={fullname} subtitle={bio} />
                 </Card>
