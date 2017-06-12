@@ -11,7 +11,8 @@ exports.up = (knex, Promise) => (
       table.integer('search_radius').nullable();
       table.integer('age').nullable();
       table.string('gender', 30).nullable();
-      table.string('photo_src', 300).nullable();
+      table.string('photo_src_large', 300).nullable();
+      table.string('photo_src_small', 300).nullable();
       table.string('song_url', 300).nullable();
       table.string('video_url', 300).nullable();
       table.boolean('has_profile').defaultTo(false);
