@@ -1,12 +1,9 @@
+/* eslint-disable camelcase */
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import FlatButton from 'material-ui/FlatButton';
 import { Card,
   CardHeader,
   CardTitle,
   CardMedia,
-  CardActions,
 } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import { List, ListItem } from 'material-ui/List';
@@ -61,8 +58,9 @@ class ResultsProfile extends React.Component {
       }
 
       const profileHeader = () => {
-        if(this.props.currentResult){
-          return (<Row>
+        if (this.props.currentResult) {
+          return (
+            <Row>
               <Col xs={12}>
                 <Paper style={style}>
                   <Card className="chat-title">
@@ -77,10 +75,10 @@ class ResultsProfile extends React.Component {
                   </Card>
                 </Paper>
               </Col>
-            </Row>)
+            </Row>);
         }
+        return (<Row />);
       };
-
 
       return (
         <div>
@@ -115,7 +113,7 @@ class ResultsProfile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">music_video</i>}
                       primaryText="YouTube"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={[
                         <CardMedia key={videoId}>
                           <iframe
@@ -130,7 +128,7 @@ class ResultsProfile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">audiotrack</i>}
                       primaryText="SoundCloud"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={[
                         <CardMedia key={song_url}>
                           <iframe
@@ -156,7 +154,7 @@ class ResultsProfile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">speaker</i>}
                       primaryText="My Instruments"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={instruments.map(instrument =>
                         <Chip key={instrument} style={chipStyle}>{instrument}</Chip> // eslint-disable-line
                       )}
@@ -164,7 +162,7 @@ class ResultsProfile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">album</i>}
                       primaryText="My Genres"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={genres.map(genre =>
                         <Chip key={genre} style={chipStyle}>{genre}</Chip> // eslint-disable-line
                       )}
@@ -172,7 +170,7 @@ class ResultsProfile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">headset</i>}
                       primaryText="My Influences"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={influences.map(influence => (
                         <Card key={influence.name}>
                           <CardHeader title={influence.name} avatar={influence.img} />
@@ -191,7 +189,7 @@ class ResultsProfile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">grade</i>}
                       primaryText="Preferred Instruments"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={preferredInstruments.map(instrument =>
                         <Chip key={instrument} style={chipStyle}>{instrument}</Chip> // eslint-disable-line
                       )}
@@ -199,7 +197,7 @@ class ResultsProfile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">favorite</i>}
                       primaryText="Preferred Genres"
-                      primaryTogglesNestedList={true}
+                      primaryTogglesNestedList
                       nestedItems={preferredGenres.map(genre =>
                         <Chip key={genre} style={chipStyle}>{genre}</Chip> // eslint-disable-line
                       )}
@@ -211,9 +209,8 @@ class ResultsProfile extends React.Component {
           </Row>
         </div>
       );
-    } else {
-      return (<div />);
     }
+    return (<div />);
   }
 }
 
