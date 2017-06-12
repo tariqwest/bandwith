@@ -27,7 +27,7 @@ class MatchListEntry extends React.Component {
     const {
       first,
       last,
-      photo_src,
+      photo_src_small,
     } = this.props.match;
     const fullname = `${first} ${last}`;
 
@@ -36,7 +36,7 @@ class MatchListEntry extends React.Component {
         <div onClick={this.chatWithMatch}>
           <ListItem
             primaryText={`${first} ${last}`}
-            leftAvatar={<Avatar src={photo_src || '/assets/avatar.jpg'} />}
+            leftAvatar={<Avatar src={photo_src_small || '/assets/avatar.jpg'} />}
             rightIcon={<CommunicationChatBubble />}
           />
         </div>
