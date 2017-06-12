@@ -119,7 +119,7 @@ module.exports.update = (req, res) => {
   // update the user_influences
   const SaveInfluences = DeleteInfluences.then(p => (
     Promise.all(influences.map(influence => (
-      models.Influence.where({ influence_name: influence }).fetch()
+      models.Influence.where({ influence_name: influence.name }).fetch()
       .then((i) => { p.influences().attach(i); })
     )))
   ));
