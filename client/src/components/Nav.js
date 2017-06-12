@@ -31,7 +31,7 @@ class Nav extends React.Component {
       this.setState({
         slideIndex: 2,
       });
-    } else if (location.pathname === '/') {
+    } else {
       this.setState({
         slideIndex: -1,
       });
