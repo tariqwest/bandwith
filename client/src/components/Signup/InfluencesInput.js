@@ -35,7 +35,6 @@ class InfluenceInput extends Component {
 
   render() {
     return (
-      <div>
         <Row>
           <Col xs={12} >
             <Subheader>
@@ -86,7 +85,6 @@ class InfluenceInput extends Component {
             />
           </Col>
         </Row>
-      </div>
     );
   }
 }
