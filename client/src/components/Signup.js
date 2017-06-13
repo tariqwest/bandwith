@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 import { Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { updateProfile, updatePhoto } from '../actions';
+import { updateProfile } from '../actions';
 import AgeInput from './Signup/AgeInput';
 import SongInput from './Signup/SongInput';
 import VideoInput from './Signup/VideoInput';
@@ -139,20 +139,10 @@ class Signup extends Component {
   }
 
   handlePhotoChange(urlLrg, urlSml) {
-    // const { dispatch } = this.props;
-
     this.setState({
       photo_src_large: urlLrg,
       photo_src_small: urlSml,
     });
-
-    // const profile = {
-    //   photo_src_large: this.state.photo_src_large,
-    //   photo_src_small: this.state.photo_src_small,
-    //   id: this.props.userId,
-    // };
-
-    // dispatch(updatePhoto(profile));
   }
 
   handleSelectMultiple(item, collection) {
