@@ -5,9 +5,6 @@ const db = require('../../db');
 const axios = require('axios');
 
 module.exports.update = (req, res) => {
-  const videoUrl = req.body.video_url.split('/');
-  const query = videoUrl[videoUrl.length - 1].split('=');
-  const id = query[query.length - 1];
   const instruments = req.body.instruments;
   const genres = req.body.genres;
   const preferredInstruments = req.body.preferred_instruments;
@@ -22,7 +19,7 @@ module.exports.update = (req, res) => {
     photo_src_large: req.body.photo_src_large,
     photo_src_small: req.body.photo_src_small,
     song_url: req.body.song_url,
-    video_url: id,
+    video_url: req.body.video_url,
     age: req.body.age,
     search_radius: req.body.search_radius,
     has_profile: true,
@@ -32,7 +29,7 @@ module.exports.update = (req, res) => {
   // make sure there are no blank fields because table insert will break
   for (let i = 0; i < keys.length; i++) {
     if (profileBody[keys[i]] === '') {
-      delete profileBody[keys[i]];
+      profileBody[keys[i]] = null;
     }
   }
 
