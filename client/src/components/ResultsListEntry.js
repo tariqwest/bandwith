@@ -1,15 +1,14 @@
+/* eslint-disable camelcase */
 import React from 'react';
-import TagList from './TagList';
-import { sendResultsAction } from '../actions';
 import { connect } from 'react-redux';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import Chip from 'material-ui/Chip';
 import Divider from 'material-ui/Divider';
 import FullscreenDialog from 'material-ui-fullscreen-dialog';
-import ResultsProfile from './ResultsProfile';
 import { Row, Col } from 'react-flexbox-grid';
+import ResultsProfile from './ResultsProfile';
+import TagList from './TagList';
+import { sendResultsAction } from '../actions';
 
 const styles = {
   fullProfile: {
@@ -32,7 +31,6 @@ const styles = {
   },
 };
 
-
 class ResultsListEntry extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +50,6 @@ class ResultsListEntry extends React.Component {
     const {
       first,
       last,
-      display,
       bio,
       photo_src_small,
       instruments,
@@ -64,7 +61,7 @@ class ResultsListEntry extends React.Component {
       <div>
         <Card>
           <CardText onClick={() => this.setState({ showFullProfile: true })} >
-            <div className="chat-title">
+            <div className="chat-title clickable">
               <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src_small || '/assets/avatar.jpg'} />
               <CardTitle title={`${first} ${last}`} subtitle={bio} />
             </div>
@@ -75,10 +72,10 @@ class ResultsListEntry extends React.Component {
           <CardActions>
             <Row>
               <Col xs={6}>
-                <FlatButton fullWidth={true} label="Yes" onClick={() => this.handleChoice(true)} />
+                <FlatButton fullWidth label="Yes" onClick={() => this.handleChoice(true)} />
               </Col>
               <Col xs={6}>
-                <FlatButton fullWidth={true} label="No" onClick={() => this.handleChoice(true)} />
+                <FlatButton fullWidth label="No" onClick={() => this.handleChoice(true)} />
               </Col>
             </Row>
           </CardActions>
@@ -88,27 +85,37 @@ class ResultsListEntry extends React.Component {
           onRequestClose={() => this.setState({ showFullProfile: false })}
           title={fullname}
           actionButton={<FlatButton
-            label='Close'
+            label="Close"
             onTouchTap={() => this.setState({ showFullProfile: false })}
           />}
-          appBarStyle={{backgroundColor: '#000000'}}
+          appBarStyle={{ backgroundColor: '#000000' }}
           containerStyle={styles.fullProfile.containerStyle}
         >
           <Card style={styles.fullProfile.choiceBar}>
             <CardActions>
               <Row>
                 <Col xs={6}>
-                  <FlatButton style={styles.fullProfile.choiceButton} fullWidth={true} label="Yes" onClick={() => this.handleChoice(true)} />
+                  <FlatButton
+                    fullWidth
+                    style={styles.fullProfile.choiceButton}
+                    label="Yes"
+                    onClick={() => this.handleChoice(true)}
+                  />
                 </Col>
                 <Col xs={6}>
-                  <FlatButton style={styles.fullProfile.choiceButton} fullWidth={true} label="No" onClick={() => this.handleChoice(true)} />
+                  <FlatButton
+                    fullWidth
+                    style={styles.fullProfile.choiceButton}
+                    label="No"
+                    onClick={() => this.handleChoice(true)}
+                  />
                 </Col>
               </Row>
             </CardActions>
           </Card>
-           <Row>
+          <Row>
             <Col xs={12} sm={8} smOffset={2}>
-             <ResultsProfile currentResult={this.props.result} />
+              <ResultsProfile currentResult={this.props.result} />
             </Col>
           </Row>
         </FullscreenDialog>
