@@ -14,6 +14,8 @@
     "loaddb": "grunt pgcreatedb:default",
     "migrate:latest": "knex migrate:latest",
     "migrate:rollback": "knex migrate:rollback",
+    "loadgis" : "psql bandwith -c 'CREATE EXTENSION postgis'",
+    "alldb": "npm run loaddb && npm run loadgis && npm run migrate:latest && npm run seed",
     "seed": "knex seed:run"
   },
   "author": "Hack Reactor",
