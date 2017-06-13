@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
   margin: 30,
+  textAlign: 'center',
 };
 
 
@@ -42,8 +43,8 @@ class Login extends React.Component {
                   <ListItem
                     disabled
                     className="homepage-text"
-                    style={{ fontSize: '26px' }}
-                    primaryText="Join Us!"
+                    style={{ fontSize: '26px', lineHeight: '30px' }}
+                    primaryText="Welcome back!"
                   />
                   <ListItem disabled>
                     <FlatButton
@@ -79,7 +80,7 @@ class Login extends React.Component {
                     />
                   </ListItem>
                 </List>
-                <ListItem>
+                <ListItem disabled>
                   <RaisedButton label="Return to Home Page" containerElement={<Link to="/" />} />
                 </ListItem>
               </Card>
