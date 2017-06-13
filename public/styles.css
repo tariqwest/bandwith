@@ -62,6 +62,10 @@ html {
   border-radius: 50%;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .edit-div {
   text-align: right;
 }
