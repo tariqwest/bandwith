@@ -58,6 +58,7 @@ class Signup extends Component {
     this.handlePhotoChange = this.handlePhotoChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleGender = this.handleGender.bind(this);
+    this.handleSearchRadius = this.handleSearchRadius.bind(this);
     this.handleNumberChange = this.handleNumberChange.bind(this);
     this.handleInfluences = this.handleInfluences.bind(this);
     this.handleSelectMultiple = this.handleSelectMultiple.bind(this);
@@ -185,6 +186,12 @@ class Signup extends Component {
   handleGender(event, index, value) {
     this.setState({
       gender: value,
+    });
+  }
+
+  handleSearchRadius(event, index, value) {
+    this.setState({
+      search_radius: value,
     });
   }
 
@@ -339,7 +346,7 @@ class Signup extends Component {
               <CardText>
                 <SearchRadiusInput
                   radius={this.state.search_radius}
-                  onChange={this.handleNumberChange}
+                  onChange={this.handleSearchRadius}
                   radiusErrorText={this.state.search_radiusErrorText}
                 />
                 <Divider />
