@@ -27,7 +27,7 @@ class MatchList extends React.Component {
       );
     }
     return (
-      <CardTitle title="No matches yet, check back again soon!" />
+      <CardTitle title="No connections yet, check back again soon!" />
     );
   }
 }
