@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const config = require('config');
 
 module.exports = {
   entry: [
@@ -52,5 +53,11 @@ module.exports = {
       favicon: path.join(__dirname, '/client/src/favicon.ico'),
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+        CONFIG: JSON.stringify(config),
+      },
+    }),
   ],
 };

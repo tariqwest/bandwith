@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const config = require('config');
 
 module.exports = {
   entry: './client/src/index.js',
@@ -35,7 +36,10 @@ module.exports = {
       favicon: path.join(__dirname, '/client/src/favicon.ico'),
     }),
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify('production') },
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+        CONFIG: JSON.stringify(config),
+      },
     }),
   ],
 };

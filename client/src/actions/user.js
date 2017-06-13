@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { setUserLocation } from './location';
-const config = require('./config');
 
 export const USER_INFO_REQUEST = 'USER_INFO_REQUEST';
 export const USER_INFO_SUCCESS = 'USER_INFO_SUCCESS';
@@ -38,7 +37,7 @@ export const getUserInfo = userId => (dispatch) => {
       return json;
     })
     .then((json) => {
-      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${json.zipcode}&key=${config.apiKeys.google}`)
+      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${json.zipcode}&key=${process.env.CONFIG.apiKeys.google}`)
         .then((response) => {
           const location = response.data.results[0].formatted_address;
           dispatch(setUserLocation(location));
