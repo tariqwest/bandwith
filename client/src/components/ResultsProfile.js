@@ -1,14 +1,15 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import { Card,
+import { Row, Col } from 'react-flexbox-grid';
+import {
+  Card,
   CardHeader,
   CardTitle,
   CardMedia,
 } from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
-import { List, ListItem } from 'material-ui/List';
 import Chip from 'material-ui/Chip';
-import { Row, Col } from 'react-flexbox-grid';
+import { List, ListItem } from 'material-ui/List';
+import Paper from 'material-ui/Paper';
 
 const style = {
   marginTop: 8,
@@ -128,7 +129,7 @@ class ResultsProfile extends React.Component {
                             scrolling="no"
                             frameBorder="no"
                             title="audio"
-                            src={song_url}
+                            src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_url}`}
                           />
                         </CardMedia>,
                       ]}
