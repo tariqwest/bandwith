@@ -3,8 +3,8 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import { connect } from 'react-redux';
 import request from 'superagent';
-import FlatButton from 'material-ui/FlatButton';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+import FontIcon from 'material-ui/FontIcon';
+import IconButton from 'material-ui/IconButton';
 import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
 
@@ -105,18 +105,11 @@ class ProfileImage extends React.Component {
           alt="upload pic"
           src={this.state.currentPhoto || '/assets/avatar.jpg'}
         />
-        <FloatingActionButton
-          style={{ marginLeft: '-30px' }}
-          zDepth={1}
-          className="edit-button"
+        <IconButton
           onClick={() => this.setState({ showEditPhoto: true })}
-          mini
-          backgroundColor="white"
-          iconStyle={{ color: 'black' }}
         >
-          <i className="material-icons">create</i>
-        </FloatingActionButton>
-
+          <FontIcon className="material-icons" color="white">add_a_photo</FontIcon>
+        </IconButton>
         <Dialog
           open={this.state.showEditPhoto}
           onRequestClose={() => this.setState({ showEditPhoto: false })}
