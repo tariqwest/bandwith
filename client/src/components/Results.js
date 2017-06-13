@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
+import { CardTitle } from 'material-ui/Card';
 import { getResultsInfo } from '../actions';
 import ResultsListEntry from './ResultsListEntry';
 
@@ -32,7 +33,9 @@ class Results extends React.Component {
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={6} smOffset={3} >
-              <h3 style={styles.title}>No more musicians for now, check again soon!</h3>
+              <Paper style={styles.paper} zDepth={1}>
+                <CardTitle title="No more musicians for now, check again soon!" />
+              </Paper>
             </Col>
           </Row>
         </div>

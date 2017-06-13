@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { List } from 'material-ui/List';
-import { CardText } from 'material-ui/Card';
+import { CardTitle } from 'material-ui/Card';
 import MatchListEntry from './MatchListEntry';
 import { getMatchesInfo } from '../actions';
 
@@ -27,7 +27,7 @@ class MatchList extends React.Component {
       );
     }
     return (
-      <CardText>No matches yet, check back again soon!</CardText>
+      <CardTitle title="No matches yet, check back again soon!" />
     );
   }
 }
