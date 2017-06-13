@@ -64,7 +64,7 @@ class Home extends React.Component {
                 <ListItem
                   disabled
                   className="homepage-text"
-                  style={{ fontSize: '26px' }}
+                  style={{ fontSize: '26px', lineHeight: '30px' }}
                   primaryText="Join the community"
                 />
                 <ListItem disabled>
