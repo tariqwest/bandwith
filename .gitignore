@@ -1,4 +1,5 @@
 # Project specific
+client/src/actions/config.js
 config/development.json
 config/staging.json
 config/test.json
