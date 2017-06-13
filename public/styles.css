@@ -52,6 +52,11 @@ html {
   height: 550px;
 }
 
+.help {
+  color: #bdbdbd;
+  cursor: pointer;
+}
+
 .homepage-text {
   font: 400 16px/22px "Lato";
   font-size: 26px;
@@ -76,22 +81,22 @@ html {
 }
 
 .parallax-top { 
-    background-image: url("/assets/matheus-ferrero-183749.jpg");
-    height: 700px; 
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url("/assets/matheus-ferrero-183749.jpg");
+  height: 700px; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .parallax-bottom { 
-    background-image: url("/assets/kimberly-richards-335.jpg");
-    height: 400px; 
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    text-align: center;
+  background-image: url("/assets/kimberly-richards-335.jpg");
+  height: 400px; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
 }
 
 .remove-div {
