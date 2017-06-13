@@ -5,13 +5,13 @@ const AgeInput = ({ value, onChange, ageErrorText }) => (
   <TextField
     fullWidth
     required
-    floatingLabelText="age"
     id="age"
     name="age"
     data-name="age"
-    errorText={ageErrorText}
     value={value}
     onChange={onChange}
+    floatingLabelText="age"
+    errorText={ageErrorText}
   />
 );
 
