@@ -1,27 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { List } from 'material-ui/List';
+import { CardText } from 'material-ui/Card';
 import MatchListEntry from './MatchListEntry';
 import { getMatchesInfo } from '../actions';
 
 class MatchList extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { dispatch, userId } = this.props;
     dispatch(getMatchesInfo(userId));
   }
 
-  render(){
+  render() {
+    if (this.props.matches.length > 0) {
+      return (
+        <List>
+          {this.props.matches.map(match =>
+            (<MatchListEntry match={match} key={match.id} />) // eslint-disable-line
+          )}
+        </List>
+      );
+    }
     return (
-      <List>
-        {this.props.matches.map(match =>
-          (<MatchListEntry match={match} key={match.id} />) // eslint-disable-line
-        )}
-      </List>
+      <CardText>No matches yet, check back again soon!</CardText>
     );
   }
 }
