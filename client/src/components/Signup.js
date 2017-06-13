@@ -7,18 +7,18 @@ import { Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { updateProfile, updatePhoto } from '../actions';
-import FirstNameInput from './Signup/FirstNameInput';
-import LastNameInput from './Signup/LastNameInput';
-import ZipCodeInput from './Signup/ZipCodeInput';
 import AgeInput from './Signup/AgeInput';
-import GenderInput from './Signup/GenderInput';
-import BiographyTextArea from './Signup/BiographyTextArea';
-import InfluencesInput from './Signup/InfluencesInput';
 import SongInput from './Signup/SongInput';
 import VideoInput from './Signup/VideoInput';
-import SearchRadiusInput from './Signup/SearchRadiusInput';
+import GenderInput from './Signup/GenderInput';
 import PopoverMenu from './Signup/PopoverMenu';
 import ProfileImage from './Signup/ProfileImage';
+import ZipCodeInput from './Signup/ZipCodeInput';
+import LastNameInput from './Signup/LastNameInput';
+import FirstNameInput from './Signup/FirstNameInput';
+import InfluencesInput from './Signup/InfluencesInput';
+import SearchRadiusInput from './Signup/SearchRadiusInput';
+import BiographyTextArea from './Signup/BiographyTextArea';
 
 const style = {
   marginTop: 8,
@@ -294,7 +294,7 @@ class Signup extends Component {
           </Paper>
           <Paper style={style}>
             <Card>
-              <CardTitle title="your sounds" />
+              <CardTitle title="Your sounds" />
               <CardText>
                 <SongInput song={this.state.song_url} onChange={this.handleChange} /><br />
                 <VideoInput video={this.state.video_url} onChange={this.handleChange} />
@@ -303,7 +303,7 @@ class Signup extends Component {
           </Paper>
           <Paper style={style}>
             <Card>
-              <CardTitle title="your stuff" />
+              <CardTitle title="Your inspirations" />
               <CardText>
                 <InfluencesInput
                   influence={this.state.influence}
@@ -335,7 +335,7 @@ class Signup extends Component {
           </Paper>
           <Paper style={style}>
             <Card>
-              <CardTitle title="your discovery prefs" />
+              <CardTitle title="Your discovery prefs" />
               <CardText>
                 <SearchRadiusInput
                   radius={this.state.search_radius}

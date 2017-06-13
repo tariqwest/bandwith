@@ -6,13 +6,19 @@ import Subheader from 'material-ui/Subheader';
 import RaisedButton from 'material-ui/RaisedButton';
 import InfluenceList from './InfluenceList';
 
-const style = {
-  margin: 12,
-  float: 'right',
-  paddingTop: '0',
-  paddingBottom: '0',
-  height: 'auto',
+const styles = {
+  iconButton: {
+    margin: 12,
+    float: 'right',
+    paddingTop: '0',
+    paddingBottom: '0',
+    height: 'auto',
+  },
+  influencesButton: {
+    marginTop: '25px',
+  },
 };
+
 
 class InfluenceInput extends Component {
   constructor(props) {
@@ -37,7 +43,7 @@ class InfluenceInput extends Component {
                 <IconButton
                   onTouchTap={this.handleShowInput}
                   label="Add Influence"
-                  style={style}
+                  style={styles.iconButton}
                   name="influences"
                   form="influences"
                 >
@@ -46,7 +52,7 @@ class InfluenceInput extends Component {
             </Subheader>
             { this.state.showInput ?
               <Row>
-                <Col xs={9} >
+                <Col xs={9}>
                   <TextField
                     floatingLabelText="musical influence"
                     fullWidth
@@ -59,12 +65,12 @@ class InfluenceInput extends Component {
                 </Col>
                 <Col xs={3}>
                   <RaisedButton
-                    onTouchTap={() => { this.props.onClick(); this.handleShowInput(); }}
                     fullWidth
                     label="add"
-                    style={style}
+                    style={styles.influencesButton}
                     name="influences"
                     form="influences"
+                    onTouchTap={() => { this.props.onClick(); this.handleShowInput(); }}
                   />
                 </Col>
               </Row>
