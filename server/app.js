@@ -23,7 +23,6 @@ app.use('/api/preference', routes.preference);
 app.use('/api/search', routes.search);
 app.use('/api/connections', routes.connections);
 app.use('/api/chats', routes.chats);
-app.use('/api/location', routes.location);
 app.use('/api/influence', routes.influence);
 app.use('/api', routes.api);
 app.use('/auth', routes.auth);
