@@ -75,25 +75,28 @@ class ProfileImage extends React.Component {
   }
 
   savePhoto() {
-    const upload = request.post(CLOUDINARY_UPLOAD_URL)
-      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-      .field('file', this.state.croppedPhoto);
+    Promise.resolve(this.imageCrop())
+      .then(() => {
+        const upload = request.post(CLOUDINARY_UPLOAD_URL)
+          .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+          .field('file', this.state.croppedPhoto);
 
-    upload.end((err, response) => {
-      if (err) {
-        console.error(err);
-      }
+        upload.end((err, response) => {
+          if (err) {
+            console.error(err);
+          }
 
-      if (response.body.secure_url !== '') {
-        this.setState({
-          cloudinaryUrlSml: response.body.secure_url,
-          currentPhoto: response.body.secure_url,
-          showEditPhoto: false,
+          if (response.body.secure_url !== '') {
+            this.setState({
+              cloudinaryUrlSml: response.body.secure_url,
+              currentPhoto: response.body.secure_url,
+              showEditPhoto: false,
+            });
+
+            this.props.handlePhotoChange(this.state.cloudinaryUrlLrg, this.state.cloudinaryUrlSml);
+          }
         });
-
-        this.props.handlePhotoChange(this.state.cloudinaryUrlLrg, this.state.cloudinaryUrlSml);
-      }
-    });
+      });
   }
 
   render() {
