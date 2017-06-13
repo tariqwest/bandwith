@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import moment from 'moment';
-import axios from 'axios';
 
 class ChatListEntry extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   render() {
