@@ -78,6 +78,7 @@ class Profile extends React.Component {
     const search = `Searching within ${search_radius} miles`;
     const profile = `${gender}, ${age}`;
 
+
     if (hasUserInfo) {
       let videoId = '';
       if (video_url) {
@@ -85,6 +86,9 @@ class Profile extends React.Component {
         const videoQuery = videoUrl[videoUrl.length - 1].split('=');
         videoId = videoQuery[videoQuery.length - 1];
       }
+
+      const re = new RegExp(/\d+(?=&)/g);
+      const song_id = song_url.match(re);
 
       return (
         <div>
@@ -168,12 +172,12 @@ class Profile extends React.Component {
                       primaryText="SoundCloud"
                       primaryTogglesNestedList
                       nestedItems={[
-                        <CardMedia key={song_url}>
+                        <CardMedia key={song_id}>
                           <iframe
                             scrolling="no"
                             frameBorder="no"
                             title="audio"
-                            src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_url}`}
+                            src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_id}`}
                           />
                         </CardMedia>,
                       ]}
