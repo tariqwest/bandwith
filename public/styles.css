@@ -125,6 +125,16 @@ html {
   text-align: center;
 }
 
+.parallax-bottom-loggedin { 
+  background-image: url("/assets/kimberly-richards-335-2.jpg");
+  height: 400px; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+
 .remove-div {
   display: inline-block;
   text-align: right;
