@@ -18,7 +18,7 @@ class Demo extends Component {
       }
       return res;
     }).then((res) => {
-        history.push('/connections');
+        history.push('/');
       })
   }
 

@@ -31,11 +31,10 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
     withRelated: ['profile']
   })
     .then(oauthAccount => {
-
       if (oauthAccount) {
         throw oauthAccount;
-      }
-
+      } 
+      
       if (!oauthProfile.emails || !oauthProfile.emails.length) {
         // FB users can register with a phone number, which is not exposed by Passport
         throw null;
@@ -43,9 +42,9 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
       return models.Profile.where({ email: oauthProfile.emails[0].value }).fetch();
     })
     .then(profile => {
-      let profileInfo = {
-        first: oauthProfile.name.givenName,
-        last: oauthProfile.name.familyName,
+      const profileInfo = {
+        first: type !== 'twitter' ? oauthProfile.name.givenName : '',
+        last: type !== 'twitter' ? oauthProfile.name.familyName: '',
         display: oauthProfile.displayName || `${oauthProfile.name.givenName} ${oauthProfile.name.familyName}`,
         email: oauthProfile.emails[0].value
       };
@@ -54,6 +53,7 @@ const getOrCreateOAuthProfile = (type, oauthProfile, done) => {
         //update profile with info from oauth
         return profile.save(profileInfo, { method: 'update' });
       }
+    
       // otherwise create new profile
       return models.Profile.forge(profileInfo).save();
     })
@@ -135,11 +135,10 @@ passport.use('local-signup', new LocalStrategy({
 passport.use('local-login', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
-  passReqToCallback: true
+  passReqToCallback: true,
 },
   (req, email, password, done) => {
     // fetch any profiles that have a local auth account with this email address
-    debugger;
     return models.Profile.where({ email }).fetch({
       withRelated: [{
         auths: query => query.where({ type: 'local' })
@@ -193,20 +192,20 @@ passport.use('facebook', new FacebookStrategy({
 );
 
 // REQUIRES PERMISSIONS FROM TWITTER TO OBTAIN USER EMAIL ADDRESSES
-// const twitterOptions = {
-//   consumerKey: config.passport.Twitter.consumerKey,
-//   consumerSecret: config.passport.Twitter.consumerSecret,
-//   callbackURL: `${config.env.serverUrl}/auth/twitter/callback`,
-//   userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
-// };
-//
-// passport.use('twitter', new TwitterStrategy(twitterOptions,
-//   (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('twitter', profile, done))
-// );
-//
-// const twitterCallback = (accessToken, refreshToken, profile, done) =>
-//   getOrCreateOAuthProfile('twitter', profile, done);
-//
-// passport.use('twitter', new TwitterStrategy(twitterOptions, twitterCallback));
+const twitterOptions = {
+  consumerKey: config.passport.Twitter.consumerKey,
+  consumerSecret: config.passport.Twitter.consumerSecret,
+  callbackURL: `${config.env.serverUrl}/auth/twitter/callback`,
+  userProfileURL: 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
+};
+
+passport.use('twitter', new TwitterStrategy(twitterOptions,
+  (accessToken, refreshToken, profile, done) => getOrCreateOAuthProfile('twitter', profile, done))
+);
+
+const twitterCallback = (accessToken, refreshToken, profile, done) =>
+  getOrCreateOAuthProfile('twitter', profile, done);
+
+passport.use('twitter', new TwitterStrategy(twitterOptions, twitterCallback));
 
 module.exports = passport;

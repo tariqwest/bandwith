@@ -5,14 +5,14 @@ const router = express.Router();
 
 router.route('/login')
   .post(middleware.passport.authenticate('local-login', {
-    successReturnToOrRedirect: '/profile',
+    successReturnToOrRedirect: '/connections',
     failureRedirect: '/login',
     failureFlash: true,
   }));
 
 router.route('/signup')
   .post(middleware.passport.authenticate('local-signup', {
-    successReturnToOrRedirect: '/profile',
+    successReturnToOrRedirect: '/connections',
     failureRedirect: '/signup',
     failureFlash: true,
   }));
@@ -32,7 +32,7 @@ router.get('/google', middleware.passport.authenticate('google', {
 
 
 router.get('/google/callback', middleware.passport.authenticate('google', {
-  successReturnToOrRedirect: '/profile',
+  successReturnToOrRedirect: '/connections',
   failureRedirect: '/login',
 }));
 
