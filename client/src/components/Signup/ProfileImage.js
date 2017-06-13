@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import request from 'superagent';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
+import FlatButton from 'material-ui/FlatButton';
 import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
 
@@ -120,7 +121,7 @@ class ProfileImage extends React.Component {
               onTouchTap={() => this.setState({ showEditPhoto: false })}
             />,
             <Dropzone
-              style={style}
+              style={styles}
               multiple={false}
               accept="image/*"
               onDrop={this.onDrop}
