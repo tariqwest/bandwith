@@ -1,4 +1,9 @@
 {
+  "env": {
+    "production": {
+      "plugins": ["transform-react-constant-elements"]
+    }
+  },
   "presets": [
     ["env", {"modules": false}],
     "react",
