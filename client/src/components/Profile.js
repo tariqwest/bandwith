@@ -61,7 +61,6 @@ class Profile extends React.Component {
       age,
       gender,
       email,
-      zipcode,
       search_radius,
       instruments,
       genres,
@@ -74,11 +73,10 @@ class Profile extends React.Component {
     } = this.props.user;
 
     const { hasUserInfo } = this.props;
-    const { city, state } = this.props.location;
+    const { location } = this.props.location;
     const fullname = `${first} ${last}`;
     const search = `Searching within ${search_radius} miles`;
     const profile = `${gender}, ${age}`;
-    const location = `${city}, ${state} ${zipcode}`;
 
     if (hasUserInfo) {
       let videoId = '';
