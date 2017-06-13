@@ -173,7 +173,7 @@ class Profile extends React.Component {
                             scrolling="no"
                             frameBorder="no"
                             title="audio"
-                            src={song_url}
+                            src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_url}`}
                           />
                         </CardMedia>,
                       ]}
