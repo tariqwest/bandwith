@@ -12,6 +12,7 @@ import Matches from './Matches';
 import Results from './Results';
 import Chats from './Chats';
 import Login from './Login';
+import Join from './Join';
 import Logout from './Logout';
 import Private from './Private';
 import Profile from './Profile';
@@ -33,6 +34,7 @@ const App = () => (
         <div className="background">
           <Nav />
           <Route path="/login" component={Login} />
+          <Route path="/join" component={Join} />
           <Route path="/logout" component={Logout} />
           <PrivateRoute path="/private" component={Private} />
           <PrivateRoute path="/profile" component={Profile} />
