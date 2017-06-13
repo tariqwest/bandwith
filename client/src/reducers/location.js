@@ -5,13 +5,7 @@ const redirectURL = (state = '/', action) => {
     case SET_USER_LOCATION:
       return {
         ...state,
-        city: action.city,
-        county: action.county,
-        lat: action.lat,
-        lng: action.lng,
-        state: action.state,
-        state_abbrev: action.state_abbrev,
-        zipcode: action.zipcode,
+        location: action.location,
       };
     default:
       return state;
