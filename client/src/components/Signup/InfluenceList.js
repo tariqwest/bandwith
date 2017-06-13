@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Chip from 'material-ui/Chip';
 import { Card, CardHeader } from 'material-ui/Card';
 
 const styles = {
@@ -23,26 +22,11 @@ class InfluenceList extends Component {
   }
 
   render() {
-    // return (
-    //   <div style={styles.wrapper}>
-    //     {this.props.selectedItems.length ?
-    //         this.props.selectedItems.map(item => (
-    //           <Chip
-    //             style={styles.chip}
-    //             key={item.name}
-    //             id={item.name}
-    //             onRequestDelete={() => this.handleChipDelete(item.name)}
-    //           >
-    //             {item.name}
-    //           </Chip>),
-    //     ) : null}
-    //   </div>
-    // );
     return (
       <div style={styles.wrapper}>
         {this.props.selectedItems.length ?
             this.props.selectedItems.map(item => (
-              <Card style={{ marginRight: '5px' }} key={item.name}>
+              <Card style={{ margin: '5px' }} key={item.name}>
                 <CardHeader style={{ padding: '16px 0px 16px 16px', display: 'inline-block' }} titleStyle={{ verticalAlign: 'middle' }} title={item.name} avatar={item.img} />
                 <div onClick={() => this.handleChipDelete(item.name)} className="remove-div">
                   <i className="material-icons remove-button">clear</i>

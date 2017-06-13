@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 const BiographyTextArea = ({ bio, onChange }) => (
   <div>
     <TextField
+      fullWidth
       required
       floatingLabelText="about you"
       multiLine

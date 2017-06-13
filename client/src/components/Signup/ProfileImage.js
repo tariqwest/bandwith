@@ -11,6 +11,8 @@ import Cropper from 'react-cropper';
 const style = {
   parent: {
     position: 'relative',
+    width: '100%',
+    textAlign: 'center',
   },
   child: {
     position: 'relative',

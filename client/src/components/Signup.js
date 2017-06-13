@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
-import { Card, CardHeader, CardText, CardActions, CardTitle } from 'material-ui/Card';
+import { Card, CardText, CardTitle } from 'material-ui/Card';
 import { withRouter } from 'react-router';
 import { Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
@@ -24,11 +23,6 @@ import ProfileImage from './Signup/ProfileImage';
 const style = {
   marginTop: 8,
   marginBottom: 8,
-};
-const chipStyle = {
-  marginTop: 5,
-  marginLeft: 5,
-  display: 'inline-block',
 };
 
 const instruments = ['electric guitar', 'acoustic guitar', 'bass', 'drums', 'piano', 'vocals', 'ukulele', 'violin', 'saxophone', 'trumpet'];
@@ -245,7 +239,7 @@ class Signup extends Component {
         .then((influencesObj) => {
           axios.post('/api/influence', influencesObj);
         })
-        .catch((err) => {throw err;});
+        .catch((err) => { throw err; });
     }
   }
 
@@ -253,32 +247,48 @@ class Signup extends Component {
     return (
       <Row>
         <Col xs={12} sm={6} smOffset={3}>
-          <Paper style={style}>
+          <Paper>
             <Card>
               <CardText>
-                <ProfileImage
-                  handlePhotoChange={this.handlePhotoChange}
-                />
-                <FirstNameInput
-                  value={this.state.first}
-                  onChange={this.handleChange}
-                />
-                <LastNameInput value={this.state.last} onChange={this.handleChange} />
-                <ZipCodeInput
-                  value={this.state.zipcode}
-                  onChange={this.handleNumberChange}
-                  zipErrorText={this.state.zipcodeErrorText}
-                />
-                <AgeInput
-                  value={this.state.age}
-                  onChange={this.handleNumberChange}
-                  ageErrorText={this.state.ageErrorText}
-                />
-                <GenderInput onChange={this.handleGender} value={this.state.gender} />
-                <BiographyTextArea
-                  bio={this.state.bio}
-                  onChange={this.handleChange}
-                />
+                <Row>
+                  <Col xs={12}>
+                    <ProfileImage
+                      handlePhotoChange={this.handlePhotoChange}
+                    />
+                  </Col>
+                  <Col xs={12} sm={6}>
+                    <FirstNameInput
+                      value={this.state.first}
+                      onChange={this.handleChange}
+                    />
+                  </Col>
+                  <Col xs={12} sm={6}>
+                    <LastNameInput value={this.state.last} onChange={this.handleChange} />
+                  </Col>
+                  <Col xs={12} sm={4}>
+                    <AgeInput
+                      value={this.state.age}
+                      onChange={this.handleNumberChange}
+                      ageErrorText={this.state.ageErrorText}
+                    />
+                  </Col>
+                  <Col xs={12} sm={4}>
+                    <GenderInput onChange={this.handleGender} value={this.state.gender} />
+                  </Col>
+                  <Col xs={12} sm={4}>
+                    <ZipCodeInput
+                      value={this.state.zipcode}
+                      onChange={this.handleNumberChange}
+                      zipErrorText={this.state.zipcodeErrorText}
+                    />
+                  </Col>
+                  <Col xs={12}>
+                    <BiographyTextArea
+                      bio={this.state.bio}
+                      onChange={this.handleChange}
+                    />
+                  </Col>
+                </Row>
               </CardText>
             </Card>
           </Paper>

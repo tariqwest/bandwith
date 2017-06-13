@@ -6,6 +6,14 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import List from './List';
 
+const style = {
+  margin: 12,
+  float: 'right',
+  paddingTop: '0',
+  paddingBottom: '0',
+  height: 'auto',
+};
+
 class PopoverMenu extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +53,7 @@ class PopoverMenu extends Component {
       <div>
         <Subheader>{this.props.itemName.split('_').join(' ')}
           <IconButton
+            style={style}
             onTouchTap={this.handleTouchTap}
             label={`your ${this.props.className}`}
           >

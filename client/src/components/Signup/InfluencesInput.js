@@ -8,6 +8,10 @@ import InfluenceList from './InfluenceList';
 
 const style = {
   margin: 12,
+  float: 'right',
+  paddingTop: '0',
+  paddingBottom: '0',
+  height: 'auto',
 };
 
 class InfluenceInput extends Component {
@@ -27,7 +31,7 @@ class InfluenceInput extends Component {
     return (
       <div>
         <Row>
-          <Col xs={12} sm={8} >
+          <Col xs={12} >
             <Subheader>
               Influences
                 <IconButton
@@ -39,8 +43,10 @@ class InfluenceInput extends Component {
                 >
                   <i className="material-icons">control_point</i>
                 </IconButton>
-              { this.state.showInput ?
-                <div>
+            </Subheader>
+            { this.state.showInput ?
+              <Row>
+                <Col xs={9} >
                   <TextField
                     floatingLabelText="musical influence"
                     fullWidth
@@ -50,17 +56,20 @@ class InfluenceInput extends Component {
                     value={this.props.influence}
                     onChange={this.props.handleChange}
                   />
+                </Col>
+                <Col xs={3}>
                   <RaisedButton
                     onTouchTap={() => { this.props.onClick(); this.handleShowInput(); }}
+                    fullWidth
                     label="add"
                     style={style}
                     name="influences"
                     form="influences"
                   />
-                </div>
-                : null
-              }
-            </Subheader>
+                </Col>
+              </Row>
+            : null
+          }
           </Col>
           <Col xs={12}>
             <InfluenceList
