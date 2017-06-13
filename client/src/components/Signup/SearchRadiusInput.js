@@ -1,26 +1,30 @@
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import Subheader from 'material-ui/Subheader';
+import Slider from 'material-ui/Slider';
 
-const SearchRadiusInput = ({ radius, onChange, radiusErrorText }) => (
-    <SelectField
-      fullWidth
-      floatingLabelText="search radius"
-      id="search_radius"
-      name="search_radius"
-      value={Number(radius)}
-      onChange={onChange}
-      data-name="search radius"
-      errorText={radiusErrorText}
-    >
-      <MenuItem value={1} primaryText="1 mile" />
-      <MenuItem value={5} primaryText="5 miles" />
-      <MenuItem value={10} primaryText="10 miles" />
-      <MenuItem value={20} primaryText="20 miles" />
-      <MenuItem value={30} primaryText="30 miles" />
-      <MenuItem value={40} primaryText="40 miles" />
-      <MenuItem value={50} primaryText="50 miles" />
-    </SelectField>
+const styles = {
+  subheader: {
+    textTransform: 'capitalize',
+  },
+};
+
+const SearchRadiusInput = ({ radius, onChange }) => (
+    <div>
+      <Subheader style={styles.subheader}>
+        {'Search radius'}
+      </Subheader>
+      <span id="radius_label" style={{ color: 'black', fontWeight: 'bold' }}>{radius}</span>
+      <Slider
+        defaultValue={5 / 100}
+        min={0}
+        max={1}
+        step={5 / 100}
+        value={radius / 100}
+        onChange={onChange}
+      />
+    </div>
 );
 
 export default SearchRadiusInput;

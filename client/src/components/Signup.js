@@ -189,9 +189,9 @@ class Signup extends Component {
     });
   }
 
-  handleSearchRadius(event, index, value) {
+  handleSearchRadius(event, value) {
     this.setState({
-      search_radius: value,
+      search_radius: Math.floor(value * 100),
     });
   }
 
