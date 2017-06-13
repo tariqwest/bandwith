@@ -5,4 +5,3 @@ module.exports.Chat = require('./chats');
 module.exports.Instrument = require('./instruments');
 module.exports.Genre = require('./genres');
 module.exports.Influence = require('./influences');
-module.exports.Location = require('./locations');
