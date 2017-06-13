@@ -74,16 +74,6 @@ exports.up = (knex, Promise) => (
       table.integer('profile_id').references('profiles.id').onDelete('CASCADE');
       table.integer('genre_id').references('genres.id').onDelete('CASCADE');
     }),
-    knex.schema.createTable('locations', (table) => {
-      table.increments('id').unsigned().primary();
-      table.integer('zipcode').nullable();
-      table.string('city', 30).nullable();
-      table.string('state', 30).nullable();
-      table.string('state_abbrev', 5).nullable();
-      table.string('county', 30).nullable();
-      table.float('lat', 14, 10).nullable();
-      table.float('lng', 14, 10).nullable();
-    }),
   ])
 );
 
@@ -101,6 +91,5 @@ exports.down = (knex, Promise) => (
     knex.schema.dropTable('usersInfluences'),
     knex.schema.dropTable('preferredInstruments'),
     knex.schema.dropTable('preferredGenres'),
-    knex.schema.dropTable('locations'),
   ])
 );
