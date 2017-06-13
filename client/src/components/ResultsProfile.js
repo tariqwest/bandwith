@@ -33,8 +33,7 @@ class ResultsProfile extends React.Component {
       bio,
       age,
       gender,
-      email,
-      zipcode,
+      location,
       instruments,
       genres,
       influences,
@@ -44,10 +43,8 @@ class ResultsProfile extends React.Component {
       song_url,
       photo_src_small,
     } = this.props.currentResult || this.props.currentMatch;
-    const { city, state } = { city: 'city', state: 'state' };
     const fullname = `${first} ${last}`;
     const profile = `${gender}, ${age}`;
-    const location = `${city}, ${state} ${zipcode}`;
 
     if (this.props.currentResult || this.props.currentMatch) {
       let videoId = '';
@@ -92,10 +89,6 @@ class ResultsProfile extends React.Component {
                     <ListItem
                       leftIcon={<i className="material-icons">account_circle</i>}
                       primaryText={profile}
-                    />
-                    <ListItem
-                      leftIcon={<i className="material-icons">email</i>}
-                      primaryText={email}
                     />
                     <ListItem
                       leftIcon={<i className="material-icons">place</i>}
