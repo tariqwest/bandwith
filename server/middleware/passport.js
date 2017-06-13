@@ -139,6 +139,7 @@ passport.use('local-login', new LocalStrategy({
 },
   (req, email, password, done) => {
     // fetch any profiles that have a local auth account with this email address
+    debugger;
     return models.Profile.where({ email }).fetch({
       withRelated: [{
         auths: query => query.where({ type: 'local' })

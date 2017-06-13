@@ -19,6 +19,7 @@ import PrivateRoute from './PrivateRoute';
 import Signup from './Signup';
 import Nav from './Nav';
 import Home from './Home';
+import Demo from './Demo';
 import HiddenLogin from './HiddenLogin';
 
 import store from '../store';
@@ -40,6 +41,7 @@ const App = () => (
           <PrivateRoute path="/chats" component={Chats} />
           <PrivateRoute path="/signup" component={Signup} />
           <Route exact path="/hidden" component={HiddenLogin} />
+          <Route exact path="/demo" component={Demo} />
           <Route exact path="/" component={Home} />
         </div>
       </Router>
