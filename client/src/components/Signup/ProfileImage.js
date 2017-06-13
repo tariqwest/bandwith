@@ -10,16 +10,15 @@ import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
 
 const styles = {
-  parent: {
+  imageContainer: {
     position: 'relative',
     width: '100%',
     textAlign: 'center',
   },
-  child: {
+  addImageButton: {
     position: 'relative',
-    top: '-50px',
-  },
-  icon: {
+    top: '-10px',
+    left: '-75px',
     color: 'white',
   },
 };
@@ -101,7 +100,7 @@ class ProfileImage extends React.Component {
 
   render() {
     return (
-      <div style={styles.parent}>
+      <div style={styles.imageContainer}>
         <img
           className="chat-picture"
           width="100"
@@ -111,6 +110,7 @@ class ProfileImage extends React.Component {
         />
         <IconButton
           onClick={() => this.setState({ showEditPhoto: true })}
+          style={styles.addImageButton}
         >
           <FontIcon className="material-icons" color="white">add_a_photo</FontIcon>
         </IconButton>
