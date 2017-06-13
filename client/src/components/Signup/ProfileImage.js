@@ -8,7 +8,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
 
-const style = {
+const styles = {
   parent: {
     position: 'relative',
     width: '100%',
@@ -16,10 +16,10 @@ const style = {
   },
   child: {
     position: 'relative',
-    left: '100px',
-    right: '-100px',
-    top: '-25px',
-    bottom: '25px',
+    top: '-50px',
+  },
+  icon: {
+    color: 'white',
   },
 };
 const CLOUDINARY_UPLOAD_PRESET = 'bandwith';
@@ -97,7 +97,7 @@ class ProfileImage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={styles.parent}>
         <img
           className="chat-picture"
           width="100"
