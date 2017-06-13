@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
+import Popover from 'material-ui/Popover';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import { Tabs, Tab } from 'material-ui/Tabs';
@@ -13,9 +13,9 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = { open: false, slideIndex: 0 };
-    this.handleToggle = this.handleToggle.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.changeTab = this.changeTab.bind(this);
+    this.handleTouchTap = this.handleTouchTap.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
   }
 
   componentWillMount() {
@@ -38,17 +38,23 @@ class Nav extends React.Component {
     }
   }
 
-  handleToggle() {
-    this.setState({ open: !this.state.open });
-  }
-
-  handleClose() {
-    this.setState({ open: false });
-  }
-
   changeTab(event) {
     this.setState({
       slideIndex: event,
+    });
+  }
+
+  handleTouchTap(event) {
+    event.preventDefault();
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget,
+    });
+  }
+
+  handleRequestClose() {
+    this.setState({
+      open: false,
     });
   }
 
@@ -80,20 +86,26 @@ class Nav extends React.Component {
         <div>
           <AppBar
             title={<NavLink exact to="/" >Bandwith</NavLink>}
-            onRightIconButtonTouchTap={this.handleToggle}
             showMenuIconButton={false}
             style={{ backgroundColor: 'black', fontFamily: 'Pacifico', position: 'fixed' }}
-            iconElementRight={<IconButton><MoreVertIcon /></IconButton>}
+            iconElementRight={
+              <IconButton>
+                <MoreVertIcon
+                  onClick={this.handleTouchTap}
+                />
+              </IconButton>
+            }
             iconStyleRight={{ color: 'white' }}
           />
-          <Drawer
-            docked={false}
+          <Popover
             open={this.state.open}
-            openSecondary
-            onRequestChange={open => this.setState({ open })}
+            anchorEl={this.state.anchorEl}
+            anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+            targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+            onRequestClose={this.handleRequestClose}
           >
             <MenuItem primaryText="Logout" containerElement={<Link to="/logout" />} />
-          </Drawer>
+          </Popover>
           <div className="bump-bar" />
           <Tabs
             onChange={this.changeTab}
