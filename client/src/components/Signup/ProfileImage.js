@@ -16,12 +16,6 @@ const styles = {
     width: '100%',
     textAlign: 'center',
   },
-  addImageButton: {
-    position: 'relative',
-    top: '-10px',
-    left: '-75px',
-    color: 'white',
-  },
   uploadImageButton: {
     color: 'black',
     margin: '2px 0px 12px 0px',
@@ -106,19 +100,23 @@ class ProfileImage extends React.Component {
   render() {
     return (
       <div style={styles.imageContainer}>
-        <img
-          className="chat-picture"
-          width="100"
-          height="100"
-          alt="upload pic"
-          src={this.state.currentPhoto || '/assets/avatar.jpg'}
-        />
-        <IconButton
-          onClick={() => this.setState({ showEditPhoto: true })}
-          style={styles.addImageButton}
-        >
-          <FontIcon className="material-icons" color="white">photo_camera</FontIcon>
-        </IconButton>
+        <div id="container">
+          <div id="base">
+            <img
+              alt="upload pic"
+              className="chat-picture"
+              height="100"
+              width="100"
+              src={this.state.currentPhoto || '/assets/avatar.jpg'}
+            />
+          </div>
+          <IconButton
+            onClick={() => this.setState({ showEditPhoto: true })}
+            id="overlay"
+          >
+            <FontIcon className="material-icons" color="white">photo_camera</FontIcon>
+          </IconButton>
+        </div>
         <Dialog
           open={this.state.showEditPhoto}
           onRequestClose={() => this.setState({ showEditPhoto: false })}
