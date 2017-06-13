@@ -6,6 +6,7 @@ import request from 'superagent';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
 
@@ -20,6 +21,10 @@ const styles = {
     top: '-10px',
     left: '-75px',
     color: 'white',
+  },
+  uploadImageButton: {
+    color: 'black',
+    margin: '2px 0px 12px 0px',
   },
 };
 const CLOUDINARY_UPLOAD_PRESET = 'bandwith';
@@ -112,7 +117,7 @@ class ProfileImage extends React.Component {
           onClick={() => this.setState({ showEditPhoto: true })}
           style={styles.addImageButton}
         >
-          <FontIcon className="material-icons" color="white">add_a_photo</FontIcon>
+          <FontIcon className="material-icons" color="white">photo_camera</FontIcon>
         </IconButton>
         <Dialog
           open={this.state.showEditPhoto}
@@ -123,20 +128,25 @@ class ProfileImage extends React.Component {
               label="Close"
               onTouchTap={() => this.setState({ showEditPhoto: false })}
             />,
-            <Dropzone
-              style={styles}
-              multiple={false}
-              accept="image/*"
-              onDrop={this.onDrop}
-            >
-              <FlatButton label="Upload Image" />
-            </Dropzone>,
             <FlatButton
               label="Save"
               onTouchTap={this.savePhoto}
             />,
           ]}
         >
+          <Dropzone
+              style={styles}
+              multiple={false}
+              accept="image/*"
+              onDrop={this.onDrop}
+          >
+            <RaisedButton
+              icon={<FontIcon className="material-icons">add_a_photo</FontIcon>}
+              fullWidth
+              onClick={() => this.setState({ showEditPhoto: true })}
+              style={styles.uploadImageButton}
+            />
+          </Dropzone>
           <Cropper
             ref="cropper"
             src={this.state.largeImage}
