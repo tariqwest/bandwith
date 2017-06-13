@@ -23,7 +23,61 @@ class Home extends React.Component {
   }
 
   render() {
-    const { redirectURL } = this.props;
+    const { redirectURL, isAuthenticated } = this.props;
+    if (isAuthenticated) {
+      return (
+        <div>
+          <div className="parallax-top">
+            <div className="vertical-center">
+              <div className="center-text">
+                <span className="homepage-text opaque-background">
+                  Find, Connect, and Jam with local musicians
+                </span>
+              </div>
+            </div>
+          </div>
+          <Row>
+            <Card style={{ boxShadow: 'none' }}>
+              <Row>
+                <Col xs={12} sm={6} className="fixed-column">
+                  <div className="vertical-center">
+                    <div className="center-text">
+                      <span className="parallel-text">Build your profile</span>
+                      <span className="parallel-text">&amp;</span>
+                      <span className="parallel-text">Meet like-minded</span>
+                      <span className="parallel-text">musicians in your area</span>
+                    </div>
+                  </div>
+                </Col>
+                <Col xs={12} sm={6} className="fixed-column">
+                  <CardMedia className="vertical-center">
+                    <img alt="splash-img" src="/assets/roman-kraft-57267.jpg" />
+                  </CardMedia>
+                </Col>
+              </Row>
+            </Card>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <div className="parallax-bottom-loggedin">
+                <div className="vertical-center">
+                  <div className="center-text">
+                    <span className="homepage-text opaque-background">{'Don\'t jam alone'}</span>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <Card style={{ backgroundColor: 'black', boxShadow: 'none' }}>
+                <CardText style={{ color: 'white', textAlign: 'center' }}>© 2017 Bandwith</CardText>
+              </Card>
+            </Col>
+          </Row>
+        </div>
+      );
+    }
     return (
       <div>
         <div className="parallax-top">
@@ -145,6 +199,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   redirectURL: state.redirectURL,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(Home);
