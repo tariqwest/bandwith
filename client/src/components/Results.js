@@ -15,26 +15,12 @@ const styles = {
 class Results extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isCompleted: false,
-      completed: 0,
-    };
-
-    this.timer = this.timer.bind(this);
-    this.hideSpinner = this.hideSpinner.bind(this);
+    this.state = {};
   }
 
   componentDidMount() {
     const { dispatch, userId } = this.props;
     dispatch(getResultsInfo(userId));
-  }
-
-  timer() {
-    setTimeout(() => this.hideSpinner(), 2000);
-  }
-
-  hideSpinner() {
-    this.setState({ isCompleted: true });
   }
 
   render() {
