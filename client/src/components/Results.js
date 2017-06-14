@@ -21,25 +21,12 @@ class Results extends React.Component {
     };
 
     this.timer = this.timer.bind(this);
-    this.progress = this.progress.bind(this);
     this.hideSpinner = this.hideSpinner.bind(this);
   }
 
   componentDidMount() {
-    this.timer();
     const { dispatch, userId } = this.props;
     dispatch(getResultsInfo(userId));
-  }
-
-  progress(completed) {
-    if (completed > 100) {
-      this.setState({ completed: 100 });
-      this.setState({ isCompleted: true });
-    } else {
-      this.setState({ completed });
-      const diff = Math.random() * 10;
-      this.timer = setTimeout(() => this.progress(completed + diff), 200);
-    }
   }
 
   timer() {
@@ -99,7 +86,7 @@ class Results extends React.Component {
 const mapStateToProps = state => ({
   userId: state.auth.userId,
   results: state.results.results,
-  isFetching: state.isFetchingResults,
+  isFetching: state.results.isFetchingResults,
 });
 
 export default connect(mapStateToProps)(Results);
