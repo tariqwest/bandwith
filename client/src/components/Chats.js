@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardTitle, CardText, CardMedia, CardHeader, CardActions } from 'material-ui/Card';
 import { Row, Col } from 'react-flexbox-grid';
 import ChatsList from './ChatsList';
+import ChatsInput from './ChatsInput';
 import ResultsProfile from './ResultsProfile';
 import Paper from 'material-ui/Paper';
 import ResultsListEntry from './ResultsListEntry';
@@ -13,6 +14,22 @@ const styles = {
   paper: { margin: 10 },
   profileContainer: { padding: 10 },
   title: { textAlign: 'center' },
+  chatsProfileHeader: {
+    position: 'absolute',
+    top: 70,
+    left: 0,
+    right: 0,
+  },
+  chatsContainer: {
+    zIndex: '1000',
+    width: '100%',
+    paddingBottom: '50px',
+    paddingTop: '275px',
+  },
+  chatsListContainer: {
+    zIndex: '-1',
+    position: 'absolute',
+  },
 };
 
 class Chats extends React.Component {
@@ -44,7 +61,7 @@ class Chats extends React.Component {
 
     const chatOrProfile = () => {
       if(this.state.showChat){
-        return (<Paper style={styles.paper} ><Card><ChatsList currentMatch={currentMatch} /></Card></Paper>)
+        return (<div style={styles.chatsContainer}><ChatsInput /><Paper style={styles.paper} ><Card><ChatsList style={styles.chatsListContainer} currentMatch={currentMatch} /></Card></Paper></div>)
       }else{
         return (<div style={styles.profileContainer}><ResultsProfile currentMatch={currentMatch} /></div>)
       }
@@ -52,10 +69,9 @@ class Chats extends React.Component {
 
     return (
       <div>
-        <Row>
-          <Col xs={12} sm={8} smOffset={2}>
+
             <Paper style={styles.paper}>
-            <Card>
+            <Card style={styles.chatsProfileHeader}>
               <div className="chat-title">
                 <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src_small || '/assets/avatar.jpg'} />
                 <CardTitle
@@ -76,8 +92,6 @@ class Chats extends React.Component {
             </Card>
             </Paper>
               {chatOrProfile()}
-          </Col>
-        </Row>
       </div>
     );
   }
