@@ -8,6 +8,7 @@ import signup from './signup';
 import user from './user';
 import results from './results';
 import location from './location';
+import photo from './photo';
 
 const rootReducer = combineReducers({
   auth,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   user,
   results,
   location,
+  photo,
 });
 
 export default rootReducer;
