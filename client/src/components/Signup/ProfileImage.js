@@ -35,6 +35,7 @@ class ProfileImage extends React.Component {
       largeImage: this.props.user.photo_src_large,
       croppedPhoto: '',
       showEditPhoto: false,
+      isFetching: false,
     };
     this.onDrop = this.onDrop.bind(this);
     this.closeDropZone = this.closeDropZone.bind(this);
@@ -43,6 +44,7 @@ class ProfileImage extends React.Component {
   }
 
   onDrop(photo) {
+    this.setState({ isFetching: true });
     const upload = request.post(CLOUDINARY_UPLOAD_URL)
       .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
       .field('file', photo);
@@ -56,6 +58,7 @@ class ProfileImage extends React.Component {
         this.setState({
           cloudinaryUrlLrg: response.body.secure_url,
           largeImage: response.body.secure_url,
+          isFetching: false,
         });
       }
     });
@@ -75,34 +78,78 @@ class ProfileImage extends React.Component {
 
   savePhoto() {
     Promise.resolve(this.imageCrop())
-      .then(() => {
-        const upload = request.post(CLOUDINARY_UPLOAD_URL)
-          .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-          .field('file', this.state.croppedPhoto);
+    .then(() => {
+      const upload = request.post(CLOUDINARY_UPLOAD_URL)
+        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+        .field('file', this.state.croppedPhoto);
 
-        upload.end((err, response) => {
-          if (err) {
-            console.error(err);
-          }
+      upload.end((err, response) => {
+        if (err) {
+          console.error(err);
+        }
 
-          if (response.body.secure_url !== '') {
-            this.setState({
-              cloudinaryUrlSml: response.body.secure_url,
-              currentPhoto: response.body.secure_url,
-              showEditPhoto: false,
-            });
+        if (response.body.secure_url !== '') {
+          this.setState({
+            cloudinaryUrlSml: response.body.secure_url,
+            currentPhoto: response.body.secure_url,
+            showEditPhoto: false,
+          });
 
-            this.props.handlePhotoChange(this.state.cloudinaryUrlLrg, this.state.cloudinaryUrlSml);
-          }
-        });
+          this.props.handlePhotoChange(this.state.cloudinaryUrlLrg, this.state.cloudinaryUrlSml);
+        }
       });
+    });
   }
 
   render() {
-    if (this.props.isFetchingPhoto) {
+    if (this.state.isFetching) {
       return (
         <div style={styles.imageContainer}>
-          <LoadingSpinner />
+          <img
+            className="chat-picture"
+            width="100"
+            height="100"
+            alt="upload pic"
+            src={this.state.currentPhoto || '/assets/avatar.jpg'}
+          />
+          <IconButton
+            onClick={() => this.setState({ showEditPhoto: true })}
+            style={styles.addImageButton}
+          >
+            <FontIcon className="material-icons" color="white">photo_camera</FontIcon>
+          </IconButton>
+          <Dialog
+            open={this.state.showEditPhoto}
+            onRequestClose={() => this.setState({ showEditPhoto: false })}
+            title="Update Profile Picture"
+            actions={[
+              <FlatButton
+                label="Close"
+                onTouchTap={() => this.setState({ showEditPhoto: false })}
+              />,
+              <FlatButton
+                label="Save"
+                onTouchTap={this.savePhoto}
+              />,
+            ]}
+          >
+            <Dropzone
+              style={styles}
+              multiple={false}
+              accept="image/*"
+              onDrop={this.onDrop}
+            >
+              <RaisedButton
+                icon={<FontIcon className="material-icons">add_a_photo</FontIcon>}
+                fullWidth
+                onClick={() => this.setState({ showEditPhoto: true })}
+                style={styles.uploadImageButton}
+              />
+            </Dropzone>
+            <div style={styles.imageContainer}>
+              <LoadingSpinner />
+            </div>
+          </Dialog>
         </div>
       );
     }
@@ -170,7 +217,6 @@ const mapStateToProps = state => ({
   user: state.user.profile,
   hasInfo: state.user.hasInfo,
   location: state.location,
-  isFetchingPhoto: state.photo.isFetchingPhoto,
 });
 
 export default connect(mapStateToProps)(ProfileImage);
