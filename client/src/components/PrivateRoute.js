@@ -19,7 +19,7 @@ class PrivateRoute extends React.Component {
     } = this.props;
 
     let redirect = location.pathname;
-    if (['/logout', '/login', '/'].includes(redirect)) {
+    if (['/logout', '/login', '/demo', '/'].includes(redirect)) {
       redirect = '/results';
     }
 
