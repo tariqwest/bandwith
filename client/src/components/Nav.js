@@ -14,6 +14,7 @@ class Nav extends React.Component {
     super(props);
     this.state = { open: false, slideIndex: 0 };
     this.changeTab = this.changeTab.bind(this);
+    this.clickHome = this.clickHome.bind(this);
     this.handleTouchTap = this.handleTouchTap.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
   }
@@ -58,6 +59,12 @@ class Nav extends React.Component {
     });
   }
 
+  clickHome() {
+    this.setState({
+      slideIndex: -1,
+    });
+  }
+
   render() {
     const styles = {
       default_tab: {
@@ -85,7 +92,7 @@ class Nav extends React.Component {
       return (
         <div>
           <AppBar
-            title={<NavLink exact to="/" >Bandwith</NavLink>}
+            title={<NavLink exact to="/" onClick={this.clickHome} >Bandwith</NavLink>}
             showMenuIconButton={false}
             style={{ backgroundColor: 'black', fontFamily: 'Pacifico', position: 'fixed' }}
             iconElementRight={
