@@ -12,13 +12,19 @@ import { List, ListItem } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 
 const style = {
-  marginTop: 8,
-  marginBottom: 8,
-};
-const chipStyle = {
-  marginTop: 5,
-  marginLeft: 5,
-  display: 'inline-block',
+  bottomRow: { marginBottom: 20 },
+  chip: {
+    marginTop: 5,
+    marginLeft: 5,
+    display: 'inline-block',
+  },
+  columnLeft: { paddingRight: 4 },
+  columnRight: { paddingLeft: 4 },
+  listItem: {
+    paddingRight: 12,
+    paddingLeft: 12,
+  },
+  paper: { marginTop: 8 },
 };
 
 class ResultsProfile extends React.Component {
@@ -63,7 +69,7 @@ class ResultsProfile extends React.Component {
           return (
             <Row>
               <Col xs={12}>
-                <Paper style={style}>
+                <Paper style={style.paper}>
                   <Card className="chat-title">
                     <img
                       className="chat-picture"
@@ -85,92 +91,78 @@ class ResultsProfile extends React.Component {
         <div>
           {profileHeader()}
           <Row>
-            <Col xs={12} sm={6}>
-              <Paper style={style}>
+            <Col xs={12}>
+              <Paper style={style.paper}>
                 <Card>
-                  <CardTitle title="General" />
+                  <CardMedia>
+                    <iframe
+                      scrolling="no"
+                      frameBorder="no"
+                      title="audio"
+                      src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_id}`}
+                    />
+                  </CardMedia>
+                </Card>
+              </Paper>
+            </Col>
+          </Row>
+          <Row style={style.bottomRow}>
+            <Col xs={12} sm={6} style={style.columnLeft}>
+              <Paper style={style.paper}>
+                <Card>
+                  <CardTitle title="General Info" />
                   <List>
                     <ListItem
+                      disabled
                       leftIcon={<i className="material-icons">account_circle</i>}
                       primaryText={profile}
                     />
                     <ListItem
+                      disabled
                       leftIcon={<i className="material-icons">place</i>}
                       primaryText={location}
                     />
                   </List>
                 </Card>
               </Paper>
-            </Col>
-            <Col xs={12} sm={6}>
-              <Paper style={style}>
+              <Paper style={style.paper}>
                 <Card>
-                  <CardTitle title="Samples" />
+                  <CardTitle title="About Me" />
                   <List>
                     <ListItem
-                      leftIcon={<i className="material-icons">music_video</i>}
-                      primaryText="YouTube"
-                      primaryTogglesNestedList
-                      nestedItems={[
-                        <CardMedia key={videoId}>
-                          <iframe
-                            frameBorder="0"
-                            allowFullScreen
-                            title="video"
-                            src={`https://www.youtube.com/embed/${videoId}`}
-                          />
-                        </CardMedia>,
-                      ]}
-                    />
-                    <ListItem
-                      leftIcon={<i className="material-icons">audiotrack</i>}
-                      primaryText="SoundCloud"
-                      primaryTogglesNestedList
-                      nestedItems={[
-                        <CardMedia key={song_id}>
-                          <iframe
-                            scrolling="no"
-                            frameBorder="no"
-                            title="audio"
-                            src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_id}`}
-                          />
-                        </CardMedia>,
-                      ]}
-                    />
-                  </List>
-                </Card>
-              </Paper>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} sm={6}>
-              <Paper style={style}>
-                <Card>
-                  <CardTitle title="Talents" />
-                  <List>
-                    <ListItem
+                      autoGenerateNestedIndicator={false}
+                      initiallyOpen
+                      disabled
                       leftIcon={<i className="material-icons">speaker</i>}
                       primaryText="My Instruments"
-                      primaryTogglesNestedList
+                      nestedListStyle={style.listItem}
                       nestedItems={instruments.map(instrument =>
-                        <Chip key={instrument} style={chipStyle}>{instrument}</Chip> // eslint-disable-line
+                        <Chip key={instrument} style={style.chip}>{instrument}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
+                      autoGenerateNestedIndicator={false}
+                      initiallyOpen
+                      disabled
                       leftIcon={<i className="material-icons">album</i>}
                       primaryText="My Genres"
-                      primaryTogglesNestedList
+                      nestedListStyle={style.listItem}
                       nestedItems={genres.map(genre =>
-                        <Chip key={genre} style={chipStyle}>{genre}</Chip> // eslint-disable-line
+                        <Chip key={genre} style={style.chip}>{genre}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
+                      autoGenerateNestedIndicator={false}
+                      initiallyOpen
+                      disabled
                       leftIcon={<i className="material-icons">headset</i>}
                       primaryText="My Influences"
-                      primaryTogglesNestedList
                       nestedItems={influences.map(influence => (
                         <Card key={influence.name}>
-                          <CardHeader title={influence.name} avatar={influence.img} />
+                          <CardHeader
+                            title={influence.influence_name}
+                            avatar={influence.influence_img}
+                          />
                         </Card> // eslint-disable-line
                       ))}
                     />
@@ -178,25 +170,45 @@ class ResultsProfile extends React.Component {
                 </Card>
               </Paper>
             </Col>
-            <Col xs={12} sm={6}>
-              <Paper style={style}>
+            <Col xs={12} sm={6} style={style.columnRight}>
+              <Paper style={style.paper}>
                 <Card>
-                  <CardTitle title="Preferences" />
+                  <CardMedia key={videoId}>
+                    <div className="aspect-ratio">
+                      <iframe
+                        frameBorder="0"
+                        allowFullScreen
+                        title="video"
+                        src={`https://www.youtube.com/embed/${videoId}`}
+                      />
+                    </div>
+                  </CardMedia>
+                </Card>
+              </Paper>
+              <Paper style={style.paper}>
+                <Card>
+                  <CardTitle title="Musician Preferences" />
                   <List>
                     <ListItem
+                      autoGenerateNestedIndicator={false}
+                      initiallyOpen
+                      disabled
                       leftIcon={<i className="material-icons">grade</i>}
                       primaryText="Preferred Instruments"
-                      primaryTogglesNestedList
+                      nestedListStyle={style.listItem}
                       nestedItems={preferredInstruments.map(instrument =>
-                        <Chip key={instrument} style={chipStyle}>{instrument}</Chip> // eslint-disable-line
+                        <Chip key={instrument} style={style.chip}>{instrument}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
+                      autoGenerateNestedIndicator={false}
+                      initiallyOpen
+                      disabled
                       leftIcon={<i className="material-icons">favorite</i>}
                       primaryText="Preferred Genres"
-                      primaryTogglesNestedList
+                      nestedListStyle={style.listItem}
                       nestedItems={preferredGenres.map(genre =>
-                        <Chip key={genre} style={chipStyle}>{genre}</Chip> // eslint-disable-line
+                        <Chip key={genre} style={style.chip}>{genre}</Chip> // eslint-disable-line
                       )}
                     />
                   </List>
