@@ -1,19 +1,19 @@
 import React from 'react';
-import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
-import { CardText, CardActions } from 'material-ui/Card';
+import { CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import { List } from 'material-ui/List';
 import ChatsListEntry from './ChatsListEntry';
+import { getChats } from '../actions';
 import LoadingSpinner from './LoadingSpinner';
-import { getChats, addSentChat, addReceivedChat } from '../actions';
 
 const styles = {
-  paper: { margin: 10 },
-  title: { textAlign: 'center' },
+  chatsListContainer: {
+    listStyle: 'none',
+    margin: 0,
+    padding: '0 0 50px 0',
+    overflowY: 'auto',
+  },
 };
 
 class ChatsList extends React.Component {
@@ -27,45 +27,39 @@ class ChatsList extends React.Component {
   }
 
   render() {
-    const chatMessages = () => {
-      if (this.props.isFetching) {
-        return (
-          <div>
-            <div className="bump-tab-bar" />
-            <Row>
-              <Col xs={12} sm={6} smOffset={3}>
-                <Paper style={styles.paper} zDepth={1}>
-                  <div style={styles.title}>
-                    <LoadingSpinner />
-                  </div>
-                </Paper>
-              </Col>
-            </Row>
-          </div>
-        );
-      }
-      if (this.props.currentMatchChatMessages.length > 0) {
-        return (
-          this.props.currentMatchChatMessages
-          .map(chatMessage => (
-            <ChatsListEntry
-              key={chatMessage.id}
-              chatMessage={chatMessage}
-              currentMatch={this.props.currentMatch}
-            />
-          ))
-        );
-      }
-      return (<CardText>Start a conversation!</CardText>);
-    };
-
-    return (
-      <div>
-        <List>
-          {chatMessages()}
-        </List>
-      </div>
-    );
+    if (this.props.isFetching) {
+      return (
+        <div>
+          <div className="bump-tab-bar" />
+          <Row>
+            <Col xs={12} sm={6} smOffset={3}>
+              <Paper style={styles.paper} zDepth={1}>
+                <div style={styles.title}>
+                  <LoadingSpinner />
+                </div>
+              </Paper>
+            </Col>
+          </Row>
+        </div>
+      );
+    }
+    if (this.props.currentMatchChatMessages.length > 0) {
+      return (
+        <ol style={styles.chatsListContainer}>
+          {
+            this.props.currentMatchChatMessages
+            .map(chatMessage => (
+              <ChatsListEntry
+                key={chatMessage.id}
+                chatMessage={chatMessage}
+                currentMatch={this.props.currentMatch}
+              />
+            ))
+          }
+        </ol>
+      );
+    }
+    return (<CardText>Start a conversation!</CardText>);
   }
 }
 
