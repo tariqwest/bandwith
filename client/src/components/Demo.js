@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 
+import { connect } from 'react-redux';
+import { checkLogin } from '../actions';
+
 class Demo extends Component {
   componentDidMount() {
-    const { history } = this.props;
-    const user = { email: 'john@lennon.com', password: 'admin123' };
+    const { history, dispatch } = this.props;
 
-    const options = {
+    fetch('/auth/login', {
       method: 'POST',
-      body: JSON.stringify(user),
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    };
-
-    fetch('/auth/login', options).then((res) => {
-      if (res.ok) {
-        console.log('Good Job');
-      }
-      return res;
-    }).then((res) => {
-        history.push('/');
-      })
+      body: 'email=john@lennon.com&password=admin123&returnTo=/connections',
+      headers: {
+        Accept: 'text/html, application/xhtml+xml,application/xml;q=0.9, image/webp,*/*;q=0.8',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      credentials: 'include',
+    }).then(() => { 
+      dispatch(checkLogin());
+      history.push('/connections');
+    });
   }
 
   render() {
-    return <div className="">Loading </div>;
+    return <div>Loading... </div>;
   }
 }
 
-export default withRouter(Demo);
+export default withRouter(connect()(Demo));
