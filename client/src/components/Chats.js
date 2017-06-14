@@ -16,12 +16,12 @@ const styles = {
   title: { textAlign: 'center' },
   chatsProfileHeader: {
     position: 'absolute',
-    top: 70,
+    top: 65,
     left: 0,
     right: 0,
+    zIndex: 1000,
   },
   chatsContainer: {
-    zIndex: '1000',
     width: '100%',
     paddingBottom: '50px',
     paddingTop: '275px',
