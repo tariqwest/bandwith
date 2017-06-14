@@ -88,7 +88,7 @@ class Profile extends React.Component {
       }
 
       const re = new RegExp(/\d+(?=&)/g);
-      const song_id = song_url.match(re);
+      const song_id = song_url && song_url.match(re);
 
       return (
         <div>
