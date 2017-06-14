@@ -37,6 +37,7 @@
     "knex": "^0.12.9",
     "material-ui": "^0.18.1",
     "material-ui-fullscreen-dialog": "^0.4.0",
+    "material-ui-slider-label": "https://github.com/tariqwest/material-ui-slider-label.git",
     "moment": "^2.18.1",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
