@@ -78,7 +78,7 @@ class ResultsProfile extends React.Component {
               </Col>
             </Row>);
         }
-        return (<Row />);
+        return (<div style={{ height: '265px' }} />);
       };
 
       return (
