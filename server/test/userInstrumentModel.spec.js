@@ -16,10 +16,9 @@ describe('Users Instruments Join Table', () => {
           last: 'Cat',
           display: 'lunacat',
           email: 'lunacat@gmail.com',
-          phone: '0412 345 678',
-          location: 'Brisbane, Australia',
+          zipcode: 94103,
           age: 4,
-          searchRadius: 5,
+          search_radius: 5,
         }).save()
       ))
       .then((profile) => {

@@ -16,10 +16,9 @@ describe('Users Genres Join Table', () => {
           last: 'Schuyler',
           display: 'a.sky',
           email: 'a.sky@gmail.com',
-          phone: '212-567-1234',
-          location: 'Albany, New York',
+          zipcode: 94103,
           age: 261,
-          searchRadius: 15,
+          search_radius: 15,
         }).save()
       ))
       .then((profile) => {

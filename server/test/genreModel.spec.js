@@ -3,10 +3,10 @@ const Genre = require('../../db/models/genres.js');
 
 describe('Genre Model', () => {
   it('Should be able to retrieve test data', (done) => {
-    Genre.forge({ genre_name: 'Jazz' }).save()
+    Genre.forge({ genre_name: 'jazz' }).save()
       .then((results) => {
         expect(results.get('id')).to.equal(1);
-        expect(results.get('genre_name')).to.equal('Jazz');
+        expect(results.get('genre_name')).to.equal('jazz');
         done();
       })
       .catch((err) => {
@@ -15,7 +15,7 @@ describe('Genre Model', () => {
   });
 
   it('Should verify that all genre names are unique', (done) => {
-    Genre.forge({ genre_name: 'Jazz' }).save()
+    Genre.forge({ genre_name: 'jazz' }).save()
       .then((result) => {
         done(new Error('was not supposed to succeed: ', result));
       })

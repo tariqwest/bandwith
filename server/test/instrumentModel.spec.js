@@ -3,11 +3,11 @@ const Instrument = require('../../db/models/instruments.js');
 
 describe('Instrument Model', () => {
   it('Should be able to retrieve test data', (done) => {
-    Instrument.forge({ instrument_name: 'triangle' }).save()
+    Instrument.forge({ instrument_name: 'trumpet' }).save()
       .then(() => Instrument.where({ id: 1 }).fetch())
       .then((results) => {
         expect(results.get('id')).to.equal(1);
-        expect(results.get('instrument_name')).to.equal('triangle');
+        expect(results.get('instrument_name')).to.equal('trumpet');
         done();
       })
       .catch((err) => {
@@ -16,7 +16,7 @@ describe('Instrument Model', () => {
   });
 
   it('Should verify that all instrument names are unique', (done) => {
-    Instrument.forge({ instrument_name: 'triangle' }).save()
+    Instrument.forge({ instrument_name: 'trumpet' }).save()
       .then((result) => {
         done(new Error('was not supposed to succeed: ', result));
       })

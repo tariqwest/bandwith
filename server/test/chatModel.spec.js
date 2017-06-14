@@ -11,10 +11,9 @@ describe('Chat Model', () => {
       last: 'Ablon',
       display: 'aprilablon',
       email: 'ablonapril@gmail.com',
-      phone: '415-123-4567',
-      location: 'San Francisco',
+      zipcode: 94103,
       age: 23,
-      searchRadius: 5,
+      search_radius: 5,
     }).save()
       .then(() => {
         Profile.forge({
@@ -22,10 +21,9 @@ describe('Chat Model', () => {
           last: 'Hamilton',
           display: 'a.ham',
           email: 'a.ham@gmail.com',
-          phone: '212-509-6995',
-          location: 'New York, New York',
+          zipcode: 94103,
           age: 260,
-          searchRadius: 5,
+          search_radius: 5,
         }).save();
       })
       .then(() => (

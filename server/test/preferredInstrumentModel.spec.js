@@ -5,7 +5,7 @@ const Instrument = require('../../db/models/instruments.js');
 describe('Preferred Instruments Join Table', () => {
   it('should be able to retrieve test data', (done) => {
     const instrument1 = new Instrument({ instrument_name: 'acoustic guitar' });
-    const instrument2 = new Instrument({ instrument_name: 'bass guitar' });
+    const instrument2 = new Instrument({ instrument_name: 'bass' });
 
     const expectedStore = {};
 
@@ -16,10 +16,9 @@ describe('Preferred Instruments Join Table', () => {
           last: 'Washington',
           display: 'g.wash',
           email: 'g.wash@gmail.com',
-          phone: '212-905-5996',
-          location: 'Mount Vernon',
+          zipcode: 94103,
           age: 285,
-          searchRadius: 5,
+          search_radius: 5,
         }).save()
       ))
       .then((profile) => {
@@ -32,10 +31,10 @@ describe('Preferred Instruments Join Table', () => {
         expectedStore['acoustic guitar'] = instrument.get('id');
       })
       .then(() => (
-        Instrument.where({ instrument_name: 'bass guitar' }).fetch()
+        Instrument.where({ instrument_name: 'bass' }).fetch()
       ))
       .then((instrument) => {
-        expectedStore['bass guitar'] = instrument.get('id');
+        expectedStore['bass'] = instrument.get('id');
       })
       .then(() => (
         Profile.where({ email: 'g.wash@gmail.com' }).fetch({ withRelated: ['preferred_instruments'] })

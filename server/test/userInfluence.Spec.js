@@ -16,10 +16,9 @@ describe('Users Influences Join Table', () => {
           last: 'Schuyler',
           display: 'e.sky',
           email: 'e.sky@gmail.com',
-          phone: '212-567-1262',
-          location: 'Albany, New York',
+          zipcode: 94103,
           age: 260,
-          searchRadius: 15,
+          search_radius: 15,
         }).save()
       ))
       .then((profile) => {

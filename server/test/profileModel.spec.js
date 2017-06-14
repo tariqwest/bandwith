@@ -8,20 +8,18 @@ describe('Profile Model', () => {
       last: 'Cat',
       display: 'hosicocat',
       email: 'hosicocat@gmail.com',
-      phone: '9876543210',
-      location: 'Russia',
+      zipcode: 94103,
       age: 10,
-      searchRadius: 5,
+      search_radius: 5,
     }).save()
       .then((results) => {
         expect(results.get('first')).to.equal('Hosico');
         expect(results.get('last')).to.equal('Cat');
         expect(results.get('display')).to.equal('hosicocat');
         expect(results.get('email')).to.equal('hosicocat@gmail.com');
-        expect(results.get('phone')).to.equal('9876543210');
-        expect(results.get('location')).to.equal('Russia');
+        expect(results.get('zipcode')).to.equal(94103);
         expect(results.get('age')).to.equal(10);
-        expect(results.get('searchRadius')).to.equal(5);
+        expect(results.get('search_radius')).to.equal(5);
         done();
       })
       .catch((err) => {
@@ -35,10 +33,9 @@ describe('Profile Model', () => {
       last: 'Cat',
       display: 'hosicocat',
       email: 'hosicocat@gmail.com',
-      phone: '9876543210',
-      location: 'Russia',
+      zipcode: 94103,
       age: 10,
-      searchRadius: 5,
+      search_radius: 5,
     }).save()
       .then((result) => {
         done(new Error('was not supposed to succeed: ', result));
@@ -52,14 +49,13 @@ describe('Profile Model', () => {
   it('Should be able to update an already existing record', (done) => {
     Profile.where({ email: 'hosicocat@gmail.com' }).fetch()
       .then((result) => {
-        expect(result.get('phone')).to.equal('9876543210');
+        expect(result.get('zipcode')).to.equal(94103);
       })
       .then(() => Profile.where({ email: 'hosicocat@gmail.com' }).save({
         first: 'Luna',
         display: 'lunacat',
         email: 'lunacat@gmail.com',
-        phone: '0412 345 678',
-        location: 'Brisbane, Australia',
+        zipcode: 94103,
         age: 4,
       },
       { method: 'update' }))
@@ -68,8 +64,7 @@ describe('Profile Model', () => {
         expect(result.get('first')).to.equal('Luna');
         expect(result.get('display')).to.equal('lunacat');
         expect(result.get('email')).to.equal('lunacat@gmail.com');
-        expect(result.get('phone')).to.equal('0412 345 678');
-        expect(result.get('location')).to.equal('Brisbane, Australia');
+        expect(result.get('zipcode')).to.equal(94103);
         expect(result.get('age')).to.equal(4);
         done();
       })
