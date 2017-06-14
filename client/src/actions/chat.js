@@ -5,7 +5,8 @@ export const CHATS_SEND = 'CHATS_SEND';
 export const CHATS_SEND_SUCCESS = 'CHATS_SEND_SUCCESS';
 export const CHATS_SEND_FAILURE = 'CHATS_SEND_FAILURE';
 export const CHATS_SET_CURRENT_MATCH = 'CHATS_SET_CURRENT_MATCH';
-
+export const CHATS_SENT_ADD = 'CHATS_SENT_ADD';
+export const CHATS_RECEIVED_ADD = 'CHATS_RECEIVED_ADD';
 
 export const requestChats = () => ({
   type: CHATS_GET,
@@ -39,7 +40,7 @@ export const getChats = (userId, matchUserId) => (dispatch) => {
 };
 
 export const requestSendChat = () => ({
-  type: CHAT_SEND,
+  type: CHATS_SEND,
   isFetching: true,
 });
 
@@ -57,7 +58,7 @@ export const sendChatFailure = errorMessage => ({
 
 export const sendChat = (userId, matchUserId, message) => (dispatch) => {
   dispatch(requestChats());
-  return fetch(`/api/chats`, {
+  return fetch('/api/chats', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -75,15 +76,27 @@ export const sendChat = (userId, matchUserId, message) => (dispatch) => {
       return response;
     })
     .then(res => res.json())
-    .then(json => {
+    .then((json) => {
       dispatch(sendChatSuccess(json));
       dispatch(getChats(json.profile_id_from, json.profile_id_to));
     })
     .catch(err => dispatch(sendChatFailure(err.message)));
 };
 
-export const setCurrentMatch = (currentMatchUserId) => ({
+export const addSentChat = sentChat => ({
+  type: CHATS_SENT_ADD,
+  isFetching: false,
+  sentChat,
+});
+
+export const addReceivedChat = receivedChat => ({
+  type: CHATS_RECEIVED_ADD,
+  isFetching: false,
+  receivedChat,
+});
+
+export const setCurrentMatch = currentMatchUserId => ({
   type: CHATS_SET_CURRENT_MATCH,
   isFetching: false,
-  currentMatchUserId
+  currentMatchUserId,
 });

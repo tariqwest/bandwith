@@ -6,6 +6,8 @@ import {
   CHATS_SEND_SUCCESS,
   CHATS_SEND_FAILURE,
   CHATS_SET_CURRENT_MATCH,
+  CHATS_SENT_ADD,
+  CHATS_RECEIVED_ADD,
 } from '../actions';
 
 const chat = (state = {
@@ -13,7 +15,6 @@ const chat = (state = {
   currentMatchChatMessages: [],
   isFetching: false,
   errorMessage: '',
-  allChatMessages: [],
 }, action) => {
   switch (action.type) {
     case CHATS_GET:
@@ -57,6 +58,18 @@ const chat = (state = {
       return {
         ...state,
         currentMatchUserId: action.currentMatchUserId,
+      };
+    case CHATS_SENT_ADD:
+      return {
+        ...state,
+        currentMatchChatMessages: state.currentMatchChatMessages
+        .concat([JSON.parse(action.sentChat)]),
+      };
+    case CHATS_RECEIVED_ADD:
+      return {
+        ...state,
+        currentMatchChatMessages: state.currentMatchChatMessages
+        .concat([JSON.parse(action.receivedChat)]),
       };
     default:
       return state;

@@ -50,7 +50,7 @@ module.exports.getAllForUserMatch = (req, res) => {
       orWhere: {
         profile_id_to: req.query.matchUserId,
         profile_id_from: req.query.userId,
-      }
+      },
     })
     .fetchAll()
     .then((chats) => {
@@ -94,18 +94,12 @@ module.exports.socketCreate = ({ matchUserId, userId, message }, socket, userToC
     message,
   })
     .save()
+    .then(chat => models.Chat.where({ id: chat.id }).fetch())
     .then((chat) => {
-      console.log('** Saved: ', chat.attributes);
-      console.log('** Broadcasting to socket: ', userToClientMap[chat.attributes.profile_id_to]);
-      socket.broadcast.to(userToClientMap[chat.attributes.profile_id_to]).emit('chat', JSON.stringify(chat.attributes));
-      // res
-      //   .status(200)
-      //   .send(chat);
+      socket.broadcast.to(userToClientMap[chat.attributes.profile_id_to]).emit('chat:received', JSON.stringify(chat.attributes));
+      socket.emit('chat:sent:success', JSON.stringify(chat.attributes));
     })
     .catch((err) => {
-      // This code indicates an outside service (the database) did not respond in time
-      // res
-      //   .status(503)
-      //   .send(err);
+      socket.emit('chat:sent:failure', JSON.stringify(err));
     });
 };

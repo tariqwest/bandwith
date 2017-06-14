@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { List } from 'material-ui/List';
 import ChatsListEntry from './ChatsListEntry';
-import { getChats } from '../actions';
+import { getChats, addSentChat, addReceivedChat } from '../actions';
 
 const styles = {
   button: {
@@ -28,8 +28,14 @@ class ChatsList extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     this.socket = io('http://localhost:3000');
-    this.socket.on('chat', () => {
-      dispatch(getChats(this.props.userId, this.props.currentMatchUserId));
+    this.socket.on('chat:received', (receivedChat) => {
+      dispatch(addReceivedChat(receivedChat));
+    });
+    this.socket.on('chat:sent:success', (sentChat) => {
+      dispatch(addSentChat(sentChat));
+      this.setState({
+        message: '',
+      });
     });
     dispatch(getChats(this.props.userId, this.props.currentMatchUserId));
   }
@@ -41,27 +47,30 @@ class ChatsList extends React.Component {
   }
 
   handleSendClick() {
-    const { dispatch } = this.props;
     const message = this.state.message;
-    this.socket.emit('chat', { userId: this.props.userId, matchUserId: this.props.currentMatchUserId, message });
-    dispatch(getChats(this.props.userId, this.props.currentMatchUserId));
-    this.setState({
-      message: '',
-    });
+    const sentChat = {
+      userId: this.props.userId,
+      matchUserId: this.props.currentMatchUserId,
+      message,
+    };
+    this.socket.emit('chat:sent', sentChat);
   }
 
   render() {
-    //const currentMatch = this.props.matches.filter((match) => match.id === this.props.currentMatchUserId)[0];
     const chatMessages = () => {
       if (this.props.currentMatchChatMessages.length > 0) {
         return (
           this.props.currentMatchChatMessages
-          .map((chatMessage, i) => (
-            <ChatsListEntry key={i} chatMessage={chatMessage} currentMatch={this.props.currentMatch} />
+          .map(chatMessage => (
+            <ChatsListEntry
+              key={chatMessage.id}
+              chatMessage={chatMessage}
+              currentMatch={this.props.currentMatch}
+            />
           ))
         );
       }
-      return (<CardText>No messages form this user. Start a conversation!</CardText>);
+      return (<CardText>Start a conversation!</CardText>);
     };
 
     return (
@@ -75,8 +84,8 @@ class ChatsList extends React.Component {
               <TextField
                 id="message"
                 type="text"
-                fullWidth={true}
-                multiLine={true}
+                fullWidth
+                multiLine
                 floatingLabelShrinkStyle={{ color: '#000' }}
                 underlineFocusStyle={{ borderColor: '#000' }}
                 value={this.state.message}
@@ -89,7 +98,7 @@ class ChatsList extends React.Component {
                 style={styles.button}
                 label="Send"
                 backgroundColor={styles.button.backgroundColor}
-                fullWidth={true}
+                fullWidth
                 onClick={this.handleSendClick}
               />
             </Col>

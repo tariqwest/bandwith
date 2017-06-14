@@ -25,10 +25,9 @@ io.use(passportSocketIo.authorize({
 const userToClientMap = {};
 
 io.on('connection', (socket) => {
-  console.log(`A client just joined with socketId: ${socket.id}, userId: ${socket.request.user.id}`);
+  console.log(`** A client joined -- socketId: ${socket.id}, userId: ${socket.request.user.id}, name: ${socket.request.user.first} ${socket.request.user.last}`);
   userToClientMap[socket.request.user.id] = socket.id;
-  socket.on('chat', (message) => {
-    console.log(`** message from userId: ${socket.request.user.id}: ${JSON.stringify(message)}`);
+  socket.on('chat:sent', (message) => {
     ChatController.socketCreate(message, socket, userToClientMap);
   });
 });
