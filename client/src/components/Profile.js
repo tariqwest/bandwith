@@ -150,7 +150,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={4}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="Checkout my skills..." />
+                  <CardTitle title="My Sounds" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">music_video</i>}
@@ -191,7 +191,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={4} smOffset={2}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="Me as a Musician" />
+                  <CardTitle title="My Talents" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">speaker</i>}
@@ -226,7 +226,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={4}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="I am looking for Musicians..." />
+                  <CardTitle title="My Preferences" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">near_me</i>}
