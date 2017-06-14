@@ -170,7 +170,7 @@ const mapStateToProps = state => ({
   user: state.user.profile,
   hasInfo: state.user.hasInfo,
   location: state.location,
-  isFetchingPhoto: state.isFetchingPhoto,
+  isFetchingPhoto: state.photo.isFetchingPhoto,
 });
 
 export default connect(mapStateToProps)(ProfileImage);
