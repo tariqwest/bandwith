@@ -1,15 +1,74 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-flexbox-grid';
-import Paper from 'material-ui/Paper';
-import { ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
-import LoadingSpinner from './LoadingSpinner';
 import moment from 'moment';
+import { Row, Col } from 'react-flexbox-grid';
 
 const styles = {
-  paper: { margin: 10 },
-  title: { textAlign: 'center' },
+  chatEntryContainer: {
+    padding: '0.5rem',
+    overflow: 'hidden',
+    position: 'relative',
+  },
+  chatEntryMessageContainer: {
+    display: 'inline-block',
+    background: 'white',
+    padding: '10px',
+    borderRadius: '2px',
+    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+    maxWidth: '80%',
+  },
+  chatEntryText: {
+    fontSsize: '0.8rem',
+    margin: '0 0 0.2rem 0',
+  },
+  chatEntryTime: {
+    fontSize: '0.7rem',
+    color: '#ccc',
+  },
+  chatEntryAvatar: {
+    display: 'inline-block',
+    width: '40px',
+    height: '40px',
+    position: 'relative',
+    top: '20px',
+  },
+  avatarLeft: {
+    margin: '0px 10px 0px 0px',
+  },
+  avatarRight: {
+    margin: '0px 0px 0px 10px',
+  },
+  positionLeft: {
+    float: 'left',
+    textAlign: 'left',
+  },
+  positionRight: {
+    float: 'right',
+    textAlign: 'right',
+  },
+  arrowLeft: {
+    display: 'inline-block',
+    width: 0,
+    height: 0,
+    borderTop: '8px solid transparent',
+    borderBottom: '8px solid transparent',
+    borderRight: '8px solid #fff',
+    position: 'relative',
+    top: 10,
+    paddingLeft: '2px',
+  },
+  arrowRight: {
+    display: 'inline-block',
+    width: 0,
+    height: 0,
+    borderTop: '8px solid transparent',
+    borderBottom: '8px solid transparent',
+    borderLeft: '8px solid #fff',
+    position: 'absolute',
+    bottom: 15,
+    paddingRight: '10px',
+  },
 };
 
 class ChatListEntry extends React.Component {
@@ -19,39 +78,46 @@ class ChatListEntry extends React.Component {
   }
 
   render() {
-    const secondary = moment(this.props.chatMessage.created_at).fromNow();
+    const time = moment(this.props.chatMessage.created_at).fromNow();
+    if (this.props.chatMessage.profile_id_from === this.props.user.id) {
+      styles.myMessage = Object.assign(styles.chatEntryContainer, styles.positionRight);
+      styles.myAvatar = Object.assign(styles.chatEntryAvatar, styles.avatarRight);
 
-    if (this.props.isFetching) {
       return (
-        <div>
-          <div className="bump-tab-bar" />
-          <Row>
-            <Col xs={12} sm={6} smOffset={3}>
-              <Paper style={styles.paper} zDepth={1}>
-                <div style={styles.title}>
-                  <LoadingSpinner />
-                </div>
-              </Paper>
-            </Col>
-          </Row>
-        </div>
-      );
-    } else if (this.props.chatMessage.profile_id_from === this.props.user.id) {
-      return (
-        <ListItem
-          primaryText={this.props.chatMessage.message}
-          secondaryText={secondary}
-          rightAvatar={<Avatar src={this.props.user.photo_src_small || '/assets/avatar.jpg'} />}
-          style={{ textAlign: 'right' }}
-        />
+        <Row>
+          <Col xs={10} xsOffset={2} sm={8} smOffset={4}>
+            <li
+              style={styles.myMessage}
+            >
+              <div style={styles.chatEntryMessageContainer}>
+                <div style={styles.chatEntryText}>{this.props.chatMessage.message}</div>
+                <div style={styles.chatEntryTime}>{time}</div>
+              </div>
+              <div style={styles.arrowRight} />
+              <Avatar style={styles.chatEntryAvatar} src={this.props.user.photo_src_small || '/assets/avatar.jpg'} />
+            </li>
+          </Col>
+        </Row>
       );
     }
+
+    styles.theirMessage = Object.assign(styles.chatEntryContainer, styles.positionLeft);
+
     return (
-      <ListItem
-        primaryText={this.props.chatMessage.message}
-        secondaryText={secondary}
-        leftAvatar={<Avatar src={this.props.currentMatch.photo_src_small || '/assets/avatar.jpg'} />}
-      />
+      <Row>
+        <Col xs={10} sm={8}>
+          <li
+            style={styles.theirMessage}
+          >
+            <Avatar style={styles.chatEntryAvatar} src={this.props.user.photo_src_small || '/assets/avatar.jpg'} />
+            <div style={styles.arrowLeft} />
+            <div style={styles.chatEntryMessageContainer}>
+              <div style={styles.chatEntryText}>{this.props.chatMessage.message}</div>
+              <div style={styles.chatEntryTime}>{time}</div>
+            </div>
+          </li>
+        </Col>
+      </Row>
     );
   }
 }

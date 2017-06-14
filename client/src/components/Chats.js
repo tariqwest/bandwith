@@ -61,7 +61,12 @@ class Chats extends React.Component {
 
     const chatOrProfile = () => {
       if(this.state.showChat){
-        return (<div style={styles.chatsContainer}><ChatsInput /><Paper style={styles.paper} ><Card><ChatsList style={styles.chatsListContainer} currentMatch={currentMatch} /></Card></Paper></div>)
+        return (
+          <div style={styles.chatsContainer}>
+            <ChatsInput currentMatch={currentMatch} />
+            <ChatsList style={styles.chatsListContainer} currentMatch={currentMatch} />
+          </div>
+        );
       }else{
         return (<div style={styles.profileContainer}><ResultsProfile currentMatch={currentMatch} /></div>)
       }
