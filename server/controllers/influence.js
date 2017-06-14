@@ -7,7 +7,9 @@ module.exports.saveOne = (req, res) => {
       if (!influence) {
         throw influence;
       }
-      res.sendStatus(201);
+      models.Influence.where({ influence_name: req.body.name })
+        .save({ influence_img: req.body.img }, { method: 'update' })
+        .then(() => res.sendStatus(201));
     })
     .catch(() => {
       models.Influence.forge({
