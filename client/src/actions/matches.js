@@ -30,6 +30,17 @@ export const getMatchesInfo = userId => (dispatch) => {
       }
       return response.data;
     })
+    .then(res => (
+      Promise.all(res.map(result => (
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${result.zipcode}&key=${process.env.CONFIG.apiKeys.google}`)
+          .then((response) => {
+            const location = {
+              location: response.data.results[0].formatted_address,
+            };
+            return Object.assign(result, location);
+          })
+      )))
+    ))
     .then(res => dispatch(receiveMatchesInfo(res)))
     .catch(err => dispatch(matchesInfoError(err.message)));
 };
