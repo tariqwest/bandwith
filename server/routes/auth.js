@@ -3,6 +3,16 @@ const middleware = require('../middleware');
 
 const router = express.Router();
 
+const prefix = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:1337';
+
+router.use((req, res, next) => {
+  if (req.query && req.query.returnTo) {
+    req.session.returnTo = prefix + req.query.returnTo;
+  }
+
+  next();
+});
+
 router.route('/login')
   .post(middleware.passport.authenticate('local-login', {
     successReturnToOrRedirect: '/connections',
@@ -16,15 +26,6 @@ router.route('/signup')
     failureRedirect: '/signup',
     failureFlash: true,
   }));
-
-const prefix = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:1337';
-
-router.use((req, res, next) => {
-  if (req.query && req.query.returnTo) {
-    req.session.returnTo = prefix + req.query.returnTo;
-  }
-  next();
-});
 
 router.get('/google', middleware.passport.authenticate('google', {
   scope: ['email', 'profile'],
