@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
 import { CardTitle } from 'material-ui/Card';
-import Spinner from './Spinner';
 import LoadingSpinner from './LoadingSpinner';
 import { getResultsInfo } from '../actions';
 import ResultsListEntry from './ResultsListEntry';
@@ -44,7 +43,7 @@ class Results extends React.Component {
   }
 
   timer() {
-    setTimeout(() => this.hideSpinner(), 3000);
+    setTimeout(() => this.hideSpinner(), 2000);
   }
 
   hideSpinner() {
@@ -52,10 +51,10 @@ class Results extends React.Component {
   }
 
   render() {
-    const { results } = this.props;
+    const { results, isFetching } = this.props;
     const result = results[0];
 
-    if (!this.state.isCompleted) {
+    if (isFetching) {
       return (
         <div>
           <div className="bump-tab-bar" />
@@ -100,6 +99,7 @@ class Results extends React.Component {
 const mapStateToProps = state => ({
   userId: state.auth.userId,
   results: state.results.results,
+  isFetching: state.isFetchingResults,
 });
 
 export default connect(mapStateToProps)(Results);
