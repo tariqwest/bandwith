@@ -35,56 +35,56 @@ class InfluenceInput extends Component {
 
   render() {
     return (
-        <Row>
-          <Col xs={12} >
-            <Subheader>
-              Influences
-                <IconButton
-                  onTouchTap={this.handleShowInput}
-                  label="Add Influence"
-                  style={styles.iconButton}
+      <Row>
+        <Col xs={12} >
+          <Subheader>
+            Influences
+              <IconButton
+                onTouchTap={this.handleShowInput}
+                label="Add Influence"
+                style={styles.iconButton}
+                name="influences"
+                form="influences"
+              >
+                <i className="material-icons">control_point</i>
+              </IconButton>
+          </Subheader>
+          { this.state.showInput ?
+            <Row>
+              <Col xs={9}>
+                <TextField
+                  floatingLabelText="musical influence"
+                  fullWidth
+                  id="influence"
+                  type="text"
+                  name="influence"
+                  value={this.props.influence}
+                  onChange={this.props.handleChange}
+                />
+              </Col>
+              <Col xs={3}>
+                <RaisedButton
+                  fullWidth
+                  label="add"
+                  style={styles.influencesButton}
                   name="influences"
                   form="influences"
-                >
-                  <i className="material-icons">control_point</i>
-                </IconButton>
-            </Subheader>
-            { this.state.showInput ?
-              <Row>
-                <Col xs={9}>
-                  <TextField
-                    floatingLabelText="musical influence"
-                    fullWidth
-                    id="influence"
-                    type="text"
-                    name="influence"
-                    value={this.props.influence}
-                    onChange={this.props.handleChange}
-                  />
-                </Col>
-                <Col xs={3}>
-                  <RaisedButton
-                    fullWidth
-                    label="add"
-                    style={styles.influencesButton}
-                    name="influences"
-                    form="influences"
-                    onTouchTap={() => { this.props.onClick(); this.handleShowInput(); }}
-                  />
-                </Col>
-              </Row>
-            : null
-          }
-          </Col>
-          <Col xs={12}>
-            <InfluenceList
-              handleChip={this.props.handleChip}
-              selectedItems={this.props.influences}
-              influence={this.props.influence}
-              className="influences"
-            />
-          </Col>
-        </Row>
+                  onTouchTap={() => { this.props.onClick(); this.handleShowInput(); }}
+                />
+              </Col>
+            </Row>
+          : null
+        }
+        </Col>
+        <Col xs={12}>
+          <InfluenceList
+            handleChip={this.props.handleChip}
+            selectedItems={this.props.influences}
+            influence={this.props.influence}
+            className="influences"
+          />
+        </Col>
+      </Row>
     );
   }
 }
