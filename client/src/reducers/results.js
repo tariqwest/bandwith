@@ -8,7 +8,7 @@ import {
 } from '../actions';
 
 const results = (state = {
-  isFetching: false,
+  isFetchingResults: false,
   errorMessage: '',
   results: [],
 }, action) => {
@@ -16,25 +16,25 @@ const results = (state = {
     case RESULTS_INFO_REQUEST:
       return {
         ...state,
-        isFetching: true,
+        isFetchingResults: true,
       };
     case RESULTS_INFO_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        isFetchingResults: false,
         results: action.results,
         errorMessage: '',
       };
     case RESULTS_INFO_FAILURE:
       return {
         ...state,
-        isFetching: false,
+        isFetchingResults: false,
         errorMessage: action.message,
       };
     case RESULTS_ACTION_REQUEST:
       return {
         ...state,
-        isFetching: true,
+        isFetchingResults: true,
       };
     case RESULTS_ACTION_SUCCESS:
       return {
@@ -46,7 +46,7 @@ const results = (state = {
     case RESULTS_ACTION_FAILURE:
       return {
         ...state,
-        isFetching: false,
+        isFetchingResults: false,
         errorMessage: action.message,
       };
     default:
