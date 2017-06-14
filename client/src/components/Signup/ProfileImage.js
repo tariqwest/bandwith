@@ -9,6 +9,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
+import LoadingSpinner from './../LoadingSpinner';
 
 const styles = {
   imageContainer: {
@@ -98,6 +99,13 @@ class ProfileImage extends React.Component {
   }
 
   render() {
+    if (this.props.isFetchingPhoto) {
+      return (
+        <div style={styles.imageContainer}>
+          <LoadingSpinner />
+        </div>
+      );
+    }
     return (
       <div style={styles.imageContainer}>
         <div id="container">
@@ -133,10 +141,10 @@ class ProfileImage extends React.Component {
           ]}
         >
           <Dropzone
-              style={styles}
-              multiple={false}
-              accept="image/*"
-              onDrop={this.onDrop}
+            style={styles}
+            multiple={false}
+            accept="image/*"
+            onDrop={this.onDrop}
           >
             <RaisedButton
               icon={<FontIcon className="material-icons">add_a_photo</FontIcon>}
@@ -162,6 +170,7 @@ const mapStateToProps = state => ({
   user: state.user.profile,
   hasInfo: state.user.hasInfo,
   location: state.location,
+  isFetchingPhoto: state.isFetchingPhoto,
 });
 
 export default connect(mapStateToProps)(ProfileImage);
