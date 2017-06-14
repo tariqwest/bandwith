@@ -244,7 +244,7 @@ class Signup extends Component {
     return (
       <Row>
         <Col xs={12} sm={6} smOffset={3}>
-          <Paper>
+          <Paper style={style}>
             <Card>
               <CardText>
                 <Row>
