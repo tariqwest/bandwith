@@ -1,20 +1,19 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-flexbox-grid';
-import {
-  Card,
+import FlatButton from 'material-ui/FlatButton';
+import { Card,
   CardHeader,
   CardTitle,
   CardMedia,
 } from 'material-ui/Card';
-import Chip from 'material-ui/Chip';
-import CircularProgress from 'material-ui/CircularProgress';
-import FlatButton from 'material-ui/FlatButton';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import FullscreenDialog from 'material-ui-fullscreen-dialog';
 import { List, ListItem } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
+import Chip from 'material-ui/Chip';
+import { Row, Col } from 'react-flexbox-grid';
+import FullscreenDialog from 'material-ui-fullscreen-dialog';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import LoadingSpinner from './LoadingSpinner';
 import Signup from './Signup';
 
 const style = {
@@ -26,11 +25,19 @@ const chipStyle = {
   marginLeft: 5,
   display: 'inline-block',
 };
+const styles = {
+  paper: { margin: 10 },
+  title: { textAlign: 'center' },
+};
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showEditProfile: false };
+    this.state = {
+      showEditProfile: false,
+      youTubeIsLoading: false,
+      soundCloudIsLoading: false,
+    };
     this.checkFormRedirect = this.checkFormRedirect.bind(this);
   }
 
@@ -77,7 +84,6 @@ class Profile extends React.Component {
     const fullname = `${first} ${last}`;
     const search = `Searching within ${search_radius} miles`;
     const profile = `${gender}, ${age}`;
-
 
     if (hasUserInfo) {
       let videoId = '';
@@ -150,7 +156,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={4}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="My Sounds" />
+                  <CardTitle title="Checkout my skills..." />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">music_video</i>}
@@ -191,7 +197,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={4} smOffset={2}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="My Talents" />
+                  <CardTitle title="Me as a Musician" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">speaker</i>}
@@ -226,7 +232,7 @@ class Profile extends React.Component {
             <Col xs={12} sm={4}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="My Preferences" />
+                  <CardTitle title="I am looking for Musicians..." />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">near_me</i>}
@@ -270,7 +276,18 @@ class Profile extends React.Component {
       );
     }
     return (
-      <CircularProgress size={100} thickness={5} />
+      <div>
+        <div className="bump-tab-bar" />
+        <Row>
+          <Col xs={12} sm={6} smOffset={3}>
+            <Paper style={styles.paper} zDepth={1}>
+              <div style={styles.title}>
+                <LoadingSpinner />
+              </div>
+            </Paper>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

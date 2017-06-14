@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider';
-import FullscreenDialog from 'material-ui-fullscreen-dialog';
 import { Row, Col } from 'react-flexbox-grid';
-import ResultsProfile from './ResultsProfile';
+import FlatButton from 'material-ui/FlatButton';
+import FullscreenDialog from 'material-ui-fullscreen-dialog';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import TagList from './TagList';
+import ResultsProfile from './ResultsProfile';
 import { sendResultsAction } from '../actions';
 
 const styles = {
