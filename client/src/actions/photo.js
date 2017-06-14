@@ -7,14 +7,17 @@ export const PHOTO_FAILURE = 'PHOTO_FAILURE';
 
 export const requestPhoto = () => ({
   type: PHOTO_REQUEST,
+  isFetchingPhoto: true,
 });
 
 export const receivePhoto = () => ({
   type: PHOTO_SUCCESS,
+  isFetchingPhoto: false,
 });
 
 export const photoError = message => ({
   type: PHOTO_FAILURE,
+  isFetchingPhoto: false,
   message,
 });
 
