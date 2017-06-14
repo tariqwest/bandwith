@@ -13,7 +13,7 @@ class SongInput extends React.Component {
     return (
       <div>
         <TextField
-          floatingLabelText="SoundCloud Track ID"
+          floatingLabelText="SoundCloud Embed Link"
           required
           id="song_url"
           type="text"
@@ -25,7 +25,7 @@ class SongInput extends React.Component {
         <Dialog
           open={this.state.open}
           onRequestClose={() => this.setState({ open: false })}
-          title="How to get SoundCloud Track ID"
+          title="How to get SoundCloud Embed Link"
           actions={[
             <FlatButton
               label="Close"
@@ -33,7 +33,7 @@ class SongInput extends React.Component {
             />,
           ]}
         >
-          <img height="400px" alt="soundcloud-gif" src="/assets/SoundCloudHowToGuide.gif" />
+          <img height="400px" alt="soundcloud-gif" src="/assets/SoundCloudHowToGetEmbed.gif" />
         </Dialog>
       </div>
     );
