@@ -5,7 +5,7 @@ import {
 } from '../actions';
 
 const photo = (state = {
-  isFetching: false,
+  isFetchingPhoto: false,
   hasSaved: false,
   errorMessage: '',
   userId: null,
@@ -14,12 +14,12 @@ const photo = (state = {
   case PHOTO_REQUEST:
     return {
       ...state,
-      isFetching: true,
+      isFetchingPhoto: true,
     };
   case PHOTO_SUCCESS:
     return {
       ...state,
-      isFetching: false,
+      isFetchingPhoto: false,
       hasSaved: true,
       errorMessage: '',
       userId: action.userId,
@@ -27,7 +27,7 @@ const photo = (state = {
   case PHOTO_FAILURE:
     return {
       ...state,
-      isFetching: false,
+      isFetchingPhoto: false,
       errorMessage: action.message,
     };
   default:
