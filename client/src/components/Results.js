@@ -24,10 +24,10 @@ class Results extends React.Component {
   }
 
   render() {
-    const { results, isFetching } = this.props;
+    const { results, isFetchingResults } = this.props;
     const result = results[0];
 
-    if (isFetching) {
+    if (isFetchingResults) {
       return (
         <div>
           <div className="bump-tab-bar" />
@@ -72,7 +72,7 @@ class Results extends React.Component {
 const mapStateToProps = state => ({
   userId: state.auth.userId,
   results: state.results.results,
-  isFetching: state.results.isFetchingResults,
+  isFetchingResults: state.results.isFetchingResults,
 });
 
 export default connect(mapStateToProps)(Results);

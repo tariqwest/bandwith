@@ -39,7 +39,7 @@ const results = (state = {
     case RESULTS_ACTION_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        isFetchingResults: false,
         results: state.results.slice(1),
         errorMessage: '',
       };

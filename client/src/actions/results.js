@@ -52,17 +52,17 @@ export const getResultsInfo = userId => (dispatch) => {
 
 export const requestResultsAction = () => ({
   type: RESULTS_ACTION_REQUEST,
-  isFetching: true,
+  isFetchingResults: true,
 });
 
 export const resultsActionSuccess = () => ({
   type: RESULTS_ACTION_SUCCESS,
-  isFetching: false,
+  isFetchingResults: false,
 });
 
 export const resultsActionFailure = message => ({
   type: RESULTS_ACTION_FAILURE,
-  isFetching: false,
+  isFetchingResults: false,
   message,
 });
 
