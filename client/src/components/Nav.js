@@ -6,7 +6,6 @@ import MenuItem from 'material-ui/MenuItem';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
-import LinearProgress from 'material-ui/LinearProgress';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { connect } from 'react-redux';
 
@@ -89,66 +88,7 @@ class Nav extends React.Component {
       </div>
     );
 
-    if (this.props.isFetchingResults) {
-      if (this.props.isAuthenticated) {
-        return (
-          <div>
-            <LinearProgress mode="indeterminate" color="#ff5bff" />
-          <div>
-            <AppBar
-              title={<NavLink exact to="/" >Bandwith</NavLink>}
-              showMenuIconButton={false}
-              style={{ backgroundColor: 'black', fontFamily: 'Pacifico', position: 'fixed' }}
-              iconElementRight={
-                <IconButton>
-                  <MoreVertIcon
-                    onClick={this.handleTouchTap}
-                  />
-                </IconButton>
-              }
-              iconStyleRight={{ color: 'white' }}
-            />
-            <Popover
-              open={this.state.open}
-              anchorEl={this.state.anchorEl}
-              anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
-              targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-              onRequestClose={this.handleRequestClose}
-            >
-              <MenuItem primaryText="Logout" containerElement={<Link to="/logout" />} />
-            </Popover>
-            <div className="bump-bar" />
-            <Tabs
-              onChange={this.changeTab}
-              value={this.state.slideIndex}
-              style={{ position: 'fixed', width: '100%', zIndex: '20' }}
-              inkBarStyle={{ background: '#ff5bff' }}
-              tabItemContainerStyle={{ background: 'black' }}
-            >
-              <Tab
-                style={styles.tab[0]}
-                value={0}
-                label={<i className="material-icons">account_circle</i>}
-                containerElement={<Link to="/profile" />}
-              />
-              <Tab
-                style={styles.tab[1]}
-                value={1}
-                label={<i className="material-icons">people</i>}
-                containerElement={<Link to="/results" />}
-              />
-              <Tab
-                style={styles.tab[2]}
-                value={2}
-                label={<i className="material-icons">favorite</i>}
-                containerElement={<Link to="/connections" />}
-              />
-            </Tabs>
-          </div>
-          </div>
-        );
-      }
-    } else if (this.props.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       return (
         <div>
           <AppBar
@@ -218,7 +158,6 @@ class Nav extends React.Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  isFetchingResults: state.results.isFetching,
 });
 
 export default connect(mapStateToProps)(Nav);
