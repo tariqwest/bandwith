@@ -85,7 +85,7 @@ class ResultsProfile extends React.Component {
             <Col xs={12} sm={6}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="Personal Info" />
+                  <CardTitle title="General" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">account_circle</i>}
@@ -102,7 +102,7 @@ class ResultsProfile extends React.Component {
             <Col xs={12} sm={6}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="Checkout my skills..." />
+                  <CardTitle title="Samples" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">music_video</i>}
@@ -143,7 +143,7 @@ class ResultsProfile extends React.Component {
             <Col xs={12} sm={6}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="Me as a Musician" />
+                  <CardTitle title="Talents" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">speaker</i>}
@@ -178,7 +178,7 @@ class ResultsProfile extends React.Component {
             <Col xs={12} sm={6}>
               <Paper style={style}>
                 <Card>
-                  <CardTitle title="I am looking for Musicians..." />
+                  <CardTitle title="Preferences" />
                   <List>
                     <ListItem
                       leftIcon={<i className="material-icons">grade</i>}
