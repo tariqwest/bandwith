@@ -55,6 +55,9 @@ class ResultsProfile extends React.Component {
         videoId = videoQuery[videoQuery.length - 1];
       }
 
+      const re = new RegExp(/\d+(?=&)/g);
+      const song_id = song_url && song_url.match(re);
+
       const profileHeader = () => {
         if (this.props.currentResult) {
           return (
@@ -124,12 +127,12 @@ class ResultsProfile extends React.Component {
                       primaryText="SoundCloud"
                       primaryTogglesNestedList
                       nestedItems={[
-                        <CardMedia key={song_url}>
+                        <CardMedia key={song_id}>
                           <iframe
                             scrolling="no"
                             frameBorder="no"
                             title="audio"
-                            src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_url}`}
+                            src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_id}`}
                           />
                         </CardMedia>,
                       ]}
