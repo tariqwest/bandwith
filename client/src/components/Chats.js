@@ -52,7 +52,6 @@ class Chats extends React.Component {
 
     return (
       <div>
-        <div className="bump-tab-bar" />
         <Row>
           <Col xs={12} sm={8} smOffset={2}>
             <Paper style={styles.paper}>
