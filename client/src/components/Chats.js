@@ -102,10 +102,10 @@ class Chats extends React.Component {
             <CardActions>
               <Row>
                 <Col xs={6}>
-                  <FlatButton fullWidth={true} label="Chat" onClick={() => this.toggleChatAndProfile('chat')} />
+                  <FlatButton secondary={this.state.showChat} fullWidth={true} label="Chat" onClick={() => this.toggleChatAndProfile('chat')} />
                 </Col>
                 <Col xs={6}>
-                  <FlatButton fullWidth={true} label="Profile" onClick={() => this.toggleChatAndProfile('profile')} />
+                  <FlatButton secondary={this.state.showProfile}  fullWidth={true} label="Profile" onClick={() => this.toggleChatAndProfile('profile')} />
                 </Col>
               </Row>
             </CardActions>
