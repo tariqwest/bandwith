@@ -16,21 +16,6 @@ import IconButton from 'material-ui/IconButton';
 import LoadingSpinner from './LoadingSpinner';
 import Signup from './Signup';
 
-const style = {
-  bottomRow: { marginBottom: 8 },
-  chip: {
-    marginTop: 5,
-    marginLeft: 5,
-    display: 'inline-block',
-  },
-  columnLeft: { paddingRight: 5 },
-  columnRight: { paddingLeft: 5 },
-  listItem: {
-    paddingRight: 12,
-    paddingLeft: 12,
-  },
-};
-
 const styles = {
   pageContainer: {
     // left and right margins
@@ -47,6 +32,18 @@ const styles = {
   loadingSpinner: {
     textAlign: 'center',
     width: '100%',
+  },
+  bottomRow: { marginBottom: 8 },
+  chip: {
+    marginTop: 5,
+    marginLeft: 5,
+    display: 'inline-block',
+  },
+  columnLeft: { paddingRight: 5 },
+  columnRight: { paddingLeft: 5 },
+  listItem: {
+    paddingRight: 12,
+    paddingLeft: 12,
   },
 };
 
@@ -146,7 +143,7 @@ class Profile extends React.Component {
           </Row>
           <Row>
             <Col xs={12} sm={8} smOffset={2}>
-              <Paper style={style.cardContainer}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardMedia>
                     <iframe
@@ -160,8 +157,8 @@ class Profile extends React.Component {
               </Paper>
             </Col>
           </Row>
-          <Row style={style.bottomRow}>
-            <Col xs={12} sm={4} smOffset={2} style={style.columnLeft}>
+          <Row style={styles.bottomRow}>
+            <Col xs={12} sm={4} smOffset={2} style={styles.columnLeft}>
               <Paper style={styles.cardContainer}>
                 <Card>
                   <CardTitle title="General Info" />
@@ -194,9 +191,9 @@ class Profile extends React.Component {
                       disabled
                       leftIcon={<i className="material-icons">speaker</i>}
                       primaryText="My Instruments"
-                      nestedListStyle={style.listItem}
+                      nestedListStyle={styles.listItem}
                       nestedItems={instruments.map(instrument =>
-                        <Chip key={instrument} style={style.chip}>{instrument}</Chip> // eslint-disable-line
+                        <Chip key={instrument} style={styles.chip}>{instrument}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
@@ -205,9 +202,9 @@ class Profile extends React.Component {
                       disabled
                       leftIcon={<i className="material-icons">album</i>}
                       primaryText="My Genres"
-                      nestedListStyle={style.listItem}
+                      nestedListStyle={styles.listItem}
                       nestedItems={genres.map(genre =>
-                        <Chip key={genre} style={style.chip}>{genre}</Chip> // eslint-disable-line
+                        <Chip key={genre} style={styles.chip}>{genre}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
@@ -226,7 +223,7 @@ class Profile extends React.Component {
                 </Card>
               </Paper>
             </Col>
-            <Col xs={12} sm={4} style={style.columnRight}>
+            <Col xs={12} sm={4} style={styles.columnRight}>
               <Paper style={styles.cardContainer}>
                 <Card>
                   <CardMedia key={videoId}>
@@ -256,9 +253,9 @@ class Profile extends React.Component {
                       disabled
                       leftIcon={<i className="material-icons">grade</i>}
                       primaryText="Preferred Instruments"
-                      nestedListStyle={style.listItem}
+                      nestedListStyle={styles.listItem}
                       nestedItems={preferred_instruments.map(instrument =>
-                        <Chip key={instrument} style={style.chip}>{instrument}</Chip> // eslint-disable-line
+                        <Chip key={instrument} style={styles.chip}>{instrument}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
@@ -267,9 +264,9 @@ class Profile extends React.Component {
                       disabled
                       leftIcon={<i className="material-icons">favorite</i>}
                       primaryText="Preferred Genres"
-                      nestedListStyle={style.listItem}
+                      nestedListStyle={styles.listItem}
                       nestedItems={preferred_genres.map(genre =>
-                        <Chip key={genre} style={style.chip}>{genre}</Chip> // eslint-disable-line
+                        <Chip key={genre} style={styles.chip}>{genre}</Chip> // eslint-disable-line
                       )}
                     />
                   </List>

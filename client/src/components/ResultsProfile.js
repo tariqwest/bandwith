@@ -11,21 +11,6 @@ import Chip from 'material-ui/Chip';
 import { List, ListItem } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 
-const style = {
-  bottomRow: { marginBottom: 8 },
-  chip: {
-    marginTop: 5,
-    marginLeft: 5,
-    display: 'inline-block',
-  },
-  columnLeft: { paddingRight: 6 },
-  columnRight: { paddingLeft: 6 },
-  listItem: {
-    paddingRight: 12,
-    paddingLeft: 12,
-  },
-};
-
 const styles = {
   pageContainer: {
     // left and right margins
@@ -38,6 +23,18 @@ const styles = {
     // spacing between cards on a page
     marginTop: '12px',
     marginBottom: '12px',
+  },
+  bottomRow: { marginBottom: 8 },
+  chip: {
+    marginTop: 5,
+    marginLeft: 5,
+    display: 'inline-block',
+  },
+  columnLeft: { paddingRight: 5 },
+  columnRight: { paddingLeft: 5 },
+  listItem: {
+    paddingRight: 12,
+    paddingLeft: 12,
   },
 };
 
@@ -120,8 +117,8 @@ class ResultsProfile extends React.Component {
               </Paper>
             </Col>
           </Row>
-          <Row style={style.bottomRow}>
-            <Col xs={12} sm={6} style={style.columnLeft}>
+          <Row style={styles.bottomRow}>
+            <Col xs={12} sm={6} style={styles.columnLeft}>
               <Paper style={styles.cardContainer}>
                 <Card>
                   <CardTitle title="General Info" />
@@ -149,9 +146,9 @@ class ResultsProfile extends React.Component {
                       disabled
                       leftIcon={<i className="material-icons">speaker</i>}
                       primaryText="My Instruments"
-                      nestedListStyle={style.listItem}
+                      nestedListStyle={styles.listItem}
                       nestedItems={instruments.map(instrument =>
-                        <Chip key={instrument} style={style.chip}>{instrument}</Chip> // eslint-disable-line
+                        <Chip key={instrument} style={styles.chip}>{instrument}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
@@ -160,9 +157,9 @@ class ResultsProfile extends React.Component {
                       disabled
                       leftIcon={<i className="material-icons">album</i>}
                       primaryText="My Genres"
-                      nestedListStyle={style.listItem}
+                      nestedListStyle={styles.listItem}
                       nestedItems={genres.map(genre =>
-                        <Chip key={genre} style={style.chip}>{genre}</Chip> // eslint-disable-line
+                        <Chip key={genre} style={styles.chip}>{genre}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
@@ -184,7 +181,7 @@ class ResultsProfile extends React.Component {
                 </Card>
               </Paper>
             </Col>
-            <Col xs={12} sm={6} style={style.columnRight}>
+            <Col xs={12} sm={6} style={styles.columnRight}>
               <Paper style={styles.cardContainer}>
                 <Card>
                   <CardMedia key={videoId}>
@@ -209,9 +206,9 @@ class ResultsProfile extends React.Component {
                       disabled
                       leftIcon={<i className="material-icons">grade</i>}
                       primaryText="Preferred Instruments"
-                      nestedListStyle={style.listItem}
+                      nestedListStyle={styles.listItem}
                       nestedItems={preferredInstruments.map(instrument =>
-                        <Chip key={instrument} style={style.chip}>{instrument}</Chip> // eslint-disable-line
+                        <Chip key={instrument} style={styles.chip}>{instrument}</Chip> // eslint-disable-line
                       )}
                     />
                     <ListItem
@@ -220,9 +217,9 @@ class ResultsProfile extends React.Component {
                       disabled
                       leftIcon={<i className="material-icons">favorite</i>}
                       primaryText="Preferred Genres"
-                      nestedListStyle={style.listItem}
+                      nestedListStyle={styles.listItem}
                       nestedItems={preferredGenres.map(genre =>
-                        <Chip key={genre} style={style.chip}>{genre}</Chip> // eslint-disable-line
+                        <Chip key={genre} style={styles.chip}>{genre}</Chip> // eslint-disable-line
                       )}
                     />
                   </List>
