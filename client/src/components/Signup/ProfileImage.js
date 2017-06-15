@@ -21,6 +21,10 @@ const styles = {
     color: 'black',
     margin: '2px 0px 12px 0px',
   },
+  loadingSpinner: {
+    textAlign: 'center',
+    width: '100%',
+  },
 };
 const CLOUDINARY_UPLOAD_PRESET = 'bandwith';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/hjwsarwnv/image/upload';

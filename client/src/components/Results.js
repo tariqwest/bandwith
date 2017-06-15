@@ -20,6 +20,10 @@ const styles = {
     marginTop: '6px',
     marginBottom: '6px',
   },
+  loadingSpinner: {
+    textAlign: 'center',
+    width: '100%',
+  },
 };
 
 class Results extends React.Component {
@@ -44,7 +48,7 @@ class Results extends React.Component {
           <Row>
             <Col xs={12} sm={6} smOffset={3}>
               <Paper zDepth={1}>
-                <div>
+                <div style={styles.loadingSpinner}>
                   <LoadingSpinner />
                 </div>
               </Paper>
@@ -65,17 +69,18 @@ class Results extends React.Component {
           </Row>
         </div>
       );
+    } else {
+      return (
+        <div style={styles.pageContainer}>
+          <div className="bump-tab-bar" />
+          <Col xs={12} sm={6} smOffset={3} >
+            <Paper style={styles.cardContainer} zDepth={1}>
+              <ResultsListEntry result={result} />
+            </Paper>
+          </Col>
+        </div>
+      );
     }
-    return (
-      <div style={styles.pageContainer}>
-        <div className="bump-tab-bar" />
-        <Col xs={12} sm={6} smOffset={3} >
-          <Paper style={styles.cardContainer} zDepth={1}>
-            <ResultsListEntry result={result} />
-          </Paper>
-        </Col>
-      </div>
-    );
   }
 }
 

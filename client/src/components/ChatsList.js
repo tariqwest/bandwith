@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
-import { CardText } from 'material-ui/Card';
+import { CardTitle } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
 import ChatsListEntry from './ChatsListEntry';
 import { getChats } from '../actions';
@@ -10,9 +10,14 @@ import LoadingSpinner from './LoadingSpinner';
 const styles = {
   chatsListContainer: {
     listStyle: 'none',
-    margin: 0,
+    margin: '0px -20px 0px -8px',
     padding: '0 0 50px 0',
     overflowY: 'auto',
+    overflowX: 'hidden',
+  },
+  loadingSpinner: {
+    textAlign: 'center',
+    width: '100%',
   },
 };
 
@@ -33,17 +38,14 @@ class ChatsList extends React.Component {
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={6} smOffset={3}>
-              <Paper style={styles.paper} zDepth={1}>
-                <div style={styles.title}>
+                <div style={styles.loadingSpinner}>
                   <LoadingSpinner />
                 </div>
-              </Paper>
             </Col>
           </Row>
         </div>
       );
-    }
-    if (this.props.currentMatchChatMessages.length > 0) {
+    } else if (this.props.currentMatchChatMessages.length > 0) {
       return (
         <ol style={styles.chatsListContainer}>
           {
@@ -59,7 +61,7 @@ class ChatsList extends React.Component {
         </ol>
       );
     }
-    return (<CardText>Start a conversation!</CardText>);
+    return (<CardTitle>Start a conversation!</CardTitle>);
   }
 }
 

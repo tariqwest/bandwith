@@ -30,17 +30,20 @@ const styles = {
     right: 0,
     zIndex: 1000,
   },
-  chatsContainer: {
-    width: '100vw',
+  chatsOuterContainer: {
+    width: '100%',
     paddingBottom: '50px',
     paddingTop: '265px',
+    marginLeft: '-12px',
+    marginRight: '-12px',
   },
-  profileContainer: {
+  profileOuterContainer: {
     marginTop: '-6px',
     marginLeft: '-12px',
     marginRight: '-12px',
   },
-  chatsListContainer: {
+  chatsListOuterContainer: {
+    width: '100%',
     zIndex: '-1',
     position: 'absolute',
   },
@@ -76,13 +79,13 @@ class Chats extends React.Component {
     const chatOrProfile = () => {
       if(this.state.showChat){
         return (
-          <div style={styles.chatsContainer}>
+          <div style={styles.chatsOuterContainer}>
             <ChatsInput currentMatch={currentMatch} />
-            <ChatsList style={styles.chatsListContainer} currentMatch={currentMatch} />
+            <ChatsList style={styles.chatsListOuterContainer} currentMatch={currentMatch} />
           </div>
         );
       }else{
-        return (<div style={styles.profileContainer}><ResultsProfile currentMatch={currentMatch} /></div>)
+        return (<div style={styles.profileOuterContainer}><ResultsProfile currentMatch={currentMatch} /></div>)
       }
     }
 

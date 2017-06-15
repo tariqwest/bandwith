@@ -16,7 +16,7 @@ const styles = {
     padding: '10px',
     borderRadius: '2px',
     boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-    maxWidth: '80%',
+    maxWidth: '70%',
   },
   chatEntryText: {
     fontSsize: '0.8rem',
