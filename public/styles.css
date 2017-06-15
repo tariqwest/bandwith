@@ -96,6 +96,7 @@ html {
 
 .edit-div {
   text-align: right;
+  margin-bottom: -35px;
 }
 
 .edit-button {
@@ -130,18 +131,18 @@ html {
   color: #fff
 }
 
-.parallax-top { 
+.parallax-top {
   background-image: url("/assets/matheus-ferrero-183749.jpg");
-  height: 700px; 
+  height: 700px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.parallax-bottom { 
+.parallax-bottom {
   background-image: url("/assets/kimberly-richards-335.jpg");
-  height: 400px; 
+  height: 400px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -149,9 +150,9 @@ html {
   text-align: center;
 }
 
-.parallax-bottom-loggedin { 
+.parallax-bottom-loggedin {
   background-image: url("/assets/kimberly-richards-335-2.jpg");
-  height: 400px; 
+  height: 400px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
