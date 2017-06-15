@@ -45,15 +45,13 @@ class Results extends React.Component {
       return (
         <div style={styles.pageContainer}>
           <div className="bump-tab-bar" />
-          <Row>
-            <Col xs={12} sm={6} smOffset={3}>
-              <Paper zDepth={1}>
-                <div style={styles.loadingSpinner}>
-                  <LoadingSpinner />
-                </div>
-              </Paper>
-            </Col>
-          </Row>
+          <Col xs={12} sm={6} smOffset={3} >
+            <Paper style={styles.cardContainer} zDepth={1}>
+              <div style={styles.loadingSpinner}>
+                <LoadingSpinner />
+              </div>
+            </Paper>
+          </Col>
         </div>
       );
     } else if (!result) {
