@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
-import { CardTitle } from 'material-ui/Card';
+import FontIcon from 'material-ui/FontIcon';
+import { grey500 } from 'material-ui/styles/colors';
 import LoadingSpinner from './LoadingSpinner';
 import { getResultsInfo } from '../actions';
 import ResultsListEntry from './ResultsListEntry';
-import FontIcon from 'material-ui/FontIcon';
-import { grey500 } from 'material-ui/styles/colors';
 
 const styles = {
   pageContainer: {
@@ -71,10 +70,10 @@ class Results extends React.Component {
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={6} smOffset={3}>
-                <div style={styles.nothingToDisplay}>
-                  <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">location_searching</FontIcon>
-                  <h2>Nobody matching your prefs yet, check back soon!</h2>
-                </div>
+              <div style={styles.nothingToDisplay}>
+                <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">location_searching</FontIcon>
+                <h2>Nobody matching your prefs yet, check back soon!</h2>
+              </div>
             </Col>
           </Row>
         </div>

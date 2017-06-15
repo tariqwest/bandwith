@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { List } from 'material-ui/List';
 import { Row, Col } from 'react-flexbox-grid';
+import FontIcon from 'material-ui/FontIcon';
+import { grey500 } from 'material-ui/styles/colors';
 import MatchListEntry from './MatchListEntry';
 import { getMatchesInfo } from '../actions';
 import LoadingSpinner from './LoadingSpinner';
-import FontIcon from 'material-ui/FontIcon';
-import { grey500 } from 'material-ui/styles/colors';
 
 const styles = {
   chatsListContainer: {
@@ -49,9 +49,9 @@ class MatchList extends React.Component {
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={6} smOffset={3}>
-                <div style={styles.loadingSpinner}>
-                  <LoadingSpinner />
-                </div>
+              <div style={styles.loadingSpinner}>
+                <LoadingSpinner />
+              </div>
             </Col>
           </Row>
         </div>
@@ -70,10 +70,10 @@ class MatchList extends React.Component {
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={6} smOffset={3}>
-                <div style={styles.nothingToDisplay}>
-                  <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">person_pin</FontIcon>
-                  <h2>No matches yet, check back soon!</h2>
-                </div>
+              <div style={styles.nothingToDisplay}>
+                <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">person_pin</FontIcon>
+                <h2>No matches yet, check back soon!</h2>
+              </div>
             </Col>
           </Row>
         </div>

@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import FontIcon from 'material-ui/FontIcon';
+import { grey500 } from 'material-ui/styles/colors';
 import ChatsListEntry from './ChatsListEntry';
 import { getChats } from '../actions';
 import LoadingSpinner from './LoadingSpinner';
-import { grey500 } from 'material-ui/styles/colors';
 
 const styles = {
   chatsListContainer: {
@@ -47,9 +47,9 @@ class ChatsList extends React.Component {
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={6} smOffset={3}>
-                <div style={styles.loadingSpinner}>
-                  <LoadingSpinner />
-                </div>
+              <div style={styles.loadingSpinner}>
+                <LoadingSpinner />
+              </div>
             </Col>
           </Row>
         </div>
@@ -75,10 +75,10 @@ class ChatsList extends React.Component {
         <div className="bump-tab-bar" />
         <Row>
           <Col xs={12} sm={6} smOffset={3}>
-              <div style={styles.nothingToDisplay}>
-                <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">chat</FontIcon>
-                <h2>Start a conversation!</h2>
-              </div>
+            <div style={styles.nothingToDisplay}>
+              <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">chat</FontIcon>
+              <h2>Start a conversation!</h2>
+            </div>
           </Col>
         </Row>
       </div>
