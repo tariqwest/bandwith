@@ -24,6 +24,7 @@ const styles = {
     paddingLeft: '12px',
     paddingRight: '12px',
   },
+  bottomRow: { marginBottom: 20 },
   cardContainer: {
     // spacing between cards on a page
     marginTop: '12px',
@@ -144,7 +145,14 @@ class Profile extends React.Component {
           </Row>
           <Row>
             <Col xs={12} sm={8} smOffset={2}>
-              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixTop, styles.rowFixBottom)}>
+              <Paper
+                style={Object.assign(
+                  {},
+                  styles.cardContainer,
+                  styles.rowFixTop,
+                  styles.rowFixBottom,
+                )}
+              >
                 <Card>
                   <CardMedia>
                     <iframe
@@ -158,7 +166,7 @@ class Profile extends React.Component {
               </Paper>
             </Col>
           </Row>
-          <Row>
+          <Row style={styles.bottomRow}>
             <Col xs={12} sm={4} smOffset={2} style={styles.columnLeft}>
               <Paper style={styles.cardContainer}>
                 <Card>
