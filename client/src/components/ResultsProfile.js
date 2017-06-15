@@ -127,7 +127,7 @@ class ResultsProfile extends React.Component {
               </Paper>
               <Paper style={style.paper}>
                 <Card>
-                  <CardTitle title="About Me" />
+                  <CardTitle title="Talents &amp; Influences" />
                   <List>
                     <ListItem
                       autoGenerateNestedIndicator={false}
@@ -187,7 +187,7 @@ class ResultsProfile extends React.Component {
               </Paper>
               <Paper style={style.paper}>
                 <Card>
-                  <CardTitle title="Musician Preferences" />
+                  <CardTitle title="Musical Preferences" />
                   <List>
                     <ListItem
                       autoGenerateNestedIndicator={false}
