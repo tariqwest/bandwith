@@ -55,6 +55,7 @@ class Results extends React.Component {
       return (
         <div style={styles.pageContainer}>
           <div className="bump-tab-bar" />
+          <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={8} smOffset={2} >
               <div style={styles.loadingSpinner}>
