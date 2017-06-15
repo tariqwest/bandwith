@@ -33,6 +33,7 @@ const styles = {
 class ChatsList extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   componentDidMount() {
@@ -59,6 +60,7 @@ class ChatsList extends React.Component {
         <ol style={styles.chatsListContainer}>
           {
             this.props.currentMatchChatMessages
+            .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
             .map(chatMessage => (
               <ChatsListEntry
                 key={chatMessage.id}
@@ -76,7 +78,9 @@ class ChatsList extends React.Component {
         <Row>
           <Col xs={12} sm={6} smOffset={3}>
             <div style={styles.nothingToDisplay}>
-              <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">chat</FontIcon>
+              <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">
+                chat
+              </FontIcon>
               <h2>Start a conversation!</h2>
             </div>
           </Col>
