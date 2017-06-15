@@ -33,7 +33,7 @@ class Matches extends React.Component {
         <Row>
           <Col xs={12} sm={8} smOffset={2}>
             <div style={styles.cardContainer} zDepth={1}>
-                <MatchList />
+              <MatchList />
             </div>
           </Col>
         </Row>
