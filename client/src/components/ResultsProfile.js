@@ -103,7 +103,7 @@ class ResultsProfile extends React.Component {
         <div style={styles.pageContainer}>
           {profileHeader()}
           <Row>
-            <Col xs={12} sm={6}>
+            <Col xs={12} sm={12}>
               <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
                 <Card>
                   <CardMedia>
@@ -183,7 +183,7 @@ class ResultsProfile extends React.Component {
               </Paper>
             </Col>
             <Col xs={12} sm={6} style={styles.columnRight}>
-              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixTop, styles.rowFixBottom)}>
+              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
                 <Card>
                   <CardMedia key={videoId}>
                     <div className="aspect-ratio">
