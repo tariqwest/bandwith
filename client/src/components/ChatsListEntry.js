@@ -12,7 +12,6 @@ const styles = {
   },
   chatEntryMessageContainer: {
     display: 'inline-block',
-    textAlign: 'left',
     background: 'white',
     padding: '10px',
     borderRadius: '2px',
