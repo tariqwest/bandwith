@@ -3,6 +3,12 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
+const style = {
+  field: { width: '95%' },
+  dialog: { textAlign: 'center' },
+  title: { textAlign: 'left' },
+};
+
 class SongInput extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +21,7 @@ class SongInput extends React.Component {
         <TextField
           floatingLabelText="SoundCloud Embed Link"
           required
+          style={style.field}
           id="song_url"
           type="text"
           name="song_url"
@@ -26,6 +33,8 @@ class SongInput extends React.Component {
           open={this.state.open}
           onRequestClose={() => this.setState({ open: false })}
           title="How to get SoundCloud Embed Link"
+          titleStyle={style.title}
+          style={style.dialog}
           actions={[
             <FlatButton
               label="Close"
