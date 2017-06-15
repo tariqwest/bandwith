@@ -12,40 +12,33 @@ import { List, ListItem } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 
 const style = {
-  bottomRow: { marginBottom: 20 },
+  bottomRow: { marginBottom: 8 },
   chip: {
     marginTop: 5,
     marginLeft: 5,
     display: 'inline-block',
   },
-  columnLeft: { paddingRight: 4 },
-  columnRight: { paddingLeft: 4 },
+  columnLeft: { paddingRight: 6 },
+  columnRight: { paddingLeft: 6 },
   listItem: {
     paddingRight: 12,
     paddingLeft: 12,
   },
-  paper: { marginTop: 8 },
 };
 
 const styles = {
   pageContainer: {
     // left and right margins
     // top and bottom padding if necesarry around multiple cards
-    paddingTop: '6px',
+    paddingTop: '0px',
     paddingLeft: '12px',
     paddingRight: '12px',
   },
   cardContainer: {
     // spacing between cards on a page
-    marginTop: '6px',
-    marginBottom: '6px',
+    marginTop: '12px',
+    marginBottom: '12px',
   },
-};
-
-const chipStyle = {
-  marginTop: 5,
-  marginLeft: 5,
-  display: 'inline-block',
 };
 
 class ResultsProfile extends React.Component {

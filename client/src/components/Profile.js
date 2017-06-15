@@ -23,27 +23,26 @@ const style = {
     marginLeft: 5,
     display: 'inline-block',
   },
-  columnLeft: { paddingRight: 4 },
-  columnRight: { paddingLeft: 4 },
+  columnLeft: { paddingRight: 5 },
+  columnRight: { paddingLeft: 5 },
   listItem: {
     paddingRight: 12,
     paddingLeft: 12,
   },
-  paper: { marginTop: 8 },
 };
 
 const styles = {
   pageContainer: {
     // left and right margins
     // top and bottom padding if necesarry around multiple cards
-    paddingTop: '6px',
+    paddingTop: '0px',
     paddingLeft: '12px',
     paddingRight: '12px',
   },
   cardContainer: {
     // spacing between cards on a page
-    marginTop: '6px',
-    marginBottom: '6px',
+    marginTop: '12px',
+    marginBottom: '12px',
   },
 };
 
@@ -122,12 +121,8 @@ class Profile extends React.Component {
                 <Card className="chat-title">
                   <div className="edit-div">
                     <IconButton
-                      zDepth={1}
                       className="edit-button"
                       onClick={() => this.setState({ showEditProfile: true })}
-                      mini
-                      backgroundColor="white"
-                      iconStyle={{ color: 'black' }}
                     >
                       <i className="material-icons">create</i>
                     </IconButton>
