@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
 const style = {
-  field: { width: '95%' },
+  field: { width: '92%' },
   dialog: { textAlign: 'center' },
   title: { textAlign: 'left' },
 };
