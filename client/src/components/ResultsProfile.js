@@ -24,7 +24,6 @@ const styles = {
     marginTop: '12px',
     marginBottom: '12px',
   },
-  bottomRow: { marginBottom: 8 },
   chip: {
     marginTop: 5,
     marginLeft: 5,
@@ -32,6 +31,8 @@ const styles = {
   },
   columnLeft: { paddingRight: 5 },
   columnRight: { paddingLeft: 5 },
+  rowFixTop: { marginTop: 0 },
+  rowFixBottom: { marginBottom: 0 },
   listItem: {
     paddingRight: 12,
     paddingLeft: 12,
@@ -103,7 +104,7 @@ class ResultsProfile extends React.Component {
           {profileHeader()}
           <Row>
             <Col xs={12} sm={6}>
-              <Paper style={styles.cardContainer}>
+              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
                 <Card>
                   <CardMedia>
                     <iframe
@@ -182,7 +183,7 @@ class ResultsProfile extends React.Component {
               </Paper>
             </Col>
             <Col xs={12} sm={6} style={styles.columnRight}>
-              <Paper style={styles.cardContainer}>
+              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixTop, styles.rowFixBottom)}>
                 <Card>
                   <CardMedia key={videoId}>
                     <div className="aspect-ratio">

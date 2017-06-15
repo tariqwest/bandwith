@@ -33,7 +33,6 @@ const styles = {
     textAlign: 'center',
     width: '100%',
   },
-  bottomRow: { marginBottom: 8 },
   chip: {
     marginTop: 5,
     marginLeft: 5,
@@ -41,6 +40,8 @@ const styles = {
   },
   columnLeft: { paddingRight: 5 },
   columnRight: { paddingLeft: 5 },
+  rowFixTop: { marginTop: 0 },
+  rowFixBottom: { marginBottom: 0 },
   listItem: {
     paddingRight: 12,
     paddingLeft: 12,
@@ -143,7 +144,7 @@ class Profile extends React.Component {
           </Row>
           <Row>
             <Col xs={12} sm={8} smOffset={2}>
-              <Paper style={styles.cardContainer}>
+              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixTop, styles.rowFixBottom)}>
                 <Card>
                   <CardMedia>
                     <iframe
@@ -157,7 +158,7 @@ class Profile extends React.Component {
               </Paper>
             </Col>
           </Row>
-          <Row style={styles.bottomRow}>
+          <Row>
             <Col xs={12} sm={4} smOffset={2} style={styles.columnLeft}>
               <Paper style={styles.cardContainer}>
                 <Card>
@@ -181,7 +182,7 @@ class Profile extends React.Component {
                   </List>
                 </Card>
               </Paper>
-              <Paper style={styles.cardContainer}>
+              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
                 <Card>
                   <CardTitle title="Talents &amp; Influences" />
                   <List>
@@ -224,7 +225,7 @@ class Profile extends React.Component {
               </Paper>
             </Col>
             <Col xs={12} sm={4} style={styles.columnRight}>
-              <Paper style={styles.cardContainer}>
+              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
                 <Card>
                   <CardMedia key={videoId}>
                     <div className="aspect-ratio">
