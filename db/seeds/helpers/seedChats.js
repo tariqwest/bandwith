@@ -1,5 +1,5 @@
 const models = require('../../models');
-import { randomChoices } from './help';
+
 module.exports = connections => (
   Promise.all(connections.map(connection =>
     Promise.all([
