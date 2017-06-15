@@ -57,11 +57,9 @@ class Results extends React.Component {
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={2} smOffset={2} >
-              <Paper style={styles.cardContainer} zDepth={1}>
                 <div style={styles.loadingSpinner}>
                   <LoadingSpinner />
                 </div>
-              </Paper>
             </Col>
           </Row>
         </div>
