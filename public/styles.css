@@ -15,23 +15,38 @@ html {
 }
 
 #container {
-    position: relative;
-    height: 120px;
-    text-align: center;
+  position: relative;
+  height: 120px;
+  text-align: center;
 }
 
 #overlay {
-    position: absolute;
-    border: 0px;
-    top: 75px;
-    z-index: 10;
+  position: absolute;
+  border: 0px;
+  top: 75px;
+  z-index: 10;
 }
 
 #base {
-    width: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#container-influence {
+  position: relative;
+  height: 78px;
+  text-align: left;
+}
+
+#overlay-influence {
+  position: absolute;
+  border: 0px;
+  top: 25px;
+  right: 10px;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .aspect-ratio {
@@ -146,17 +161,6 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-}
-
-.remove-div {
-  display: inline-block;
-  text-align: right;
-  cursor: pointer;
-}
-
-.remove-button {
-  margin-top: 5px;
-  margin-right: 5px;
 }
 
 .vertical-center {
