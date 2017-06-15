@@ -13,7 +13,7 @@ const style = {
 
 const LoadingSpinner = () => (
   <div style={style.container}>
-    <CircularProgress size={80} thickness={5} />
+    <CircularProgress size={80} thickness={5} color="rgb(255, 64, 129)" />
   </div>
 );
 
