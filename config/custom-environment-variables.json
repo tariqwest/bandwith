@@ -6,6 +6,9 @@
   "knex": {
     "connection": "DATABASE_URL"
   },
+  "apiKeys":{
+    "google": "GOOGLE_KEY"
+  },
   "passport": {
     "Google": {
       "clientID": "GOOGLE_CLIENTID",

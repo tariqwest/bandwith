@@ -14,7 +14,7 @@
     "loaddb": "grunt pgcreatedb:default",
     "migrate:latest": "knex migrate:latest",
     "migrate:rollback": "knex migrate:rollback",
-    "loadgis" : "psql bandwith -c 'CREATE EXTENSION postgis'",
+    "loadgis": "psql bandwith -c 'CREATE EXTENSION postgis'",
     "alldb": "npm run loaddb && npm run loadgis && npm run migrate:latest && npm run seed",
     "seed": "knex seed:run"
   },
@@ -69,6 +69,7 @@
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-plugin-transform-react-constant-elements": "^6.23.0",
     "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-2": "^6.24.1",
