@@ -1,7 +1,7 @@
 const models = require('../../db/models');
 
 const processProfileRelations = (profile) => {
-  const influences = profile.related('influences').map(i => i.attributes.influence_name);
+  const influences = profile.related('influences').map(i => i.attributes);
   const instruments = profile.related('instruments').map(i => i.attributes.instrument_name);
   const preferredInstruments = profile.related('preferred_instruments').map(p => p.attributes.instrument_name);
   const genres = profile.related('genres').map(g => g.attributes.genre_name);
