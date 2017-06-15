@@ -24,7 +24,7 @@ const styles = {
     paddingLeft: '12px',
     paddingRight: '12px',
   },
-  bottomRow: { marginBottom: 20 },
+  bottomRow: { marginBottom: 5 },
   cardContainer: {
     // spacing between cards on a page
     marginTop: '12px',
