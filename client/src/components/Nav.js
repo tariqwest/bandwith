@@ -118,7 +118,7 @@ class Nav extends React.Component {
             onChange={this.changeTab}
             value={this.state.slideIndex}
             style={{ position: 'fixed', width: '100%', zIndex: '20' }}
-            inkBarStyle={{ background: '#ff5bff' }}
+            inkBarStyle={{ background: 'rgb(255, 64, 129)' }}
             tabItemContainerStyle={{ background: 'black' }}
           >
             <Tab
