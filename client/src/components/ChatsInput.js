@@ -41,7 +41,8 @@ class ChatsInput extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    this.socket = io('http://localhost:3000');
+    const socketUrl = process.NODE_ENV === 'production' ? '/' : 'http://localhost:3000';
+    this.socket = io(socketUrl);
     this.socket.on('chat:received', (receivedChat) => {
       dispatch(addReceivedChat(receivedChat));
     });
