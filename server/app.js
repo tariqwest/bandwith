@@ -30,6 +30,12 @@ app.use('/api/signup', routes.signup);
 app.use('/api/photo', routes.photo);
 app.use(express.static(path.join(__dirname, '../public')));
 
+app.get('*.js', (req, res, next) => {
+  req.url = `${req.url}.gz`;
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../public', 'index.html'));
 });

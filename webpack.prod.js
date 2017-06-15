@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const config = require('config');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: './client/src/index.js',
@@ -11,7 +12,7 @@ module.exports = {
     path: path.resolve(__dirname, 'public/'),
   },
 
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
 
   module: {
     rules: [
@@ -40,6 +41,13 @@ module.exports = {
         NODE_ENV: JSON.stringify('production'),
         CONFIG: JSON.stringify(config),
       },
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8,
     }),
   ],
 };
