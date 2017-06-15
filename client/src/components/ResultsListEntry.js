@@ -29,6 +29,16 @@ const styles = {
       paddingBottom: '50px',
     },
   },
+  generalInfo: {
+    height: '30px',
+    display: 'inline-flex',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+  },
+  generalInfoIcon: {
+    marginTop: '-2px',
+    marginRight: '5px',
+  },
 };
 
 class ResultsListEntry extends React.Component {
@@ -54,17 +64,23 @@ class ResultsListEntry extends React.Component {
       photo_src_small,
       instruments,
       genres,
+      gender,
+      age,
+      location,
     } = this.props.result;
     const fullname = `${first} ${last}`;
+    const profile = `${gender}, ${age}`;
 
     return (
       <div>
         <Card>
-          <CardText onClick={() => this.setState({ showFullProfile: true })} >
-            <div className="chat-title clickable">
-              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src_small || '/assets/avatar.jpg'} />
-              <CardTitle title={`${first} ${last}`} subtitle={bio} />
-            </div>
+          <CardText className="chat-title clickable" onClick={() => this.setState({ showFullProfile: true })} >
+            <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src_small || '/assets/avatar.jpg'} />
+            <CardTitle title={`${first} ${last}`} subtitle={bio} />
+            <CardText>
+              <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>account_circle</i>{profile}</span>
+              <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>place</i>{location}</span>
+            </CardText>
             <CardText> <TagList tags={instruments.concat(genres)} type="instrument" /> </CardText>
           </CardText>
 

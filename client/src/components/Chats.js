@@ -33,7 +33,7 @@ const styles = {
   chatsOuterContainer: {
     width: '100%',
     paddingBottom: '50px',
-    paddingTop: '265px',
+    paddingTop: '326px',
     marginLeft: '-12px',
     marginRight: '-12px',
   },
@@ -46,6 +46,16 @@ const styles = {
     width: '100%',
     zIndex: '-1',
     position: 'absolute',
+  },
+  generalInfo: {
+    height: '30px',
+    display: 'inline-flex',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+  },
+  generalInfoIcon: {
+    marginTop: '-2px',
+    marginRight: '5px',
   },
 };
 
@@ -73,8 +83,13 @@ class Chats extends React.Component {
       first,
       last,
       bio,
-      photo_src_small
+      photo_src_small,
+      gender,
+      age,
+      location
     } = currentMatch;
+
+    const profile = `${gender}, ${age}`;
 
     const chatOrProfile = () => {
       if(this.state.showChat){
@@ -98,6 +113,10 @@ class Chats extends React.Component {
               <CardTitle
                 title={`${first} ${last}`} subtitle={bio}
               />
+              <CardText>
+                <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>account_circle</i>{profile}</span>
+                <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>place</i>{location}</span>
+              </CardText>
               <Divider />
             <CardActions>
               <Row>

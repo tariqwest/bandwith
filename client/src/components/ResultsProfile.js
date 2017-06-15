@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
   CardMedia,
+  CardText,
 } from 'material-ui/Card';
 import Chip from 'material-ui/Chip';
 import { List, ListItem } from 'material-ui/List';
@@ -36,6 +37,16 @@ const styles = {
   listItem: {
     paddingRight: 12,
     paddingLeft: 12,
+  },
+  generalInfo: {
+    height: '30px',
+    display: 'inline-flex',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+  },
+  generalInfoIcon: {
+    marginTop: '-2px',
+    marginRight: '5px',
   },
 };
 
@@ -91,12 +102,16 @@ class ResultsProfile extends React.Component {
                       src={photo_src_small || '/assets/avatar.jpg'}
                     />
                     <CardTitle title={fullname} subtitle={bio} />
+                    <CardText>
+                      <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>account_circle</i>{profile}</span>
+                      <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>place</i>{location}</span>
+                    </CardText>
                   </Card>
                 </Paper>
               </Col>
             </Row>);
         }
-        return (<div style={{ height: '265px' }} />);
+        return (<div style={{ height: '326px' }} />);
       };
 
       return (
@@ -120,25 +135,6 @@ class ResultsProfile extends React.Component {
           </Row>
           <Row style={styles.bottomRow}>
             <Col xs={12} sm={6} style={styles.columnLeft}>
-              <Paper style={styles.cardContainer}>
-                <Card>
-                  <CardTitle title="General Info" />
-                  <List>
-                    <ListItem
-                      disabled
-                      key="account_circle"
-                      leftIcon={<i className="material-icons">account_circle</i>}
-                      primaryText={profile}
-                    />
-                    <ListItem
-                      disabled
-                      key="place"
-                      leftIcon={<i className="material-icons">place</i>}
-                      primaryText={location}
-                    />
-                  </List>
-                </Card>
-              </Paper>
               <Paper style={styles.cardContainer}>
                 <Card>
                   <CardTitle title="Talents &amp; Influences" />

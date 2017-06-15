@@ -13,8 +13,8 @@ const styles = {
     // left and right margins
     // top and bottom padding if necesarry around multiple cards
     marginTop: '6px',
-    paddingLeft: '6px',
-    paddingRight: '6px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
   },
   cardContainer: {
     // spacing between cards on a page
