@@ -126,11 +126,13 @@ class ResultsProfile extends React.Component {
                   <List>
                     <ListItem
                       disabled
+                      key="account_circle"
                       leftIcon={<i className="material-icons">account_circle</i>}
                       primaryText={profile}
                     />
                     <ListItem
                       disabled
+                      key="place"
                       leftIcon={<i className="material-icons">place</i>}
                       primaryText={location}
                     />
@@ -145,6 +147,7 @@ class ResultsProfile extends React.Component {
                       autoGenerateNestedIndicator={false}
                       initiallyOpen
                       disabled
+                      key="instruments"
                       leftIcon={<i className="material-icons">speaker</i>}
                       primaryText="My Instruments"
                       nestedListStyle={styles.listItem}
@@ -156,6 +159,7 @@ class ResultsProfile extends React.Component {
                       autoGenerateNestedIndicator={false}
                       initiallyOpen
                       disabled
+                      key="genres"
                       leftIcon={<i className="material-icons">album</i>}
                       primaryText="My Genres"
                       nestedListStyle={styles.listItem}
@@ -167,6 +171,7 @@ class ResultsProfile extends React.Component {
                       autoGenerateNestedIndicator={false}
                       initiallyOpen
                       disabled
+                      key="influences"
                       leftIcon={<i className="material-icons">headset</i>}
                       primaryText="My Influences"
                       nestedItems={influences.map(influence => (
@@ -205,6 +210,7 @@ class ResultsProfile extends React.Component {
                       autoGenerateNestedIndicator={false}
                       initiallyOpen
                       disabled
+                      key="grade"
                       leftIcon={<i className="material-icons">grade</i>}
                       primaryText="Preferred Instruments"
                       nestedListStyle={styles.listItem}
@@ -216,6 +222,7 @@ class ResultsProfile extends React.Component {
                       autoGenerateNestedIndicator={false}
                       initiallyOpen
                       disabled
+                      key="preferred_genres"
                       leftIcon={<i className="material-icons">favorite</i>}
                       primaryText="Preferred Genres"
                       nestedListStyle={styles.listItem}
