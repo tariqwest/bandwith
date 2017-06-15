@@ -254,7 +254,7 @@ class Signup extends Component {
     return (
     <Paper style={styles.pageContainer}>
       <Row>
-        <Col xs={12} sm={6} smOffset={3}>
+        <Col xs={12} sm={8} smOffset={2}>
           <Paper style={styles.cardContainer}>
             <Card>
               <CardText>
