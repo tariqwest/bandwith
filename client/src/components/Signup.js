@@ -291,7 +291,7 @@ class Signup extends Component {
           </Paper>
           <Paper style={style}>
             <Card>
-              <CardTitle title="Your sounds" />
+              <CardTitle title="Your Sounds" />
               <CardText>
                 <SongInput song={this.state.song_url} onChange={this.handleChange} /><br />
                 <VideoInput video={this.state.video_url} onChange={this.handleChange} />
@@ -300,7 +300,7 @@ class Signup extends Component {
           </Paper>
           <Paper style={style}>
             <Card>
-              <CardTitle title="Your inspirations" />
+              <CardTitle title="Your Inspirations &amp; Talents" />
               <CardText>
                 <InfluencesInput
                   influence={this.state.influence}
@@ -332,7 +332,7 @@ class Signup extends Component {
           </Paper>
           <Paper style={style}>
             <Card>
-              <CardTitle title="Your discovery prefs" />
+              <CardTitle title="Your Discovery Preferences" />
               <CardText>
                 <SearchRadiusInput
                   radius={this.state.search_radius}
