@@ -56,10 +56,10 @@ class Results extends React.Component {
         <div style={styles.pageContainer}>
           <div className="bump-tab-bar" />
           <Row>
-            <Col xs={12} sm={2} smOffset={2} >
-                <div style={styles.loadingSpinner}>
-                  <LoadingSpinner />
-                </div>
+            <Col xs={12} sm={8} smOffset={2} >
+              <div style={styles.loadingSpinner}>
+                <LoadingSpinner />
+              </div>
             </Col>
           </Row>
         </div>
@@ -72,7 +72,10 @@ class Results extends React.Component {
           <Row>
             <Col xs={12} sm={8} smOffset={2}>
               <div style={styles.nothingToDisplay}>
-                <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">location_searching</FontIcon>
+                <FontIcon
+                  style={styles.nothingToDisplayIcon}
+                  className="material-icons"
+                >location_searching</FontIcon>
                 <h2>We didn't find any compatible folks, check back soon!</h2>
               </div>
             </Col>
