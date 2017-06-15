@@ -117,7 +117,7 @@ const profiles = [
   },
   {
     first: 'Adele',
-    last: '',
+    last: ' ',
     display: 'Adele',
     email: 'adele@adele.com',
     bio: 'rolling in the deep',
