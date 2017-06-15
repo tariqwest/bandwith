@@ -12,6 +12,8 @@ const GenderInput = ({ onChange, value }) => (
     id="gender"
     name="gender"
     onChange={onChange}
+    floatingLabelFocusStyle={{ color: 'rgb(255, 64, 129)' }}
+    underlineFocusStyle={{ borderBottomColor: 'rgb(255, 64, 129)' }}
   >
     <MenuItem value="Female" primaryText="Female" />
     <MenuItem value="Male" primaryText="Male" />
