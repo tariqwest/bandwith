@@ -20,9 +20,19 @@ import InfluencesInput from './Signup/InfluencesInput';
 import SearchRadiusInput from './Signup/SearchRadiusInput';
 import BiographyTextArea from './Signup/BiographyTextArea';
 
-const style = {
-  marginTop: 8,
-  marginBottom: 8,
+
+const styles = {
+  pageContainer: {
+    // left and right margins
+    // top and bottom padding if necesarry around multiple cards
+    paddingLeft: '12px',
+    paddingRight: '12px',
+  },
+  cardContainer: {
+    // spacing between cards on a page
+    marginTop: '12px',
+    marginBottom: '12px',
+  },
 };
 
 const instruments = ['electric guitar', 'acoustic guitar', 'bass', 'drums', 'piano', 'vocals', 'ukulele', 'violin', 'saxophone', 'trumpet'];
@@ -242,9 +252,10 @@ class Signup extends Component {
 
   render() {
     return (
+    <Paper style={styles.pageContainer}>
       <Row>
         <Col xs={12} sm={6} smOffset={3}>
-          <Paper style={style}>
+          <Paper style={styles.cardContainer}>
             <Card>
               <CardText>
                 <Row>
@@ -289,7 +300,7 @@ class Signup extends Component {
               </CardText>
             </Card>
           </Paper>
-          <Paper style={style}>
+          <Paper style={styles.cardContainer}>
             <Card>
               <CardTitle title="Your Sounds" />
               <CardText>
@@ -298,7 +309,7 @@ class Signup extends Component {
               </CardText>
             </Card>
           </Paper>
-          <Paper style={style}>
+          <Paper style={styles.cardContainer}>
             <Card>
               <CardTitle title="Your Inspirations &amp; Talents" />
               <CardText>
@@ -311,7 +322,6 @@ class Signup extends Component {
                 /><br />
                 <Divider />
                 <PopoverMenu
-                  style={style}
                   itemName="instruments"
                   className="instruments"
                   listItems={instruments}
@@ -320,7 +330,6 @@ class Signup extends Component {
                 /><br />
                 <Divider />
                 <PopoverMenu
-                  style={style}
                   className="genres"
                   itemName="genres"
                   listItems={genres}
@@ -330,7 +339,7 @@ class Signup extends Component {
               </CardText>
             </Card>
           </Paper>
-          <Paper style={style}>
+          <Paper style={styles.cardContainer}>
             <Card>
               <CardTitle title="Your Discovery Preferences" />
               <CardText>
@@ -360,6 +369,7 @@ class Signup extends Component {
           </Paper>
         </Col>
       </Row>
+    </Paper>
     );
   }
 }

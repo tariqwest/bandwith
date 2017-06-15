@@ -8,8 +8,18 @@ import { getResultsInfo } from '../actions';
 import ResultsListEntry from './ResultsListEntry';
 
 const styles = {
-  paper: { margin: 10 },
-  title: { textAlign: 'center' },
+  pageContainer: {
+    // left and right margins
+    // top and bottom padding if necesarry around multiple cards
+    marginTop: '6px',
+    paddingLeft: '12px',
+    paddingRight: '12px',
+  },
+  cardContainer: {
+    // spacing between cards on a page
+    marginTop: '6px',
+    marginBottom: '6px',
+  },
 };
 
 class Results extends React.Component {
@@ -29,12 +39,12 @@ class Results extends React.Component {
 
     if (isFetchingResults) {
       return (
-        <div>
+        <div style={styles.pageContainer}>
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={6} smOffset={3}>
-              <Paper style={styles.paper} zDepth={1}>
-                <div style={styles.title}>
+              <Paper zDepth={1}>
+                <div>
                   <LoadingSpinner />
                 </div>
               </Paper>
@@ -44,11 +54,11 @@ class Results extends React.Component {
       );
     } else if (!result) {
       return (
-        <div>
+        <div style={styles.pageContainer}>
           <div className="bump-tab-bar" />
           <Row>
             <Col xs={12} sm={6} smOffset={3} >
-              <Paper style={styles.paper} zDepth={1}>
+              <Paper style={styles.cardContainer} zDepth={1}>
                 <CardTitle title="No more musicians for now, check again soon!" />
               </Paper>
             </Col>
@@ -57,10 +67,10 @@ class Results extends React.Component {
       );
     }
     return (
-      <div>
+      <div style={styles.pageContainer}>
         <div className="bump-tab-bar" />
         <Col xs={12} sm={6} smOffset={3} >
-          <Paper style={styles.paper} zDepth={1}>
+          <Paper style={styles.cardContainer} zDepth={1}>
             <ResultsListEntry result={result} />
           </Paper>
         </Col>

@@ -109,7 +109,7 @@ class ChatListEntry extends React.Component {
           <li
             style={styles.theirMessage}
           >
-            <Avatar style={styles.chatEntryAvatar} src={this.props.user.photo_src_small || '/assets/avatar.jpg'} />
+            <Avatar style={styles.chatEntryAvatar} src={this.props.currentMatch.photo_src_small || '/assets/avatar.jpg'} />
             <div style={styles.arrowLeft} />
             <div style={styles.chatEntryMessageContainer}>
               <div style={styles.chatEntryText}>{this.props.chatMessage.message}</div>

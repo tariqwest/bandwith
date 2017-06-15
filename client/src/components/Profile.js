@@ -31,9 +31,20 @@ const style = {
   },
   paper: { marginTop: 8 },
 };
+
 const styles = {
-  paper: { margin: 10 },
-  title: { textAlign: 'center' },
+  pageContainer: {
+    // left and right margins
+    // top and bottom padding if necesarry around multiple cards
+    paddingTop: '6px',
+    paddingLeft: '12px',
+    paddingRight: '12px',
+  },
+  cardContainer: {
+    // spacing between cards on a page
+    marginTop: '6px',
+    marginBottom: '6px',
+  },
 };
 
 class Profile extends React.Component {
@@ -103,11 +114,11 @@ class Profile extends React.Component {
       const song_id = song_url && song_url.match(re);
 
       return (
-        <div>
+        <div style={styles.pageContainer}>
           <div className="bump-tab-bar" />
           <Row>
-            <Col xs={12} sm={8} xsOffset={0} smOffset={2}>
-              <Paper style={style.paper}>
+            <Col xs={12} sm={8} smOffset={2}>
+              <Paper style={styles.cardContainer}>
                 <Card className="chat-title">
                   <div className="edit-div">
                     <FloatingActionButton
@@ -136,7 +147,7 @@ class Profile extends React.Component {
           </Row>
           <Row>
             <Col xs={12} sm={8} smOffset={2}>
-              <Paper style={style.paper}>
+              <Paper style={style.cardContainer}>
                 <Card>
                   <CardMedia>
                     <iframe
@@ -152,7 +163,7 @@ class Profile extends React.Component {
           </Row>
           <Row style={style.bottomRow}>
             <Col xs={12} sm={4} smOffset={2} style={style.columnLeft}>
-              <Paper style={style.paper}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardTitle title="General Info" />
                   <List>
@@ -174,7 +185,7 @@ class Profile extends React.Component {
                   </List>
                 </Card>
               </Paper>
-              <Paper style={style.paper}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardTitle title="Talents &amp; Influences" />
                   <List>
@@ -217,7 +228,7 @@ class Profile extends React.Component {
               </Paper>
             </Col>
             <Col xs={12} sm={4} style={style.columnRight}>
-              <Paper style={style.paper}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardMedia key={videoId}>
                     <div className="aspect-ratio">
@@ -231,7 +242,7 @@ class Profile extends React.Component {
                   </CardMedia>
                 </Card>
               </Paper>
-              <Paper style={style.paper}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardTitle title="Musical Preferences" />
                   <List>
@@ -284,7 +295,7 @@ class Profile extends React.Component {
       );
     }
     return (
-      <div>
+      <div style={styles.pageContainer}>
         <div className="bump-tab-bar" />
         <Row>
           <Col xs={12} sm={6} smOffset={3}>

@@ -27,6 +27,27 @@ const style = {
   paper: { marginTop: 8 },
 };
 
+const styles = {
+  pageContainer: {
+    // left and right margins
+    // top and bottom padding if necesarry around multiple cards
+    paddingTop: '6px',
+    paddingLeft: '12px',
+    paddingRight: '12px',
+  },
+  cardContainer: {
+    // spacing between cards on a page
+    marginTop: '6px',
+    marginBottom: '6px',
+  },
+};
+
+const chipStyle = {
+  marginTop: 5,
+  marginLeft: 5,
+  display: 'inline-block',
+};
+
 class ResultsProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -69,7 +90,7 @@ class ResultsProfile extends React.Component {
           return (
             <Row>
               <Col xs={12}>
-                <Paper style={style.paper}>
+                <Paper style={styles.cardContainer}>
                   <Card className="chat-title">
                     <img
                       className="chat-picture"
@@ -88,11 +109,11 @@ class ResultsProfile extends React.Component {
       };
 
       return (
-        <div>
+        <div style={styles.pageContainer}>
           {profileHeader()}
           <Row>
-            <Col xs={12}>
-              <Paper style={style.paper}>
+            <Col xs={12} sm={6}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardMedia>
                     <iframe
@@ -108,7 +129,7 @@ class ResultsProfile extends React.Component {
           </Row>
           <Row style={style.bottomRow}>
             <Col xs={12} sm={6} style={style.columnLeft}>
-              <Paper style={style.paper}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardTitle title="General Info" />
                   <List>
@@ -125,7 +146,7 @@ class ResultsProfile extends React.Component {
                   </List>
                 </Card>
               </Paper>
-              <Paper style={style.paper}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardTitle title="Talents &amp; Influences" />
                   <List>
@@ -171,7 +192,7 @@ class ResultsProfile extends React.Component {
               </Paper>
             </Col>
             <Col xs={12} sm={6} style={style.columnRight}>
-              <Paper style={style.paper}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardMedia key={videoId}>
                     <div className="aspect-ratio">
@@ -185,7 +206,7 @@ class ResultsProfile extends React.Component {
                   </CardMedia>
                 </Card>
               </Paper>
-              <Paper style={style.paper}>
+              <Paper style={styles.cardContainer}>
                 <Card>
                   <CardTitle title="Musical Preferences" />
                   <List>

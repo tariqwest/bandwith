@@ -11,9 +11,18 @@ import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
-  paper: { margin: 10 },
-  profileContainer: { padding: 10 },
-  title: { textAlign: 'center' },
+  pageContainer: {
+    // left and right margins
+    // top and bottom padding if necesarry around multiple cards
+    paddingTop: '6px',
+    paddingLeft: '12px',
+    paddingRight: '12px',
+  },
+  cardContainer: {
+    // spacing between cards on a page
+    marginTop: '6px',
+    marginBottom: '6px',
+  },
   chatsProfileHeader: {
     position: 'absolute',
     top: 65,
@@ -22,9 +31,14 @@ const styles = {
     zIndex: 1000,
   },
   chatsContainer: {
-    width: '100%',
+    width: '100vw',
     paddingBottom: '50px',
-    paddingTop: '275px',
+    paddingTop: '265px',
+  },
+  profileContainer: {
+    marginTop: '-6px',
+    marginLeft: '-12px',
+    marginRight: '-12px',
   },
   chatsListContainer: {
     zIndex: '-1',
@@ -73,30 +87,29 @@ class Chats extends React.Component {
     }
 
     return (
-      <div>
-
-            <Paper style={styles.paper}>
-            <Card style={styles.chatsProfileHeader}>
-              <div className="chat-title">
-                <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src_small || '/assets/avatar.jpg'} />
-                <CardTitle
-                  title={`${first} ${last}`} subtitle={bio}
-                />
-                <Divider />
-              <CardActions>
-                <Row>
-                  <Col xs={6}>
-                    <FlatButton fullWidth={true} label="Chat" onClick={() => this.toggleChatAndProfile('chat')} />
-                  </Col>
-                  <Col xs={6}>
-                    <FlatButton fullWidth={true} label="Profile" onClick={() => this.toggleChatAndProfile('profile')} />
-                  </Col>
-                </Row>
-              </CardActions>
-              </div>
-            </Card>
-            </Paper>
-              {chatOrProfile()}
+      <div style={styles.pageContainer}>
+        <Paper style={styles.cardContainer}>
+          <Card style={styles.chatsProfileHeader}>
+            <div className="chat-title">
+              <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src_small || '/assets/avatar.jpg'} />
+              <CardTitle
+                title={`${first} ${last}`} subtitle={bio}
+              />
+              <Divider />
+            <CardActions>
+              <Row>
+                <Col xs={6}>
+                  <FlatButton fullWidth={true} label="Chat" onClick={() => this.toggleChatAndProfile('chat')} />
+                </Col>
+                <Col xs={6}>
+                  <FlatButton fullWidth={true} label="Profile" onClick={() => this.toggleChatAndProfile('profile')} />
+                </Col>
+              </Row>
+            </CardActions>
+            </div>
+          </Card>
+        </Paper>
+        {chatOrProfile()}
       </div>
     );
   }
