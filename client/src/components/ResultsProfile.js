@@ -19,10 +19,10 @@ const styles = {
     paddingLeft: '12px',
     paddingRight: '12px',
   },
+  bottomRow: { marginBottom: 20 },
   cardContainer: {
     // spacing between cards on a page
-    marginTop: '12px',
-    marginBottom: '12px',
+    marginTop: 12,
   },
   chip: {
     marginTop: 5,
