@@ -12,11 +12,6 @@ import { getChats, addSentChat, addReceivedChat } from '../actions';
 import FontIcon from 'material-ui/FontIcon';
 
 const styles = {
-  button: {
-    position: 'relative',
-    top: '27px',
-    backgroundColor: '#000',
-  },
   chatInputBar: {
     position: 'absolute',
     bottom: '0px',
@@ -32,6 +27,11 @@ const styles = {
     padding: '10px',
     outline: 'none',
     fontSize: '16px',
+  },
+  chatInputButton: {
+    position: 'absolute',
+    top: 4,
+    right: -4,
   },
 };
 
@@ -92,6 +92,7 @@ class ChatsInput extends React.Component {
               <IconButton
                 label="Send"
                 onClick={this.handleSendClick}
+                style={styles.chatInputButton}
               >
                 <FontIcon className="material-icons">send_icon</FontIcon>
               </IconButton>
