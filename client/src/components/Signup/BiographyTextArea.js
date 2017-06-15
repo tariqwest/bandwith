@@ -15,6 +15,8 @@ const BiographyTextArea = ({ bio, onChange }) => (
       name="bio"
       value={bio}
       onChange={onChange}
+      floatingLabelFocusStyle={{ color: 'rgb(255, 64, 129)' }}
+      underlineFocusStyle={{ borderBottomColor: 'rgb(255, 64, 129)' }}
     />
   </div>
 );

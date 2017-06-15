@@ -11,6 +11,8 @@ const FirstNameInput = ({ value, onChange }) => (
     name="first"
     value={value}
     onChange={onChange}
+    floatingLabelFocusStyle={{ color: 'rgb(255, 64, 129)' }}
+    underlineFocusStyle={{ borderBottomColor: 'rgb(255, 64, 129)' }}
   />
 );
 

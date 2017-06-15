@@ -27,6 +27,8 @@ class VideoInput extends React.Component {
           name="video_url"
           value={this.props.video}
           onChange={this.props.onChange}
+          floatingLabelFocusStyle={{ color: 'rgb(255, 64, 129)' }}
+          underlineFocusStyle={{ borderBottomColor: 'rgb(255, 64, 129)' }}
         />
         <i onClick={() => this.setState({ open: true })} className="material-icons help">info</i>
         <Dialog

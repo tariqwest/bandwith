@@ -12,6 +12,8 @@ const AgeInput = ({ value, onChange, ageErrorText }) => (
     onChange={onChange}
     floatingLabelText="age"
     errorText={ageErrorText}
+    floatingLabelFocusStyle={{ color: 'rgb(255, 64, 129)' }}
+    underlineFocusStyle={{ borderBottomColor: 'rgb(255, 64, 129)' }}
   />
 );
 

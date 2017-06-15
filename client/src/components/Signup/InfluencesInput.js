@@ -60,6 +60,8 @@ class InfluenceInput extends Component {
                   name="influence"
                   value={this.props.influence}
                   onChange={this.props.handleChange}
+                  floatingLabelFocusStyle={{ color: 'rgb(255, 64, 129)' }}
+                  underlineFocusStyle={{ borderBottomColor: 'rgb(255, 64, 129)' }}
                 />
               </Col>
               <Col xs={3}>

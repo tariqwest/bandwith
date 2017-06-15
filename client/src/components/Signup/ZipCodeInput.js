@@ -12,6 +12,8 @@ const ZipCodeInput = ({ value, onChange, zipErrorText }) => (
     errorText={zipErrorText}
     value={value}
     onChange={onChange}
+    floatingLabelFocusStyle={{ color: 'rgb(255, 64, 129)' }}
+    underlineFocusStyle={{ borderBottomColor: 'rgb(255, 64, 129)' }}
   />
 );
 
