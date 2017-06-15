@@ -12,7 +12,7 @@ import Paper from 'material-ui/Paper';
 import Chip from 'material-ui/Chip';
 import { Row, Col } from 'react-flexbox-grid';
 import FullscreenDialog from 'material-ui-fullscreen-dialog';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+import IconButton from 'material-ui/IconButton';
 import LoadingSpinner from './LoadingSpinner';
 import Signup from './Signup';
 
@@ -121,7 +121,7 @@ class Profile extends React.Component {
               <Paper style={styles.cardContainer}>
                 <Card className="chat-title">
                   <div className="edit-div">
-                    <FloatingActionButton
+                    <IconButton
                       zDepth={1}
                       className="edit-button"
                       onClick={() => this.setState({ showEditProfile: true })}
@@ -130,7 +130,7 @@ class Profile extends React.Component {
                       iconStyle={{ color: 'black' }}
                     >
                       <i className="material-icons">create</i>
-                    </FloatingActionButton>
+                    </IconButton>
                   </div>
                   <img
                     className="chat-picture"
