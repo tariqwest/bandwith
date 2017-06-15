@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card } from 'material-ui/Card';
 import { Row, Col } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
 
@@ -33,11 +32,9 @@ class Matches extends React.Component {
         <div className="bump-tab-bar" />
         <Row>
           <Col xs={12} sm={8} smOffset={2}>
-            <Paper style={styles.cardContainer} zDepth={1}>
-              <Card>
+            <div style={styles.cardContainer} zDepth={1}>
                 <MatchList />
-              </Card>
-            </Paper>
+            </div>
           </Col>
         </Row>
       </div>

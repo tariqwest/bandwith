@@ -3,13 +3,9 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
 import { Card, CardText, CardActions } from 'material-ui/Card';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
-import { List } from 'material-ui/List';
-import ChatsListEntry from './ChatsListEntry';
-import { getChats, addSentChat, addReceivedChat } from '../actions';
 import FontIcon from 'material-ui/FontIcon';
+import { addSentChat, addReceivedChat } from '../actions';
 
 const styles = {
   chatInputBar: {

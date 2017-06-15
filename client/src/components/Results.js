@@ -13,8 +13,8 @@ const styles = {
     // left and right margins
     // top and bottom padding if necesarry around multiple cards
     marginTop: '6px',
-    paddingLeft: '12px',
-    paddingRight: '12px',
+    paddingLeft: '6px',
+    paddingRight: '6px',
   },
   cardContainer: {
     // spacing between cards on a page
@@ -55,41 +55,45 @@ class Results extends React.Component {
       return (
         <div style={styles.pageContainer}>
           <div className="bump-tab-bar" />
-          <Col xs={12} sm={6} smOffset={3} >
-            <Paper style={styles.cardContainer} zDepth={1}>
-              <div style={styles.loadingSpinner}>
-                <LoadingSpinner />
-              </div>
-            </Paper>
-          </Col>
+          <Row>
+            <Col xs={12} sm={2} smOffset={2} >
+              <Paper style={styles.cardContainer} zDepth={1}>
+                <div style={styles.loadingSpinner}>
+                  <LoadingSpinner />
+                </div>
+              </Paper>
+            </Col>
+          </Row>
         </div>
       );
     } else if (!result) {
       return (
         <div style={styles.pageContainer}>
           <div className="bump-tab-bar" />
+          <div className="bump-tab-bar" />
           <Row>
-            <Col xs={12} sm={6} smOffset={3}>
+            <Col xs={12} sm={8} smOffset={2}>
               <div style={styles.nothingToDisplay}>
                 <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">location_searching</FontIcon>
-                <h2>Nobody matching your prefs yet, check back soon!</h2>
+                <h2>We didn't find any compatible folks, check back soon!</h2>
               </div>
             </Col>
           </Row>
         </div>
       );
-    } else {
-      return (
-        <div style={styles.pageContainer}>
-          <div className="bump-tab-bar" />
-          <Col xs={12} sm={6} smOffset={3} >
+    }
+    return (
+      <div style={styles.pageContainer}>
+        <div className="bump-tab-bar" />
+        <Row>
+          <Col xs={12} sm={8} smOffset={2} >
             <Paper style={styles.cardContainer} zDepth={1}>
               <ResultsListEntry result={result} />
             </Paper>
           </Col>
-        </div>
-      );
-    }
+        </Row>
+      </div>
+    );
   }
 }
 
