@@ -1,16 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { List } from 'material-ui/List';
-import { CardTitle } from 'material-ui/Card';
 import { Row, Col } from 'react-flexbox-grid';
 import MatchListEntry from './MatchListEntry';
 import { getMatchesInfo } from '../actions';
 import LoadingSpinner from './LoadingSpinner';
+import FontIcon from 'material-ui/FontIcon';
+import { grey500 } from 'material-ui/styles/colors';
 
 const styles = {
+  chatsListContainer: {
+    listStyle: 'none',
+    margin: '0px -20px 0px -8px',
+    padding: '0 0 50px 0',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+  },
   loadingSpinner: {
     textAlign: 'center',
     width: '100%',
+  },
+  nothingToDisplay: {
+    textAlign: 'center',
+    width: '100%',
+    color: grey500,
+  },
+  nothingToDisplayIcon: {
+    fontSize: '70px',
+    color: grey500,
   },
 };
 
@@ -49,7 +66,17 @@ class MatchList extends React.Component {
       );
     } else {
       return (
-        <CardTitle title="No connections yet, check back again soon!" />
+        <div>
+          <div className="bump-tab-bar" />
+          <Row>
+            <Col xs={12} sm={6} smOffset={3}>
+                <div style={styles.nothingToDisplay}>
+                  <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">person_pin</FontIcon>
+                  <h2>No matches yet, check back soon!</h2>
+                </div>
+            </Col>
+          </Row>
+        </div>
       );
     }
   }

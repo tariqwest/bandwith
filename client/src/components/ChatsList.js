@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
-import { CardTitle } from 'material-ui/Card';
-import Paper from 'material-ui/Paper';
+import FontIcon from 'material-ui/FontIcon';
 import ChatsListEntry from './ChatsListEntry';
 import { getChats } from '../actions';
 import LoadingSpinner from './LoadingSpinner';
+import { grey500 } from 'material-ui/styles/colors';
 
 const styles = {
   chatsListContainer: {
@@ -18,6 +18,15 @@ const styles = {
   loadingSpinner: {
     textAlign: 'center',
     width: '100%',
+  },
+  nothingToDisplay: {
+    textAlign: 'center',
+    width: '100%',
+    color: grey500,
+  },
+  nothingToDisplayIcon: {
+    fontSize: '70px',
+    color: grey500,
   },
 };
 
@@ -61,7 +70,19 @@ class ChatsList extends React.Component {
         </ol>
       );
     }
-    return (<CardTitle>Start a conversation!</CardTitle>);
+    return (
+      <div>
+        <div className="bump-tab-bar" />
+        <Row>
+          <Col xs={12} sm={6} smOffset={3}>
+              <div style={styles.nothingToDisplay}>
+                <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">chat</FontIcon>
+                <h2>Start a conversation!</h2>
+              </div>
+          </Col>
+        </Row>
+      </div>
+    );
   }
 }
 

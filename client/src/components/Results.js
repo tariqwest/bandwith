@@ -6,6 +6,8 @@ import { CardTitle } from 'material-ui/Card';
 import LoadingSpinner from './LoadingSpinner';
 import { getResultsInfo } from '../actions';
 import ResultsListEntry from './ResultsListEntry';
+import FontIcon from 'material-ui/FontIcon';
+import { grey500 } from 'material-ui/styles/colors';
 
 const styles = {
   pageContainer: {
@@ -23,6 +25,15 @@ const styles = {
   loadingSpinner: {
     textAlign: 'center',
     width: '100%',
+  },
+  nothingToDisplay: {
+    textAlign: 'center',
+    width: '100%',
+    color: grey500,
+  },
+  nothingToDisplayIcon: {
+    fontSize: '70px',
+    color: grey500,
   },
 };
 
@@ -59,10 +70,11 @@ class Results extends React.Component {
         <div style={styles.pageContainer}>
           <div className="bump-tab-bar" />
           <Row>
-            <Col xs={12} sm={6} smOffset={3} >
-              <Paper style={styles.cardContainer} zDepth={1}>
-                <CardTitle title="No more musicians for now, check again soon!" />
-              </Paper>
+            <Col xs={12} sm={6} smOffset={3}>
+                <div style={styles.nothingToDisplay}>
+                  <FontIcon style={styles.nothingToDisplayIcon} className="material-icons">location_searching</FontIcon>
+                  <h2>Nobody matching your prefs yet, check back soon!</h2>
+                </div>
             </Col>
           </Row>
         </div>
