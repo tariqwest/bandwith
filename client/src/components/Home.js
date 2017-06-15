@@ -14,6 +14,9 @@ const style = {
     marginLeft: 15,
     marginRight: 15,
   },
+  column: {
+    height: 550,
+  },
 };
 
 class Home extends React.Component {
@@ -39,7 +42,7 @@ class Home extends React.Component {
           <Row>
             <Card style={{ boxShadow: 'none' }}>
               <Row>
-                <Col xs={12} sm={6} className="fixed-column">
+                <Col xs={12} sm={6} style={style.column}>
                   <div className="vertical-center">
                     <div className="center-text">
                       <span className="parallel-text">Build your profile</span>
@@ -49,7 +52,7 @@ class Home extends React.Component {
                     </div>
                   </div>
                 </Col>
-                <Col xs={12} sm={6} className="fixed-column">
+                <Col xs={12} sm={6} style={style.column}>
                   <CardMedia className="vertical-center">
                     <img alt="splash-img" src="/assets/roman-kraft-57267.jpg" />
                   </CardMedia>

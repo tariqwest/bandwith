@@ -102,10 +102,6 @@ html {
   margin: 10px;
 }
 
-.fixed-column {
-  height: 550px;
-}
-
 .help {
   color: #bdbdbd;
   cursor: pointer;
@@ -166,7 +162,6 @@ html {
 .vertical-center {
   height: inherit;
   min-height: 50%;
-  min-height: 50vh;
   display: flex;
   align-items: center;
 }
