@@ -44,6 +44,10 @@ const styles = {
     marginTop: '12px',
     marginBottom: '12px',
   },
+  loadingSpinner: {
+    textAlign: 'center',
+    width: '100%',
+  },
 };
 
 class Profile extends React.Component {
@@ -95,13 +99,13 @@ class Profile extends React.Component {
       photo_src_small,
     } = this.props.user;
 
-    const { hasUserInfo } = this.props;
+    const { hasUserInfo, isSavingUser, isFetchingUser } = this.props;
     const { location } = this.props.location;
     const fullname = `${first} ${last}`;
     const search = `Searching within ${search_radius} miles`;
     const profile = `${gender}, ${age}`;
 
-    if (hasUserInfo) {
+    if (hasUserInfo && !isSavingUser && !isFetchingUser) {
       let videoId = '';
       if (video_url) {
         const videoUrl = video_url.split('/');
@@ -294,8 +298,8 @@ class Profile extends React.Component {
         <div className="bump-tab-bar" />
         <Row>
           <Col xs={12} sm={6} smOffset={3}>
-            <Paper>
-              <div>
+            <Paper style={styles.cardContainer}>
+              <div style={styles.loadingSpinner}>
                 <LoadingSpinner />
               </div>
             </Paper>
