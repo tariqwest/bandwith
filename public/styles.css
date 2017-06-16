@@ -169,8 +169,18 @@ html {
   min-height: 50%;
   min-height: 50vh;
   display: flex;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  align-items: center;
+}
+
+.middle-panel {
+  height: inherit;
+  min-height: 50%;
+  min-height: 50vh;
+  display: flex;
+  padding-top: 5%;
+  padding-top: 5vh;
+  padding-bottom: 5%;
+  padding-bottom: 5vh;
   align-items: center;
 }
 
