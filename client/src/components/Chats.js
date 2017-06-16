@@ -30,10 +30,13 @@ const styles = {
     right: 0,
     zIndex: 1000,
   },
+  chatsProfileHeaderTitle: {
+    padding: 0,
+  },
   chatsOuterContainer: {
     width: '100%',
     paddingBottom: '50px',
-    paddingTop: '326px',
+    paddingTop: '283px',
     marginLeft: '-12px',
     marginRight: '-12px',
   },
@@ -46,6 +49,9 @@ const styles = {
     width: '100%',
     zIndex: '-1',
     position: 'absolute',
+  },
+  generalInfoContainer: {
+    paddingBottom: 8,
   },
   generalInfo: {
     height: '30px',
@@ -111,9 +117,10 @@ class Chats extends React.Component {
             <div className="chat-title">
               <img className="chat-picture" width="100" height="100" alt="profile-pic" src={photo_src_small || '/assets/avatar.jpg'} />
               <CardTitle
+                style={styles.chatsProfileHeaderTitle}
                 title={`${first} ${last}`} subtitle={bio}
               />
-              <CardText>
+              <CardText style={styles.generalInfoContainer}>
                 <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>account_circle</i>{profile}</span>
                 <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>place</i>{location}</span>
               </CardText>
