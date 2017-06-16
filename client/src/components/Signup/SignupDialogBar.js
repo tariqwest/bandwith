@@ -105,7 +105,7 @@ const SignupDialogBar = (props) => {
             textAlign: 'center',
           }}
         >
-          <div>
+          <div id="save-button">
             <span style={{
               position: 'relative',
               paddingLeft: '16px',

@@ -49,6 +49,10 @@ html {
   cursor: pointer;
 }
 
+#save-button:hover {
+  background-color: rgba(153, 153, 153, 0.2);
+}
+
 .aspect-ratio {
   position: relative;
   width: 100%;
