@@ -1,19 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
 import Card from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
   margin: 30,
   textAlign: 'center',
 };
-
 
 class Login extends React.Component {
   componentDidMount() {
@@ -80,9 +77,6 @@ class Login extends React.Component {
                     />
                   </ListItem>
                 </List>
-                <ListItem disabled>
-                  <RaisedButton label="Return to Home Page" containerElement={<Link to="/" />} />
-                </ListItem>
               </Card>
             </Paper>
           </Col>
