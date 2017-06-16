@@ -88,7 +88,7 @@ class Home extends React.Component {
               <div>
                 <RaisedButton
                   style={style.button}
-                  label="Log in"
+                  label="Login"
                   icon={<FontIcon color={'black'} className="material-icons">play_arrow</FontIcon>}
                   labelPosition="before"
                   href={'/login'}
