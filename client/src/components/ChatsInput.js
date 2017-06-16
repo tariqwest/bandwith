@@ -2,7 +2,7 @@ import React from 'react';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-flexbox-grid';
-import { Card, CardText, CardActions } from 'material-ui/Card';
+import { Card } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import { addSentChat, addReceivedChat } from '../actions';
@@ -41,7 +41,7 @@ class ChatsInput extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    const socketUrl = process.NODE_ENV === 'production' ? '/' : 'http://localhost:3000';
+    const socketUrl = process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:3000';
     this.socket = io(socketUrl);
     this.socket.on('chat:received', (receivedChat) => {
       dispatch(addReceivedChat(receivedChat));
