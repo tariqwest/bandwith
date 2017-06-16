@@ -23,6 +23,7 @@ const styles = {
     textAlign: 'center',
     width: '100%',
     color: grey500,
+    marginTop: 10,
   },
   nothingToDisplayIcon: {
     fontSize: '70px',
