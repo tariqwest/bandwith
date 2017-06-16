@@ -206,7 +206,7 @@ class ProfileImage extends React.Component {
           </Dropzone>
           <Cropper
             ref="cropper"
-            src={this.state.largeImage}
+            src={this.state.largeImage || '/assets/avatar.jpg'}
             style={{ height: '400px', width: '100%' }}
             aspectRatio={16 / 16}
             crop={this.imageCrop}
