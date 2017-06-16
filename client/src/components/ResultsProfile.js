@@ -25,6 +25,9 @@ const styles = {
     // spacing between cards on a page
     marginTop: 12,
   },
+  empty: {
+    marginTop: 0,
+  },
   chip: {
     marginTop: 5,
     marginLeft: 5,
@@ -103,8 +106,16 @@ class ResultsProfile extends React.Component {
                     />
                     <CardTitle title={fullname} subtitle={bio} />
                     <CardText>
-                      <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>account_circle</i>{profile}</span>
-                      <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>place</i>{location}</span>
+                      <span style={styles.generalInfo}>
+                        <i className="material-icons" style={styles.generalInfoIcon}>
+                          account_circle
+                        </i>
+                        {profile}
+                      </span>
+                      <span style={styles.generalInfo}>
+                        <i className="material-icons" style={styles.generalInfoIcon}>place</i>
+                        {location}
+                      </span>
                     </CardText>
                   </Card>
                 </Paper>
@@ -117,25 +128,28 @@ class ResultsProfile extends React.Component {
       return (
         <div style={styles.pageContainer}>
           {profileHeader()}
-          <Row>
-            <Col xs={12} sm={12}>
-              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
-                <Card>
-                  <CardMedia>
-                    <iframe
-                      scrolling="no"
-                      frameBorder="no"
-                      title="audio"
-                      src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_id}`}
-                    />
-                  </CardMedia>
-                </Card>
-              </Paper>
-            </Col>
-          </Row>
+          { song_id ?
+            <Row>
+              <Col xs={12} sm={12}>
+                <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
+                  <Card>
+                    <CardMedia>
+                      <iframe
+                        scrolling="no"
+                        frameBorder="no"
+                        title="audio"
+                        src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_id}`}
+                      />
+                    </CardMedia>
+                  </Card>
+                </Paper>
+              </Col>
+            </Row>
+          : null
+          }
           <Row style={styles.bottomRow}>
             <Col xs={12} sm={6} style={styles.columnLeft}>
-              <Paper style={styles.cardContainer}>
+              <Paper style={song_id ? styles.cardContainer : styles.empty}>
                 <Card>
                   <CardTitle title="Talents &amp; Influences" />
                   <List>
@@ -184,21 +198,24 @@ class ResultsProfile extends React.Component {
               </Paper>
             </Col>
             <Col xs={12} sm={6} style={styles.columnRight}>
-              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
-                <Card>
-                  <CardMedia key={videoId}>
-                    <div className="aspect-ratio">
-                      <iframe
-                        frameBorder="0"
-                        allowFullScreen
-                        title="video"
-                        src={`https://www.youtube.com/embed/${videoId}`}
-                      />
-                    </div>
-                  </CardMedia>
-                </Card>
-              </Paper>
-              <Paper style={styles.cardContainer}>
+              { videoId ?
+                <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
+                  <Card>
+                    <CardMedia key={videoId}>
+                      <div className="aspect-ratio">
+                        <iframe
+                          frameBorder="0"
+                          allowFullScreen
+                          title="video"
+                          src={`https://www.youtube.com/embed/${videoId}`}
+                        />
+                      </div>
+                    </CardMedia>
+                  </Card>
+                </Paper>
+                : null
+              }
+              <Paper style={videoId ? styles.cardContainer : styles.empty}>
                 <Card>
                   <CardTitle title="Musical Preferences" />
                   <List>

@@ -22,15 +22,19 @@ const styles = {
   pageContainer: {
     // left and right margins
     // top and bottom padding if necesarry around multiple cards
-    paddingTop: '0px',
-    paddingLeft: '12px',
-    paddingRight: '12px',
+    paddingTop: 0,
+    paddingLeft: 12,
+    paddingRight: 12,
   },
   bottomRow: { marginBottom: 12 },
   cardContainer: {
     // spacing between cards on a page
-    marginTop: '12px',
-    marginBottom: '12px',
+    marginTop: 12,
+    marginBottom: 12,
+  },
+  empty: {
+    marginTop: 0,
+    marginBottom: 0,
   },
   loadingSpinner: {
     textAlign: 'center',
@@ -50,14 +54,14 @@ const styles = {
     paddingLeft: 12,
   },
   generalInfo: {
-    height: '30px',
+    height: 30,
     display: 'inline-flex',
-    paddingLeft: '10px',
-    paddingRight: '10px',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   generalInfoIcon: {
-    marginTop: '-2px',
-    marginRight: '5px',
+    marginTop: -2,
+    marginRight: 5,
   },
 };
 
@@ -103,7 +107,6 @@ class Profile extends React.Component {
       bio,
       age,
       gender,
-      email,
       search_radius,
       instruments,
       genres,
@@ -157,40 +160,55 @@ class Profile extends React.Component {
                   />
                   <CardTitle title={fullname} subtitle={bio} />
                   <CardText>
-                    <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>account_circle</i>{profile}</span>
-                    <span style={styles.generalInfo}><i className="material-icons" style={styles.generalInfoIcon}>place</i>{location}</span>
+                    <span style={styles.generalInfo}>
+                      <i className="material-icons" style={styles.generalInfoIcon}>
+                        account_circle
+                      </i>
+                      {profile}
+                    </span>
+                    <span style={styles.generalInfo}>
+                      <i className="material-icons" style={styles.generalInfoIcon}>
+                        place
+                      </i>
+                      {location}
+                    </span>
                   </CardText>
-
                 </Card>
               </Paper>
             </Col>
           </Row>
-          <Row>
-            <Col xs={12} sm={8} smOffset={2}>
-              <Paper
-                style={Object.assign(
-                  {},
-                  styles.cardContainer,
-                  styles.rowFixTop,
-                  styles.rowFixBottom,
-                )}
-              >
-                <Card>
-                  <CardMedia>
-                    <iframe
-                      scrolling="no"
-                      frameBorder="no"
-                      title="audio"
-                      src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_id}`}
-                    />
-                  </CardMedia>
-                </Card>
-              </Paper>
-            </Col>
-          </Row>
+          { song_id ?
+            <Row>
+              <Col xs={12} sm={8} smOffset={2}>
+                <Paper
+                  style={Object.assign(
+                    {},
+                    styles.cardContainer,
+                    styles.rowFixTop,
+                    styles.rowFixBottom,
+                  )}
+                >
+                  <Card>
+                    <CardMedia>
+                      <iframe
+                        scrolling="no"
+                        frameBorder="no"
+                        title="audio"
+                        src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song_id}`}
+                      />
+                    </CardMedia>
+                  </Card>
+                </Paper>
+              </Col>
+            </Row>
+            : null
+          }
           <Row style={styles.bottomRow}>
             <Col xs={12} sm={4} smOffset={2} style={styles.columnLeft}>
-              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
+              <Paper style={song_id ?
+                Object.assign({}, styles.cardContainer, styles.rowFixBottom) :
+                Object.assign({}, styles.empty, styles.rowFixBottom)}
+              >
                 <Card>
                   <CardTitle title="Talents &amp; Influences" />
                   <List>
@@ -233,21 +251,24 @@ class Profile extends React.Component {
               </Paper>
             </Col>
             <Col xs={12} sm={4} style={styles.columnRight}>
-              <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
-                <Card>
-                  <CardMedia key={videoId}>
-                    <div className="aspect-ratio">
-                      <iframe
-                        frameBorder="0"
-                        allowFullScreen
-                        title="video"
-                        src={`https://www.youtube.com/embed/${videoId}`}
-                      />
-                    </div>
-                  </CardMedia>
-                </Card>
-              </Paper>
-              <Paper style={styles.cardContainer}>
+              { videoId ?
+                <Paper style={Object.assign({}, styles.cardContainer, styles.rowFixBottom)}>
+                  <Card>
+                    <CardMedia key={videoId}>
+                      <div className="aspect-ratio">
+                        <iframe
+                          frameBorder="0"
+                          allowFullScreen
+                          title="video"
+                          src={`https://www.youtube.com/embed/${videoId}`}
+                        />
+                      </div>
+                    </CardMedia>
+                  </Card>
+                </Paper>
+                : null
+              }
+              <Paper style={videoId ? styles.cardContainer : styles.empty}>
                 <Card>
                   <CardTitle title="Musical Preferences" />
                   <List>
@@ -294,7 +315,7 @@ class Profile extends React.Component {
             />}
             appBarStyle={{ backgroundColor: '#000000' }}
           >
-            <Signup hideEditProfileDialog={this.hideEditProfileDialog}  />
+            <Signup hideEditProfileDialog={this.hideEditProfileDialog} />
           </FullscreenDialog>
         </div>
       );
