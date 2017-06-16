@@ -19,7 +19,7 @@ import FirstNameInput from './Signup/FirstNameInput';
 import InfluencesInput from './Signup/InfluencesInput';
 import SearchRadiusInput from './Signup/SearchRadiusInput';
 import BiographyTextArea from './Signup/BiographyTextArea';
-
+import SignupDialogBar from './Signup/SignupDialogBar';
 
 const styles = {
   pageContainer: {
@@ -84,9 +84,9 @@ class Signup extends Component {
     this.fillFormData(nextProps);
   }
 
-  componentWillUnmount() {
-    this.send();
-  }
+  // componentWillUnmount() {
+  //   this.send();
+  // }
 
   fillFormData(props) {
     if (props.hasUserInfo) {
@@ -144,8 +144,8 @@ class Signup extends Component {
       preferred_instruments: [],
       preferred_genres: [],
     });
-
     dispatch(updateProfile(profile));
+    this.props.hideEditProfileDialog();
   }
 
   handlePhotoChange(urlLrg, urlSml) {
@@ -253,6 +253,7 @@ class Signup extends Component {
   render() {
     return (
     <Paper style={styles.pageContainer}>
+      <SignupDialogBar dialogTitle={`${this.state.first} ${this.state.last}`} onCloseClick={this.props.hideEditProfileDialog} onSaveClick={this.send} />
       <Row>
         <Col xs={12} sm={8} smOffset={2}>
           <Paper style={styles.cardContainer}>

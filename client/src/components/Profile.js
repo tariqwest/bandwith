@@ -70,6 +70,7 @@ class Profile extends React.Component {
       soundCloudIsLoading: false,
     };
     this.checkFormRedirect = this.checkFormRedirect.bind(this);
+    this.hideEditProfileDialog = this.hideEditProfileDialog.bind(this);
   }
 
   componentWillMount() {
@@ -89,6 +90,10 @@ class Profile extends React.Component {
     if (hasUserInfo && hasProfile) {
       this.setState({ showEditProfile: false });
     }
+  }
+
+  hideEditProfileDialog() {
+    this.setState({ showEditProfile: false });
   }
 
   render() {
@@ -289,7 +294,7 @@ class Profile extends React.Component {
             />}
             appBarStyle={{ backgroundColor: '#000000' }}
           >
-            <Signup />
+            <Signup hideEditProfileDialog={this.hideEditProfileDialog}  />
           </FullscreenDialog>
         </div>
       );
