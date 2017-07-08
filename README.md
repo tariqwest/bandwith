@@ -1,6 +1,6 @@
 # Bandwith
 
-Musicians find musicians to jam with, or join a band with. See a demo [here](bitly.com/bandwith-app).
+Musicians find musicians to jam with, or join a band with. See a demo [here](http://bitly.com/bandwith-app).
 
 ![enter image description here](https://github.com/tariqwest/bandwith/blob/master/Screen%20Shot%202017-06-16%20at%203.25.18%20PM_iphone6_silver_portrait.png)
 
